@@ -1,57 +1,82 @@
 <?php
 /**
- * /var/www/elgg/mod/polls/start.php
+ * mod/votaciones/start.php
  * Poll(ita)s plugin for elgg-1.8
  * Página
  * Formulario: creación y votación.
- * 
+ *
+ * Copyright 2012 DRY Team
+ *              - aruberuto
+ *              - joker
+ *              - mari
+ *              y otros
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
  */
 
-elgg_register_event_handler('init', 'system', 'polls18_init');
+elgg_register_event_handler('init', 'system', 'votaciones_init');
 
-function polls18_init() {
-	// Rename this function based on the name of your plugin and update the
-	// elgg_register_event_handler() call accordingly
-	// Renombra esta función basada en el nombre de tu plugin y actualiza
-	// elgg_register_event handler() llamada acordinglui
+function votaciones_init() {
 
-	// Register a script to handle (usually) a POST request (an action)
-	$base_dir = elgg_get_plugins_path() . 'polls18/actions/polls18';
-	elgg_register_action('polls18/save', "$base_dir/save.php");
+	$base_dir = elgg_get_plugins_path() . 'votaciones/actions';
+	elgg_register_action('guardar_votacion', "$base_dir/guardar_votacion.php");
+	// Es recomendable usar como nombre el mismo que el de la vista de la accion
+	// como primer termino, antes registrándola de este modo
+	// elgg_register_action('votaciones/guardar', "$base_dir/guardar_votacion.php");
+	// no tiraba
 
 	// Extend the main CSS file
-	elgg_extend_view('css/elgg', 'polls18/css');
+	elgg_extend_view('css/elgg', 'votaciones/css');
 
 	// Add a menu item to the main site menu
-	$item = new ElggMenuItem('polls18', elgg_echo('polls18:menu'), 'polls18/all');
+	$item = new ElggMenuItem('votaciones', elgg_echo('votaciones:menu'), 'votaciones/totus');
 	#menu
 	elgg_register_menu_item('site', $item);
 	#manejador de páginas
-	elgg_register_page_handler('polls18', 'polls18_page_handler');
+	elgg_register_page_handler('votaciones', 'maneja_paginas_votaciones');
+	//registra librerias externas
+	elgg_register_library('votaciones:model', elgg_get_plugins_path() . 'votaciones/lib/modelo.php');
 }
 
-function polls18_page_handler($page)
+function maneja_paginas_votaciones($page)
 {
-	global $CONFIG;
+	$base_dir = elgg_get_plugins_path() . 'votaciones/pages/';
 	
 	switch ($page[0]){
-		case "all":
-			include $CONFIG->pluginspath . 'polls18/pages/polls18/all.php';
+		case "totus":
+			include $base_dir . 'totus.php';
 			break;
-		case "edit":
-			include $CONFIG->pluginspath . 'polls18/pages/polls18/edit.php';
+		case "editare":
+			include $base_dir . 'editare.php';
 			break;
-		case "view":
+		case "nueva":
+			include $base_dir . 'editare.php';
+			break;
+		case "vistazo":
 			set_input('guid', $page[1]);
-			include $CONFIG->pluginspath . 'polls18/pages/polls18/view.php';
+			include $base_dir . 'vistazo.php';
 			break;
-		case "friends":
-			include $CONFIG->pluginspath . 'polls18/pages/polls18/friends.php';
+		case "amigos":
+			include $base_dir . 'amigos.php';
 			break;
-		case "owner":
-			include $CONFIG->pluginspath . 'polls18/pages/polls18/owner.php';
+		case "trujaman":
+			include $base_dir . 'trujaman.php';
 			break;
 		
-		}
-		return true;
 	}
+	
+	return true;
+}

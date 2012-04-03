@@ -1,6 +1,6 @@
 <?php
 
-$title = elgg_echo('polls18:title');
+$title = elgg_echo('votaciones:titulo');
 
 //get all polls order by date
 $content = elgg_list_entities(array(
@@ -15,7 +15,7 @@ elgg_register_title_button();
 $body = elgg_view_layout('content', array(
 	'content' => $content,
 	'title' => $title,
-	'filter_context' => 'owner',
+	'filter_context' => 'friends',
 	'sidebar' => ''
 ));
 

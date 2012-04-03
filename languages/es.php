@@ -18,11 +18,13 @@
  */
 
 $mapping = array(
-	'votaciones:titulo' => 'Polls',
-	'votaciones:menu' => 'Polls',
-	'votaciones:nueva' => 'New Poll',
-	'votaciones:editare' => 'Editing a Poll',
-	'votaciones:enviada:nueva' => 'New Poll created.',
+	'votaciones:titulo' => 'Votaciones',
+	'votaciones:menu' => 'Votaciones',
+	'votaciones:nueva' => 'Nueva Votación',
+	'votaciones:editare' => 'Editor de votaciones',
+	'votaciones:enviada:nueva' => 'Votación creada satisfactoriamente',
+	'votaciones:discusion:previa' => 'Dirección de enlace a la discusión previa a la votación',
+	'votaciones:opciones' => 'Opciones para la votación',
 );
 
-add_translation('en', $mapping);
+add_translation('es', $mapping);
