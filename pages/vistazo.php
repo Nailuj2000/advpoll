@@ -4,7 +4,7 @@
  * Copyright 2012 DRY Team
  *              - aruberuto
  *              - joker
- *              - mari
+ *              - *****
  *              y otros
  *
  * This program is free software; you can redistribute it and/or modify
@@ -22,4 +22,12 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  */
+
+$content = elgg_get_entities(array(
+	'type' => 'object',
+	'subtype' => 'poll_choice',
+	'limit' => 10
+	));
+
+print_r($content);
  

@@ -5,7 +5,7 @@
  * Copyright 2012 DRY Team
  *              - aruberuto
  *              - joker
- *              - mari
+ *              - ******
  *              y otros
  *
  * This program is free software; you can redistribute it and/or modify
@@ -28,7 +28,7 @@ $title = elgg_echo('votaciones:titulo');
 // Obtiene una lista de polls ordenada por fecha
 $content = elgg_list_entities(array(
 	'type' => 'object',
-	'subtype' => 'polls',
+	'subtype' => 'poll',
 	'limit' => 10
 	));
 

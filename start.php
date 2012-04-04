@@ -8,7 +8,7 @@
  * Copyright 2012 DRY Team
  *              - aruberuto
  *              - joker
- *              - mari
+ *              - *****
  *              y otros
  *
  * This program is free software; you can redistribute it and/or modify
@@ -47,6 +47,8 @@ function votaciones_init() {
 	elgg_register_menu_item('site', $item);
 	#manejador de páginas
 	elgg_register_page_handler('votaciones', 'maneja_paginas_votaciones');
+	#manejador de direccion url
+	elgg_register_entity_url_handler('object', 'poll', 'votaciones_url');
 	//registra librerias externas
 	elgg_register_library('votaciones:model', elgg_get_plugins_path() . 'votaciones/lib/modelo.php');
 }
@@ -79,4 +81,9 @@ function maneja_paginas_votaciones($page)
 	}
 	
 	return true;
+}
+
+function votaciones_url($entity) {
+	$title = elgg_get_friendly_title($entity->title);
+	return "votaciones/vistazo/$entity->guid/$title";
 }

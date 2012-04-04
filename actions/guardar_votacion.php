@@ -4,7 +4,7 @@
  * Copyright 2012 DRY Team
  *              - aruberuto
  *              - joker
- *              - mari
+ *              - *****
  *              y otros
  *
  * This program is free software; you can redistribute it and/or modify
@@ -91,5 +91,5 @@ $votacion = new ElggObject();
 ?>
 
 
-?>
+
 
