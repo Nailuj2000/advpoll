@@ -34,7 +34,7 @@ $opciones = polls_get_choice_array($votacion);
 ?>
 
 <div>
-	<label><?php echo elgg_echo('votaciones:votar:opcion'); ?></label><br />
+	<h3><?php echo elgg_echo('votaciones:votar:opcion'); ?></h3><br />
 	<?php echo elgg_view('input/radio', array(
 		'name' => 'response', 
 		'options' => $opciones,

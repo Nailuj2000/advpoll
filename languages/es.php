@@ -28,6 +28,9 @@ $mapping = array(
 	'votaciones:nueva:opcion' => '+',
 	'votaciones:numero:votos:opcion' => 'Numero de votos obtenidos -> ',
 	'votaciones:resultados' => 'Resultados de la votación',
+	'votaciones:votar:opcion' => 'Elige la opción que quieras',
+	'votaciones:respuesta' => 'Opción',
+	'votaciones:numero:votos:total' => 'Número Total de votos -> '
 );
 
 add_translation('es', $mapping);

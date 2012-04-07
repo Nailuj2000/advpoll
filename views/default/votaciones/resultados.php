@@ -50,6 +50,9 @@ foreach ($opciones as $opcion){
 	echo "</label></div>";
 	
 }
+echo "<div>	<label>";
+	echo elgg_echo('votaciones:numero:votos:total') . " $num_votos";
+	echo "</label></div>";
 
 
 //print_r($opciones);
