@@ -1,6 +1,7 @@
 <?php
-
-/*
+/**
+ * mod/votaciones/views/default/forms/votar.php
+ * 
  * Copyright 2012 DRY Team
  *              - aruberuto
  *              - joker
@@ -23,25 +24,29 @@
  * MA 02110-1301, USA.
  */
 
-elgg_load_library('votaciones:model');
-$guid = get_input('guid');
-$poll = get_entity($guid);
-$title = $poll->title;
+// once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
 
-$content = $poll->description;
 
-$content .= elgg_view_form('votar' , array() , array(
-	'votacion' => $poll,
+$votacion = elgg_extract('votacion', $vars, '');
+$opciones = polls_get_choice_array($votacion);
+
+
+?>
+
+<div>
+	<label><?php echo elgg_echo('votaciones:votar:opcion'); ?></label><br />
+	<?php echo elgg_view('input/radio', array(
+		'name' => 'response', 
+		'options' => $opciones,
 	));
+?>
 
-$body = elgg_view_layout('one_sidebar', array(
-	'title' => $title,
-	'content' => $content,
-	'sidebar' => '',
-	));
-	
-echo elgg_view_page($title, $body);
-	
+</div>
+<?php
 
 
- 
+echo elgg_view('input/submit', array('value' => elgg_echo("votar")));
+
+
+
+

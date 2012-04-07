@@ -25,7 +25,7 @@ $mapping = array(
 	'votaciones:enviada:nueva' => 'Votación creada satisfactoriamente',
 	'votaciones:discusion:previa' => 'Dirección de enlace a la discusión previa a la votación',
 	'votaciones:opciones' => 'Opciones para la votación',
-	'votaciones::nueva_opcion' => '+',
+	'votaciones:nueva:opcion' => '+',
 );
 
 add_translation('es', $mapping);

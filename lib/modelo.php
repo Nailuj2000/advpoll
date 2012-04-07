@@ -52,8 +52,12 @@ function polls_get_choice_array($poll) {
 	$choices = polls_get_choices($poll);
 	$responses = array();
 	if ($choices) {
+		$i = 1;
 		foreach($choices as $choice) {
-			$responses[] = $choice->text;
+			
+			$label = elgg_echo('votaciones:respuesta') . " $i: "  . $choice->text;
+			$responses[$label] = $choice->guid;
+			$i = $i+1;
 		}
 	}	
 	return $responses;
