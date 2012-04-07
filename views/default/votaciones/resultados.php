@@ -25,7 +25,7 @@
  */
 
 // once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
-
+elgg_load_library('votaciones:model');
 $votacion = elgg_extract('votacion', $vars, '');
 $opciones = polls_get_choice_array($votacion);
 $num_votos = 0;

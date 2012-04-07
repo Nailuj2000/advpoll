@@ -31,7 +31,7 @@ $title = $poll->title;
 $content = $poll->description;
 
 $content .= elgg_view_form('votar' , array() , array(
-	'votacion' => $poll,
+	'guid' => $guid,
 	));
 
 $content .= elgg_view('votaciones/resultados', array(

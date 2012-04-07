@@ -25,13 +25,24 @@
  */
 
 // once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
-
+elgg_load_library('votaciones:model');
 $choice = get_input('response');
-$votacion = get_input('votacion');
+$guid = get_input('guid');
+$votacion = get_entity($guid);
 $respuesta = get_entity($choice);
-$owner_guid = elgg_get_logged_in_user_guid();
+$owner_guid = get_input('owner_guid');
+
+$choices = polls_get_choice_array($votacion);
+
+foreach ($choices as $vote_guid){
+	if (remove_anotation_by_entity_guid_user_guid('vote', $vote_guid, $owner_guid)){
+		system_message('ok');
+	}
+}
+
 
 if ($respuesta->annotate('vote', 1, 'ACCESS_PUBLIC', $owner_guid, 'int')){
-		system_message(elgg_echo('votacion:vote:success'));
+		//system_message(elgg_echo('votacion:vote:success'));
 	}
-system_message(elgg_echo($choice));
+
+//system_message($choices);
