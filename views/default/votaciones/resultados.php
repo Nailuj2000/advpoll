@@ -1,6 +1,6 @@
 <?php
 /**
- * mod/votaciones/actions/votar.php
+ * mod/votaciones/views/default/votaciones/resultados.php
  * 
  * Copyright 2012 DRY Team
  *              - aruberuto
@@ -26,12 +26,31 @@
 
 // once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
 
-$choice = get_input('response');
-$votacion = get_input('votacion');
-$respuesta = get_entity($choice);
-$owner_guid = elgg_get_logged_in_user_guid();
+$votacion = elgg_extract('votacion', $vars, '');
+$opciones = polls_get_choice_array($votacion);
+$num_votos = 0;
 
-if ($respuesta->annotate('vote', 1, 'ACCESS_PUBLIC', $owner_guid, 'int')){
-		system_message(elgg_echo('votacion:vote:success'));
-	}
-system_message(elgg_echo($choice));
+
+//print_r($lista);
+//print_r('eeeeeeeeeeey');
+//print_r($num_votos);
+?>
+<br />
+<div>
+	<h3><?php echo elgg_echo('votaciones:resultados'); ?></h3><br />
+	<?php
+foreach ($opciones as $opcion){
+	$respuesta = get_entity($opcion);
+	$opcion_num_votos = $respuesta->CountAnnotations('vote',9999,0,'desc');
+	$lista[$opcion] = $opcion_num_votos;
+	$num_votos = $num_votos + $opcion_num_votos;
+	echo "<div>	<label>";
+	echo " $respuesta->text ";
+	echo elgg_echo('votaciones:numero:votos:opcion') . " $opcion_num_votos";
+	echo "</label></div>";
+	
+}
+
+
+//print_r($opciones);
+

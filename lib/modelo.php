@@ -115,4 +115,21 @@ function polls_can_add_to_group($group,$user=null) {
 		return $group->canEdit() || $group->isMember($user);
 	}
 }
+
+function remove_anotation_by_entity_guid_user_guid($annotation, $entity_guid, $user_guid){
+	$entity = get_entity($entity_guid);
+	$all_annotations = $entity->getAnnotations($annotation);
+	foreach ($all_annotations as $annotation_entity){
+		if ($annotation_entity->owner_guid == $user_guid 
+			&&
+			$annotation_entity->entity_guid == $entity_guid){
+				$annotation_id = $annotation_entity->id;
+				elgg_delete_annotation_by_id($annotation_id);
+				return TRUE;
+				
+			} else { 
+				return FALSE;
+			}
+		}
+	}
 ?>

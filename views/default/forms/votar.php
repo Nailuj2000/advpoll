@@ -44,7 +44,11 @@ $opciones = polls_get_choice_array($votacion);
 </div>
 <?php
 
-
+echo elgg_view('input/hidden', array(
+	'name' => 'votacion',
+	'value' => $votacion
+	));
+	
 echo elgg_view('input/submit', array('value' => elgg_echo("votar")));
 
 

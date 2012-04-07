@@ -34,6 +34,10 @@ $content .= elgg_view_form('votar' , array() , array(
 	'votacion' => $poll,
 	));
 
+$content .= elgg_view('votaciones/resultados', array(
+	'votacion' => $poll
+	));
+
 $body = elgg_view_layout('one_sidebar', array(
 	'title' => $title,
 	'content' => $content,

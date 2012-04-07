@@ -26,6 +26,8 @@ $mapping = array(
 	'votaciones:discusion:previa' => 'Dirección de enlace a la discusión previa a la votación',
 	'votaciones:opciones' => 'Opciones para la votación',
 	'votaciones:nueva:opcion' => '+',
+	'votaciones:numero:votos:opcion' => 'Numero de votos obtenidos -> ',
+	'votaciones:resultados' => 'Resultados de la votación',
 );
 
 add_translation('es', $mapping);
