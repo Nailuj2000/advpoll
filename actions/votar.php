@@ -31,7 +31,7 @@ $guid = get_input('guid');
 $votacion = get_entity($guid);
 $respuesta = get_entity($choice);
 $owner_guid = get_input('owner_guid');
-
+$access_id = $respuesta->access_id;
 $choices = polls_get_choice_array($votacion);
 
 foreach ($choices as $vote_guid){
@@ -41,7 +41,7 @@ foreach ($choices as $vote_guid){
 }
 
 
-if ($respuesta->annotate('vote', 1, 'ACCESS_PUBLIC', $owner_guid, 'int')){
+if ($respuesta->annotate('vote', 1, $access_id, $owner_guid, 'int')){
 		//system_message(elgg_echo('votacion:vote:success'));
 	}
 

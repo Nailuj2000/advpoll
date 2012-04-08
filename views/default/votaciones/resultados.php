@@ -30,10 +30,6 @@ $votacion = elgg_extract('votacion', $vars, '');
 $opciones = polls_get_choice_array($votacion);
 $num_votos = 0;
 
-
-//print_r($lista);
-//print_r('eeeeeeeeeeey');
-//print_r($num_votos);
 ?>
 <br />
 <div>
@@ -41,8 +37,7 @@ $num_votos = 0;
 	<?php
 foreach ($opciones as $opcion){
 	$respuesta = get_entity($opcion);
-	$opcion_num_votos = $respuesta->getAnnotationsSum('vote');
-	$lista[$opcion] = $opcion_num_votos;
+	$opcion_num_votos = $respuesta->countAnnotations('vote');
 	$num_votos = $num_votos + $opcion_num_votos;
 	echo "<div>	<label>";
 	echo " $respuesta->text ";
