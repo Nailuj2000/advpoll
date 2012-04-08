@@ -41,7 +41,7 @@ $num_votos = 0;
 	<?php
 foreach ($opciones as $opcion){
 	$respuesta = get_entity($opcion);
-	$opcion_num_votos = $respuesta->countAnnotations('vote');
+	$opcion_num_votos = $respuesta->getAnnotationsSum('vote');
 	$lista[$opcion] = $opcion_num_votos;
 	$num_votos = $num_votos + $opcion_num_votos;
 	echo "<div>	<label>";
