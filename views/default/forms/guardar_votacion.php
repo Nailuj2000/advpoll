@@ -38,8 +38,13 @@ $path = $votacion->path;
 $tags = $votacion->tags;
 $access_id = $votacion->access_id;
 $container_guid = $votacion->container_guid;
+if ($votacion){
+	$opciones = polls_get_choice_array($votacion);
+} else {
+	$opciones = array();
+}
 
-$opciones = polls_get_choice_array($votacion);
+	
 $num_opciones = count($opciones);
 ?>
 
