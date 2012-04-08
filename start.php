@@ -41,6 +41,10 @@ function votaciones_init() {
 
 	// Extend the main CSS file
 	elgg_extend_view('css/elgg', 'votaciones/css');
+	
+	// Register entity type for search
+	// Registrar tipo de entidad para las busquedas
+	elgg_register_entity_type('object', 'poll');
 
 	// Add a menu item to the main site menu
 	$item = new ElggMenuItem('votaciones', elgg_echo('votaciones:menu'), 'votaciones/totus');
@@ -62,7 +66,8 @@ function maneja_paginas_votaciones($page)
 		case "totus":
 			include $base_dir . 'totus.php';
 			break;
-		case "editare":
+		case "edit":
+			set_input('guid', $page[1]);
 			include $base_dir . 'editare.php';
 			break;
 		case "nueva":

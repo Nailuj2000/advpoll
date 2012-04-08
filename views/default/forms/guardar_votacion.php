@@ -27,17 +27,20 @@
  */
 
 // once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
+elgg_load_library('votaciones:model');
+$guid = get_input('guid');
 
+$votacion = get_entity($guid);
 
-$title = elgg_extract('title', $vars, '');
-$desc = elgg_extract('description', $vars, '');
-$path = elgg_extract('path', $vars, '');
-$tags = elgg_extract('tags', $vars, '');
-$access_id = elgg_extract('access_id', $vars, ACCESS_DEFAULT);
-$container_guid = elgg_extract('container_guid', $vars);
-$guid = elgg_extract('guid', $vars, null);
-$opciones = elgg_extract('opciones', $vars, array());
-$num_opciones = elgg_extract('numero_opciones', $vars, 0);
+$title = $votacion->title;
+$desc = $votacion->description;
+$path = $votacion->path;
+$tags = $votacion->tags;
+$access_id = $votacion->access_id;
+$container_guid = $votacion->container_guid;
+
+$opciones = polls_get_choice_array($votacion);
+$num_opciones = count($opciones);
 ?>
 
 <div>
@@ -76,14 +79,16 @@ if ($categories) {
 <?php 
 
 
-
-$num_opciones = count($opciones);
-for ($i=0; $i<$num_opciones; $i++) {
+$i = 0;
+foreach ($opciones as $opcion_guid) {
+$opcion = get_entity($opcion_guid);
+$value = $opcion->text;
 ?>
 <div>
-	<?php echo elgg_view('input/text', array('name' => 'opcion'.$i, 'class' => 'opcion', 'value' => $opcion)); ?>
+	<?php echo elgg_view('input/text', array('name' => 'opcion'.$i, 'class' => 'opcion', 'value' => $value)); ?>
 </div>
 <?php
+$i = $i+1;
 }
 ?>
 </div>

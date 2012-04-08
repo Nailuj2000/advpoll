@@ -30,7 +30,8 @@ $mapping = array(
 	'votaciones:resultados' => 'Resultados de la votación',
 	'votaciones:votar:opcion' => 'Elige la opción que quieras',
 	'votaciones:respuesta' => 'Opción',
-	'votaciones:numero:votos:total' => 'Número Total de votos -> '
+	'votaciones:numero:votos:total' => 'Número Total de votos -> ',
+	'votaciones:debate:previo:link' => 'Enlace al debate previo',
 );
 
 add_translation('es', $mapping);

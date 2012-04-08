@@ -43,52 +43,35 @@ for ($i=0; $i<$num_opciones; $i++) {
 
 system_message("$opciones");
 
-
-
-
 $votacion = new ElggObject();
+$votacion->subtype = "poll";
+$votacion->title = $title;
+$votacion->description = $desc;
+$votacion->path = $path;
+$votacion->access_id = $access_id;
+$votacion->owner_guid = elgg_get_logged_in_user_guid();
+$votacion->container_guid = $trujaman;
+$votacion->tags = $tags;
 
-  
-  $votacion->subtype = "poll";
-  $votacion->title = $title;
-  $votacion->description = $desc;
-  $vatacion->guid = $guid;
- 
-  // for now make all librillo posts public
-  $votacion->access_id = $access_id;
-  //$votacion->write_access_id = $write_access;
-  
- 
-  // owner is logged in user
-  $votacion->owner_guid = elgg_get_logged_in_user_guid();
-  $votacion->container_guid = $trujaman;
-  // save tags as metadata
-  $votacion->tags = $tags;
- 
-  // save to database and get id of the new blog
-  if ($guid) {
-  	$guid = $votacion->save();
+if ($guid) {
+	$votation->guid = $guid;
+	$votacion->save();
   	}
   	else {
   	$guid = $votacion->save();
   	}
   
-  polls_add_choices($votacion,$opciones);
+polls_add_choices($votacion,$opciones);
 
-  
- 
-  // if the blog was saved, we want to display the new post
-  // otherwise, we want to register an error and forward back to the form
-  if ($guid) {
-     system_message(elgg_echo('votacion:guardada'));
-     forward($votacion->getURL());
-  } else {
-     register_error(elgg_echo('votacion:error:guardar'));
-     forward(REFERER); // REFERER is a global variable that defines the previous page
-  }
+if ($guid) {
+	system_message(elgg_echo('votacion:guardada'));
+	forward($votacion->getURL());
+}
+else {
+	register_error(elgg_echo('votacion:error:guardar'));
+	forward(REFERER); // REFERER is a global variable that defines the previous page
+}
 
-
-?>
 
 
 
