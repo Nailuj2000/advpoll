@@ -29,7 +29,7 @@ $path = get_input('path');
 $tags = get_input('tags');
 $access_id = get_input('access_id');
 $container_guid = get_input('container_guid');
-$guid = get_input('guid');
+//$guid = get_input('guid');
 $choices = get_input('choices');
 $num_opciones = intval(get_input('num_opciones'));
 $trujaman = intval(get_input('container_guid'));
@@ -42,8 +42,12 @@ for ($i=0; $i<$num_opciones; $i++) {
 }
 
 system_message("$opciones");
-
-$votacion = new ElggObject();
+if (!$guid){
+	$votacion = new ElggObject();
+} else {
+	$votacion = get_entity($guid);
+}
+	
 $votacion->subtype = "poll";
 $votacion->title = $title;
 $votacion->description = $desc;
@@ -60,10 +64,11 @@ if ($guid) {
   	else {
   	$guid = $votacion->save();
   	}
-  
+
+polls_delete_choices($votacion); 
 polls_add_choices($votacion,$opciones);
 
-if ($guid) {
+if ($guid) { //esta parte creo que esta un poco mal
 	system_message(elgg_echo('votacion:guardada'));
 	forward($votacion->getURL());
 }
