@@ -22,60 +22,32 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  */
-elgg_load_library('votaciones:model');
-$title = get_input('title');
+
 $desc = get_input('description');
 $path = get_input('path');
 $tags = get_input('tags');
 $access_id = get_input('access_id');
-$container_guid = get_input('container_guid');
-//$guid = get_input('guid');
-$choices = get_input('choices');
-$num_opciones = intval(get_input('num_opciones'));
-$trujaman = intval(get_input('container_guid'));
 $guid = intval(get_input('guid'));
+
 $poll_anulada = get_input('poll_anulada');
 $poll_cerrada = get_input('poll_cerrada');
 $auditoria = get_input('auditoria');
 
+$votacion = get_entity($guid);
 
-$opciones = array();
-for ($i=0; $i<$num_opciones; $i++) {
-	$opciones[$i] = get_input('opcion'.$i);
-}
-
-system_message("$opciones");
-if (!$guid){
-	$votacion = new ElggObject();
-} else {
-	$votacion = get_entity($guid);
-}
 	
-$votacion->subtype = "poll";
-$votacion->title = $title;
+//escribimos en base de datos	
 $votacion->description = $desc;
 $votacion->path = $path;
 $votacion->access_id = $access_id;
-$votacion->owner_guid = elgg_get_logged_in_user_guid();
-$votacion->container_guid = $trujaman;
 $votacion->tags = $tags;
+$votation->guid = $guid;
+
 $votation->poll_anulada = $poll_anulada;
 $votation->poll_cerrada = $poll_cerrada;
 $votacion->auditoria = $auditoria;
 
-
-if ($guid) {
-	$votation->guid = $guid;
-	$votacion->save();
-  	}
-  	else {
-  	$guid = $votacion->save();
-  	}
-
-polls_delete_choices($votacion); 
-polls_add_choices($votacion,$opciones);
-
-if ($guid) { //esta parte creo que esta un poco mal
+if ($votacion->save()){
 	system_message(elgg_echo('votacion:guardada'));
 	forward($votacion->getURL());
 }
@@ -83,6 +55,7 @@ else {
 	register_error(elgg_echo('votacion:error:guardar'));
 	forward(REFERER); // REFERER is a global variable that defines the previous page
 }
+
 
 
 

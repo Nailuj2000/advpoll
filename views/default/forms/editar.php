@@ -38,6 +38,9 @@ $path = $votacion->path;
 $tags = $votacion->tags;
 $access_id = $votacion->access_id;
 $container_guid = $votacion->container_guid;
+$auditoria = $votacion->auditoria;
+$poll_anulada = $votacion->poll_anulada;
+$poll_cerrada = $votacion->poll_cerrada;
 if ($votacion){
 	$opciones = polls_get_choice_array($votacion);
 } else {
@@ -50,7 +53,8 @@ $num_opciones = count($opciones);
 
 <div>
 	<label><?php echo elgg_echo('votaciones:pregunta'); ?></label><br />
-	<?php echo elgg_view('input/text', array('name' => 'title', 'value' => $title)); ?>
+	<label><?php echo elgg_view('output/text', array('value' => $title)); ?></label><br />
+	<?php echo elgg_echo('votaciones:advertencia:editar:titulo'); ?>
 </div>
 
 <div>
@@ -75,27 +79,35 @@ if ($categories) {
 }
 
 ?>
-<div>
-	<label><?php echo elgg_echo('access'); ?></label><br />
-	<?php echo elgg_view('input/access', array('name' => 'access_id', 'value' => $access_id)); ?>
-</div>
-<div id="opciones"><?php echo elgg_view('input/button', array('id' => 'nueva_opcion', 'value' => elgg_echo('votaciones:nueva:opcion')));?>
-<label><?php echo elgg_echo('votaciones:opciones'); ?></label><br />
+
+
 <?php 
-
-
-$i = 0;
-foreach ($opciones as $opcion_guid) {
-$opcion = get_entity($opcion_guid);
-$value = $opcion->text;
-?>
+/**
+ * <div id="opciones"><?php echo elgg_view('input/button', array('id' => 'nueva_opcion', 'value' => elgg_echo('votaciones:nueva:opcion')));?>
+ * <label><?php echo elgg_echo('votaciones:opciones'); ?></label><br />
+ * <?php 
+ */
+ ?>
 <div>
-	<?php echo elgg_view('input/text', array('name' => 'opcion'.$i, 'class' => 'opcion', 'value' => $value)); ?>
+	<label><?php echo elgg_echo('votaciones:opciones'); ?></label><br />
 </div>
-<?php
-$i = $i+1;
-}
-?>
+
+<div><ul class='choices_ul'>
+	<?php
+	$i = 0;
+	foreach ($opciones as $opcion_guid) {
+		$opcion = get_entity($opcion_guid);
+		$value = $opcion->text; ?>
+		<li><?php echo elgg_view('output/text', array('value' => $value)); ?></li>
+		<?php
+		$i = $i+1;
+	}
+	?>
+</ul></div>
+
+</div>
+<div> 
+	<?php echo elgg_echo('votaciones:advertencia:editar'); ?>
 </div>
 <div>
 	<label><?php echo elgg_echo('access'); ?></label><br />
@@ -107,10 +119,11 @@ $i = $i+1;
 	<?php echo elgg_view('input/dropdown', array(
 		'name' => 'poll_cerrada',
 		 'options_values' => array(
-			elgg_echo('no') => 'no',
 			elgg_echo('yes') => 'yes',
+			elgg_echo('no') => 'no',
 			),
-		)); ?>
+		'value' => $poll_cerrada,
+	)); ?>
 </div>
 
 <div>
@@ -118,26 +131,19 @@ $i = $i+1;
 	<?php echo elgg_view('input/dropdown', array(
 		'name' => 'poll_anulada',
 		 'options_values' => array(
-			elgg_echo('no') => 'no',
 			elgg_echo('yes') => 'yes',
+			elgg_echo('no') => 'no',
 			),
-		
+		'value' => $poll_anulada,
 	));
 	?>
 </div>
 <div>
 	<label><?php echo elgg_echo('votaciones:auditoria'); ?></label><br />
-	<?php echo elgg_view('input/dropdown', array(
-		'name' => 'auditoria',
-		 'options_values' => array(
-			elgg_echo('no') => 'no',
-			elgg_echo('yes') => 'yes',
-		),
-		
-	));
-	?>
+	<label><?php echo elgg_echo($auditoria); ?></label><br />
+	<?php echo elgg_echo('votaciones:advertencia:editar:auditoria'); ?><br />
+	
 </div>
-
 
 
 <div class="elgg-foot">
@@ -155,15 +161,6 @@ echo elgg_view('input/submit', array('value' => elgg_echo("save")));
 ?>
 </div>
 
-<script type="text/javascript">
-	$('#nueva_opcion').click(function() {
-		var num_opciones = $('.opcion').length;
-		$('#opciones').append ('<div><br /><input type="text" name="opcion'+num_opciones+'" id="opcion'+num_opciones+'" class="elgg-input-text opcion" /></div>');
-	});
-	$('.elgg-form-guardar-votacion').submit(function() {
-		$('#num_opciones').val($('.opcion').length);
-	});
-</script>
 
 
 

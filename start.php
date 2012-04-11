@@ -34,6 +34,7 @@ function votaciones_init() {
 	$base_dir = elgg_get_plugins_path() . 'votaciones/actions';
 	elgg_register_action('guardar_votacion', "$base_dir/guardar_votacion.php");
 	elgg_register_action('votar', "$base_dir/votar.php");
+	elgg_register_action('editar', "$base_dir/editar.php");
 	// Es recomendable usar como nombre el mismo que el de la vista de la accion
 	// como primer termino, antes registrándola de este modo
 	// elgg_register_action('votaciones/guardar', "$base_dir/guardar_votacion.php");
@@ -71,7 +72,7 @@ function maneja_paginas_votaciones($page)
 			include $base_dir . 'editare.php';
 			break;
 		case "nueva":
-			include $base_dir . 'editare.php';
+			include $base_dir . 'creare.php';
 			break;
 		case "vistazo":
 			set_input('guid', $page[1]);

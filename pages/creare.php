@@ -25,7 +25,7 @@
 
 $vars = array();
 $title = elgg_echo('votaciones:editare');
-$content = elgg_view_form('editar', array(), $vars);
+$content = elgg_view_form('guardar_votacion', array(), $vars);
 //$content = elgg_view('votaciones/vistazo', array());
 $body = elgg_view_layout('content', array(
 	'filter' => '',

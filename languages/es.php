@@ -32,6 +32,11 @@ $mapping = array(
 	'votaciones:respuesta' => 'Opción',
 	'votaciones:numero:votos:total' => 'Número Total de votos -> ',
 	'votaciones:debate:previo:link' => 'Enlace al debate previo',
+	'votaciones:advertencia:editar' => 'Por motivos de seguridad no se pueden modificar las opciones de una votación una vez creada',
+	'votaciones:pregunta' => 'Título de la pregunta',
+	'votaciones:advertencia:editar:titulo' => 'Por motivos de seguridad no se puede modificar la pregunta de la votación una vez creada',
+	'votaciones:advertencia:editar:auditoria' => 'Por motivos de privacidad no se puede modificar esta opción una vez creada la votación',
+	
 );
 
 add_translation('es', $mapping);
