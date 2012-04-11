@@ -12,11 +12,20 @@ $content = elgg_list_entities(array(
 
 
 elgg_register_title_button();
+$filtros = elgg_view('votaciones/filtros', array(
+	'filter_context' => 'amigos',
+	'context' => 'votaciones'
+	));
+
+// llama a la vista 'content' del core registrada en el archivo
+// views/default/pages/layout/content.php
 $body = elgg_view_layout('content', array(
 	'content' => $content,
 	'title' => $title,
-	'filter_context' => 'owner',
+	'filter' => $filtros,
+	'filter_context' => 'amigos',
 	'sidebar' => ''
 ));
+
 
 echo elgg_view_page($title, $body);

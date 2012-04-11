@@ -36,13 +36,18 @@ $content = elgg_list_entities(array(
 // Registra un botón "añadir nueva" si no se especifican parámetros añade
 // ese por defecto
 elgg_register_title_button('votaciones', 'nueva');
+$filtros = elgg_view('votaciones/filtros', array(
+	'filter_context' => 'totus',
+	'context' => 'votaciones'
+	));
 
 // llama a la vista 'content' del core registrada en el archivo
 // views/default/pages/layout/content.php
 $body = elgg_view_layout('content', array(
 	'content' => $content,
 	'title' => $title,
-	'filter_context' => 'all',
+	'filter' => $filtros,
+	'filter_context' => 'totus',
 	'sidebar' => ''
 ));
 // Renderiza la página con el título y el cuerpo
