@@ -1,4 +1,5 @@
 <?php
+
 elgg_load_library('votaciones:model');
 $votacion = $vars['entity'];
 $titulo = $votacion->title;
@@ -28,7 +29,7 @@ echo $tags;
 echo "<br />";
 */
 
-
+$full = elgg_extract('full_view', $vars, FALSE);
 $owner =  $votacion->getOwnerEntity();
 $owner_icon = elgg_view_entity_icon($owner, 'tiny');
 
@@ -39,7 +40,7 @@ $metadata = elgg_view_menu('entity', array(
 	'class' => 'elgg-menu-hz',
 ));
 
-	// brief view
+
 	
 	$url = $votacion->path;
 	$display_text = $url;
@@ -65,7 +66,24 @@ $metadata = elgg_view_menu('entity', array(
 		'content' => $link,
 	);
 	$params = $params + $vars;
+	
+
+if ($full) {
+	$body = elgg_view('output/longtext', array('value' => $votacion->description));
+	$owner_icon = elgg_view_entity_icon($owner, 'small');
+	$summary = elgg_view('object/elements/summary', $params);
+
+	echo elgg_view('object/elements/full', array(
+		'entity' => $votacion,
+		'title' => '',
+		'icon' => $owner_icon,
+		'summary' => $summary,
+		'body' => $body,
+	));
+
+} else {
 	$body = elgg_view('object/elements/summary', $params);
 	
 	echo elgg_view_image_block($owner_icon, $body);
+}
 

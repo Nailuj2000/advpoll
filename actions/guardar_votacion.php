@@ -68,6 +68,7 @@ elgg_clear_sticky_form('votaciones');
 
 if ($guid) { //esta parte creo que esta un poco mal
 	system_message(elgg_echo('votacion:guardada'));
+	system_message("$guid");
 	forward($votacion->getURL());
 }
 else {

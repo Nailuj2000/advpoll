@@ -45,7 +45,9 @@ $votacion->guid = $guid;
 $votacion->poll_cerrada = $poll_cerrada;
 $votacion->auditoria = $auditoria;
 
-if ($votacion->save()){
+$guid2 = $votacion->save();
+
+if ($guid2){
 	system_message(elgg_echo('votacion:guardada'));
 	forward($votacion->getURL());
 }

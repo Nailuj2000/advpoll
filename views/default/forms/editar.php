@@ -35,7 +35,7 @@ $desc = elgg_extract('description', $vars, '');
 $access_id = elgg_extract('access_id', $vars, ACCESS_DEFAULT);
 $tags = elgg_extract('tags', $vars, '');
 $container_guid = elgg_extract('container_guid', $vars, elgg_get_page_owner_guid());
-$guid = elgg_extract('guid', $vars, null);
+$guid = get_input('guid');
 $votacion = elgg_extract('entity', $vars, null);
 $path = elgg_extract('path', $vars, '');
 $poll_cerrada = elgg_extract('poll_cerrada', $vars, 'no');
@@ -143,7 +143,7 @@ if ($categories) {
 
 <div>
 	<label><?php echo elgg_echo('votaciones:auditoria'); ?></label><br />
-	<label><?php echo elgg_echo($auditoria); ?></label><br />
+	<label><?php echo elgg_echo("option:$auditoria"); ?></label><br />
 	<?php echo elgg_echo('votaciones:advertencia:editar:auditoria'); ?><br />
 	
 </div>
@@ -151,7 +151,7 @@ if ($categories) {
 
 <div class="elgg-foot">
 <?php
-
+echo "$guid";
 //echo elgg_view('input/hidden', array('name' => 'container_guid', 'value' => $container_guid));
 echo elgg_view('input/hidden', array('name' => 'num_opciones', 'id' => 'num_opciones', 'value' => $num_opciones));
 

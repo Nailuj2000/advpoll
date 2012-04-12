@@ -112,8 +112,8 @@ $i = $i+1;
 	<?php echo elgg_view('input/radio', array(
 		'name' => 'auditoria',
 		 'options' => array(
-			elgg_echo('option:no') => 'no' ,
-			elgg_echo('option:yes') => 'yes',
+			'no' => 'no' ,
+			'yes' => 'yes',
 			),
 		'value' => $auditoria,
 	));

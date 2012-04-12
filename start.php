@@ -71,7 +71,7 @@ function maneja_paginas_votaciones($page)
 			include $base_dir . 'totus.php';
 			break;
 		case "edit":
-			set_input('container_guid', $page[1]);
+			set_input('guid', $page[1]);
 			include $base_dir . 'editare.php';
 			break;
 		case "nueva":
