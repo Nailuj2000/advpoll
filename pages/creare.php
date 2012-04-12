@@ -22,19 +22,23 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  */
+ 
+gatekeeper();
+ 
+elgg_load_library('votaciones:model');
 
-$vars = array();
+$vars = votaciones_preparar_vars($votacion);
 $title = elgg_echo('votaciones:editare');
 
 // Esto de abajo sirve para que aparezca en el menu lateral las opciones
 // de grupo y de usuario al que pertenece la votación
-$content = elgg_view_form('guardar_votacion', array(), $vars);
-$container_guid = (int) get_input('container_guid');
+
+$container_guid = (int) get_input('guid');
 $container = get_entity($container_guid);
 elgg_set_page_owner_guid($container->getGUID());
 
 
-
+$content = elgg_view_form('guardar_votacion', array(), $vars);
 //$content = elgg_view('votaciones/vistazo', array());
 $body = elgg_view_layout('content', array(
 	'filter' => '',

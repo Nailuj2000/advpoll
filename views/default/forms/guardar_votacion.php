@@ -29,7 +29,18 @@
 // once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
 elgg_load_library('votaciones:model');
 
-$container_guid = get_input('container_guid');
+
+
+$title = elgg_extract('title', $vars, '');
+$desc = elgg_extract('description', $vars, '');
+$access_id = elgg_extract('access_id', $vars, ACCESS_DEFAULT);
+$tags = elgg_extract('tags', $vars, '');
+$container_guid = elgg_extract('container_guid', $vars, elgg_get_page_owner_guid());
+$guid = elgg_extract('guid', $vars, null);
+$votacion = elgg_extract('entity', $vars, null);
+$path = elgg_extract('path', $vars, '');
+$poll_cerrada = elgg_extract('poll_cerrada', $vars, 'no');
+$auditoria = elgg_extract('auditoria', $vars, 'no');
 $group = get_entity($container_guid);
 
 ?>
@@ -92,7 +103,7 @@ $i = $i+1;
 			elgg_echo('option:no') => 'no' ,
 			elgg_echo('option:yes') => 'yes',
 			),
-		'value' => 'no',
+		'value' => $poll_cerrada,
 		)); ?>
 </div>
 
@@ -104,7 +115,7 @@ $i = $i+1;
 			elgg_echo('option:no') => 'no' ,
 			elgg_echo('option:yes') => 'yes',
 			),
-		'value' => 'no',
+		'value' => $auditoria,
 	));
 
 	?>

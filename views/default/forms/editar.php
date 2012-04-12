@@ -28,19 +28,33 @@
 
 // once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
 elgg_load_library('votaciones:model');
-$guid = get_input('guid');
 
-$votacion = get_entity($guid);
 
-$title = $votacion->title;
-$desc = $votacion->description;
-$path = $votacion->path;
-$tags = $votacion->tags;
-$access_id = $votacion->access_id;
-$container_guid = $votacion->container_guid;
-$auditoria = $votacion->auditoria;
-$poll_anulada = $votacion->poll_anulada;
-$poll_cerrada = $votacion->poll_cerrada;
+$title = elgg_extract('title', $vars, '');
+$desc = elgg_extract('description', $vars, '');
+$access_id = elgg_extract('access_id', $vars, ACCESS_DEFAULT);
+$tags = elgg_extract('tags', $vars, '');
+$container_guid = elgg_extract('container_guid', $vars, elgg_get_page_owner_guid());
+$guid = elgg_extract('guid', $vars, null);
+$votacion = elgg_extract('entity', $vars, null);
+$path = elgg_extract('path', $vars, '');
+$poll_cerrada = elgg_extract('poll_cerrada', $vars, 'no');
+$auditoria = elgg_extract('auditoria', $vars, 'no');
+$group = get_entity($container_guid);
+
+/**
+$group = get_entity($container_guid);
+$title = elgg_extract('title', $vars, '');
+$desc = elgg_extract('description', $vars, '');
+$access_id = elgg_extract('access_id', $vars, ACCESS_DEFAULT);
+$tags = elgg_extract('tags', $vars, '');
+$container_guid = elgg_extract('container_guid', $vars, elgg_get_page_owner_guid());
+$guid = elgg_extract('guid', $vars, null);
+$votacion = elgg_extract('entity', $vars, null);
+$path = elgg_extract('path', $vars, '');
+$poll_cerrada = elgg_extract('poll_cerrada', $vars, 'no');
+$auditoria = elgg_extract('auditoria', $vars, 'no');
+*/
 if ($votacion){
 	$opciones = polls_get_choice_array($votacion);
 } else {

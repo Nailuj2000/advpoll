@@ -132,4 +132,40 @@ function remove_anotation_by_entity_guid_user_guid($annotation, $entity_guid, $u
 			}
 		}
 	}
+
+function votaciones_preparar_vars($votaciones = null) {
+
+	// input names => defaults
+	$values = array(
+		'title' => '',
+		'description' => '',
+		'access_id' => ACCESS_DEFAULT,
+		'tags' => '',
+		'container_guid' => elgg_get_page_owner_guid(),
+		'guid' => null,
+		'entity' => $votaciones,
+		'path' => 'http://',
+		'poll_cerrada' => 'no',
+		'auditoria' => 'no',
+	);
+
+	if ($votaciones) {
+		foreach (array_keys($values) as $field) {
+			if (isset($votaciones->$field)) {
+				$values[$field] = $votaciones->$field;
+			}
+		}
+	}
+
+	if (elgg_is_sticky_form('votaciones')) {
+		$sticky_values = elgg_get_sticky_values('votaciones');
+		foreach ($sticky_values as $key => $value) {
+			$values[$key] = $value;
+		}
+	}
+
+	elgg_clear_sticky_form('votaciones');
+
+	return $values;
+}
 ?>

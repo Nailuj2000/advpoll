@@ -39,6 +39,7 @@ $poll_cerrada = get_input('poll_cerrada');
 $auditoria = get_input('auditoria');
 $owner_guid = elgg_get_logged_in_user_guid();
 
+elgg_make_sticky_form('page');
 
 $opciones = array();
 for ($i=0; $i<$num_opciones; $i++) {
@@ -62,6 +63,8 @@ $guid = $votacion->save();
 
 polls_delete_choices($votacion); 
 polls_add_choices($votacion,$opciones);
+
+elgg_clear_sticky_form('votaciones');
 
 if ($guid) { //esta parte creo que esta un poco mal
 	system_message(elgg_echo('votacion:guardada'));

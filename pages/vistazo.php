@@ -26,6 +26,14 @@
 elgg_load_library('votaciones:model');
 $guid = get_input('guid');
 $poll = get_entity($guid);
+
+// Esto de abajo sirve para que aparezca en el menu lateral las opciones
+// de grupo y de usuario al que pertenece la votación
+$container_guid = $poll->container_guid;
+$container = get_entity($container_guid);
+
+elgg_set_page_owner_guid($container->getGUID());
+
 $title = $poll->title;
 
 $content = $poll->description;
@@ -41,10 +49,10 @@ $content .= elgg_view('votaciones/resultados', array(
 $cerrada = $poll->poll_cerrada;
 $content .= $cerrada;
 
-$body = elgg_view_layout('one_sidebar', array(
+$body = elgg_view_layout('content', array(
 	'title' => $title,
 	'content' => $content,
-	'sidebar' => '',
+	'filter' => '',
 	));
 	
 echo elgg_view_page($title, $body);

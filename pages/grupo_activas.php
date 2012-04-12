@@ -1,10 +1,11 @@
 <?php
-
-/*
+/**
+* /var/www/elgg/mod/polls/pages/all.php
+ *
  * Copyright 2012 DRY Team
  *              - aruberuto
  *              - joker
- *              - *****
+ *              - ******
  *              y otros
  *
  * This program is free software; you can redistribute it and/or modify
@@ -22,27 +23,32 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  */
+$title = elgg_echo('votaciones:titulo');
 
-gatekeeper();
- 
-elgg_load_library('votaciones:model');
+// Obtiene una lista de polls ordenada por fecha
+$content = elgg_list_entities(array(
+	'type' => 'object',
+	'subtype' => 'poll',
+	'limit' => 10
+	));
 
-$vars = votaciones_preparar_vars($votacion);
-$title = elgg_echo('votaciones:editare');
 
-// Esto de abajo sirve para que aparezca en el menu lateral las opciones
-// de grupo y de usuario al que pertenece la votación
-
-$container_guid = (int) get_input('guid');
-$container = get_entity($container_guid);
-elgg_set_page_owner_guid($container->getGUID());
-
-$content = elgg_view_form('editar', array(), $vars);
-//$content = elgg_view('votaciones/vistazo', array());
+// Registra un botón "añadir nueva" si no se especifican parámetros añade
+// ese por defecto
+elgg_register_title_button('votaciones', 'nueva');
+$filtros = elgg_view('votaciones/filtros', array(
+	'filter_context' => 'totus',
+	'context' => 'votaciones'
+	));
+print_r(elgg_get_context());
+// llama a la vista 'content' del core registrada en el archivo
+// views/default/pages/layout/content.php
 $body = elgg_view_layout('content', array(
-	'filter' => '',
 	'content' => $content,
 	'title' => $title,
+	'filter' => $filtros,
+	'filter_context' => 'totus',
+	'sidebar' => ''
 ));
-
+// Renderiza la página con el título y el cuerpo
 echo elgg_view_page($title, $body);

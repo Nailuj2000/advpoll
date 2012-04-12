@@ -75,7 +75,7 @@ function maneja_paginas_votaciones($page)
 			include $base_dir . 'editare.php';
 			break;
 		case "nueva":
-			set_input('container_guid', $page[1]);
+			set_input('guid', $page[1]);
 			include $base_dir . 'creare.php';
 			break;
 		case "vistazo":
@@ -96,7 +96,14 @@ function maneja_paginas_votaciones($page)
 			break;
 		case "group";
 			set_input('guid', $page[1]);
-			include $base_dir . 'trujaman.php';
+			if ($page[2] == 'totus') {
+				include $base_dir . 'grupo_totus.php';
+			}
+			if ($page[2] == 'cerradas'){
+				include $base_dir . 'grupo_cerradas.php';
+			} else {
+				include $base_dir . 'grupo_activas.php';
+			}
 			break;
 		
 	}
