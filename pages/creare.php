@@ -33,7 +33,7 @@ $title = elgg_echo('votaciones:editare');
 // Esto de abajo sirve para que aparezca en el menu lateral las opciones
 // de grupo y de usuario al que pertenece la votación
 
-$container_guid = (int) get_input('guid');
+$container_guid = (int) get_input('container_guid');
 $container = get_entity($container_guid);
 elgg_set_page_owner_guid($container->getGUID());
 

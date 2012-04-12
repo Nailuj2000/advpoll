@@ -135,13 +135,14 @@ function remove_anotation_by_entity_guid_user_guid($annotation, $entity_guid, $u
 
 function votaciones_preparar_vars($votaciones = null) {
 
-	// input names => defaults
+	// input names => default
+	$container_guid = get_input('container_guid');
 	$values = array(
 		'title' => '',
 		'description' => '',
 		'access_id' => ACCESS_DEFAULT,
 		'tags' => '',
-		'container_guid' => elgg_get_page_owner_guid(),
+		'container_guid' => $container_guid,
 		'guid' => null,
 		'entity' => $votaciones,
 		'path' => 'http://',
