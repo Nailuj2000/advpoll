@@ -57,6 +57,9 @@ function votaciones_init() {
 	elgg_register_entity_url_handler('object', 'poll', 'votaciones_url');
 	//registra librerias externas
 	elgg_register_library('votaciones:model', elgg_get_plugins_path() . 'votaciones/lib/modelo.php');
+	// Módulo para grupos
+	add_group_tool_option('votaciones', elgg_echo('votaciones:grupos:habilitarvotaciones'), true);
+	elgg_extend_view('groups/tool_latest', 'votaciones/group_module');
 }
 
 function maneja_paginas_votaciones($page)
@@ -72,6 +75,7 @@ function maneja_paginas_votaciones($page)
 			include $base_dir . 'editare.php';
 			break;
 		case "nueva":
+			set_input('container_guid', $page[1]);
 			include $base_dir . 'creare.php';
 			break;
 		case "vistazo":
@@ -89,6 +93,10 @@ function maneja_paginas_votaciones($page)
 			break;
 		case "cerradas";
 			include $base_dir . 'cerradas.php';
+			break;
+		case "group";
+			set_input('guid', $page[1]);
+			include $base_dir . 'trujaman.php';
 			break;
 		
 	}

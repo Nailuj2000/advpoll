@@ -29,6 +29,9 @@
 // once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
 elgg_load_library('votaciones:model');
 
+$container_guid = get_input('container_guid');
+$group = get_entity($container_guid);
+
 ?>
 
 <div>
@@ -112,7 +115,7 @@ $i = $i+1;
 <div class="elgg-foot">
 <?php
 
-//echo elgg_view('input/hidden', array('name' => 'container_guid', 'value' => $container_guid));
+echo elgg_view('input/hidden', array('name' => 'container_guid', 'value' => $container_guid));
 echo elgg_view('input/hidden', array('name' => 'num_opciones', 'id' => 'num_opciones', 'value' => $num_opciones));
 
 if ($guid) {
