@@ -26,7 +26,7 @@ elgg_load_library('votaciones:model');
 $title = get_input('title');
 $desc = get_input('description');
 $path = get_input('path');
-$tags = get_input('tags');
+$tags = string_to_tag_array(get_input('tags'));
 $access_id = get_input('access_id');
 $container_guid = get_input('container_guid');
 //$guid = get_input('guid');

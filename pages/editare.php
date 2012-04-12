@@ -27,16 +27,18 @@ gatekeeper();
  
 elgg_load_library('votaciones:model');
 
-$vars = votaciones_preparar_vars($votacion);
+
 $title = elgg_echo('votaciones:editare');
 
 // Esto de abajo sirve para que aparezca en el menu lateral las opciones
 // de grupo y de usuario al que pertenece la votación
 
-$container_guid = (int) get_input('guid');
+$guid = (int) get_input('guid');
+$votacion = get_entity($guid);
+$container_guid = $votacion->container_guid;
 $container = get_entity($container_guid);
 elgg_set_page_owner_guid($container->getGUID());
-
+$vars = votaciones_preparar_vars($votacion);
 $content = elgg_view_form('editar', array(), $vars);
 //$content = elgg_view('votaciones/vistazo', array());
 $body = elgg_view_layout('content', array(

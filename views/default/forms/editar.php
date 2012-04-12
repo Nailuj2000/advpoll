@@ -136,7 +136,7 @@ if ($categories) {
 			elgg_echo('option:no') => 'no' ,
 			elgg_echo('option:yes') => 'yes',
 			),
-		'value' => 'no',
+		'value' => $poll_cerrada,
 		)); ?>
 </div>
 
@@ -151,7 +151,7 @@ if ($categories) {
 
 <div class="elgg-foot">
 <?php
-echo "$guid";
+
 //echo elgg_view('input/hidden', array('name' => 'container_guid', 'value' => $container_guid));
 echo elgg_view('input/hidden', array('name' => 'num_opciones', 'id' => 'num_opciones', 'value' => $num_opciones));
 

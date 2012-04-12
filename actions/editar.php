@@ -25,7 +25,7 @@
 
 $desc = get_input('description');
 $path = get_input('path');
-$tags = get_input('tags');
+$tags = string_to_tag_array(get_input('tags'));
 $access_id = get_input('access_id');
 $guid = intval(get_input('guid'));
 
