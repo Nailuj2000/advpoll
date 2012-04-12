@@ -23,9 +23,34 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  */
-$title = elgg_echo('votaciones:titulo');
+$title = elgg_echo('votaciones:grupo:titulo');
 $container_guid = get_input('guid');
+$group_context = get_input('group_context');
 // Obtiene una lista de polls ordenada por fecha
+
+if ("$group_context" == 'totus'){
+$content = elgg_list_entities(array(
+	'type' => 'object',
+	'subtype' => 'poll',
+	'limit' => 10,
+	'full_view' => false,
+	'container_guid' =>  $container_guid,
+	));
+	
+} else {
+if ("$group_context" == 'cerradas'){
+$content = elgg_list_entities_from_metadata(array(
+	'type' => 'object',
+	'subtype' => 'poll',
+	'limit' => 10,
+	'full_view' => false,
+	'container_guid' =>  $container_guid,
+	'metadata_name' => 'poll_cerrada',
+	'metadata_value' => 'yes',
+	));
+	
+} else {
+
 $content = elgg_list_entities_from_metadata(array(
 	'type' => 'object',
 	'subtype' => 'poll',
@@ -35,13 +60,15 @@ $content = elgg_list_entities_from_metadata(array(
 	'metadata_name' => 'poll_cerrada',
 	'metadata_value' => 'no',
 	));
-
+	
+}
+}
 
 // Registra un botón "añadir nueva" si no se especifican parámetros añade
 // ese por defecto
 elgg_register_title_button('votaciones', 'nueva');
 $filtros = elgg_view('votaciones/filtros_grupos', array(
-	'filter_context' => 'activas',
+	'filter_context' => "$group_context",
 	'context' => 'votaciones'
 	));
 
@@ -51,7 +78,7 @@ $body = elgg_view_layout('content', array(
 	'content' => $content,
 	'title' => $title,
 	'filter' => $filtros,
-	'filter_context' => 'activas',
+	'filter_context' => "$group_context",
 	'sidebar' => ''
 ));
 // Renderiza la página con el título y el cuerpo

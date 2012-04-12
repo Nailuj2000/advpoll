@@ -96,14 +96,15 @@ function maneja_paginas_votaciones($page)
 			break;
 		case "group";
 			set_input('guid', $page[1]);
-			if ($page[2] == 'totus') {
-				include $base_dir . 'grupo_totus.php';
-			}
-			if ($page[2] == 'cerradas'){
-				include $base_dir . 'grupo_cerradas.php';
-			} else {
-				include $base_dir . 'grupo_activas.php';
-			}
+			set_input('group_context', $page[2]);
+			//if ($page[2] == 'totus') {
+				include $base_dir . 'grupo.php';
+			//}
+			//if ($page[2] == 'cerradas'){
+			//	include $base_dir . 'grupo_cerradas.php';
+			//} else {
+			//	include $base_dir . 'grupo_activas.php';
+			//}
 			break;
 		
 	}
