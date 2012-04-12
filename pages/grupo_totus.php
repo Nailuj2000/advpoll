@@ -32,8 +32,7 @@ $content = elgg_list_entities_from_metadata(array(
 	'limit' => 10,
 	'full_view' => false,
 	'container_guid' =>  $container_guid,
-	'metadata_name' => 'poll_cerrada',
-	'metadata_value' => 'no',
+	
 	));
 
 
@@ -41,7 +40,7 @@ $content = elgg_list_entities_from_metadata(array(
 // ese por defecto
 elgg_register_title_button('votaciones', 'nueva');
 $filtros = elgg_view('votaciones/filtros_grupos', array(
-	'filter_context' => 'activas',
+	'filter_context' => 'totus',
 	'context' => 'votaciones'
 	));
 
@@ -51,7 +50,7 @@ $body = elgg_view_layout('content', array(
 	'content' => $content,
 	'title' => $title,
 	'filter' => $filtros,
-	'filter_context' => 'activas',
+	'filter_context' => 'totus',
 	'sidebar' => ''
 ));
 // Renderiza la página con el título y el cuerpo
