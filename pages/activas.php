@@ -3,17 +3,22 @@
 $title = elgg_echo('votaciones:titulo');
 
 //get all polls order by date
-$content = elgg_list_entities(array(
+
+//$content = get_entity(171);
+	
+$content = elgg_list_entities_from_metadata(array(
 	'type' => 'object',
-	'subtype' => 'polls',
-	'limit' => 10
+	'subtype' => 'poll',
+	'metadata_name' => 'poll_cerrada',
+	'metadata_value' => 'no',
+	'limit' => 10,
 	));
+	
 
 
-
-elgg_register_title_button();
+elgg_register_title_button('votaciones', 'nueva');
 $filtros = elgg_view('votaciones/filtros', array(
-	'filter_context' => 'amigos',
+	'filter_context' => 'activas',
 	'context' => 'votaciones'
 	));
 
@@ -23,7 +28,7 @@ $body = elgg_view_layout('content', array(
 	'content' => $content,
 	'title' => $title,
 	'filter' => $filtros,
-	'filter_context' => 'amigos',
+	'filter_context' => 'activas',
 	'sidebar' => ''
 ));
 

@@ -36,6 +36,11 @@ $mapping = array(
 	'votaciones:pregunta' => 'Título de la pregunta',
 	'votaciones:advertencia:editar:titulo' => 'Por motivos de seguridad no se puede modificar la pregunta de la votación una vez creada',
 	'votaciones:advertencia:editar:auditoria' => 'Por motivos de privacidad no se puede modificar esta opción una vez creada la votación',
+	'votaciones:filtros:activas' => 'Activas',
+	'votaciones:filtros:anuladas' => 'Anuladas',
+	'votaciones:filtros:totus' => 'Todas',
+	'votaciones:filtros:amigos' => 'De Amigos',
+	'votaciones:filtros:trujaman' => 'Mías',
 	
 );
 

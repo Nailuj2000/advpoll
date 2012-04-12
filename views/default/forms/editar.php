@@ -116,28 +116,17 @@ if ($categories) {
 
 <div>
 	<label><?php echo elgg_echo('votaciones:cerrada'); ?></label><br />
-	<?php echo elgg_view('input/dropdown', array(
+	<?php echo elgg_view('input/radio', array(
 		'name' => 'poll_cerrada',
-		 'options_values' => array(
-			elgg_echo('yes') => 'yes',
-			elgg_echo('no') => 'no',
+		 'options' => array(
+			elgg_echo('option:no') => 'no' ,
+			elgg_echo('option:yes') => 'yes',
 			),
-		'value' => $poll_cerrada,
-	)); ?>
+		'value' => 'no',
+		)); ?>
 </div>
 
-<div>
-	<label><?php echo elgg_echo('votaciones:anulada'); ?></label><br />
-	<?php echo elgg_view('input/dropdown', array(
-		'name' => 'poll_anulada',
-		 'options_values' => array(
-			elgg_echo('yes') => 'yes',
-			elgg_echo('no') => 'no',
-			),
-		'value' => $poll_anulada,
-	));
-	?>
-</div>
+
 <div>
 	<label><?php echo elgg_echo('votaciones:auditoria'); ?></label><br />
 	<label><?php echo elgg_echo($auditoria); ?></label><br />

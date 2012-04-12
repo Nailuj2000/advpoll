@@ -33,10 +33,11 @@ $container_guid = get_input('container_guid');
 $choices = get_input('choices');
 $num_opciones = intval(get_input('num_opciones'));
 $trujaman = intval(get_input('container_guid'));
-$guid = intval(get_input('guid'));
-$poll_anulada = get_input('poll_anulada');
+//$guid = intval(get_input('guid'));
+
 $poll_cerrada = get_input('poll_cerrada');
 $auditoria = get_input('auditoria');
+$owner_guid = elgg_get_logged_in_user_guid();
 
 
 $opciones = array();
@@ -44,33 +45,20 @@ for ($i=0; $i<$num_opciones; $i++) {
 	$opciones[$i] = get_input('opcion'.$i);
 }
 
-system_message("$opciones");
-if (!$guid){
-	$votacion = new ElggObject();
-} else {
-	$votacion = get_entity($guid);
-}
-	
+
+$votacion = new ElggObject();
+
 $votacion->subtype = "poll";
 $votacion->title = $title;
 $votacion->description = $desc;
 $votacion->path = $path;
 $votacion->access_id = $access_id;
-$votacion->owner_guid = elgg_get_logged_in_user_guid();
+$votacion->owner_guid = $owner_guid;
 $votacion->container_guid = $trujaman;
 $votacion->tags = $tags;
-$votation->poll_anulada = $poll_anulada;
-$votation->poll_cerrada = $poll_cerrada;
+$votacion->poll_cerrada = $poll_cerrada;
 $votacion->auditoria = $auditoria;
-
-
-if ($guid) {
-	$votation->guid = $guid;
-	$votacion->save();
-  	}
-  	else {
-  	$guid = $votacion->save();
-  	}
+$guid = $votacion->save();
 
 polls_delete_choices($votacion); 
 polls_add_choices($votacion,$opciones);

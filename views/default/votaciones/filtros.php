@@ -38,7 +38,7 @@ if (elgg_is_logged_in() && $context) {
 			'text' => elgg_echo('votaciones:filtros:trujaman'),
 			'href' => (isset($vars['mtrujaman_link'])) ? $vars['trujaman_link'] : "$context/trujaman",
 			'selected' => ($filter_context == 'trujaman'),
-			'priority' => 600,
+			'priority' => 300,
 		),
 		'amigos' => array(
 			'text' => elgg_echo('votaciones:filtros:amigos'),
@@ -46,10 +46,10 @@ if (elgg_is_logged_in() && $context) {
 			'selected' => ($filter_context == 'burning'),
 			'priority' => 400,
 		),
-		'anuladas' => array(
-			'text' => elgg_echo('votaciones:filtros:anuladas'),
-			'href' => (isset($vars['anuladas_link'])) ? $vars['all_link'] : "$context/anuladas",
-			'selected' => ($filter_context == 'all'),
+		'cerradas' => array(
+			'text' => elgg_echo('votaciones:filtros:cerradas'),
+			'href' => (isset($vars['cerradas_link'])) ? $vars['cerradas_link'] : "$context/cerradas",
+			'selected' => ($filter_context == 'cerradas'),
 			'priority' => 500,
 		),
 			);

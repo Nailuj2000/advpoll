@@ -28,24 +28,7 @@
 
 // once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
 elgg_load_library('votaciones:model');
-$guid = get_input('guid');
 
-$votacion = get_entity($guid);
-
-$title = $votacion->title;
-$desc = $votacion->description;
-$path = $votacion->path;
-$tags = $votacion->tags;
-$access_id = $votacion->access_id;
-$container_guid = $votacion->container_guid;
-if ($votacion){
-	$opciones = polls_get_choice_array($votacion);
-} else {
-	$opciones = array();
-}
-
-	
-$num_opciones = count($opciones);
 ?>
 
 <div>
@@ -97,44 +80,30 @@ $i = $i+1;
 }
 ?>
 </div>
-<div>
-	<label><?php echo elgg_echo('access'); ?></label><br />
-	<?php echo elgg_view('input/access', array('name' => 'access_id', 'value' => $access_id)); ?>
-</div>
 
 <div>
 	<label><?php echo elgg_echo('votaciones:cerrada'); ?></label><br />
-	<?php echo elgg_view('input/dropdown', array(
+	<?php echo elgg_view('input/radio', array(
 		'name' => 'poll_cerrada',
-		 'options_values' => array(
-			elgg_echo('no') => 'no',
-			elgg_echo('yes') => 'yes',
+		 'options' => array(
+			elgg_echo('option:no') => 'no' ,
+			elgg_echo('option:yes') => 'yes',
 			),
+		'value' => 'no',
 		)); ?>
 </div>
 
 <div>
-	<label><?php echo elgg_echo('votaciones:anulada'); ?></label><br />
-	<?php echo elgg_view('input/dropdown', array(
-		'name' => 'poll_anulada',
-		 'options_values' => array(
-			elgg_echo('no') => 'no',
-			elgg_echo('yes') => 'yes',
-			),
-		
-	));
-	?>
-</div>
-<div>
 	<label><?php echo elgg_echo('votaciones:auditoria'); ?></label><br />
-	<?php echo elgg_view('input/dropdown', array(
+	<?php echo elgg_view('input/radio', array(
 		'name' => 'auditoria',
-		 'options_values' => array(
-			elgg_echo('no') => 'no',
-			elgg_echo('yes') => 'yes',
-		),
-		
+		 'options' => array(
+			elgg_echo('option:no') => 'no' ,
+			elgg_echo('option:yes') => 'yes',
+			),
+		'value' => 'no',
 	));
+
 	?>
 </div>
 

@@ -11,7 +11,7 @@ $content = elgg_list_entities(array(
 
 
 
-elgg_register_title_button();
+elgg_register_title_button('votaciones', 'nueva');
 $filtros = elgg_view('votaciones/filtros', array(
 	'filter_context' => 'amigos',
 	'context' => 'votaciones'

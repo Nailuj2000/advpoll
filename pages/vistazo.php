@@ -38,6 +38,9 @@ $content .= elgg_view('votaciones/resultados', array(
 	'votacion' => $poll
 	));
 
+$cerrada = $poll->poll_cerrada;
+$content .= $cerrada;
+
 $body = elgg_view_layout('one_sidebar', array(
 	'title' => $title,
 	'content' => $content,

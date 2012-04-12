@@ -29,7 +29,6 @@ $tags = get_input('tags');
 $access_id = get_input('access_id');
 $guid = intval(get_input('guid'));
 
-$poll_anulada = get_input('poll_anulada');
 $poll_cerrada = get_input('poll_cerrada');
 $auditoria = get_input('auditoria');
 
@@ -41,10 +40,9 @@ $votacion->description = $desc;
 $votacion->path = $path;
 $votacion->access_id = $access_id;
 $votacion->tags = $tags;
-$votation->guid = $guid;
+$votacion->guid = $guid;
 
-$votation->poll_anulada = $poll_anulada;
-$votation->poll_cerrada = $poll_cerrada;
+$votacion->poll_cerrada = $poll_cerrada;
 $votacion->auditoria = $auditoria;
 
 if ($votacion->save()){
