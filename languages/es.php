@@ -41,6 +41,7 @@ $mapping = array(
 	'votaciones:filtros:totus' => 'Todas',
 	'votaciones:filtros:amigos' => 'De Amigos',
 	'votaciones:filtros:trujaman' => 'Mías',
+	'votaciones:filtros:cerradas' => 'Finalizadas',
 	
 );
 

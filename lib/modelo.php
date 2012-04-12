@@ -133,7 +133,7 @@ function remove_anotation_by_entity_guid_user_guid($annotation, $entity_guid, $u
 		}
 	}
 
-function votaciones_preparar_vars($votaciones = null) {
+function votaciones_preparar_vars($votaciones) {
 
 	// input names => default
 	$container_guid = get_input('container_guid');
