@@ -42,6 +42,7 @@ $mapping = array(
 	'votaciones:filtros:amigos' => 'De Amigos',
 	'votaciones:filtros:trujaman' => 'Mías',
 	'votaciones:filtros:cerradas' => 'Finalizadas',
+	'votaciones:opcion:borrame' => 'Bórrame'
 	
 );
 

@@ -9,3 +9,9 @@
     font-style: normal;
     line-height: 1.5em;
 }
+
+.eliminarcontomate {
+	color: red;
+	cursor: pointer;
+}
+	
