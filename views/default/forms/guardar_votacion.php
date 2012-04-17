@@ -76,6 +76,8 @@ if ($categories) {
 	<label><?php echo elgg_echo('access'); ?></label><br />
 	<?php echo elgg_view('input/access', array('name' => 'access_id', 'value' => $access_id)); ?>
 </div>
+
+
 <div id="opciones"><?php echo elgg_view('input/button', array('id' => 'nueva_opcion', 'value' => elgg_echo('votaciones:nueva:opcion')));?>
 <label><?php echo elgg_echo('votaciones:opciones'); ?></label><br />
 <?php 
@@ -83,15 +85,15 @@ if ($categories) {
 
 $i = 0;
 foreach ($opciones as $opcion_guid) {
-$opcion = get_entity($opcion_guid);
-$value = $opcion->text;
-?>
-<div>
-	<?php echo elgg_view('input/text', array('name' => 'opcion'.$i, 'class' => 'opcion', 'value' => $value)); ?>
-</div>
-<?php
-$i = $i+1;
-}
+	$opcion = get_entity($opcion_guid);
+	$value = $opcion->text;
+	?>
+	<div>
+		<?php echo elgg_view('input/text', array('name' => 'opcion'.$i, 'class' => 'opcion', 'value' => $value)); ?>
+	</div>
+	<?php
+	$i = $i+1;
+	}
 ?>
 </div>
 
@@ -140,14 +142,44 @@ echo elgg_view('input/submit', array('value' => elgg_echo("save")));
 
 <script type="text/javascript">
 	$('#nueva_opcion').click(function() {
+		// si estás aquí dentro es porque has pulsado el botón nuva_opcion
+		// metemos en la variable número de opciones,
+		// la longitud de opciones que haya o no haya... 0,1,2,3,4
 		var num_opciones = $('.opcion').length;
-		$('#opciones').append ('<div><br /><input type="text" name="opcion'+num_opciones+'" id="opcion'+num_opciones+'" class="elgg-input-text opcion" /></div>');
+		
+		// Añadimos al selector <div id=opciones... un input text
+		$('#opciones').append ('<div id="'+num_opciones+'"><br /><input type="text" name="opcion'+num_opciones+'" id="opcion'+num_opciones+'" class="elgg-input-text opcion" /><span class="eliminarcontomate" rel="'+num_opciones+'" style="cursor: pointer;">borrame</span></div>');
+		
+		// cosa rara para que funcione el live, quizás.
+		return false; 
 	});
+	$('.eliminarcontomate').live('click', function() {
+	    // alert('hola caracola');
+	    
+	    // si estás aquí dentro es porque has pulsado alguna palabra,
+	    // "borrame" contenida dentro de un class="eliminarcontomate"
+	    // metemos dentro de la variable cual_borro, el contenido de 
+	    // rel="0 o 1 o 2 o 3 o 4".....rel="'+num_opciones+'" para luego
+	    // borrar todo el div de la opcion <div id="'+num_opciones+'">
+	    var cual_borro = $(this).attr('rel');
+	    
+	    // metemos en la variable chapucilla, el selector(id) que se va a usar
+	    var chapucilla = "#"+ cual_borro;
+	    
+	    // removemos chapucilla.
+	    $(chapucilla).remove();
+	    return false;
+	});
+
+	//$('.eliminarcontomate').click(function() {
+		//alert('ha pulsado el boton borrame');
+		//var cual_borro = $(this).attr('rel');
+		//var x = '#'+ cual_borro
+		//alert(x);
+		//$(x).fadeOut();
+	//});
 	$('.elgg-form-guardar-votacion').submit(function() {
 		$('#num_opciones').val($('.opcion').length);
 	});
 </script>
-
-
-
 
