@@ -33,6 +33,7 @@ function votaciones_init() {
 
 	$base_dir = elgg_get_plugins_path() . 'votaciones/actions';
 	elgg_register_action('guardar_votacion', "$base_dir/guardar_votacion.php");
+	elgg_register_action('condorcet_guardar', "$base_dir/condorcet_guardar.php");
 	elgg_register_action('votar', "$base_dir/votar.php");
 	elgg_register_action('editar', "$base_dir/editar.php");
 	// Es recomendable usar como nombre el mismo que el de la vista de la accion
@@ -55,6 +56,7 @@ function votaciones_init() {
 	elgg_register_page_handler('votaciones', 'maneja_paginas_votaciones');
 	#manejador de direccion url
 	elgg_register_entity_url_handler('object', 'poll', 'votaciones_url');
+	elgg_register_entity_url_handler('object', 'condorcet', 'condorcet_url');
 	//registra librerias externas
 	elgg_register_library('votaciones:model', elgg_get_plugins_path() . 'votaciones/lib/modelo.php');
 	// Módulo para grupos
@@ -91,10 +93,10 @@ function maneja_paginas_votaciones($page)
 		case "activas":
 			include $base_dir . 'activas.php';
 			break;
-		case "cerradas";
+		case "cerradas":
 			include $base_dir . 'cerradas.php';
 			break;
-		case "group";
+		case "group":
 			set_input('guid', $page[1]);
 			set_input('group_context', $page[2]);
 			//if ($page[2] == 'totus') {
@@ -106,7 +108,19 @@ function maneja_paginas_votaciones($page)
 			//	include $base_dir . 'grupo_activas.php';
 			//}
 			break;
-		
+		case "condorcet":
+			switch ($page[1]){
+				case "nueva":
+					set_input('container_guid', $page[2]);
+					include $base_dir . 'condorcet_creare.php';
+					break;
+				case "vistazo":
+					set_input('guid', $page[2]);
+					include $base_dir . 'condorcet_vistazo.php';
+					break;
+					
+				}
+			
 	}
 	
 	return true;
@@ -115,4 +129,9 @@ function maneja_paginas_votaciones($page)
 function votaciones_url($entity) {
 	$title = elgg_get_friendly_title($entity->title);
 	return "votaciones/vistazo/$entity->guid/$title";
+}
+
+function condorcet_url($entity) {
+	$title = elgg_get_friendly_title($entity->title);
+	return "votaciones/condorcet/vistazo/$entity->guid/$title";
 }
