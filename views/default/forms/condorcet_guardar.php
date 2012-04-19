@@ -148,7 +148,7 @@ echo elgg_view('input/submit', array('value' => elgg_echo("save")));
 		var num_opciones = $('.opcion').length;
 		
 		// Añadimos al selector <div id=opciones... un input text
-		$('#opciones').append ('<div id="'+num_opciones+'"><br /><input type="text" name="opcion'+num_opciones+'" id="opcion'+num_opciones+'" class="elgg-input-text opcion" /><span class="eliminarcontomate" rel="'+num_opciones+'" ><?echo elgg_echo('votaciones:opcion:borrame'); ?></span></div>');
+		$('#opciones').append ('<div id="'+num_opciones+'"><br /><input type="text" name="opcion'+num_opciones+'" id="opcion'+num_opciones+'" class="elgg-input-text opcion" /><span class="eliminarcontomate" rel="'+num_opciones+'" ><?php echo elgg_echo('votaciones:opcion:borrame'); ?></span></div>');
 		
 		// cosa rara para que funcione el live, quizás.
 		return false; 
