@@ -49,10 +49,16 @@ $choices = elgg_get_entities_from_relationship($options);
 <div>
 	<h3><?php echo elgg_echo('votaciones:votar:opcion'); ?></h3><br />
 	<div class="opciones-condorcet"><ul id="ordenable">
-		<?php foreach ($opciones as $opcion => $guid){
-			echo '<li class="ui-objeto-ordenable"><p class="parrafo-opciones">'. $opcion . '</p></li>';
+		<?php
+		
+		foreach ($opciones as $opcion => $guid){
+			
+			echo '<li class="ui-objeto-ordenable"><p class="parrafo-opciones">'. $opcion . '</p>';
+			echo elgg_view('input/hidden', array ('name' => "opciones[]", 'value' => $opcion));
+			echo '</li>';
 }
-echo '</ul></div>'
+
+echo '</ul></div>';
 	
 ?>
 
