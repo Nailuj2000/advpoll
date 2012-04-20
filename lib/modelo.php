@@ -55,7 +55,7 @@ function polls_get_choice_array($poll) {
 		$i = 1;
 		foreach($choices as $choice) {
 			
-			$label = elgg_echo('votaciones:respuesta') . " $i: "  . $choice->text;
+			$label = $choice->text;
 			$responses[$label] = $choice->guid;
 			$i = $i+1;
 		}
@@ -148,6 +148,7 @@ function votaciones_preparar_vars($votaciones) {
 		'path' => 'http://',
 		'poll_cerrada' => 'no',
 		'auditoria' => 'no',
+		'poll_tipo' => 'normal',
 	);
 
 	if ($votaciones) {
@@ -157,7 +158,7 @@ function votaciones_preparar_vars($votaciones) {
 			}
 		}
 	}
-
+/**
 	if (elgg_is_sticky_form('votaciones')) {
 		$sticky_values = elgg_get_sticky_values('votaciones');
 		foreach ($sticky_values as $key => $value) {
@@ -166,7 +167,7 @@ function votaciones_preparar_vars($votaciones) {
 	}
 
 	elgg_clear_sticky_form('votaciones');
-
+*/
 	return $values;
 }
 ?>

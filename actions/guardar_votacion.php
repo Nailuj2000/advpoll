@@ -38,12 +38,14 @@ $trujaman = intval(get_input('container_guid'));
 $poll_cerrada = get_input('poll_cerrada');
 $auditoria = get_input('auditoria');
 $owner_guid = elgg_get_logged_in_user_guid();
+$poll_tipo = get_input('poll_tipo');
 
 elgg_make_sticky_form('page');
 
 $opciones = array();
 for ($i=0; $i<$num_opciones; $i++) {
 	$opciones[$i] = get_input('opcion'.$i);
+	
 }
 
 
@@ -59,6 +61,7 @@ $votacion->container_guid = $trujaman;
 $votacion->tags = $tags;
 $votacion->poll_cerrada = $poll_cerrada;
 $votacion->auditoria = $auditoria;
+$votacion->poll_tipo = $poll_tipo;
 $guid = $votacion->save();
 
 polls_delete_choices($votacion); 
@@ -68,7 +71,7 @@ elgg_clear_sticky_form('votaciones');
 
 if ($guid) { //esta parte creo que esta un poco mal
 	system_message(elgg_echo('votacion:guardada'));
-	system_message("$guid");
+	system_message("$poll_tipo");
 	forward($votacion->getURL());
 }
 else {

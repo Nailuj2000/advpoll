@@ -1,6 +1,7 @@
 <?php
-
-/*
+/**
+ * mod/votaciones/actions/votar.php
+ * 
  * Copyright 2012 DRY Team
  *              - aruberuto
  *              - joker
@@ -22,28 +23,26 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  */
- 
-gatekeeper();
- 
+
+// once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
 elgg_load_library('votaciones:model');
+$choice = get_input('response');
+$guid = get_input('guid');
+$votacion = get_entity($guid);
+$respuesta = get_entity($choice);
+$owner_guid = get_input('owner_guid');
+$access_id = $respuesta->access_id;
+$choices = polls_get_choice_array($votacion);
 
-$vars = votaciones_preparar_vars($votacion);
-$title = elgg_echo('votaciones:editare');
-
-// Esto de abajo sirve para que aparezca en el menu lateral las opciones
-// de grupo y de usuario al que pertenece la votación
-
-$container_guid = (int) get_input('container_guid');
-$container = get_entity($container_guid);
-elgg_set_page_owner_guid($container->getGUID());
+foreach ($choices as $vote_guid){
+	if (remove_anotation_by_entity_guid_user_guid('vote', $vote_guid, $owner_guid)){
+		system_message('ok');
+	}
+}
 
 
-$content = elgg_view_form('condorcet_guardar', array(), $vars);
-//$content = elgg_view('votaciones/vistazo', array());
-$body = elgg_view_layout('content', array(
-	'filter' => '',
-	'content' => $content,
-	'title' => $title,
-));
+if ($respuesta->annotate('vote', 1, $access_id, $owner_guid, 'int')){
+		//system_message(elgg_echo('votacion:vote:success'));
+	}
 
-echo elgg_view_page($title, $body);
+//system_message($choices);

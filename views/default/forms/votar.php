@@ -32,6 +32,18 @@ $votacion = get_entity($guid);
 $opciones = polls_get_choice_array($votacion);
 $owner_guid = elgg_get_logged_in_user_guid();
 
+//print_r($votacion);
+//print_r($opciones);
+
+$options = array(
+		'relationship' => 'poll_choice',
+		'relationship_guid' => $votacion->guid,
+		'inverse_relationship' => TRUE,
+		'order_by_metadata' => array('name'=>'display_order','direction'=>'ASC'));
+	
+$choices = elgg_get_entities_from_relationship($options);
+
+
 ?>
 
 <div>
@@ -41,13 +53,6 @@ $owner_guid = elgg_get_logged_in_user_guid();
 		'options' => $opciones,
 	));
 
-echo '<div class="demo">';	
-echo '<div class="demo"><ul id="sortable">';
-foreach ($opciones as $opcion => $guid){
-	echo '<li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'. $opcion . '</li>';
-}
-echo '</ul></div>'
-	
 ?>
 
 </div>
@@ -67,14 +72,6 @@ echo elgg_view('input/submit', array('value' => elgg_echo("votar")));
 
 
 ?>
-
-
-	<script>
-	$(function() {
-		$( "#sortable" ).sortable();
-		$( "#sortable" ).disableSelection();
-	});
-	</script>
 
 
 

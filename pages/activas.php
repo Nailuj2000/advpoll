@@ -17,7 +17,7 @@ $content = elgg_list_entities_from_metadata(array(
 
 
 elgg_register_title_button('votaciones', 'nueva');
-elgg_register_title_button('votaciones', 'condorcet/nueva');
+
 $filtros = elgg_view('votaciones/filtros', array(
 	'filter_context' => 'activas',
 	'context' => 'votaciones'

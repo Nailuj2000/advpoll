@@ -42,6 +42,7 @@ $path = elgg_extract('path', $vars, '');
 $poll_cerrada = elgg_extract('poll_cerrada', $vars, 'no');
 $auditoria = elgg_extract('auditoria', $vars, 'no');
 $group = get_entity($container_guid);
+$poll_tipo = elgg_extract('poll_tipo', $vars, 'normal');
 
 ?>
 
@@ -123,6 +124,17 @@ foreach ($opciones as $opcion_guid) {
 	?>
 </div>
 
+<div>
+	<label><?php echo elgg_echo('votaciones:tipo'); ?></label><br />
+	<?php echo elgg_view('input/radio', array(
+		'name' => 'poll_tipo',
+		 'options' => array(
+			elgg_echo('option:normal') => 'normal' ,
+			elgg_echo('option:condorcet') => 'condorcet',
+			),
+		'value' => $poll_tipo,
+		)); ?>
+</div>
 
 
 <div class="elgg-foot">

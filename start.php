@@ -33,8 +33,8 @@ function votaciones_init() {
 
 	$base_dir = elgg_get_plugins_path() . 'votaciones/actions';
 	elgg_register_action('guardar_votacion', "$base_dir/guardar_votacion.php");
-	elgg_register_action('condorcet_guardar', "$base_dir/condorcet_guardar.php");
 	elgg_register_action('votar', "$base_dir/votar.php");
+	elgg_register_action('condorcet_votar', "$base_dir/condorcet_votar.php");
 	elgg_register_action('editar', "$base_dir/editar.php");
 	// Es recomendable usar como nombre el mismo que el de la vista de la accion
 	// como primer termino, antes registrándola de este modo
@@ -108,19 +108,7 @@ function maneja_paginas_votaciones($page)
 			//	include $base_dir . 'grupo_activas.php';
 			//}
 			break;
-		case "condorcet":
-			switch ($page[1]){
-				case "nueva":
-					set_input('container_guid', $page[2]);
-					include $base_dir . 'condorcet_creare.php';
-					break;
-				case "vistazo":
-					set_input('guid', $page[2]);
-					include $base_dir . 'condorcet_vistazo.php';
-					break;
-					
-				}
-			
+				
 	}
 	
 	return true;

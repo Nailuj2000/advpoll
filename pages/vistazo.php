@@ -27,6 +27,7 @@ elgg_load_library('votaciones:model');
 $guid = get_input('guid');
 $poll = get_entity($guid);
 $poll_cerrada = $poll->poll_cerrada;
+$poll_tipo = $poll->poll_tipo;
 
 
 // Esto de abajo sirve para que aparezca en el menu lateral las opciones
@@ -40,15 +41,23 @@ $title = $poll->title;
 
 $content = elgg_view_entity($poll, array('full_view' => true));
 
-if ($poll_cerrada == 'no'){
-$content .= elgg_view_form('votar' , array() , array(
-	'guid' => $guid,
-	));
-}
-
-$content .= elgg_view('votaciones/resultados', array(
+if ($poll_tipo == 'condorcet') {
+	if ($poll_cerrada == 'no') {
+		$content .= elgg_view_form('condorcet_votar' , array() , array(
+			'guid' => $guid,
+			));
+	}
+	$content .= "Reessuuuuuultaddoooos condorceeeeet";
+} else {
+	if ($poll_cerrada == 'no') {
+		$content .= elgg_view_form('votar' , array() , array(
+			'guid' => $guid,
+			));
+	}
+	$content .= elgg_view('votaciones/resultados', array(
 	'votacion' => $poll
 	));
+}
 
 $content .= elgg_view_comments($poll);
 $body = elgg_view_layout('content', array(
