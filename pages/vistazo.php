@@ -47,7 +47,9 @@ if ($poll_tipo == 'condorcet') {
 			'guid' => $guid,
 			));
 	}
-	$content .= "Reessuuuuuultaddoooos condorceeeeet";
+	$content .= elgg_view('votaciones/resultados', array(
+	'votacion' => $poll
+	));
 } else {
 	if ($poll_cerrada == 'no') {
 		$content .= elgg_view_form('votar' , array() , array(

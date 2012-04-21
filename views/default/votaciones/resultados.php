@@ -30,6 +30,8 @@ $votacion = elgg_extract('votacion', $vars, '');
 $opciones = polls_get_choice_array($votacion);
 $num_votos = 0;
 
+$condorcet = $votacion->getAnnotations('vote_condorcet');
+print_r($condorcet);
 ?>
 <br />
 <div>

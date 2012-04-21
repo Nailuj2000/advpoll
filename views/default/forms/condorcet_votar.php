@@ -26,7 +26,7 @@
 
 // once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
 
-
+elgg_load_library('votaciones:model');
 $guid = elgg_extract('guid', $vars, '');
 $votacion = get_entity($guid);
 $opciones = polls_get_choice_array($votacion);
@@ -76,6 +76,9 @@ echo elgg_view('input/hidden', array(
 	));
 	
 echo elgg_view('input/submit', array('value' => elgg_echo("votar")));
+
+
+
 
 
 ?>

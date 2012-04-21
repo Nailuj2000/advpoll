@@ -170,4 +170,49 @@ function votaciones_preparar_vars($votaciones) {
 */
 	return $values;
 }
+
+// Funciones especificas para método de Condorcet
+function pasar_opciones_a_condorcet ($opciones) {
+	foreach ($opciones as $key => $id) {
+		$opciones_matriz[] = $key;
+	}
+	return $opciones_matriz;
+}
+
+function opcion_gana_a_opcion($opcion1, $opcion2, $matriz_ordenada) {
+	foreach ($matriz_ordenada as $posicion => $elemento) {
+		if ($elemento == $opcion1) {
+			$posicion1 = $posicion;
+		}
+		if ($elemento == $opcion2) {
+			$posicion2 = $posicion;
+		}
+	}
+	if ($posicion1 < $posicion2) {
+		return true;
+	} else {
+		return false;
+	}
+			
+}
+
+function linea_de_candidato($candidato, $candidatos_ordenados, $opciones_condorcet) {
+	$i = 0;
+	foreach ($opciones_condorcet as $op) {
+		if (opcion_gana_a_opcion($candidato, $op, $candidatos_ordenados)) {
+			$linea[$i] = 1;
+		} else {
+			$linea[$i] = 0;
+		}
+		$i++;
+	}
+	return $linea;
+}
+
+function matriz_papeleta($opciones_iniciales, $opciones_ordenadas) {
+	foreach ($opciones_iniciales as $opcion) {
+		$matriz_papeleta[] = linea_de_candidato($opcion, $opciones_ordenadas, $opciones_iniciales);
+	}
+	return $matriz_papeleta;
+}
 ?>
