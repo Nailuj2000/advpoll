@@ -35,6 +35,10 @@ $owner_guid = elgg_get_logged_in_user_guid();
 //print_r($votacion);
 //print_r($opciones);
 
+$papelota = matriz_papeleta($opciones, $opciones);
+$papelota_cad = pasar_matriz_a_cadena($papelota);
+$papelota_mat = pasar_cadena_a_matriz($papelota_cad);
+
 $options = array(
 		'relationship' => 'poll_choice',
 		'relationship_guid' => $votacion->guid,
@@ -51,7 +55,7 @@ $choices = elgg_get_entities_from_relationship($options);
 	<div class="opciones-condorcet"><ul id="ordenable">
 		<?php
 		
-		foreach ($opciones as $opcion => $guid){
+		foreach ($opciones as $opcion => $opcion_guid){
 			
 			echo '<li class="ui-objeto-ordenable"><p class="parrafo-opciones">'. $opcion . '</p>';
 			echo elgg_view('input/hidden', array ('name' => "opciones[]", 'value' => $opcion));
@@ -64,6 +68,7 @@ echo '</ul></div>';
 
 </div>
 <?php
+
 
 echo elgg_view('input/hidden', array(
 	'name' => 'guid',

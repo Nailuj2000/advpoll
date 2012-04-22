@@ -29,18 +29,18 @@
 elgg_load_library('votaciones:model');
 $guid = get_input('guid');
 $votacion = get_entity($guid);
-$opciones_iniciales = polls_get_choice_array($votacion);
-$opciones = get_input(opciones);
-$opciones = pasar_opciones_a_condorcet($opciones);
-$opciones_iniciales = pasar_opciones_a_condorcet($opciones_iniciales);
+$op_ini = polls_get_choice_array($votacion);
+$opciones = get_input('opciones');
+$opciones_iniciales = pasar_opciones_a_condorcet($op_ini);
 $owner_guid = get_input('owner_guid');
 $access_id = ACCESS_PUBLIC;
 
 
 $papeleta = matriz_papeleta($opciones_iniciales, $opciones);
+$papeleta_cadena = pasar_matriz_a_cadena($papeleta);
 
-if ($votacion->annotate('vote_condorcet', "$papeleta", $access_id, $owner_guid)){
-		//system_message(elgg_echo('votacion:vote:success'));
+if ($votacion->annotate('vote_condorcet', "$papeleta_cadena", $access_id, $owner_guid)){
+		//system_message(elgg_echo($papeleta_cadena));
 	}
 
 

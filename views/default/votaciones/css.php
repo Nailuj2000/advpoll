@@ -50,4 +50,35 @@
 	margin-left: 30px;
 }
 
+.condorcet-papeleta-table {
+    border-color: #CCCCCC;
+    border-style: solid;
+    border-width: 1px;
+    
+}
+
+.condorcet-tr {
+}
+
+.condorcet-td {
+	padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    text-align: center;
+    border-color: #CCCCCC;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.rojo {
+	background-color: LightPink;
+}
+.verde {
+	background-color: PaleGreen;
+}
+
+
+
+
 	

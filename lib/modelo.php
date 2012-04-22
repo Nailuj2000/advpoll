@@ -215,4 +215,82 @@ function matriz_papeleta($opciones_iniciales, $opciones_ordenadas) {
 	}
 	return $matriz_papeleta;
 }
+
+function pasar_matriz_a_cadena($matriz) {
+	foreach ($matriz as $fila) {
+		$cadena_fila[] = implode(" ", $fila);
+	}
+	$cadena = implode(",", $cadena_fila);
+	return $cadena;
+}
+
+function pasar_cadena_a_matriz($cadena) {
+	$matriz_filas = explode(",", $cadena);
+	foreach ($matriz_filas as $fila_cadena) {
+		$fila_matriz = explode(" ", $fila_cadena);
+		$matriz_final[] = $fila_matriz;
+	}
+	return $matriz_final;
+}
+
+function todas_las_filas_dimension_n($n, $matrix) {
+	foreach ($matrix as $fila) {
+		$columnas = count($fila);
+		if ($columnas !== $n) {
+			return false;
+			break;
+		} else {
+			return true;
+		}
+	}
+}
+	 
+function suma_filas($fila1, $fila2) {
+	$i = 0;
+	foreach ($fila1 as $elemento) {
+		$fila_sumada[] = $elemento + $fila2[$i];
+		$i++;
+	}
+	return $fila_sumada;
+}	
+
+function suma_matrices($a, $b) {
+	
+	/** Las matrices tienen que estar expresadas de la forma
+	 * $a = array(
+	 * 			array(a11, a12, a13),
+	 * 			array(a21, a22, a23),
+	 * 			array(a31, a32, a33)
+	 * );
+	 */
+	
+	$a_filas = count($a);
+	$b_filas = count($b);
+	$a_columnas = count($a[0]);
+	$b_columnas = count($b[0]);
+	if (todas_las_filas_dimension_n($a_columnas, $a) &&
+		todas_las_filas_dimension_n($b_columnas, $b) &&
+		$a_filas === $b_filas &&
+		$a_columnas === $b_columnas) {
+			$i= 0;
+			foreach ($a as $filas){
+				$matriz_sumada[] = suma_filas($a[$i], $b[$i]);
+			$i++;
+			}
+			
+			
+		} else {
+			$matriz_sumada = "No se pueden sumar las matrices";
+		}
+	return $matriz_sumada;
+} 
+
+
+
+
+
+
+
+
+
 ?>

@@ -30,6 +30,7 @@ $poll_cerrada = $poll->poll_cerrada;
 $poll_tipo = $poll->poll_tipo;
 
 
+
 // Esto de abajo sirve para que aparezca en el menu lateral las opciones
 // de grupo y de usuario al que pertenece la votación
 $container_guid = $poll->container_guid;
@@ -47,8 +48,8 @@ if ($poll_tipo == 'condorcet') {
 			'guid' => $guid,
 			));
 	}
-	$content .= elgg_view('votaciones/resultados', array(
-	'votacion' => $poll
+	$content .= elgg_view('votaciones/condorcet_resultados', array(
+	'guid' => $guid
 	));
 } else {
 	if ($poll_cerrada == 'no') {
