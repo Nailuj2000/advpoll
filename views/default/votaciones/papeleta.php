@@ -1,13 +1,23 @@
 <?php
 
 $matriz = elgg_extract('matriz', $vars, array());
+$opciones = elgg_extract('opciones', $vars, array());
+
+
 echo '<div>';
 echo '<br>';
 echo "<table class='condorcet-papeleta-table'>";
+echo "<thead class='condorcet-thead'><tr class='condorcet-tr'>";
+echo "<th></th>";
+foreach ($opciones as $opcion) {
+	echo "<th class='condorcet-th'>" . elgg_echo('votaciones:condorcet:leyenda:opcion') . "$opcion</th>";
+}
+echo "</tr></thead><tbody>";
 $i = 0;
 $j = 0;
 foreach ($matriz as $fila) {
 	echo "<tr class='condorcet-tr'>";
+	echo "<th class='condorcet-th'>" . elgg_echo('votaciones:condorcet:leyenda:opcion') . "$opciones[$i]</th>";
 	
 	foreach($fila as $elemento){
 		if ($matriz[$i][$j] === $matriz[$j][$i]) {

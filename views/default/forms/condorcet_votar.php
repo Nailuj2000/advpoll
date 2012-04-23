@@ -51,8 +51,8 @@ $choices = elgg_get_entities_from_relationship($options);
 ?>
 
 <div>
-	<h3><?php echo elgg_echo('votaciones:votar:opcion'); ?></h3><br />
-	<div class="opciones-condorcet"><ul id="ordenable">
+	<br><h3><?php echo elgg_echo('votaciones:condorcet:votar:opcion'); ?></h3><br />
+	<div class="opciones-condorcet"><ol id="ordenable">
 		<?php
 		
 		foreach ($opciones as $opcion => $opcion_guid){
@@ -62,7 +62,7 @@ $choices = elgg_get_entities_from_relationship($options);
 			echo '</li>';
 }
 
-echo '</ul></div>';
+echo '</ol></div>';
 	
 ?>
 

@@ -28,13 +28,19 @@
 }
 
 #ordenable {
+	font-weight: bold;
+	list-style-image: none;
+    list-style-position: outside;
+    list-style-type: decimal;
+    padding-left: 20px;
+    
+   
 }
 .ui-sortable {
 }
 .ui-objeto-ordenable {
 	background: white;
 	background-image: url(<?php echo elgg_get_site_url() . "mod/votaciones/_graphics/mover.png" ; ?>);
-	
 	background-position: 10px;
 	background-repeat: no-repeat;
 	margin: 10px;
@@ -43,11 +49,18 @@
 	padding: 5px;
 	border-radius: 5px;
 	border-color: #4D4D4D;
+	cursor: move;
 		
 }
 
 .parrafo-opciones {
+	font-weight: normal;
 	margin-left: 30px;
+	margin-bottom: 0;
+    margin-left: 30px;
+    margin-top: 0;
+    
+    
 }
 
 .condorcet-papeleta-table {
@@ -61,10 +74,10 @@
 }
 
 .condorcet-td {
-	padding-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
+	padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
     text-align: center;
     border-color: #CCCCCC;
     border-style: solid;
@@ -76,6 +89,27 @@
 }
 .verde {
 	background-color: PaleGreen;
+}
+.condorcet-thead {
+}
+.condorcet-th {
+	padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    text-align: center;
+    border-color: #CCCCCC;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.papeleta-ol {
+	list-style-image: none;
+    list-style-position: inside;
+    list-style-type: decimal;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    padding-bottom: 10px;
 }
 
 

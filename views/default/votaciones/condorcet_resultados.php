@@ -30,7 +30,14 @@ $guid = elgg_extract('guid', $vars, '');
 $votacion = get_entity($guid);
 $opciones = polls_get_choice_array($votacion);
 $num_votos = 0;
+$abcd = 65;
+foreach ($opciones as $opcion) {
+	$abecedario[] = chr($abcd);
+	$abcd++;
+}
+	
 
+$opciones_condorcet = pasar_opciones_a_condorcet($opciones);
 
 $condorcet = elgg_get_annotations(array(
 	'type' => 'object',
@@ -42,9 +49,28 @@ $condorcet = elgg_get_annotations(array(
 
 
 	$i = 0;
+
+echo '<div>';
+echo '<br>';	
+
 foreach ($condorcet as $papeleta){
 	$papeleta_matriz = pasar_cadena_a_matriz($papeleta->value);
-	$content .= elgg_view('votaciones/papeleta', array('matriz' => $papeleta_matriz));
+	$papelota = pasar_anotacion_a_lista_ordenada($papeleta);
+	$usuario_guid = $papeleta->owner_guid;
+	$usuario = get_entity($usuario_guid);
+	$nombre = $usuario->name;
+	echo "<br><hr><h3>" . elgg_echo('votaciones:condorcet:opciones:elegidas:usuario') . $nombre . "</h3>";
+	echo "<br>";
+	echo "<ol class='papeleta-ol'>";
+	
+	foreach ($papelota as $opcion) {
+		echo "<li>$opcion</li>";
+		
+	}
+	
+	echo "</ol>";
+	echo "<h4>" . elgg_echo('votaciones:condorcet:opciones:elegidas:papeleta') .  $nombre . "</h4>";
+	echo elgg_view('votaciones/papeleta', array('matriz' => $papeleta_matriz, 'opciones' => $abecedario));
 	$matriz[] = $papeleta_matriz;
 	if ($i === 0) {
 		$matriz_aux = $papeleta_matriz;
@@ -55,8 +81,23 @@ foreach ($condorcet as $papeleta){
 	
 }
 
-$content .= elgg_view('votaciones/papeleta', array('matriz' => $matriz_aux));
-echo $content;
+echo '<div><br>';
+echo "<h2>" . elgg_echo('votaciones:condorcet:resultado:final') . "</h2>";
+
+echo elgg_view('votaciones/papeleta', array('matriz' => $matriz_aux, 'opciones' => $abecedario));
+		
+$abc = 65;
+echo "<br><h3>" . elgg_echo('votaciones:condorcet:leyenda') . "</h3><br>";
+echo '<ul><br>';
+	foreach ($opciones_condorcet as $opcion){	
+		echo "<li><b>" . elgg_echo('votaciones:condorcet:leyenda:opcion') . chr($abc) . ': </b>' . "$opcion</li><br>";
+		$abc++;
+	}
+	
+echo '</ul></div>';
+		
+
+echo '</div>';	
 
 
 

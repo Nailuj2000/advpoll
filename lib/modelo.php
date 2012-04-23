@@ -285,6 +285,32 @@ function suma_matrices($a, $b) {
 	return $matriz_sumada;
 } 
 
+function suma_puntos_de_fila($fila) {
+	$suma = 0;
+	foreach ($fila as $puntos) {
+		$suma = $suma + $puntos;
+	}
+	return $suma;
+}
+
+function pasar_anotacion_a_lista_ordenada ($anotacion){
+	$votacion = get_entity($anotacion->entity_guid);
+	$papeleta = pasar_cadena_a_matriz($anotacion->value);
+	$opciones = polls_get_choice_array($votacion);
+	$opciones_condorcet = pasar_opciones_a_condorcet($opciones);
+	$i = 0;
+	foreach ($papeleta as $fila) {
+		$puntuacion = suma_puntos_de_fila($fila);
+		$lista[$puntuacion] = $opciones_condorcet[$i];
+		$i++;
+	}
+	krsort($lista);
+	foreach ($lista as $opcion) {
+		$lista2[] = $opcion;
+	}
+	return $lista2;
+}
+
 
 
 

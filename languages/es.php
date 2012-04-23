@@ -42,7 +42,13 @@ $mapping = array(
 	'votaciones:filtros:amigos' => 'De Amigos',
 	'votaciones:filtros:trujaman' => 'Mías',
 	'votaciones:filtros:cerradas' => 'Finalizadas',
-	'votaciones:opcion:borrame' => 'Bórrame'
+	'votaciones:opcion:borrame' => 'Bórrame',
+	'votaciones:condorcet:leyenda:opcion' => 'Opción ',
+	'votaciones:condorcet:leyenda' => 'Leyenda',
+	'votaciones:condorcet:opciones:elegidas:usuario' => 'Estas son las opciones que eligió ',
+	'votaciones:condorcet:resultado:final' => 'Resultados',
+	'votaciones:condorcet:opciones:elegidas:papeleta' => 'Papeleta de voto en forma de matriz de ',
+	'votaciones:condorcet:votar:opcion' => 'Ordena las opciones según tus preferencias y pulsa el botón "votar"',
 	
 );
 
