@@ -32,21 +32,17 @@ $votacion = get_entity($guid);
 $opciones = polls_get_choice_array($votacion);
 $owner_guid = elgg_get_logged_in_user_guid();
 
-//print_r($votacion);
 //print_r($opciones);
-
-$options = array(
-		'relationship' => 'poll_choice',
-		'relationship_guid' => $votacion->guid,
-		'inverse_relationship' => TRUE,
-		'order_by_metadata' => array('name'=>'display_order','direction'=>'ASC'));
-	
-$choices = elgg_get_entities_from_relationship($options);
 
 
 ?>
 
 <div>
+	<?php if (usuario_ha_votado($owner_guid, $guid)) { ?>
+		<br><h2 class='pulsa-que-se-expande'><?php echo elgg_echo('votaciones:pulsar:cambio'); ?></h2>
+		<div class='parrafo-extendible'>
+	<?php } ?>
+	<br>
 	<h3><?php echo elgg_echo('votaciones:votar:opcion'); ?></h3><br />
 	<?php echo elgg_view('input/radio', array(
 		'name' => 'response', 
@@ -55,7 +51,7 @@ $choices = elgg_get_entities_from_relationship($options);
 
 ?>
 
-</div>
+
 <?php
 
 echo elgg_view('input/hidden', array(
@@ -73,5 +69,16 @@ echo elgg_view('input/submit', array('value' => elgg_echo("votar")));
 
 ?>
 
+
+
+	<script>
+	$(".pulsa-que-se-expande").click(function () {
+		if ($(".parrafo-extendible").is(":hidden")) {
+			$(".parrafo-extendible").slideDown("slow");
+		} else {
+			$(".parrafo-extendible").hide();
+	}
+});
+	</script>
 
 

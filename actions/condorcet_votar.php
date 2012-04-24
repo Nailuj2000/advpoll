@@ -39,6 +39,11 @@ $access_id = ACCESS_PUBLIC;
 $papeleta = matriz_papeleta($opciones_iniciales, $opciones);
 $papeleta_cadena = pasar_matriz_a_cadena($papeleta);
 
+if (remove_anotation_by_entity_guid_user_guid('vote_condorcet', $guid, $owner_guid)){
+		system_message(elgg_echo('votaciones:anteriores:borradas:ok'));
+	}
+
+
 if ($votacion->annotate('vote_condorcet', "$papeleta_cadena", $access_id, $owner_guid)){
 		//system_message(elgg_echo($papeleta_cadena));
 	}

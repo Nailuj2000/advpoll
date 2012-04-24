@@ -112,6 +112,25 @@
     padding-bottom: 10px;
 }
 
+.auditoria-extendible {
+	display: none;
+}
+
+.parrafo-extendible {
+	display: none;
+}
+
+.resultados-expandibles {
+	cursor: pointer;
+}
+
+.pulsa-que-se-expande {
+	cursor: pointer;
+}
+	
+	
+
+
 
 
 

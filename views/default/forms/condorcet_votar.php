@@ -48,10 +48,27 @@ $options = array(
 $choices = elgg_get_entities_from_relationship($options);
 
 
+
+
+$condorcet = elgg_get_annotations(array(
+	'type' => 'object',
+	'subtype' => 'poll',
+	'guid' => $guid,
+	'anotation_name' => 'vote_condorcet',
+	'limit' => 0,
+	));
+	
+
+
 ?>
 
 <div>
-	<br><h3><?php echo elgg_echo('votaciones:condorcet:votar:opcion'); ?></h3><br />
+	<?php if (usuario_ha_votado_condorcet($owner_guid, $condorcet)) { ?>
+		<br><h2 class='pulsa-que-se-expande'><?php echo elgg_echo('votaciones:condorcet:pulsar:cambio'); ?></h2>
+		<div class='parrafo-extendible'>
+	<?php } ?>
+	<br>
+	<h3><?php echo elgg_echo('votaciones:condorcet:votar:opcion'); ?></h3><br>
 	<div class="opciones-condorcet"><ol id="ordenable">
 		<?php
 		
@@ -66,7 +83,9 @@ echo '</ol></div>';
 	
 ?>
 
-</div>
+
+
+
 <?php
 
 
@@ -80,6 +99,7 @@ echo elgg_view('input/hidden', array(
 	'value' => $owner_guid,
 	));
 	
+echo '<br>';	
 echo elgg_view('input/submit', array('value' => elgg_echo("votar")));
 
 
@@ -87,14 +107,23 @@ echo elgg_view('input/submit', array('value' => elgg_echo("votar")));
 
 
 ?>
+</div>
 
 
 	<script>
+	$(".pulsa-que-se-expande").click(function () {
+		if ($(".parrafo-extendible").is(":hidden")) {
+			$(".parrafo-extendible").slideDown("slow");
+		} else {
+			$(".parrafo-extendible").hide();
+	}
+});
 	$(function() {
 		$( "#ordenable" ).sortable();
 		$( "#ordenable" ).disableSelection();
 	});
+	
 	</script>
-
+	
 
 

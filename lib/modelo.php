@@ -125,12 +125,11 @@ function remove_anotation_by_entity_guid_user_guid($annotation, $entity_guid, $u
 			$annotation_entity->entity_guid == $entity_guid){
 				$annotation_id = $annotation_entity->id;
 				elgg_delete_annotation_by_id($annotation_id);
-				return TRUE;
+				$return = TRUE;
 				
-			} else { 
-				return FALSE;
-			}
+			} 
 		}
+		return $return;
 	}
 
 function votaciones_preparar_vars($votaciones) {
@@ -170,6 +169,34 @@ function votaciones_preparar_vars($votaciones) {
 */
 	return $values;
 }
+
+function usuario_ha_votado($user_guid, $votacion_guid) {
+	$votacion = get_entity($votacion_guid);
+	$opciones = polls_get_choice_array($votacion);
+	$return = false;
+	foreach ($opciones as $vote_guid){
+		$entity = get_entity($vote_guid);
+		$all_annotations = $entity->getAnnotations('vote');
+		
+		foreach ($all_annotations as $ann){
+			
+			if ($ann->owner_guid == $user_guid 
+				&&
+				$ann->entity_guid == $vote_guid){
+				
+					$return = true or $return;
+				} else {
+					$return = $return or false;
+				}
+			}
+		}
+			return $return;
+	}
+
+
+
+
+
 
 // Funciones especificas para método de Condorcet
 function pasar_opciones_a_condorcet ($opciones) {
@@ -310,6 +337,19 @@ function pasar_anotacion_a_lista_ordenada ($anotacion){
 	}
 	return $lista2;
 }
+
+function usuario_ha_votado_condorcet ($user_guid, $anotaciones) {
+	foreach ($anotaciones as $anotacion){
+		$return = false;
+		if ($anotacion->owner_guid == $user_guid){
+				$return = true or $return;
+			} else {
+				$return = $return or false;
+			}
+		}
+		return $return;
+	}
+
 
 
 

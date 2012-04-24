@@ -26,23 +26,12 @@
 
 // once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
 elgg_load_library('votaciones:model');
-$guid = elgg_extract('guid', $vars, '');
-$votacion = get_entity($guid);
+$votacion = elgg_extract('votacion', $vars, array());
+$guid = $votacion->guid;
 $opciones = polls_get_choice_array($votacion);
 $num_votos = 0;
 
 
-$condorcet = elgg_get_annotations(array(
-	'type' => 'object',
-	'subtype' => 'poll',
-	'guid' => $guid,
-	'anotation_name' => 'vote_condorcet',
-	'limit' => 0,
-	));
-
-foreach ($condorcet as $papeleta){
-	//echo $papeleta->value;	
-}
 ?>
 <br />
 <div>

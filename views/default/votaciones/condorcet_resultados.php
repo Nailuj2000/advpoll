@@ -49,9 +49,9 @@ $condorcet = elgg_get_annotations(array(
 
 
 	$i = 0;
-
-echo '<div>';
-echo '<br>';	
+echo "<br>";
+echo "<div><h2 class='resultados-expandibles'>" . elgg_echo('votaciones:condorcet:auditoria:mostrar') . "</h2>";
+echo "<div class='auditoria-extendible'><br>";	
 
 foreach ($condorcet as $papeleta){
 	$papeleta_matriz = pasar_cadena_a_matriz($papeleta->value);
@@ -80,7 +80,7 @@ foreach ($condorcet as $papeleta){
 	$i++;
 	
 }
-
+echo '</div>';
 echo '<div><br>';
 echo "<h2>" . elgg_echo('votaciones:condorcet:resultado:final') . "</h2>";
 
@@ -97,7 +97,22 @@ echo '<ul><br>';
 echo '</ul></div>';
 		
 
-echo '</div>';	
+echo '</div>';
+?>
+
+<script>
+$(".resultados-expandibles").click(function () {
+if ($(".auditoria-extendible").is(":hidden")) {
+$(".auditoria-extendible").slideDown("slow");
+} else {
+$(".auditoria-extendible").hide();
+}
+});
+
+</script>
+
+
+
 
 
 

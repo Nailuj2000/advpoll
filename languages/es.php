@@ -49,6 +49,10 @@ $mapping = array(
 	'votaciones:condorcet:resultado:final' => 'Resultados',
 	'votaciones:condorcet:opciones:elegidas:papeleta' => 'Papeleta de voto en forma de matriz de ',
 	'votaciones:condorcet:votar:opcion' => 'Ordena las opciones según tus preferencias y pulsa el botón "votar"',
+	'votaciones:condorcet:auditoria:mostrar' => 'Mostrar auditoría de todos los votos emitidos',
+	'votaciones:condorcet:pulsar:cambio' => 'Pulsa para cambiar tu votación',
+	'votaciones:anteriores:borradas:ok' => 'Se han borrado tus votaciones anteriores',
+	'votaciones:pulsar:cambio' => 'Pulsa para cambiar tu voto anterior',
 	
 );
 
