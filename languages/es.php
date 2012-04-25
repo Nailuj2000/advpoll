@@ -90,7 +90,7 @@ $mapping = array(
 	'votaciones:condorcet:ayuda:papeletas:paso4' =>	'<br> 4. El siguiente paso es una cuestión de visibilización que nos servirá posteriormente para sacar conclusiones
 		del método de condorcet. Consiste en colorear de verde aquellas casillas cuya puntuación sea mayor que la casilla simétrica con respecto a la diagonal.<br>
 		<em>¿y eso qué significa?</em> En este paso inicial, simplemente significa que coloreemos de verde los 1 
-		y de rojo los 0, aquellos ceros que están en la diagonal. <br>
+		y de rojo los 0, salvo aquellos ceros que están en la diagonal. <br>
 		Si nos fijamos, por ejemplo la casilla "Fila A, Columna B" tiene distinto color que la casilla simétrica "Fila B, Columna A".<br>
 		Esto va a ser una regla de este tipo de tablas, y nos va a servir posteriormente para detectar si ha habido algún error en el proceso, pero
 		también nos servirá para calcular el resultado final.',
