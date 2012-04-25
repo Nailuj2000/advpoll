@@ -101,6 +101,13 @@ function maneja_paginas_votaciones($page)
 		case "cerradas":
 			include $base_dir . 'cerradas.php';
 			break;
+		case "condorcet":
+			switch ($page[1]) {
+				case "ayuda":
+					include $base_dir . 'condorcet_ayuda.php';
+					break;
+			}
+			break;			
 		case "group":
 			set_input('guid', $page[1]);
 			set_input('group_context', $page[2]);

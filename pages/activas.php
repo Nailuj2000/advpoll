@@ -12,6 +12,7 @@ $content = elgg_list_entities_from_metadata(array(
 	'metadata_name' => 'poll_cerrada',
 	'metadata_value' => 'no',
 	'limit' => 10,
+	'full_view' => false,
 	));
 	
 

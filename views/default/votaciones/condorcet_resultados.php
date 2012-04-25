@@ -50,7 +50,7 @@ $condorcet = elgg_get_annotations(array(
 
 	$i = 0;
 echo "<br>";
-echo "<div><h2 class='resultados-expandibles'>" . elgg_echo('votaciones:condorcet:auditoria:mostrar') . "</h2>";
+echo "<h2 class='resultados-expandibles'>" . elgg_echo('votaciones:condorcet:auditoria:mostrar') . "</h2>";
 echo "<div class='auditoria-extendible'><br>";	
 
 foreach ($condorcet as $papeleta){
@@ -97,7 +97,7 @@ echo '<ul><br>';
 echo '</ul></div>';
 		
 
-echo '</div>';
+
 ?>
 
 <script>

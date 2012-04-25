@@ -63,7 +63,8 @@ echo elgg_view('input/hidden', array(
 	'name' => 'owner_guid',
 	'value' => $owner_guid,
 	));
-	
+
+echo '<br>';	
 echo elgg_view('input/submit', array('value' => elgg_echo("votar")));
 
 

@@ -107,7 +107,7 @@ echo elgg_view('input/submit', array('value' => elgg_echo("votar")));
 
 
 ?>
-</div>
+
 
 
 	<script>

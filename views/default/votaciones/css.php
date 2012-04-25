@@ -53,6 +53,11 @@
 		
 }
 
+.ui-objeto-ordenable:hover {
+	background-image: url(<?php echo elgg_get_site_url() . "mod/votaciones/_graphics/mover2.png" ; ?>);
+	color: #4690D6;	
+}
+
 .parrafo-opciones {
 	font-weight: normal;
 	margin-left: 30px;
@@ -79,7 +84,7 @@
     padding-right: 5px;
     padding-top: 5px;
     text-align: center;
-    border-color: #CCCCCC;
+    border-color: #4D4D4D;
     border-style: solid;
     border-width: 1px;
 }
@@ -98,7 +103,7 @@
     padding-right: 5px;
     padding-top: 5px;
     text-align: center;
-    border-color: #CCCCCC;
+    border-color: #4D4D4D;
     border-style: solid;
     border-width: 1px;
 }
@@ -124,13 +129,21 @@
 	cursor: pointer;
 }
 
+.resultados-expandibles:hover {
+	color: #4690D6;
+}
+
 .pulsa-que-se-expande {
 	cursor: pointer;
 }
-
+.pulsa-que-se-expande:hover {
+	color: #4690D6;
+}
 .tarta {
 }
-
+.ayuda-cuatro-columnas {
+	padding: 10px;
+}
 	
 	
 

@@ -8,7 +8,15 @@ echo '<div>';
 echo '<br>';
 echo "<table class='condorcet-papeleta-table'>";
 echo "<thead class='condorcet-thead'><tr class='condorcet-tr'>";
-echo "<th></th>";
+echo "<th class='condorcet-th'>";
+$texto .= elgg_echo('votaciones:condorcet:info');
+$texto .= elgg_view_icon('info');
+
+$direccion = elgg_get_site_url() . "votaciones/condorcet/ayuda";
+echo elgg_view('output/url',array(
+	'text' => $texto ,
+	'href' => $direccion,
+	)) . "</th>";
 foreach ($opciones as $opcion) {
 	echo "<th class='condorcet-th'>" . elgg_echo('votaciones:condorcet:leyenda:opcion') . "$opcion</th>";
 }
@@ -38,5 +46,8 @@ foreach ($matriz as $fila) {
 	echo '</tr>';
 }
 
-echo "</table>";
+echo "</tbody></table>";
 echo '</div>';
+
+
+

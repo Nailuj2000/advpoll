@@ -1,12 +1,14 @@
 <?php
 
 $title = elgg_echo('votaciones:titulo');
-
+$page_owner = elgg_get_logged_in_user_entity();
 //get all polls order by date
 $content = elgg_list_entities(array(
 	'type' => 'object',
-	'subtype' => 'polls',
-	'limit' => 10
+	'subtype' => 'poll',
+	'limit' => 10,
+	'full_view' => false,
+	'container_guid' => $page_owner->guid,
 	));
 
 

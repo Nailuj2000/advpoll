@@ -41,6 +41,12 @@ $subtitulo_tarta = $votacion->title;
 <div id='tarta-resultados'></div>
 
 <script type="text/javascript">
+
+function roundNumber(num, dec) {
+	var result = Math.round(num*Math.pow(10,dec))/Math.pow(10,dec);
+	return result;
+}
+
 $(function () {
     var chart;
 	var titulo = "<?php echo $titulo_tarta; ?>";
@@ -80,7 +86,7 @@ $(function () {
                         color: '#000000',
                         connectorColor: '#000000',
                         formatter: function() {
-                            return 'Votos: '+ this.y + '<br>Porcentaje: '+ this.percentage +' %';
+                            return 'Votos: '+ this.y + '<br>Porcentaje: '+ roundNumber(this.percentage, 2) +' %';
                         }
                     },
                     showInLegend: true,
@@ -103,14 +109,16 @@ $(function () {
             }],
             legend: {
 				labelFormatter: function() {
-					return '<p>' + this.name + ' Votos: '+ this.y +' / '+'<?php echo $num_votos; ?> </p>';
+					return '<p>' + this.name + '<br>Votos: '+ this.y +' / '+'<?php echo $num_votos; ?> </p>';
 					},
 				width: 720,
 				itemStyle: {
 					cursor: 'pointer',
 					color: '#3E576F',
-					width: 710,
-				}
+				},
+				itemWidth: 710,
+				verticalAlign: 'top',
+				y: 50,
 			},
             credits: {
 				enabled: false

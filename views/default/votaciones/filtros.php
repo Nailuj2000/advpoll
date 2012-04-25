@@ -36,13 +36,13 @@ if (elgg_is_logged_in() && $context) {
 		),
 		'trujaman' => array(
 			'text' => elgg_echo('votaciones:filtros:trujaman'),
-			'href' => (isset($vars['mtrujaman_link'])) ? $vars['trujaman_link'] : "$context/trujaman",
+			'href' => (isset($vars['mtrujaman_link'])) ? $vars['trujaman_link'] : "$context/trujaman/$username",
 			'selected' => ($filter_context == 'trujaman'),
 			'priority' => 300,
 		),
 		'amigos' => array(
 			'text' => elgg_echo('votaciones:filtros:amigos'),
-			'href' => (isset($vars['amigos_link'])) ? $vars['amigos_link'] : "$context/amigos",
+			'href' => (isset($vars['amigos_link'])) ? $vars['amigos_link'] : "$context/amigos/$username",
 			'selected' => ($filter_context == 'burning'),
 			'priority' => 400,
 		),
