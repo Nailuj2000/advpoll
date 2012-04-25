@@ -26,11 +26,9 @@ $mapping = array(
 	'votaciones:discusion:previa' => 'Dirección de enlace a la discusión previa a la votación',
 	'votaciones:opciones' => 'Opciones para la votación',
 	'votaciones:nueva:opcion' => '+',
-	'votaciones:numero:votos:opcion' => 'Numero de votos obtenidos -> ',
 	'votaciones:resultados' => 'Resultados de la votación',
 	'votaciones:votar:opcion' => 'Elige la opción que quieras',
 	'votaciones:respuesta' => 'Opción',
-	'votaciones:numero:votos:total' => 'Número Total de votos -> ',
 	'votaciones:debate:previo:link' => 'Enlace al debate previo',
 	'votaciones:advertencia:editar' => 'Por motivos de seguridad no se pueden modificar las opciones de una votación una vez creada',
 	'votaciones:pregunta' => 'Título de la pregunta',
@@ -53,6 +51,8 @@ $mapping = array(
 	'votaciones:condorcet:pulsar:cambio' => 'Pulsa para cambiar tu votación',
 	'votaciones:anteriores:borradas:ok' => 'Se han borrado tus votaciones anteriores',
 	'votaciones:pulsar:cambio' => 'Pulsa para cambiar tu voto anterior',
+	'votaciones:resultados:tarta:titulo' => 'Resultados de la votación',
+	
 	
 );
 

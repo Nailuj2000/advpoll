@@ -127,6 +127,10 @@
 .pulsa-que-se-expande {
 	cursor: pointer;
 }
+
+.tarta {
+}
+
 	
 	
 

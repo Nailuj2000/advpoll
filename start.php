@@ -62,6 +62,11 @@ function votaciones_init() {
 	// Módulo para grupos
 	add_group_tool_option('votaciones', elgg_echo('votaciones:grupos:habilitarvotaciones'), true);
 	elgg_extend_view('groups/tool_latest', 'votaciones/group_module');
+	//libreria para las tartas
+	$url = elgg_get_site_url() . "mod/votaciones/lib/js/highcharts.js";
+	elgg_register_js('highcharts', $url, 'footer', 20000);
+	
+	
 }
 
 function maneja_paginas_votaciones($page)

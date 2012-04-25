@@ -34,13 +34,13 @@ $owner_guid = get_input('owner_guid');
 $access_id = $respuesta->access_id;
 $choices = polls_get_choice_array($votacion);
 
-
+/**
 foreach ($choices as $vote_guid){
 	if (remove_anotation_by_entity_guid_user_guid('vote', $vote_guid, $owner_guid)){
 		system_message(elgg_echo('votaciones:anteriores:borradas:ok'));
 	}
 }
-
+*/
 
 if ($respuesta->annotate('vote', 1, $access_id, $owner_guid, 'int')){
 		//system_message(elgg_echo('votacion:vote:success'));
