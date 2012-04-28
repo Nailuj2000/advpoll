@@ -30,14 +30,20 @@ $poll_cerrada = $poll->poll_cerrada;
 $poll_tipo = $poll->poll_tipo;
 
 
-
 // Esto de abajo sirve para que aparezca en el menu lateral las opciones
 // de grupo y de usuario al que pertenece la votación
 $container_guid = $poll->container_guid;
 $container = get_entity($container_guid);
 
-elgg_set_page_owner_guid($container->getGUID());
+if (elgg_instanceof($container, 'group')) {
+	elgg_push_breadcrumb($container->name, "votaciones/group/$container->guid/");
+} else {
+	elgg_push_breadcrumb($container->name, "votaciones/trujaman/$container->username");
+}
+elgg_push_breadcrumb($poll->title);
 
+elgg_set_page_owner_guid($container->getGUID());
+elgg_register_title_button('votaciones', 'nueva');
 $title = $poll->title;
 
 $content = elgg_view_entity($poll, array('full_view' => true));
@@ -69,7 +75,7 @@ $body = elgg_view_layout('content', array(
 	'filter' => '',
 	));
 	
-echo elgg_view_page($title, $body);
+echo elgg_view_page('', $body);
 	
 
 

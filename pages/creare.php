@@ -29,6 +29,7 @@ elgg_load_library('votaciones:model');
 
 $vars = votaciones_preparar_vars($votacion);
 $title = elgg_echo('votaciones:editare');
+elgg_push_breadcrumb(elgg_echo('votaciones:creare'));
 
 // Esto de abajo sirve para que aparezca en el menu lateral las opciones
 // de grupo y de usuario al que pertenece la votación

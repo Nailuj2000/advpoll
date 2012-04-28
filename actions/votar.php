@@ -43,7 +43,7 @@ foreach ($choices as $vote_guid){
 
 
 if ($respuesta->annotate('vote', 1, $access_id, $owner_guid, 'int')){
-		//system_message(elgg_echo('votacion:vote:success'));
+		system_message(elgg_echo('votaciones:accion:voto:ok'));
 	}
 
 //system_message($choices);

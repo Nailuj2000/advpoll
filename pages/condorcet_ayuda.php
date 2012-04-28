@@ -24,6 +24,7 @@
  */
 
 elgg_load_library('votaciones:model');
+elgg_push_breadcrumb(elgg_echo('votaciones:ayuda'));
 
 // Esto de abajo sirve para que aparezca en el menu lateral las opciones
 // de grupo y de usuario al que pertenece la votación

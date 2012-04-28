@@ -2,6 +2,8 @@
 $choices = elgg_extract('choices', $vars, array());
 
 
+echo '<h5>' . elgg_echo('votaciones:opciones') . '</h5>';
+
 echo "<div><ul class='choices_ul'>";
 
 foreach($choices as $choice){	

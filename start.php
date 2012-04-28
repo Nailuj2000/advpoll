@@ -73,6 +73,7 @@ function maneja_paginas_votaciones($page)
 {
 	$base_dir = elgg_get_plugins_path() . 'votaciones/pages/';
 	
+	elgg_push_breadcrumb(elgg_echo('votaciones'), 'votaciones/totus');
 	switch ($page[0]){
 		case "totus":
 			include $base_dir . 'totus.php';

@@ -2,6 +2,7 @@
 
 $title = elgg_echo('votaciones:titulo');
 $page_owner = elgg_get_logged_in_user_entity();
+elgg_push_breadcrumb($page_owner->name, "votaciones/amigos/" . $page_owner->name);
 //get all polls order by date
 $content = elgg_list_entities(array(
 	'type' => 'object',

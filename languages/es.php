@@ -24,7 +24,7 @@ $mapping = array(
 	'votaciones:editare' => 'Editor de votaciones',
 	'votaciones:enviada:nueva' => 'Votación creada satisfactoriamente',
 	'votaciones:discusion:previa' => 'Dirección de enlace a la discusión previa a la votación',
-	'votaciones:opciones' => 'Opciones para la votación',
+	'votaciones:opciones' => 'Opciones de la votación: ',
 	'votaciones:nueva:opcion' => '+',
 	'votaciones:resultados' => 'Resultados de la votación',
 	'votaciones:votar:opcion' => 'Elige la opción que prefieras',
@@ -49,7 +49,7 @@ $mapping = array(
 	'votaciones:condorcet:votar:opcion' => 'Ordena las opciones según tus preferencias y pulsa el botón "votar"',
 	'votaciones:condorcet:auditoria:mostrar' => 'Mostrar auditoría de todos los votos emitidos',
 	'votaciones:condorcet:pulsar:cambio' => 'Pulsa aquí para cambiar tu votación',
-	'votaciones:anteriores:borradas:ok' => 'Se han borrado tus votaciones anteriores',
+	'votaciones:anteriores:borradas:ok' => 'Se ha borrado tu elección anterior',
 	'votaciones:pulsar:cambio' => 'Pulsa aquí para cambiar tu voto anterior',
 	'votaciones:resultados:tarta:titulo' => 'Resultados de la votación',
 	'votaciones:grupo' => 'Votaciones del grupo',	
@@ -107,7 +107,11 @@ $mapping = array(
 		C A B D <br>
 		A B D C <br><br>
 		Las tablas correspondientes a cada uno de estas elecciones serán las siguientes:',
-	
+	'votaciones:trujaman' => 'Votación creada por ',
+	'votaciones:accion:voto:ok' => 'Tu voto se ha guardado correctamente',
+	'votaciones:amigos' => 'Amigos',
+	'votaciones:activas' => 'Activas',
+	'votaciones' => 'Votaciones',
 		
 
 );

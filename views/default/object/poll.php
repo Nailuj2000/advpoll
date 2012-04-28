@@ -10,28 +10,10 @@ $owner_guid = $votacion->owner_guid;
 $container_guid = $votacion->container_guid;
 $tags = $votacion->tags;
 $choices = polls_get_choice_array($votacion);
-
-/**
-echo "<br />";
-echo $titulo;
-echo "<br />";
-echo $desc;
-echo "<br />";
-echo $path;
-echo "<br />";
-echo $acces_id;
-echo "<br />";
-echo $owner_guid;
-echo "<br />";
-echo $container_guid;
-echo "<br />";
-echo $tags;
-echo "<br />";
-*/
-
 $full = elgg_extract('full_view', $vars, FALSE);
 $owner =  $votacion->getOwnerEntity();
-$owner_icon = elgg_view_entity_icon($owner, 'tiny');
+
+$entity_icon = elgg_view_entity_icon($votacion, 'small');
 
 $metadata = elgg_view_menu('entity', array(
 	'entity' => $votacion,
@@ -49,34 +31,40 @@ $metadata = elgg_view_menu('entity', array(
 		$excerpt = " - $excerpt";
 	}
 
-	$link = elgg_view('output/url', array(
+	
+	$link = elgg_get_site_url() . "profile/" . $owner->name ;
+	$subtitle = elgg_echo('votaciones:trujaman');
+	$subtitle .= elgg_view('output/url', array(
+		'href' => $link,
+		'text' => $owner->name,
+	));
+	
+	$subtitle .= '<br>' . elgg_view('output/url', array(
 		'href' => $votacion->path,
 		'text' => elgg_echo('votaciones:debate:previo:link'),
 	));
-
 	
 	
-	$subtitle = elgg_view('votaciones/choices', array('choices' => $choices));
-
+	$content .= elgg_view('votaciones/choices', array('choices' => $choices));
 	$params = array(
 		'entity' => $votacion,
 		'metadata' => $metadata,
 		'subtitle' => $subtitle,
 		'tags' => $tags,
-		'content' => $link,
+		'content' => $content,
 	);
 	$params = $params + $vars;
 	
 
 if ($full) {
 	$body = elgg_view('output/longtext', array('value' => $votacion->description));
-	$owner_icon = elgg_view_entity_icon($owner, 'small');
+	$entity_icon = elgg_view_entity_icon($votacion, 'small');
 	$summary = elgg_view('object/elements/summary', $params);
 
 	echo elgg_view('object/elements/full', array(
 		'entity' => $votacion,
 		'title' => '',
-		'icon' => $owner_icon,
+		'icon' => $entity_icon,
 		'summary' => $summary,
 		'body' => $body,
 	));

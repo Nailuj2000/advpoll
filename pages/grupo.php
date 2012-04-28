@@ -25,10 +25,13 @@
  */
 $title = elgg_echo('votaciones:grupo:titulo');
 $container_guid = get_input('guid');
+$container = get_entity($container_guid);
 $group_context = get_input('group_context');
 // Obtiene una lista de polls ordenada por fecha
 
 if ("$group_context" == 'totus'){
+	elgg_push_breadcrumb($container->name, "votaciones/group/" . $container->guid);
+	elgg_push_breadcrumb(elgg_echo('votaciones:totus'));
 $content = elgg_list_entities(array(
 	'type' => 'object',
 	'subtype' => 'poll',
@@ -39,6 +42,8 @@ $content = elgg_list_entities(array(
 	
 } else {
 if ("$group_context" == 'cerradas'){
+	elgg_push_breadcrumb($container->name, "votaciones/group/" . $container->guid);
+	elgg_push_breadcrumb(elgg_echo('votaciones:cerradas'));
 $content = elgg_list_entities_from_metadata(array(
 	'type' => 'object',
 	'subtype' => 'poll',
@@ -50,6 +55,8 @@ $content = elgg_list_entities_from_metadata(array(
 	));
 	
 } else {
+	elgg_push_breadcrumb($container->name, "votaciones/group/" . $container->guid);
+	elgg_push_breadcrumb(elgg_echo('votaciones:activas'));
 
 $content = elgg_list_entities_from_metadata(array(
 	'type' => 'object',

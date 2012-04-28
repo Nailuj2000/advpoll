@@ -25,6 +25,8 @@
  */
 $title = elgg_echo('votaciones:titulo');
 
+elgg_push_breadcrumb(elgg_echo('votaciones:totus'));
+
 // Obtiene una lista de polls ordenada por fecha
 $content = elgg_list_entities(array(
 	'type' => 'object',

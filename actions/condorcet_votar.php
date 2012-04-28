@@ -45,7 +45,7 @@ if (remove_anotation_by_entity_guid_user_guid('vote_condorcet', $guid, $owner_gu
 
 
 if ($votacion->annotate('vote_condorcet', "$papeleta_cadena", $access_id, $owner_guid)){
-		//system_message(elgg_echo($papeleta_cadena));
+		system_message(elgg_echo('votaciones:accion:voto:ok'));
 	}
 
 

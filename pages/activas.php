@@ -1,5 +1,8 @@
 <?php
 
+elgg_push_breadcrumb(elgg_echo('votaciones:activas'));
+
+
 $title = elgg_echo('votaciones:titulo');
 
 //get all polls order by date
