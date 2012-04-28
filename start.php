@@ -56,7 +56,6 @@ function votaciones_init() {
 	elgg_register_page_handler('votaciones', 'maneja_paginas_votaciones');
 	#manejador de direccion url
 	elgg_register_entity_url_handler('object', 'poll', 'votaciones_url');
-	elgg_register_entity_url_handler('object', 'condorcet', 'condorcet_url');
 	//registra librerias externas
 	elgg_register_library('votaciones:model', elgg_get_plugins_path() . 'votaciones/lib/modelo.php');
 	// Módulo para grupos
@@ -65,7 +64,7 @@ function votaciones_init() {
 	//libreria para las tartas
 	$url = elgg_get_site_url() . "mod/votaciones/lib/js/highcharts.js";
 	elgg_register_js('highcharts', $url, 'footer', 20000);
-	
+	elgg_register_plugin_hook_handler('register', 'menu:owner_block', 'votaciones_trujaman_menu_block');
 	
 }
 
@@ -102,9 +101,9 @@ function maneja_paginas_votaciones($page)
 		case "cerradas":
 			include $base_dir . 'cerradas.php';
 			break;
-		case "condorcet":
+		case "ayuda":
 			switch ($page[1]) {
-				case "ayuda":
+				case "condorcet":
 					include $base_dir . 'condorcet_ayuda.php';
 					break;
 			}
@@ -132,7 +131,20 @@ function votaciones_url($entity) {
 	return "votaciones/vistazo/$entity->guid/$title";
 }
 
-function condorcet_url($entity) {
-	$title = elgg_get_friendly_title($entity->title);
-	return "votaciones/condorcet/vistazo/$entity->guid/$title";
+
+
+function votaciones_trujaman_menu_block($hook, $type, $return, $params) {
+	if (elgg_instanceof($params['entity'], 'user')) {
+		$url = "votaciones/trujaman/{$params['entity']->username}";
+		$item = new ElggMenuItem('votaciones', elgg_echo('votaciones'), $url);
+		$return[] = $item;
+	} else {
+		if ($params['entity']->bookmarks_enable != 'no') {
+			$url = "votaciones/group/{$params['entity']->guid}/activas";
+			$item = new ElggMenuItem('votaciones', elgg_echo('votaciones:group'), $url);
+			$return[] = $item;
+		}
+	}
+
+	return $return;
 }
