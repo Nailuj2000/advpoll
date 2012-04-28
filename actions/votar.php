@@ -33,17 +33,23 @@ $respuesta = get_entity($choice);
 $owner_guid = get_input('owner_guid');
 $access_id = $respuesta->access_id;
 $choices = polls_get_choice_array($votacion);
+$poll_cerrada = $votacion->poll_cerrada;
+
+if ($poll_cerrada != no) {
+	register_error(elgg_echo('votaciones:accion:votacion:cerrada'));
+} else {
 
 
-foreach ($choices as $vote_guid){
-	if (remove_anotation_by_entity_guid_user_guid('vote', $vote_guid, $owner_guid)){
-		system_message(elgg_echo('votaciones:anteriores:borradas:ok'));
-	}
+		foreach ($choices as $vote_guid){
+			if (remove_anotation_by_entity_guid_user_guid('vote', $vote_guid, $owner_guid)){
+				system_message(elgg_echo('votaciones:anteriores:borradas:ok'));
+			}
+		}
+		
+		
+		if ($respuesta->annotate('vote', 1, $access_id, $owner_guid, 'int')){
+				system_message(elgg_echo('votaciones:accion:voto:ok'));
+			}
+		
+
 }
-
-
-if ($respuesta->annotate('vote', 1, $access_id, $owner_guid, 'int')){
-		system_message(elgg_echo('votaciones:accion:voto:ok'));
-	}
-
-//system_message($choices);

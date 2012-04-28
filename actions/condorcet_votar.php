@@ -34,6 +34,11 @@ $opciones = get_input('opciones');
 $opciones_iniciales = pasar_opciones_a_condorcet($op_ini);
 $owner_guid = get_input('owner_guid');
 $access_id = ACCESS_PUBLIC;
+$poll_cerrada = $votacion->poll_cerrada;
+
+if ($poll_cerrada != no) {
+	register_error(elgg_echo('votaciones:accion:votacion:cerrada'));
+} else {
 
 
 $papeleta = matriz_papeleta($opciones_iniciales, $opciones);
@@ -49,8 +54,7 @@ if ($votacion->annotate('vote_condorcet', "$papeleta_cadena", $access_id, $owner
 	}
 
 
-echo $papeleta;
-	
+}
 	
 	
 	

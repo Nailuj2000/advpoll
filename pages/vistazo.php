@@ -53,7 +53,7 @@ if ($poll_tipo == 'condorcet') {
 		$content .= elgg_view_form('condorcet_votar' , array() , array(
 			'guid' => $guid,
 			));
-	}
+	} 
 	$content .= elgg_view('votaciones/condorcet_resultados', array(
 	'guid' => $guid
 	));
