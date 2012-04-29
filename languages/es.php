@@ -143,6 +143,8 @@ $mapping = array(
 	'votaciones:vistazo:mostrar:resultados' => ' Resultados antes de finalizar:',
 	'votaciones:mostrar:yes' => ' Sí',
 	'votaciones:mostrar:no' => ' No',
+	'votaciones:delete:success' => 'Votación borrada correctamente',
+	'votaciones:opcion:delete:success' => 'Opción de la votación borrada correctamente',
 	
 	
 		

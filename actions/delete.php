@@ -29,13 +29,10 @@ if ($votacion->canEdit()) {
 		if ($votacion->delete())  {
 			system_message(elgg_echo('votaciones:delete:success'));	
 		}
-		if (elgg_instanceof($container, 'group')) {
-			forward("votaciones/group/$container->guid/activas");
-		} else {
-			forward("votaciones/activas");
-		}
+		forward(REFERER);
 	}
 } else {
 	register_error(elgg_echo('votaciones:delete:notsuccess'));
+	forward(REFERER);
 }
 
