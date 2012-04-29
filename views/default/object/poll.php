@@ -72,6 +72,6 @@ if ($full) {
 } else {
 	$body = elgg_view('object/elements/summary', $params);
 	
-	echo elgg_view_image_block($owner_icon, $body);
+	echo elgg_view_image_block($entity_icon, $body);
 }
 
