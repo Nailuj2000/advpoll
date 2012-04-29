@@ -33,27 +33,32 @@ $op_ini = polls_get_choice_array($votacion);
 $opciones = get_input('opciones');
 $opciones_iniciales = pasar_opciones_a_condorcet($op_ini);
 $owner_guid = get_input('owner_guid');
-$access_id = ACCESS_PUBLIC;
+$access_id = $votacion->acces_id;
+$usuaria = elgg_get_logged_in_user_guid();
+$access_col = get_access_array($usuaria);
+$access_votar_id = $votacion->access_votar_id;
+
+
 
 
 if (!votacion_en_fecha($votacion)) {
 	register_error(elgg_echo('votaciones:accion:votacion:cerrada'));
 } else {
-
-
-$papeleta = matriz_papeleta($opciones_iniciales, $opciones);
-$papeleta_cadena = pasar_matriz_a_cadena($papeleta);
-/**
-if (remove_anotation_by_entity_guid_user_guid('vote_condorcet', $guid, $owner_guid)){
-		system_message(elgg_echo('votaciones:anteriores:borradas:ok'));
+	if (!in_array($access_votar_id, $access_col)) {
+		register_error(elgg_echo('votaciones:accion:error:permisos'));
+	} else {
+		$papeleta = matriz_papeleta($opciones_iniciales, $opciones);
+		$papeleta_cadena = pasar_matriz_a_cadena($papeleta);
+		/**
+		if (remove_anotation_by_entity_guid_user_guid('vote_condorcet', $guid, $owner_guid)){
+				system_message(elgg_echo('votaciones:anteriores:borradas:ok'));
+			}
+		*/
+		
+		if ($votacion->annotate('vote_condorcet', "$papeleta_cadena", $access_id, $owner_guid)){
+				system_message(elgg_echo('votaciones:accion:voto:ok'));
+			}
 	}
-*/
-
-if ($votacion->annotate('vote_condorcet', "$papeleta_cadena", $access_id, $owner_guid)){
-		system_message(elgg_echo('votaciones:accion:voto:ok'));
-	}
-
-
 }
 	
 	

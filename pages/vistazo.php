@@ -33,6 +33,11 @@ $auditoria = $poll->auditoria;
 $fecha_fin = $poll->fecha_fin;
 $fecha_inicio = $poll->fecha_inicio;
 
+print_r("inicio $fecha_inicio <br>");
+
+print_r("fin $fecha_fin <br>");
+
+
 $anotaciones = elgg_get_annotations(array(
 	'type' => 'object',
 	'subtype' => 'poll',

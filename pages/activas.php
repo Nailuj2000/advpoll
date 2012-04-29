@@ -8,12 +8,24 @@ $title = elgg_echo('votaciones:titulo');
 //get all polls order by date
 
 //$content = get_entity(171);
-	
+$time = time();
 $content = elgg_list_entities_from_metadata(array(
 	'type' => 'object',
 	'subtype' => 'poll',
-	'metadata_name' => 'poll_cerrada',
-	'metadata_value' => 'no',
+	'metadata_name_value_pairs' => array(
+		'name' => 'fecha_fin',
+		'value' => $time,
+		'operand' => '>',
+		'case_sensitive' => TRUE
+		),
+	
+	/**'metadata_name_value_pairs' => array(
+		'name' => 'fecha_fin',
+		'value' => 'no',
+		'operand' => '=',
+		'case_sensitive' => TRUE
+		),
+		*/
 	'limit' => 5,
 	'full_view' => false,
 	));

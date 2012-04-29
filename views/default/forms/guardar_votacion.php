@@ -77,8 +77,13 @@ if ($categories) {
 
 ?>
 <div>
-	<label><?php echo elgg_echo('access'); ?></label><br />
+	<label><?php echo elgg_echo('votaciones:acceso:ver'); ?></label><br />
 	<?php echo elgg_view('input/access', array('name' => 'access_id', 'value' => $access_id)); ?>
+</div>
+
+<div>
+	<label><?php echo elgg_echo('votaciones:acceso:votar'); ?></label><br />
+	<?php echo elgg_view('input/access', array('name' => 'access_votar_id', 'value' => $access_id)); ?>
 </div>
 
 

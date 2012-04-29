@@ -2,7 +2,7 @@
 
 $title = elgg_echo('votaciones:titulo');
 elgg_push_breadcrumb(elgg_echo('votaciones:cerradas'));
-
+$time = time();
 //get all polls order by date
 
 //$content = get_entity(171);
@@ -10,8 +10,12 @@ elgg_push_breadcrumb(elgg_echo('votaciones:cerradas'));
 $content = elgg_list_entities_from_metadata(array(
 	'type' => 'object',
 	'subtype' => 'poll',
-	'metadata_name' => 'poll_cerrada',
-	'metadata_value' => 'yes',
+	'metadata_name_value_pairs' => array(
+		'name' => 'fecha_fin',
+		'value' => $time,
+		'operand' => '<',
+		'case_sensitive' => TRUE
+		),
 	'limit' => 5,
 	'full_view' => false,
 	));

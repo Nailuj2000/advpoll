@@ -41,15 +41,16 @@ $owner_guid = elgg_get_logged_in_user_guid();
 $poll_tipo = get_input('poll_tipo');
 $fecha_inicio = get_input('fecha_inicio');
 $fecha_fin = get_input('fecha_fin');
+$access_votar_id = get_input('access_votar_id');
 
 
 if (!$fecha_fin) {
-	$fecha_fin = 'no';
+	$fecha_fin = time() + 31536000 ;
 	system_message('fecha final no hay pero ahora es false');
 	}
 
 if (!$fecha_inicio) {
-	$fecha_inicio = date();
+	$fecha_inicio = time();
 	system_message('fecha inicio no existe y ahora es la fecha actual');
 }
 
@@ -73,36 +74,41 @@ if (!$title) {
 		if (algo_repe_en_array($opciones)) {
 			register_error(elgg_echo('votacion:error:opciones:repes'));
 		} else {
-			
-			$votacion = new ElggObject();
-			$votacion->subtype = "poll";
-			$votacion->title = $title;
-			$votacion->description = $desc;
-			$votacion->path = $path;
-			$votacion->access_id = $access_id;
-			$votacion->owner_guid = $owner_guid;
-			$votacion->container_guid = $trujaman;
-			$votacion->tags = $tags;
-			$votacion->poll_cerrada = $poll_cerrada;
-			$votacion->auditoria = $auditoria;
-			$votacion->poll_tipo = $poll_tipo;
-			$votacion->fecha_inicio = $fecha_inicio;
-			$votacion->fecha_fin = $fecha_fin;
-			$guid = $votacion->save();
-			
-			polls_delete_choices($votacion); 
-			polls_add_choices($votacion,$opciones);
-			
-			elgg_clear_sticky_form('votaciones');
-			
-			if ($guid) { //esta parte creo que esta un poco mal
-				system_message(elgg_echo('votacion:guardada'));
-				system_message("$poll_tipo");
-				forward($votacion->getURL());
-			}
-			else {
-				register_error(elgg_echo('votacion:error:guardar'));
-				forward(REFERER); // REFERER is a global variable that defines the previous page
+			if ($fecha_inicio > $fecha_fin) {
+				register_error(elgg_echo('votacion:error:fechas:mal'));
+			} else {
+				
+				$votacion = new ElggObject();
+				$votacion->subtype = "poll";
+				$votacion->title = $title;
+				$votacion->description = $desc;
+				$votacion->path = $path;
+				$votacion->access_id = $access_id;
+				$votacion->owner_guid = $owner_guid;
+				$votacion->container_guid = $trujaman;
+				$votacion->tags = $tags;
+				$votacion->poll_cerrada = $poll_cerrada;
+				$votacion->auditoria = $auditoria;
+				$votacion->poll_tipo = $poll_tipo;
+				$votacion->fecha_inicio = $fecha_inicio;
+				$votacion->fecha_fin = $fecha_fin;
+				$votacion->access_votar_id = $access_votar_id;
+				$guid = $votacion->save();
+				
+				polls_delete_choices($votacion); 
+				polls_add_choices($votacion,$opciones);
+				
+				elgg_clear_sticky_form('votaciones');
+				
+				if ($guid) { //esta parte creo que esta un poco mal
+					system_message(elgg_echo('votacion:guardada'));
+					system_message("$poll_tipo");
+					forward($votacion->getURL());
+				}
+				else {
+					register_error(elgg_echo('votacion:error:guardar'));
+					forward(REFERER); // REFERER is a global variable that defines the previous page
+				}
 			}
 		}
 	}

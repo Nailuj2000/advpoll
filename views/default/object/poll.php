@@ -2,7 +2,7 @@
 
 elgg_load_library('votaciones:model');
 $votacion = $vars['entity'];
-$poll_cerrada = $votacion->poll_cerrada;
+
 $auditoria = $votacion->auditoria;
 $tipo = $votacion->poll_tipo;
 $titulo = $votacion->title;
@@ -15,6 +15,25 @@ $tags = $votacion->tags;
 $choices = polls_get_choice_array($votacion);
 $full = elgg_extract('full_view', $vars, FALSE);
 $owner =  $votacion->getOwnerEntity();
+$fecha_inicio = $votacion->fecha_inicio;
+$fecha_fin = $votacion->fecha_fin;
+$time = time();
+if ($time < $fecha_fin ) {
+	$poll_comparada_fin = 'menorfin';
+} else {
+	if ($time >= $fecha_fin ){
+		$poll_comparada_fin = 'mayorfin';
+	}
+}
+
+if ($time < $fecha_inicio) {
+	$poll_comparada_ini = 'menorini';
+}else {
+	if ($time >= $fecha_inicio ){
+		$poll_comparada_ini = 'mayorini';
+	}
+}
+
 
 $entity_icon = elgg_view_entity_icon($votacion, 'small');
 
@@ -49,7 +68,13 @@ $metadata = elgg_view_menu('entity', array(
 		'text' => elgg_echo('votaciones:debate:previo:link'),
 	));
 
-	$subtitle .= "<br>".elgg_echo('votaciones:vistazo:cerrada') . elgg_echo('option:' . $poll_cerrada) . ',';
+	$subtitle .= "<br>" . elgg_echo('votacion:vistazo:finalizada:' . $poll_comparada_fin . ':' . $poll_comparada_ini ) . ',';
+	if ($poll_comparada_ini == 'menorini') {
+	$subtitle .= elgg_echo('votaciones:vistazo:tiempo:desde') .elgg_view('output/date', array('value' => $fecha_inicio)) . ', ';
+} 
+	if ($poll_comparada_fin == 'menorfin') {
+	$subtitle .= elgg_echo('votaciones:vistazo:tiempo:hasta') .elgg_view('output/date', array('value' => $fecha_fin));
+} 
 	$subtitle .= elgg_echo('votaciones:vistazo:auditoria') . elgg_echo('option:' . $auditoria) . ',';
 	$subtitle .= elgg_echo('votaciones:vistazo:tipo') . elgg_echo('votaciones:tipo:' . $tipo) . '.' ;
 

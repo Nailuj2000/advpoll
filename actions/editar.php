@@ -38,35 +38,39 @@ $fecha_fin = get_input('fecha_fin');
 
 
 if (!$fecha_fin) {
-	$fecha_fin = 'no';
-	system_message('fecha final no hay pero ahora es false');
+	$fecha_fin = time() + 31536000 ;
+	
 	}
 
 if (!$fecha_inicio) {
-	$fecha_inicio = date();
-	system_message('fecha inicio no existe y ahora es la fecha actual');
-}
+	$fecha_inicio = time();
 	
-//escribimos en base de datos	
-$votacion->description = $desc;
-$votacion->path = $path;
-$votacion->access_id = $access_id;
-$votacion->tags = $tags;
-$votacion->guid = $guid;
-$votacion->fecha_fin = $fecha_fin;
-$votacion->fecha_inicio = $fecha_inicio;
-
-$guid2 = $votacion->save();
-
-if ($guid2){
-	system_message(elgg_echo('votacion:guardada'));
-	forward($votacion->getURL());
-}
-else {
-	register_error(elgg_echo('votacion:error:guardar'));
-	forward(REFERER); // REFERER is a global variable that defines the previous page
 }
 
+if ($fecha_inicio > $fecha_fin) {
+	register_error(elgg_echo('votacion:error:fechas:mal'));
+} else {
+	
+	//escribimos en base de datos	
+	$votacion->description = $desc;
+	$votacion->path = $path;
+	$votacion->access_id = $access_id;
+	$votacion->tags = $tags;
+	$votacion->guid = $guid;
+	$votacion->fecha_fin = $fecha_fin;
+	$votacion->fecha_inicio = $fecha_inicio;
+	
+	$guid2 = $votacion->save();
+	
+	if ($guid2){
+		system_message(elgg_echo('votacion:guardada'));
+		forward($votacion->getURL());
+	}
+	else {
+		register_error(elgg_echo('votacion:error:guardar'));
+		forward(REFERER); // REFERER is a global variable that defines the previous page
+	}
+}
 
 
 

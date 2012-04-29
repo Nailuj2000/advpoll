@@ -126,6 +126,16 @@ $mapping = array(
 	'votaciones:fecha:inicio' => 'La votación comienza el día ',
 	'votaciones:fecha:fin' => ' y termina el día ',
 	'votaciones:fecha:ayuda' => 'Dejar en blanco para controlar la votación de manera manual',
+	'votaciones:acceso:ver' => '¿Quién puede ver los resultados de la votación?',
+	'votaciones:acceso:votar' => '¿Quién puede votar?',
+	'votaciones:vistazo:tiempo:desde' => ' Periodo de votación desde el ',
+	'votaciones:vistazo:tiempo:hasta' => ' hasta el ',
+	'votacion:vistazo:finalizada:si' => 'Finalizada',
+	'votacion:vistazo:finalizada:no' => 'Activa',
+	'votacion:vistazo:finalizada:menorfin:menorini' => 'No iniciada',
+	'votacion:vistazo:finalizada:menorfin:mayorini' => 'Activa',
+	'votacion:vistazo:finalizada:mayorfin:menorini' => 'Imposible',
+	'votacion:vistazo:finalizada:mayorfin:mayorini' => 'Finalizada',
 	
 	
 		
