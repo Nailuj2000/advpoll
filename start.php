@@ -36,6 +36,8 @@ function votaciones_init() {
 	elgg_register_action('votar', "$base_dir/votar.php");
 	elgg_register_action('condorcet_votar', "$base_dir/condorcet_votar.php");
 	elgg_register_action('editar', "$base_dir/editar.php");
+	elgg_register_action('votaciones/delete', "$base_dir/delete.php");
+	
 	// Es recomendable usar como nombre el mismo que el de la vista de la accion
 	// como primer termino, antes registrándola de este modo
 	// elgg_register_action('votaciones/guardar', "$base_dir/guardar_votacion.php");
