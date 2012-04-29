@@ -18,6 +18,7 @@ $owner =  $votacion->getOwnerEntity();
 $fecha_inicio = $votacion->fecha_inicio;
 $fecha_fin = $votacion->fecha_fin;
 $time = time();
+$mostrar_resultados = $votacion->mostrar_resultados;
 if ($time < $fecha_fin ) {
 	$poll_comparada_fin = 'menorfin';
 } else {
@@ -76,7 +77,8 @@ $metadata = elgg_view_menu('entity', array(
 	$subtitle .= elgg_echo('votaciones:vistazo:tiempo:hasta') .date('d - M - Y', $fecha_fin);
 } 
 	$subtitle .= elgg_echo('votaciones:vistazo:auditoria') . elgg_echo('option:' . $auditoria) . ',';
-	$subtitle .= elgg_echo('votaciones:vistazo:tipo') . elgg_echo('votaciones:tipo:' . $tipo) . '.' ;
+	$subtitle .= elgg_echo('votaciones:vistazo:tipo') . elgg_echo('votaciones:tipo:' . $tipo) . ',';
+	$subtitle .= elgg_echo('votaciones:vistazo:mostrar:resultados') . elgg_echo('votaciones:mostrar:' . $mostrar_resultados) . '.';
 
 	
 	$content .= elgg_view('votaciones/choices', array('choices' => $choices));

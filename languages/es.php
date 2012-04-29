@@ -138,6 +138,12 @@ $mapping = array(
 	'votacion:vistazo:finalizada:mayorfin:mayorini' => 'Finalizada',
 	'votaciones:grupos:habilitarvotaciones' => 'Activar las votaciones de grupo',
 	'votaciones:accion:error:permisos' => 'Lo sentimos, no tienes permisos para votar',
+	'votaciones:mostrar:resultados:durante' => '¿Mostrar resultados durante la votación (y auditoría si está activada)?',
+	'votaciones:advertencia:editar:mostrar:resultados' => 'Por cuestiones de privacidad no se permite modificar este parámetro una vez creada la votación',
+	'votaciones:vistazo:mostrar:resultados' => ' Resultados antes de finalizar:',
+	'votaciones:mostrar:yes' => ' Sí',
+	'votaciones:mostrar:no' => ' No',
+	
 	
 		
 

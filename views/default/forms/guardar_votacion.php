@@ -45,7 +45,8 @@ $group = get_entity($container_guid);
 $poll_tipo = elgg_extract('poll_tipo', $vars, 'normal');
 $fecha_inicio = elgg_extract('fecha_inicio', $vars);
 $fecha_fin = elgg_extract('fecha_fin', $vars);
-
+$access_votar_id = elgg_extract('access_votar_id', $vars, ACCESS_DEFAULT);
+$mostrar_resultados = elgg_extract('mostrar_resultados', $vars, 'no');
 
 ?>
 
@@ -83,7 +84,7 @@ if ($categories) {
 
 <div>
 	<label><?php echo elgg_echo('votaciones:acceso:votar'); ?></label><br />
-	<?php echo elgg_view('input/access', array('name' => 'access_votar_id', 'value' => $access_id)); ?>
+	<?php echo elgg_view('input/access', array('name' => 'access_votar_id', 'value' => $access_votar_id)); ?>
 </div>
 
 
@@ -128,8 +129,8 @@ if ($categories) {
 	<?php echo elgg_view('input/radio', array(
 		'name' => 'auditoria',
 		 'options' => array(
-			'no' => 'no' ,
-			'yes' => 'yes',
+			elgg_echo('option:no') => 'no' ,
+			elgg_echo('option:yes') => 'yes',
 			),
 		'value' => $auditoria,
 	));
@@ -147,6 +148,20 @@ if ($categories) {
 			),
 		'value' => $poll_tipo,
 		)); ?>
+</div>
+
+<div>
+	<label><?php echo elgg_echo('votaciones:mostrar:resultados:durante'); ?></label><br />
+	<?php echo elgg_view('input/radio', array(
+		'name' => 'mostrar_resultados',
+		 'options' => array(
+			elgg_echo('option:no') => 'no' ,
+			elgg_echo('option:yes') => 'yes',
+			),
+		'value' => $mostrar_resultados,
+	));
+
+	?>
 </div>
 
 

@@ -174,6 +174,12 @@ if ($categories) {
 	<?php echo elgg_echo('votaciones:advertencia:editar:auditoria'); ?><br />
 	
 </div>
+<div>
+	<label><?php echo elgg_echo('votaciones:mostrar:resultados:durante'); ?></label><br />
+	<label><?php echo elgg_echo("option:$mostrar_resultados"); ?></label><br />
+	<?php echo elgg_echo('votaciones:advertencia:editar:mostrar:resultados'); ?><br />
+	
+</div>
 
 
 <div class="elgg-foot">

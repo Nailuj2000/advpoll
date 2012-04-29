@@ -149,6 +149,7 @@ function votaciones_preparar_vars($votaciones) {
 		'auditoria' => 'no',
 		'poll_tipo' => 'normal',
 		'access_votar_id' => ACCESS_DEFAULT,
+		'mostrar_resultados' => 'no',
 	);
 
 	if ($votaciones) {

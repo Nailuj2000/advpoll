@@ -32,6 +32,7 @@ $usuaria_guid = elgg_get_logged_in_user_guid();
 $auditoria = $poll->auditoria;
 $fecha_fin = $poll->fecha_fin;
 $fecha_inicio = $poll->fecha_inicio;
+$mostrar_resultados = $poll->mostrar_resultados;
 
 $acceso_lectura = $poll->access_id;
 $acceso_votar = $poll->access_votar_id;
@@ -75,7 +76,7 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 		
 	}
 	
-	if ($auditoria == 'yes') {
+	if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !votacion_en_fecha($poll))) {
 		$content .= elgg_view('input/button', array('class' => 'resultados-expandibles', 'value' => elgg_echo('votaciones:condorcet:auditoria:mostrar'))); 
 	}
 	
@@ -85,9 +86,11 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 				'guid' => $guid,
 				));
 		}	
-		$content .= elgg_view('votaciones/condorcet_resultados', array(
-		'guid' => $guid
-		));
+		if ($mostrar_resultados == 'yes' or !votacion_en_fecha($poll)) {
+			$content .= elgg_view('votaciones/condorcet_resultados', array(
+				'guid' => $guid
+			));
+		}
 	} else {
 		if (votacion_en_fecha($poll) && in_array($acceso_votar, $acceso_col)) {
 			$content .= elgg_view_form('votar' , array() , array(
@@ -95,9 +98,11 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 				));
 		
 		}
-		$content .= elgg_view('votaciones/resultados', array(
-		'votacion' => $poll
-		));
+		if ($mostrar_resultados == 'yes' or !votacion_en_fecha($poll)) {
+			$content .= elgg_view('votaciones/resultados', array(
+			'votacion' => $poll
+			));
+		}
 	}
 	
 	$content .= elgg_view_comments($poll);
