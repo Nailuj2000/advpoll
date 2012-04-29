@@ -35,7 +35,7 @@ if ("$group_context" == 'totus'){
 $content = elgg_list_entities(array(
 	'type' => 'object',
 	'subtype' => 'poll',
-	'limit' => 10,
+	'limit' => 5,
 	'full_view' => false,
 	'container_guid' =>  $container_guid,
 	));
@@ -47,7 +47,7 @@ if ("$group_context" == 'cerradas'){
 $content = elgg_list_entities_from_metadata(array(
 	'type' => 'object',
 	'subtype' => 'poll',
-	'limit' => 10,
+	'limit' => 5,
 	'full_view' => false,
 	'container_guid' =>  $container_guid,
 	'metadata_name' => 'poll_cerrada',
@@ -61,7 +61,7 @@ $content = elgg_list_entities_from_metadata(array(
 $content = elgg_list_entities_from_metadata(array(
 	'type' => 'object',
 	'subtype' => 'poll',
-	'limit' => 10,
+	'limit' => 5,
 	'full_view' => false,
 	'container_guid' =>  $container_guid,
 	'metadata_name' => 'poll_cerrada',

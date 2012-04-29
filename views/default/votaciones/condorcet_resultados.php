@@ -50,8 +50,9 @@ $condorcet = elgg_get_annotations(array(
 
 	$i = 0;
 echo "<br>";
-echo "<h2 class='resultados-expandibles'>" . elgg_echo('votaciones:condorcet:auditoria:mostrar') . "</h2>";
-echo "<div class='auditoria-extendible'><br>";	
+
+//echo "<h2 class='resultados-expandibles'>" . elgg_echo('votaciones:condorcet:auditoria:mostrar') . "</h2>";
+echo "<div class='auditoria-extendible'>";	
 
 foreach ($condorcet as $papeleta){
 	$papeleta_matriz = pasar_cadena_a_matriz($papeleta->value);
@@ -59,7 +60,7 @@ foreach ($condorcet as $papeleta){
 	$usuario_guid = $papeleta->owner_guid;
 	$usuario = get_entity($usuario_guid);
 	$nombre = $usuario->name;
-	echo "<br><hr><h3>" . elgg_echo('votaciones:condorcet:opciones:elegidas:usuario') . $nombre . "</h3>";
+	echo "<h3  class='separador-punteado'>" . elgg_echo('votaciones:condorcet:opciones:elegidas:usuario') . $nombre . "</h3>";
 	echo "<br>";
 	echo "<ol class='papeleta-ol'>";
 	
@@ -99,23 +100,6 @@ echo '</ul></div>';
 
 
 ?>
-
-<script>
-$(".resultados-expandibles").click(function () {
-if ($(".auditoria-extendible").is(":hidden")) {
-$(".auditoria-extendible").slideDown("slow");
-} else {
-$(".auditoria-extendible").hide();
-}
-});
-
-</script>
-
-
-
-
-
-
 
 
 

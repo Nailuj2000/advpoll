@@ -382,6 +382,26 @@ function algo_repe_en_array ($array) {
 	}
 	return $return;
 }
+
+function votacion_en_fecha($votacion) {
+	$inicio = $votacion->fecha_inicio;
+	$fin = $votacion->fecha_fin;
+	$date = time();
+	
+	if ($fin == 'no') {
+		if ($inicio < $date) {
+			return true ;
+		} else {
+			return false ;
+		}
+	} else {
+		if (($inicio < $date) && ($date < $fin)) {
+			return true ;
+		} else {
+			return false ;
+		}
+	}
+}
 	
 		
 

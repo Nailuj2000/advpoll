@@ -47,8 +47,8 @@ $mapping = array(
 	'votaciones:condorcet:resultado:final' => 'Resultados',
 	'votaciones:condorcet:opciones:elegidas:papeleta' => 'Papeleta de voto en forma de matriz de ',
 	'votaciones:condorcet:votar:opcion' => 'Ordena las opciones según tus preferencias y pulsa el botón "votar"',
-	'votaciones:condorcet:auditoria:mostrar' => 'Mostrar auditoría de todos los votos emitidos',
-	'votaciones:condorcet:pulsar:cambio' => 'Pulsa aquí para cambiar tu votación',
+	'votaciones:condorcet:auditoria:mostrar' => 'Mostrar auditoría',
+	'votaciones:condorcet:pulsar:cambio' => 'Cambiar votación',
 	'votaciones:anteriores:borradas:ok' => 'Se ha borrado tu elección anterior',
 	'votaciones:pulsar:cambio' => 'Pulsa aquí para cambiar tu voto anterior',
 	'votaciones:resultados:tarta:titulo' => 'Resultados de la votación',
@@ -112,6 +112,22 @@ $mapping = array(
 	'votaciones:amigos' => 'Amigos',
 	'votaciones:activas' => 'Activas',
 	'votaciones' => 'Votaciones',
+	
+	'votaciones:vistazo:cerrada' => 'Finalizada: ',
+	'votaciones:vistazo:auditoria' => ' Auditoría pública: ',
+	'votaciones:vistazo:tipo' => ' Tipo: ',
+	'votaciones:tipo:normal' => ' Normal',
+	'votaciones:tipo:condorcet' => ' Preferencial',
+	'votaciones:cerrada' => '¿Votación cerrada? (nadie podrá votar hasta que se active)',
+	'votaciones:auditoria' => '¿Realizar auditoría pública? (los votos serán publicados detalladamente)',
+	'votaciones:tipo' => 'Tipo de votación',
+	'option:normal' => 'Normal: se vota una opción entre varias',
+	'option:condorcet' => 'Preferencial: se vota el orden de todas las opciones',
+	'votaciones:fecha:inicio' => 'La votación comienza el día ',
+	'votaciones:fecha:fin' => ' y termina el día ',
+	'votaciones:fecha:ayuda' => 'Dejar en blanco para controlar la votación de manera manual',
+	
+	
 		
 
 );

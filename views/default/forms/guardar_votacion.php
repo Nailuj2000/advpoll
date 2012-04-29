@@ -43,6 +43,8 @@ $poll_cerrada = elgg_extract('poll_cerrada', $vars, 'no');
 $auditoria = elgg_extract('auditoria', $vars, 'no');
 $group = get_entity($container_guid);
 $poll_tipo = elgg_extract('poll_tipo', $vars, 'normal');
+$fecha_inicio = elgg_extract('fecha_inicio', $vars);
+$fecha_fin = elgg_extract('fecha_fin', $vars);
 
 
 ?>
@@ -86,6 +88,25 @@ if ($categories) {
 </div>
 
 <div>
+	<label><?php echo elgg_echo('votaciones:fecha:inicio'); ?>
+	<?php echo elgg_view('input/date', array(
+		'name' => 'fecha_inicio',
+		'value' => $fecha_inicio,
+		'timestamp' => true,
+		'class' => 'fecha-continua',
+		)); ?>
+	<?php echo elgg_echo('votaciones:fecha:fin'); ?>
+	<?php echo elgg_view('input/date', array(
+		'name' => 'fecha_fin',
+		'value' => $fecha_inicio,
+		'timestamp' => true,
+		'class' => 'fecha-continua',
+		)); ?>
+		</label>
+	<?php echo elgg_echo('votaciones:fecha:ayuda'); ?>
+</div>
+<?php /**
+<div>
 	<label><?php echo elgg_echo('votaciones:cerrada'); ?></label><br />
 	<?php echo elgg_view('input/radio', array(
 		'name' => 'poll_cerrada',
@@ -96,7 +117,7 @@ if ($categories) {
 		'value' => $poll_cerrada,
 		)); ?>
 </div>
-
+*/ ?>
 <div>
 	<label><?php echo elgg_echo('votaciones:auditoria'); ?></label><br />
 	<?php echo elgg_view('input/radio', array(

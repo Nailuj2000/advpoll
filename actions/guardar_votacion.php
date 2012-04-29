@@ -39,6 +39,21 @@ $poll_cerrada = get_input('poll_cerrada');
 $auditoria = get_input('auditoria');
 $owner_guid = elgg_get_logged_in_user_guid();
 $poll_tipo = get_input('poll_tipo');
+$fecha_inicio = get_input('fecha_inicio');
+$fecha_fin = get_input('fecha_fin');
+
+
+if (!$fecha_fin) {
+	$fecha_fin = 'no';
+	system_message('fecha final no hay pero ahora es false');
+	}
+
+if (!$fecha_inicio) {
+	$fecha_inicio = date();
+	system_message('fecha inicio no existe y ahora es la fecha actual');
+}
+
+
 
 elgg_make_sticky_form('votaciones');
 
@@ -46,10 +61,6 @@ $opciones = array();
 for ($i=0; $i<$num_opciones; $i++) {
 	$opciones[$i] = get_input('opcion'.$i);
 	
-}
-
-if (se_repite_nombre_array('a', array('a', 'b', 'd', 'a'))){
-	system_message('si qye esta repe');
 }
 
 if (!$title) {
@@ -75,6 +86,8 @@ if (!$title) {
 			$votacion->poll_cerrada = $poll_cerrada;
 			$votacion->auditoria = $auditoria;
 			$votacion->poll_tipo = $poll_tipo;
+			$votacion->fecha_inicio = $fecha_inicio;
+			$votacion->fecha_fin = $fecha_fin;
 			$guid = $votacion->save();
 			
 			polls_delete_choices($votacion); 

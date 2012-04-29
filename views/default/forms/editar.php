@@ -28,19 +28,21 @@
 
 // once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
 elgg_load_library('votaciones:model');
-
-
-$title = elgg_extract('title', $vars, '');
-$desc = elgg_extract('description', $vars, '');
-$access_id = elgg_extract('access_id', $vars, ACCESS_DEFAULT);
-$tags = elgg_extract('tags', $vars, '');
-$container_guid = elgg_extract('container_guid', $vars, elgg_get_page_owner_guid());
 $guid = get_input('guid');
 $votacion = elgg_extract('entity', $vars, null);
-$path = elgg_extract('path', $vars, '');
-$poll_cerrada = elgg_extract('poll_cerrada', $vars, 'no');
-$auditoria = elgg_extract('auditoria', $vars, 'no');
+
+$title = $votacion->title;
+$desc = $votacion->description;
+$access_id = $votacion->access_id;
+$tags = $votacion->tags;
+$container_guid = $votacion->container_guid;
+
+$path = $votacion->path;
+
+$auditoria = $votacion->auditoria;
 $group = get_entity($container_guid);
+$fecha_inicio = $votacion->fecha_inicio;
+$fecha_fin = $votacion->fecha_fin;
 
 /**
 $group = get_entity($container_guid);
@@ -129,6 +131,26 @@ if ($categories) {
 </div>
 
 <div>
+	<label><?php echo elgg_echo('votaciones:fecha:inicio'); ?>
+	<?php echo elgg_view('input/date', array(
+		'name' => 'fecha_inicio',
+		'value' => $fecha_inicio,
+		'timestamp' => true,
+		'class' => 'fecha-continua',
+		)); ?>
+	<?php echo elgg_echo('votaciones:fecha:fin'); ?>
+	<?php echo elgg_view('input/date', array(
+		'name' => 'fecha_fin',
+		'value' => $fecha_fin,
+		'timestamp' => true,
+		'class' => 'fecha-continua',
+		)); ?>
+		</label><br>
+	<?php echo elgg_echo('votaciones:fecha:ayuda'); ?>
+</div>
+
+<?php /**
+<div>
 	<label><?php echo elgg_echo('votaciones:cerrada'); ?></label><br />
 	<?php echo elgg_view('input/radio', array(
 		'name' => 'poll_cerrada',
@@ -139,7 +161,7 @@ if ($categories) {
 		'value' => $poll_cerrada,
 		)); ?>
 </div>
-
+*/?>
 
 <div>
 	<label><?php echo elgg_echo('votaciones:auditoria'); ?></label><br />

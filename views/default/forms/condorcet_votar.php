@@ -59,71 +59,49 @@ $condorcet = elgg_get_annotations(array(
 	));
 	
 
-
-?>
-
-<div>
-	<?php if (usuario_ha_votado_condorcet($owner_guid, $condorcet)) { ?>
-		<br><h2 class='pulsa-que-se-expande'><?php echo elgg_echo('votaciones:condorcet:pulsar:cambio'); ?></h2>
-		<div class='parrafo-extendible'>
-	<?php } ?>
-	<br>
-	<h3><?php echo elgg_echo('votaciones:condorcet:votar:opcion'); ?></h3><br>
-	<div class="opciones-condorcet"><ol id="ordenable">
-		<?php
+if (usuario_ha_votado_condorcet($owner_guid, $condorcet)) {
+	?>
+	<div class='parrafo-extendible'>
+		<?php 
+	} ?>
+		<br>
+		<h3><?php echo elgg_echo('votaciones:condorcet:votar:opcion'); ?></h3>
+		<br>
+		<div class="opciones-condorcet"><ol id="ordenable">
+			<?php
 		
-		foreach ($opciones as $opcion => $opcion_guid){
+			foreach ($opciones as $opcion => $opcion_guid){
 			
-			echo '<li class="ui-objeto-ordenable"><p class="parrafo-opciones">'. $opcion . '</p>';
-			echo elgg_view('input/hidden', array ('name' => "opciones[]", 'value' => $opcion));
-			echo '</li>';
+				echo '<li class="ui-objeto-ordenable"><p class="parrafo-opciones">'. $opcion . '</p>';
+				echo elgg_view('input/hidden', array ('name' => "opciones[]", 'value' => $opcion));
+				echo '</li>';
 }
 
-echo '</ol></div>';
+			?>
+			</ol>
+		</div>
+
+	<?php
+
+
+	echo elgg_view('input/hidden', array(
+		'name' => 'guid',
+		'value' => $guid
+		));
+
+	echo elgg_view('input/hidden', array(
+		'name' => 'owner_guid',
+		'value' => $owner_guid,
+		));
 	
+	echo '<br>';	
+	echo elgg_view('input/submit', array('value' => elgg_echo("votar")));
 ?>
+	</div>
 
 
 
-
-<?php
-
-
-echo elgg_view('input/hidden', array(
-	'name' => 'guid',
-	'value' => $guid
-	));
-
-echo elgg_view('input/hidden', array(
-	'name' => 'owner_guid',
-	'value' => $owner_guid,
-	));
 	
-echo '<br>';	
-echo elgg_view('input/submit', array('value' => elgg_echo("votar")));
-
-
-
-
-
-?>
-
-
-
-	<script>
-	$(".pulsa-que-se-expande").click(function () {
-		if ($(".parrafo-extendible").is(":hidden")) {
-			$(".parrafo-extendible").slideDown("slow");
-		} else {
-			$(".parrafo-extendible").hide();
-	}
-});
-	$(function() {
-		$( "#ordenable" ).sortable();
-		$( "#ordenable" ).disableSelection();
-	});
-	
-	</script>
 	
 
 

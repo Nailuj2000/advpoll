@@ -7,7 +7,7 @@ elgg_push_breadcrumb($page_owner->name, "votaciones/amigos/" . $page_owner->name
 $content = elgg_list_entities(array(
 	'type' => 'object',
 	'subtype' => 'poll',
-	'limit' => 10,
+	'limit' => 5,
 	'full_view' => false,
 	'container_guid' => $page_owner->guid,
 	));

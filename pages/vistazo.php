@@ -28,7 +28,18 @@ $guid = get_input('guid');
 $poll = get_entity($guid);
 $poll_cerrada = $poll->poll_cerrada;
 $poll_tipo = $poll->poll_tipo;
+$owner_guid = elgg_get_logged_in_user_guid();
+$auditoria = $poll->auditoria;
+$fecha_fin = $poll->fecha_fin;
+$fecha_inicio = $poll->fecha_inicio;
 
+$anotaciones = elgg_get_annotations(array(
+	'type' => 'object',
+	'subtype' => 'poll',
+	'guid' => $guid,
+	'anotation_name' => 'vote_condorcet',
+	'limit' => 0,
+	));
 
 // Esto de abajo sirve para que aparezca en el menu lateral las opciones
 // de grupo y de usuario al que pertenece la votación
@@ -47,21 +58,35 @@ elgg_register_title_button('votaciones', 'nueva');
 $title = $poll->title;
 
 $content = elgg_view_entity($poll, array('full_view' => true));
+if ((($poll_tipo == 'normal' && usuario_ha_votado($owner_guid, $guid)) or 
+	($poll_tipo == 'condorcet' && usuario_ha_votado_condorcet($owner_guid, $anotaciones))) &&
+	votacion_en_fecha($poll)) {
+	$content .= elgg_view('input/button', array(
+		'class' => 'pulsa-que-se-expande',
+		'value' => elgg_echo('votaciones:condorcet:pulsar:cambio'),
+	));
+	
+}
+
+if ($auditoria == 'yes') {
+	$content .= elgg_view('input/button', array('class' => 'resultados-expandibles', 'value' => elgg_echo('votaciones:condorcet:auditoria:mostrar'))); 
+}
 
 if ($poll_tipo == 'condorcet') {
-	if ($poll_cerrada == 'no') {
+	if (votacion_en_fecha($poll)) {
 		$content .= elgg_view_form('condorcet_votar' , array() , array(
 			'guid' => $guid,
 			));
-	} 
+	}	
 	$content .= elgg_view('votaciones/condorcet_resultados', array(
 	'guid' => $guid
 	));
 } else {
-	if ($poll_cerrada == 'no') {
+	if (votacion_en_fecha($poll)) {
 		$content .= elgg_view_form('votar' , array() , array(
 			'guid' => $guid,
 			));
+	
 	}
 	$content .= elgg_view('votaciones/resultados', array(
 	'votacion' => $poll
@@ -77,6 +102,28 @@ $body = elgg_view_layout('content', array(
 	
 echo elgg_view_page('', $body);
 	
+?>
+<script>
+$(".resultados-expandibles").click(function () {
+if ($(".auditoria-extendible").is(":hidden")) {
+$(".auditoria-extendible").slideDown("slow");
+} else {
+$(".auditoria-extendible").hide();
+}
+});
+
+$(".pulsa-que-se-expande").click(function () {
+		if ($(".parrafo-extendible").is(":hidden")) {
+			$(".parrafo-extendible").slideDown("slow");
+		} else {
+			$(".parrafo-extendible").hide();
+	}
+});
+	$(function() {
+		$( "#ordenable" ).sortable();
+		$( "#ordenable" ).disableSelection();
+	});
+	</script>
 
 
  

@@ -119,6 +119,11 @@
 
 .auditoria-extendible {
 	display: none;
+	background-color: Ivory;
+	padding: 10px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: gray;
 }
 
 .parrafo-extendible {
@@ -144,6 +149,18 @@
 .ayuda-cuatro-columnas {
 	padding: 10px;
 }
+
+.separador-punteado {
+	border-top-color: gray;
+    border-top-style: dotted;
+    border-top-width: 1px;
+    margin-top: 20px;
+    padding-top: 10px;
+}
+.fecha-continua {
+	width: 200px;
+}
+
 	
 	
 

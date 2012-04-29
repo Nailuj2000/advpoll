@@ -30,10 +30,22 @@ $access_id = get_input('access_id');
 $guid = intval(get_input('guid'));
 
 $poll_cerrada = get_input('poll_cerrada');
-$auditoria = get_input('auditoria');
+
 
 $votacion = get_entity($guid);
+$fecha_inicio = get_input('fecha_inicio');
+$fecha_fin = get_input('fecha_fin');
 
+
+if (!$fecha_fin) {
+	$fecha_fin = 'no';
+	system_message('fecha final no hay pero ahora es false');
+	}
+
+if (!$fecha_inicio) {
+	$fecha_inicio = date();
+	system_message('fecha inicio no existe y ahora es la fecha actual');
+}
 	
 //escribimos en base de datos	
 $votacion->description = $desc;
@@ -41,9 +53,8 @@ $votacion->path = $path;
 $votacion->access_id = $access_id;
 $votacion->tags = $tags;
 $votacion->guid = $guid;
-
-$votacion->poll_cerrada = $poll_cerrada;
-$votacion->auditoria = $auditoria;
+$votacion->fecha_fin = $fecha_fin;
+$votacion->fecha_inicio = $fecha_inicio;
 
 $guid2 = $votacion->save();
 

@@ -39,7 +39,7 @@ $owner_guid = elgg_get_logged_in_user_guid();
 
 <div>
 	<?php if (usuario_ha_votado($owner_guid, $guid)) { ?>
-		<br><h2 class='pulsa-que-se-expande'><?php echo elgg_echo('votaciones:pulsar:cambio'); ?></h2>
+		
 		<div class='parrafo-extendible'>
 	<?php } ?>
 	<br>
@@ -68,18 +68,5 @@ echo '<br>';
 echo elgg_view('input/submit', array('value' => elgg_echo("votar")));
 
 
-?>
-
-
-
-	<script>
-	$(".pulsa-que-se-expande").click(function () {
-		if ($(".parrafo-extendible").is(":hidden")) {
-			$(".parrafo-extendible").slideDown("slow");
-		} else {
-			$(".parrafo-extendible").hide();
-	}
-});
-	</script>
 
 

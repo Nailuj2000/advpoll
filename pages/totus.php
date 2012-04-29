@@ -31,7 +31,7 @@ elgg_push_breadcrumb(elgg_echo('votaciones:totus'));
 $content = elgg_list_entities(array(
 	'type' => 'object',
 	'subtype' => 'poll',
-	'limit' => 10,
+	'limit' => 5,
 	'full_view' => false,
 	));
 

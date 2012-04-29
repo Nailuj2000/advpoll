@@ -2,6 +2,9 @@
 
 elgg_load_library('votaciones:model');
 $votacion = $vars['entity'];
+$poll_cerrada = $votacion->poll_cerrada;
+$auditoria = $votacion->auditoria;
+$tipo = $votacion->poll_tipo;
 $titulo = $votacion->title;
 $desc = $votacion->description;
 $path = $votacion->path;
@@ -39,11 +42,17 @@ $metadata = elgg_view_menu('entity', array(
 		'text' => $owner->name,
 	));
 	
+	
+	
 	$subtitle .= '<br>' . elgg_view('output/url', array(
 		'href' => $votacion->path,
 		'text' => elgg_echo('votaciones:debate:previo:link'),
 	));
-	
+
+	$subtitle .= "<br>".elgg_echo('votaciones:vistazo:cerrada') . elgg_echo('option:' . $poll_cerrada) . ',';
+	$subtitle .= elgg_echo('votaciones:vistazo:auditoria') . elgg_echo('option:' . $auditoria) . ',';
+	$subtitle .= elgg_echo('votaciones:vistazo:tipo') . elgg_echo('votaciones:tipo:' . $tipo) . '.' ;
+
 	
 	$content .= elgg_view('votaciones/choices', array('choices' => $choices));
 	$params = array(
