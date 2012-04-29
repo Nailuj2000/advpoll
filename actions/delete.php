@@ -11,11 +11,7 @@ if ($votacion->canEdit()) {
 		if ($votacion->delete()) {
 			system_message(elgg_echo('votaciones:delete:success'));	
 		}
-		if (elgg_instanceof($container, 'group')) {
-			forward("votaciones/group/$container->guid/activas");
-		} else {
-			forward("votaciones/activas");
-		}
+		forward(REFERER);
 	} else {
 		$choices = polls_get_choice_array($votacion);
 		foreach ($choices as $vote_guid) {
