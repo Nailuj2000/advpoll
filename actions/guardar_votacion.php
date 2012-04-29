@@ -40,7 +40,7 @@ $auditoria = get_input('auditoria');
 $owner_guid = elgg_get_logged_in_user_guid();
 $poll_tipo = get_input('poll_tipo');
 
-elgg_make_sticky_form('page');
+elgg_make_sticky_form('votaciones');
 
 $opciones = array();
 for ($i=0; $i<$num_opciones; $i++) {
@@ -48,38 +48,53 @@ for ($i=0; $i<$num_opciones; $i++) {
 	
 }
 
-
-$votacion = new ElggObject();
-
-$votacion->subtype = "poll";
-$votacion->title = $title;
-$votacion->description = $desc;
-$votacion->path = $path;
-$votacion->access_id = $access_id;
-$votacion->owner_guid = $owner_guid;
-$votacion->container_guid = $trujaman;
-$votacion->tags = $tags;
-$votacion->poll_cerrada = $poll_cerrada;
-$votacion->auditoria = $auditoria;
-$votacion->poll_tipo = $poll_tipo;
-$guid = $votacion->save();
-
-polls_delete_choices($votacion); 
-polls_add_choices($votacion,$opciones);
-
-elgg_clear_sticky_form('votaciones');
-
-if ($guid) { //esta parte creo que esta un poco mal
-	system_message(elgg_echo('votacion:guardada'));
-	system_message("$poll_tipo");
-	forward($votacion->getURL());
-}
-else {
-	register_error(elgg_echo('votacion:error:guardar'));
-	forward(REFERER); // REFERER is a global variable that defines the previous page
+if (se_repite_nombre_array('a', array('a', 'b', 'd', 'a'))){
+	system_message('si qye esta repe');
 }
 
+if (!$title) {
+	register_error(elgg_echo('votacion:error:pregunta'));
 
-
-
+} else {
+	if ($num_opciones < 2) {
+		register_error(elgg_echo('votacion:error:num:opciones'));
+	} else { 
+		if (algo_repe_en_array($opciones)) {
+			register_error(elgg_echo('votacion:error:opciones:repes'));
+		} else {
+			
+			$votacion = new ElggObject();
+			$votacion->subtype = "poll";
+			$votacion->title = $title;
+			$votacion->description = $desc;
+			$votacion->path = $path;
+			$votacion->access_id = $access_id;
+			$votacion->owner_guid = $owner_guid;
+			$votacion->container_guid = $trujaman;
+			$votacion->tags = $tags;
+			$votacion->poll_cerrada = $poll_cerrada;
+			$votacion->auditoria = $auditoria;
+			$votacion->poll_tipo = $poll_tipo;
+			$guid = $votacion->save();
+			
+			polls_delete_choices($votacion); 
+			polls_add_choices($votacion,$opciones);
+			
+			elgg_clear_sticky_form('votaciones');
+			
+			if ($guid) { //esta parte creo que esta un poco mal
+				system_message(elgg_echo('votacion:guardada'));
+				system_message("$poll_tipo");
+				forward($votacion->getURL());
+			}
+			else {
+				register_error(elgg_echo('votacion:error:guardar'));
+				forward(REFERER); // REFERER is a global variable that defines the previous page
+			}
+		}
+	}
+}
+		
+		
+		
 

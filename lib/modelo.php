@@ -156,7 +156,17 @@ function votaciones_preparar_vars($votaciones) {
 				$values[$field] = $votaciones->$field;
 			}
 		}
+		
 	}
+	if (elgg_is_sticky_form('votaciones')) {
+		$sticky_values = elgg_get_sticky_values('votaciones');
+		foreach ($sticky_values as $key => $value) {
+			$values[$key] = $value;
+		}
+	}
+
+	elgg_clear_sticky_form('votaciones');
+
 /**
 	if (elgg_is_sticky_form('votaciones')) {
 		$sticky_values = elgg_get_sticky_values('votaciones');
@@ -349,6 +359,31 @@ function usuario_ha_votado_condorcet ($user_guid, $anotaciones) {
 		}
 		return $return;
 	}
+
+function se_repite_nombre_array ($nombre, $array) {
+	$return = false;
+	foreach ($array as $element) {
+		if ($nombre == $element) {
+			$return = true;
+		} 
+	}
+	return $return;
+}
+
+function algo_repe_en_array ($array) {
+	$return = false;
+	$copia = $array;
+	foreach ($array as $key => $opc) {
+		unset($array[$key]);
+		if ( se_repite_nombre_array($opc, $array)){
+			$return = true;
+		}
+		$array = $copia;
+	}
+	return $return;
+}
+	
+		
 
 
 

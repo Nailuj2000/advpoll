@@ -44,6 +44,7 @@ $auditoria = elgg_extract('auditoria', $vars, 'no');
 $group = get_entity($container_guid);
 $poll_tipo = elgg_extract('poll_tipo', $vars, 'normal');
 
+
 ?>
 
 <div>
@@ -81,21 +82,7 @@ if ($categories) {
 
 <div id="opciones"><?php echo elgg_view('input/button', array('id' => 'nueva_opcion', 'value' => elgg_echo('votaciones:nueva:opcion')));?>
 <label><?php echo elgg_echo('votaciones:opciones'); ?></label><br />
-<?php 
 
-
-$i = 0;
-foreach ($opciones as $opcion_guid) {
-	$opcion = get_entity($opcion_guid);
-	$value = $opcion->text;
-	?>
-	<div>
-		<?php echo elgg_view('input/text', array('name' => 'opcion'.$i, 'class' => 'opcion', 'value' => $value)); ?>
-	</div>
-	<?php
-	$i = $i+1;
-	}
-?>
 </div>
 
 <div>
