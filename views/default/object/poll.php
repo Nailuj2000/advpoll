@@ -70,10 +70,10 @@ $metadata = elgg_view_menu('entity', array(
 
 	$subtitle .= "<br>" . elgg_echo('votacion:vistazo:finalizada:' . $poll_comparada_fin . ':' . $poll_comparada_ini ) . ',';
 	if ($poll_comparada_ini == 'menorini') {
-	$subtitle .= elgg_echo('votaciones:vistazo:tiempo:desde') .elgg_view('output/date', array('value' => $fecha_inicio)) . ', ';
+	$subtitle .= elgg_echo('votaciones:vistazo:tiempo:desde') . date('d - M - Y', $fecha_inicio) . ', ';
 } 
 	if ($poll_comparada_fin == 'menorfin') {
-	$subtitle .= elgg_echo('votaciones:vistazo:tiempo:hasta') .elgg_view('output/date', array('value' => $fecha_fin));
+	$subtitle .= elgg_echo('votaciones:vistazo:tiempo:hasta') .date('d - M - Y', $fecha_fin);
 } 
 	$subtitle .= elgg_echo('votaciones:vistazo:auditoria') . elgg_echo('option:' . $auditoria) . ',';
 	$subtitle .= elgg_echo('votaciones:vistazo:tipo') . elgg_echo('votaciones:tipo:' . $tipo) . '.' ;

@@ -28,84 +28,87 @@ $guid = get_input('guid');
 $poll = get_entity($guid);
 $poll_cerrada = $poll->poll_cerrada;
 $poll_tipo = $poll->poll_tipo;
-$owner_guid = elgg_get_logged_in_user_guid();
+$usuaria_guid = elgg_get_logged_in_user_guid();
 $auditoria = $poll->auditoria;
 $fecha_fin = $poll->fecha_fin;
 $fecha_inicio = $poll->fecha_inicio;
 
-print_r("inicio $fecha_inicio <br>");
+$acceso_lectura = $poll->access_id;
+$acceso_votar = $poll->access_votar_id;
+$acceso_col = get_access_array($usuaria_guid);
 
-print_r("fin $fecha_fin <br>");
-
-
-$anotaciones = elgg_get_annotations(array(
-	'type' => 'object',
-	'subtype' => 'poll',
-	'guid' => $guid,
-	'anotation_name' => 'vote_condorcet',
-	'limit' => 0,
-	));
-
-// Esto de abajo sirve para que aparezca en el menu lateral las opciones
-// de grupo y de usuario al que pertenece la votación
-$container_guid = $poll->container_guid;
-$container = get_entity($container_guid);
-
-if (elgg_instanceof($container, 'group')) {
-	elgg_push_breadcrumb($container->name, "votaciones/group/$container->guid/");
+if (!in_array($acceso_lectura, $acceso_col)) {
+	forward(REFERER);
 } else {
-	elgg_push_breadcrumb($container->name, "votaciones/trujaman/$container->username");
-}
-elgg_push_breadcrumb($poll->title);
-
-elgg_set_page_owner_guid($container->getGUID());
-elgg_register_title_button('votaciones', 'nueva');
-$title = $poll->title;
-
-$content = elgg_view_entity($poll, array('full_view' => true));
-if ((($poll_tipo == 'normal' && usuario_ha_votado($owner_guid, $guid)) or 
-	($poll_tipo == 'condorcet' && usuario_ha_votado_condorcet($owner_guid, $anotaciones))) &&
-	votacion_en_fecha($poll)) {
-	$content .= elgg_view('input/button', array(
-		'class' => 'pulsa-que-se-expande',
-		'value' => elgg_echo('votaciones:condorcet:pulsar:cambio'),
-	));
+	$anotaciones = elgg_get_annotations(array(
+		'type' => 'object',
+		'subtype' => 'poll',
+		'guid' => $guid,
+		'anotation_name' => 'vote_condorcet',
+		'limit' => 0,
+		));
 	
-}
-
-if ($auditoria == 'yes') {
-	$content .= elgg_view('input/button', array('class' => 'resultados-expandibles', 'value' => elgg_echo('votaciones:condorcet:auditoria:mostrar'))); 
-}
-
-if ($poll_tipo == 'condorcet') {
-	if (votacion_en_fecha($poll)) {
-		$content .= elgg_view_form('condorcet_votar' , array() , array(
-			'guid' => $guid,
-			));
-	}	
-	$content .= elgg_view('votaciones/condorcet_resultados', array(
-	'guid' => $guid
-	));
-} else {
-	if (votacion_en_fecha($poll)) {
-		$content .= elgg_view_form('votar' , array() , array(
-			'guid' => $guid,
-			));
+	// Esto de abajo sirve para que aparezca en el menu lateral las opciones
+	// de grupo y de usuario al que pertenece la votación
+	$container_guid = $poll->container_guid;
+	$container = get_entity($container_guid);
 	
+	if (elgg_instanceof($container, 'group')) {
+		elgg_push_breadcrumb($container->name, "votaciones/group/$container->guid/");
+	} else {
+		elgg_push_breadcrumb($container->name, "votaciones/trujaman/$container->username");
 	}
-	$content .= elgg_view('votaciones/resultados', array(
-	'votacion' => $poll
-	));
-}
-
-$content .= elgg_view_comments($poll);
-$body = elgg_view_layout('content', array(
-	'title' => $title,
-	'content' => $content,
-	'filter' => '',
-	));
+	elgg_push_breadcrumb($poll->title);
 	
-echo elgg_view_page('', $body);
+	elgg_set_page_owner_guid($container->getGUID());
+	elgg_register_title_button('votaciones', 'nueva');
+	$title = $poll->title;
+	
+	$content = elgg_view_entity($poll, array('full_view' => true));
+	if ((($poll_tipo == 'normal' && usuario_ha_votado($usuaria_guid, $guid)) or 
+		($poll_tipo == 'condorcet' && usuario_ha_votado_condorcet($usuaria_guid, $anotaciones))) &&
+		votacion_en_fecha($poll) && in_array($acceso_votar, $acceso_col)) {
+		$content .= elgg_view('input/button', array(
+			'class' => 'pulsa-que-se-expande',
+			'value' => elgg_echo('votaciones:condorcet:pulsar:cambio'),
+		));
+		
+	}
+	
+	if ($auditoria == 'yes') {
+		$content .= elgg_view('input/button', array('class' => 'resultados-expandibles', 'value' => elgg_echo('votaciones:condorcet:auditoria:mostrar'))); 
+	}
+	
+	if ($poll_tipo == 'condorcet') {
+		if (votacion_en_fecha($poll) && in_array($acceso_votar, $acceso_col)) {
+			$content .= elgg_view_form('condorcet_votar' , array() , array(
+				'guid' => $guid,
+				));
+		}	
+		$content .= elgg_view('votaciones/condorcet_resultados', array(
+		'guid' => $guid
+		));
+	} else {
+		if (votacion_en_fecha($poll) && in_array($acceso_votar, $acceso_col)) {
+			$content .= elgg_view_form('votar' , array() , array(
+				'guid' => $guid,
+				));
+		
+		}
+		$content .= elgg_view('votaciones/resultados', array(
+		'votacion' => $poll
+		));
+	}
+	
+	$content .= elgg_view_comments($poll);
+	$body = elgg_view_layout('content', array(
+		'title' => $title,
+		'content' => $content,
+		'filter' => '',
+		));
+		
+	echo elgg_view_page('', $body);
+}
 	
 ?>
 <script>

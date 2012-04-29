@@ -23,9 +23,9 @@ if (elgg_is_logged_in() && $context) {
 
 	// generate a list of default tabs
 	$tabs = array(
-		'activas' => array(
-			'text' => elgg_echo('votaciones:filtros:activas'),
-			'href' => (isset($vars['activas_link'])) ? $vars['activas_link'] : "$context/group/$grupo/activas",
+		'en_curso' => array(
+			'text' => elgg_echo('votaciones:filtros:encurso'),
+			'href' => (isset($vars['en_curso_link'])) ? $vars['en_curso_link'] : "$context/group/$grupo/en_curso",
 			'selected' => ($filter_context == 'activas'),
 			'priority' => 100,
 		),
@@ -36,12 +36,19 @@ if (elgg_is_logged_in() && $context) {
 			'priority' => 200,
 		),
 		
-		'cerradas' => array(
-			'text' => elgg_echo('votaciones:filtros:cerradas'),
-			'href' => (isset($vars['cerradas_link'])) ? $vars['cerradas_link'] : "$context/group/$grupo/cerradas",
+		'finalizadas' => array(
+			'text' => elgg_echo('votaciones:filtros:finalizadas'),
+			'href' => (isset($vars['finalizadas_link'])) ? $vars['finalizadas_link'] : "$context/group/$grupo/finalizadas",
 			'selected' => ($filter_context == 'cerradas'),
 			'priority' => 500,
 		),
+		'no_iniciadas' => array(
+			'text' => elgg_echo('votaciones:filtros:noiniciadas'),
+			'href' => (isset($vars['no_iniciadas_link'])) ? $vars['no_iniciadas_link'] : "$context/group/$grupo/no_iniciadas",
+			'selected' => ($filter_context == 'cerradas'),
+			'priority' => 500,
+		),
+		
 			);
 	
 	foreach ($tabs as $name => $tab) {

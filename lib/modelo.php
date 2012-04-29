@@ -403,6 +403,38 @@ function votacion_en_fecha($votacion) {
 		}
 	}
 }
+
+function elgg_get_votaciones_por_estado($votaciones, $estado) {
+	$time = time();
+	switch ($estado) {
+		case 'en_curso':
+			foreach ($votaciones as $votacion) {
+				if ($time < $votacion->fecha_fin && $time > $votacion->fecha_inicio) {
+					$resultado[] = $votacion;
+				}
+			}
+			break;
+		case 'no_iniciadas':
+			foreach ($votaciones as $votacion) {
+				if ($time < $votacion->fecha_fin && $time < $votacion->fecha_inicio) {
+					$resultado[] = $votacion;
+				}
+			}
+			break;
+		case 'finalizadas':
+			foreach ($votaciones as $votacion) {
+				if ($time > $votacion->fecha_fin && $time > $votacion->fecha_inicio) {
+					$resultado[] = $votacion;
+				}
+			}
+			break;
+		
+		case 'totus':
+			$resultado = $votaciones;
+			break;
+		}
+	return $resultado;
+}
 	
 		
 

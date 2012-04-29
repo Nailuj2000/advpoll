@@ -46,12 +46,10 @@ $access_votar_id = get_input('access_votar_id');
 
 if (!$fecha_fin) {
 	$fecha_fin = time() + 31536000 ;
-	system_message('fecha final no hay pero ahora es false');
-	}
+}
 
 if (!$fecha_inicio) {
 	$fecha_inicio = time();
-	system_message('fecha inicio no existe y ahora es la fecha actual');
 }
 
 
@@ -102,7 +100,6 @@ if (!$title) {
 				
 				if ($guid) { //esta parte creo que esta un poco mal
 					system_message(elgg_echo('votacion:guardada'));
-					system_message("$poll_tipo");
 					forward($votacion->getURL());
 				}
 				else {

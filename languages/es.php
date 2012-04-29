@@ -34,12 +34,12 @@ $mapping = array(
 	'votaciones:pregunta' => 'Título de la pregunta',
 	'votaciones:advertencia:editar:titulo' => 'Por motivos de seguridad no se puede modificar la pregunta de la votación una vez creada',
 	'votaciones:advertencia:editar:auditoria' => 'Por motivos de privacidad no se puede modificar esta opción una vez creada la votación',
-	'votaciones:filtros:activas' => 'Activas',
-	'votaciones:filtros:anuladas' => 'Anuladas',
+	'votaciones:filtros:encurso' => 'En Curso',
+	'votaciones:filtros:finalizadas' => 'Finalizadas',
 	'votaciones:filtros:totus' => 'Todas',
 	'votaciones:filtros:amigos' => 'De Amigos',
 	'votaciones:filtros:trujaman' => 'Mías',
-	'votaciones:filtros:cerradas' => 'Finalizadas',
+	'votaciones:filtros:noiniciadas' => 'No Iniciadas',
 	'votaciones:opcion:borrame' => 'Bórrame',
 	'votaciones:condorcet:leyenda:opcion' => 'Opción ',
 	'votaciones:condorcet:leyenda' => 'Leyenda',
@@ -136,7 +136,8 @@ $mapping = array(
 	'votacion:vistazo:finalizada:menorfin:mayorini' => 'Activa',
 	'votacion:vistazo:finalizada:mayorfin:menorini' => 'Imposible',
 	'votacion:vistazo:finalizada:mayorfin:mayorini' => 'Finalizada',
-	
+	'votaciones:grupos:habilitarvotaciones' => 'Activar las votaciones de grupo',
+	'votaciones:accion:error:permisos' => 'Lo sentimos, no tienes permisos para votar',
 	
 		
 

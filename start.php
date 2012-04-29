@@ -51,7 +51,7 @@ function votaciones_init() {
 	elgg_register_entity_type('object', 'poll');
 
 	// Add a menu item to the main site menu
-	$item = new ElggMenuItem('votaciones', elgg_echo('votaciones:menu'), 'votaciones/activas');
+	$item = new ElggMenuItem('votaciones', elgg_echo('votaciones:menu'), 'votaciones/totus');
 	#menu
 	elgg_register_menu_item('site', $item);
 	#manejador de páginas
@@ -97,11 +97,17 @@ function maneja_paginas_votaciones($page)
 		case "trujaman":
 			include $base_dir . 'trujaman.php';
 			break;
-		case "activas":
-			include $base_dir . 'activas.php';
+		case "en_curso":
+			set_input('contexto', $page[0]);
+			include $base_dir . 'listas.php';
 			break;
-		case "cerradas":
-			include $base_dir . 'cerradas.php';
+		case "finalizadas":
+			set_input('contexto', $page[0]);
+			include $base_dir . 'listas.php';
+			break;
+		case "no_iniciadas":
+			set_input('contexto', $page[0]);
+			include $base_dir . 'listas.php';
 			break;
 		case "ayuda":
 			switch ($page[1]) {
@@ -142,8 +148,8 @@ function votaciones_trujaman_menu_block($hook, $type, $return, $params) {
 		$return[] = $item;
 	} else {
 		if ($params['entity']->bookmarks_enable != 'no') {
-			$url = "votaciones/group/{$params['entity']->guid}/activas";
-			$item = new ElggMenuItem('votaciones', elgg_echo('votaciones:group'), $url);
+			$url = "votaciones/group/{$params['entity']->guid}/totus";
+			$item = new ElggMenuItem('votaciones', elgg_echo('votaciones:grupo'), $url);
 			$return[] = $item;
 		}
 	}

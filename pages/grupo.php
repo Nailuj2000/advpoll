@@ -23,64 +23,41 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  */
+
+elgg_load_library('votaciones:model');
 $title = elgg_echo('votaciones:grupo:titulo');
 $container_guid = get_input('guid');
 $container = get_entity($container_guid);
 $group_context = get_input('group_context');
-// Obtiene una lista de polls ordenada por fecha
 
-if ("$group_context" == 'totus'){
-	elgg_push_breadcrumb($container->name, "votaciones/group/" . $container->guid);
-	elgg_push_breadcrumb(elgg_echo('votaciones:totus'));
-$content = elgg_list_entities(array(
-	'type' => 'object',
-	'subtype' => 'poll',
-	'limit' => 5,
-	'full_view' => false,
-	'container_guid' =>  $container_guid,
-	));
-	
-} else {
-if ("$group_context" == 'cerradas'){
-	elgg_push_breadcrumb($container->name, "votaciones/group/" . $container->guid);
-	elgg_push_breadcrumb(elgg_echo('votaciones:cerradas'));
-$content = elgg_list_entities_from_metadata(array(
-	'type' => 'object',
-	'subtype' => 'poll',
-	'limit' => 5,
-	'full_view' => false,
-	'container_guid' =>  $container_guid,
-	'metadata_name' => 'poll_cerrada',
-	'metadata_value' => 'yes',
-	));
-	
-} else {
-	elgg_push_breadcrumb($container->name, "votaciones/group/" . $container->guid);
-	elgg_push_breadcrumb(elgg_echo('votaciones:activas'));
-
-$content = elgg_list_entities_from_metadata(array(
-	'type' => 'object',
-	'subtype' => 'poll',
-	'limit' => 5,
-	'full_view' => false,
-	'container_guid' =>  $container_guid,
-	'metadata_name' => 'poll_cerrada',
-	'metadata_value' => 'no',
-	));
-	
-}
-}
-
-// Registra un botón "añadir nueva" si no se especifican parámetros añade
-// ese por defecto
 elgg_register_title_button('votaciones', 'nueva');
+elgg_push_breadcrumb($container->name, "votaciones/group/" . $container->guid);
+elgg_push_breadcrumb(elgg_echo('votaciones:' . $group_context));
+
+$votaciones = elgg_get_entities(array(
+	'type' => 'object',
+	'subtype' => 'poll',
+	'limit' => 0,
+	'container_guid' => $container_guid,
+	));
+
+$filtradas = $filtradas = elgg_get_votaciones_por_estado($votaciones, $group_context);
+
+$content = elgg_view_entity_list(
+	$filtradas,
+	$vars = array(), 
+	$offset = 0, 
+	$limit = 5, 
+	$full_view = false, 
+	$list_type_toggle = true, 
+	$pagination = true
+	); 	
+
 $filtros = elgg_view('votaciones/filtros_grupos', array(
 	'filter_context' => "$group_context",
 	'context' => 'votaciones'
 	));
 
-// llama a la vista 'content' del core registrada en el archivo
-// views/default/pages/layout/content.php
 $body = elgg_view_layout('content', array(
 	'content' => $content,
 	'title' => $title,

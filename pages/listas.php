@@ -1,31 +1,32 @@
 <?php
 
-$title = elgg_echo('votaciones:titulo');
-elgg_push_breadcrumb(elgg_echo('votaciones:cerradas'));
-$time = time();
-//get all polls order by date
+elgg_load_library('votaciones:model');
+elgg_push_breadcrumb(elgg_echo('votaciones:activas'));
 
-//$content = get_entity(171);
-	
-$content = elgg_list_entities_from_metadata(array(
+$contexto = get_input('contexto');
+$title = elgg_echo('votaciones:titulo');
+
+$votaciones = elgg_get_entities(array(
 	'type' => 'object',
 	'subtype' => 'poll',
-	'metadata_name_value_pairs' => array(
-		'name' => 'fecha_fin',
-		'value' => $time,
-		'operand' => '<',
-		'case_sensitive' => TRUE
-		),
-	'limit' => 5,
-	'full_view' => false,
+	'limit' => 0,
 	));
-	
 
+$filtradas = elgg_get_votaciones_por_estado($votaciones, $contexto);
+$content = elgg_view_entity_list(
+	$filtradas,
+	$vars = array(), 
+	$offset = 0, 
+	$limit = 5, 
+	$full_view = false, 
+	$list_type_toggle = true, 
+	$pagination = true
+	); 	
 
 elgg_register_title_button('votaciones', 'nueva');
 
 $filtros = elgg_view('votaciones/filtros', array(
-	'filter_context' => 'cerradas',
+	'filter_context' => $contexto,
 	'context' => 'votaciones'
 	));
 
@@ -35,7 +36,7 @@ $body = elgg_view_layout('content', array(
 	'content' => $content,
 	'title' => $title,
 	'filter' => $filtros,
-	'filter_context' => 'cerradas',
+	'filter_context' => $contexto,
 	'sidebar' => ''
 ));
 

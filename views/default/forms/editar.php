@@ -131,6 +131,11 @@ if ($categories) {
 </div>
 
 <div>
+	<label><?php echo elgg_echo('votaciones:acceso:votar'); ?></label><br />
+	<?php echo elgg_view('input/access', array('name' => 'access_votar_id', 'value' => $access_id)); ?>
+</div>
+
+<div>
 	<label><?php echo elgg_echo('votaciones:fecha:inicio'); ?>
 	<?php echo elgg_view('input/date', array(
 		'name' => 'fecha_inicio',
