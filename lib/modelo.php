@@ -56,7 +56,8 @@ function polls_get_choice_array($poll) {
 		foreach($choices as $choice) {
 			
 			$label = $choice->text;
-			$responses[$label] = $choice->guid;
+			//pequeño truco para que los números los pase a cadena si o si
+			$responses["$label" . ' '] = $choice->guid;
 			$i = $i+1;
 		}
 	}	

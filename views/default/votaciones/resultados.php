@@ -59,7 +59,7 @@ $(function () {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
-                
+                height: 700,                
             },
             title: {
                 text: titulo,

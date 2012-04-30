@@ -591,6 +591,7 @@ $body = elgg_view_layout('content', array(
 	'title' => $title,
 	'content' => $content,
 	'filter' => '',
+	'nav' => '<b>Navigation</b>'
 	));
 	
 
