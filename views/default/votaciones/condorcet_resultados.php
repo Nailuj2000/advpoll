@@ -88,12 +88,12 @@ if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !votacion_en_fecha($
 }
 
 $i2 = 0;
-foreach ($condorcet2 as $papeleta2){
+foreach ($condorcet as $papeleta2){
 	$papeleta_matriz2 = pasar_cadena_a_matriz($papeleta2->value);
 	$papelota2 = pasar_anotacion_a_lista_ordenada($papeleta2);
 	$matriz2[] = $papeleta_matriz2;
 	if ($i2 === 0) {
-		$matriz_aux2 = $papeleta_matriz;
+		$matriz_aux2 = $papeleta_matriz2;
 	} else {
 		$matriz_aux2 = suma_matrices($matriz_aux2, $papeleta_matriz2);
 	}
