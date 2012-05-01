@@ -34,10 +34,62 @@ $num_votos = 0;
 
 $titulo_tarta = elgg_echo('votaciones:resultados:tarta:titulo');
 $subtitulo_tarta = $votacion->title;
-?>
-<br />
-<div>
-
+if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !votacion_en_fecha($votacion))) {
+	?>
+	<br />
+	<div class='auditoria-extendible'>
+		<table class='auditoria-normal-table'>
+			<thead class='auditoria-normal-thead'>
+				<tr class='auditoria-normal-tr'>
+					<th class='auditoria-normal-th'><?php echo elgg_echo('votaciones:normal:auditoria:usuaria'); ?></th>
+					<th class='auditoria-normal-th'><?php echo elgg_echo('votaciones:normal:auditoria:nick'); ?></th>
+					<th class='auditoria-normal-th'><?php echo elgg_echo('votaciones:normal:auditoria:nombre'); ?></th>
+					<th class='auditoria-normal-th'><?php echo elgg_echo('votaciones:normal:auditoria:fecha'); ?></th>
+					<th class='auditoria-normal-th'><?php echo elgg_echo('votaciones:normal:auditoria:opcion'); ?></th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				
+		<?php
+		
+		foreach ($opciones as $op) {
+			$entidad = get_entity($op);
+			$anotaciones = $entidad->getAnnotations('vote');
+			$nombre_op = $entidad->text;
+			//print_r($nombre_op);
+			foreach ($anotaciones as $anotacion){
+				$nombre = $anotacion->name;
+				$time = $anotacion->time_created;
+				$fecha = date('d-m-Y, h:i:s', $time);
+				$usuario_guid = $anotacion->owner_guid;
+				$usuario = get_entity($usuario_guid);
+				$usuario_nombre = $usuario->name;
+				$usuario_nick = $usuario->username;
+				$usuario_icono = elgg_view_entity_icon($usuario, 'tiny');
+				
+				?>
+				<tr class='auditoria-normal-tr'>
+					<td class='auditoria-normal-td'><?php echo $usuario_icono; ?></td>
+					<td class='auditoria-normal-td'><?php echo $usuario_nick; ?></td>
+					<td class='auditoria-normal-td'><?php echo $usuario_nombre; ?></td>
+					<td class='auditoria-normal-td'><?php echo $fecha; ?></td>
+					<td class='auditoria-normal-td'><?php echo $nombre_op; ?></td>
+				</tr>
+				<?php
+			}
+			//print_r($anotaciones);
+		}
+		?>
+		
+		</tbody>
+		</table>
+	</div>
+<?php
+}
+?>		
+	
+	
 <div id='tarta-resultados'></div>
 
 <script type="text/javascript">
@@ -128,7 +180,8 @@ $(function () {
 });
 
 </script>
-</div>
+
+
 
 
 

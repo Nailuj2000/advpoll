@@ -75,7 +75,7 @@ if (usuario_ha_votado_condorcet($owner_guid, $condorcet)) {
 				echo '<li class="ui-objeto-ordenable"><p class="parrafo-opciones">'. $opcion . '</p>';
 				echo elgg_view('input/hidden', array ('name' => "opciones[]", 'value' => $opcion));
 				echo '</li>';
-}
+			}
 
 			?>
 			</ol>
@@ -96,8 +96,9 @@ if (usuario_ha_votado_condorcet($owner_guid, $condorcet)) {
 	
 	echo '<br>';	
 	echo elgg_view('input/submit', array('value' => elgg_echo("votar")));
-?>
-	</div>
+	if (usuario_ha_votado_condorcet($owner_guid, $condorcet)) {
+		echo '</div>';
+	}
 
 
 

@@ -31,6 +31,8 @@ $votacion = get_entity($guid);
 $opciones = polls_get_choice_array($votacion);
 $num_votos = 0;
 $abcd = 65;
+$auditoria = $votacion->auditoria;
+$mostrar_resultados = $votacion->mostrar_resultados;
 foreach ($opciones as $opcion) {
 	$abecedario[] = chr($abcd);
 	$abcd++;
@@ -43,7 +45,7 @@ $condorcet = elgg_get_annotations(array(
 	'type' => 'object',
 	'subtype' => 'poll',
 	'guid' => $guid,
-	'anotation_name' => 'vote_condorcet',
+	'annotation_name' => 'vote_condorcet',
 	'limit' => 0,
 	));
 
@@ -51,41 +53,59 @@ $condorcet = elgg_get_annotations(array(
 	$i = 0;
 echo "<br>";
 
-//echo "<h2 class='resultados-expandibles'>" . elgg_echo('votaciones:condorcet:auditoria:mostrar') . "</h2>";
-echo "<div class='auditoria-extendible'>";	
-
-foreach ($condorcet as $papeleta){
-	$papeleta_matriz = pasar_cadena_a_matriz($papeleta->value);
-	$papelota = pasar_anotacion_a_lista_ordenada($papeleta);
-	$usuario_guid = $papeleta->owner_guid;
-	$usuario = get_entity($usuario_guid);
-	$nombre = $usuario->name;
-	echo "<h3  class='separador-punteado'>" . elgg_echo('votaciones:condorcet:opciones:elegidas:usuario') . $nombre . "</h3>";
-	echo "<br>";
-	echo "<ol class='papeleta-ol'>";
+if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !votacion_en_fecha($votacion))) {
+		
+	echo "<div class='auditoria-extendible'>";	
 	
-	foreach ($papelota as $opcion) {
-		echo "<li>$opcion</li>";
+	foreach ($condorcet as $papeleta){
+		$papeleta_matriz = pasar_cadena_a_matriz($papeleta->value);
+		$papelota = pasar_anotacion_a_lista_ordenada($papeleta);
+		$usuario_guid = $papeleta->owner_guid;
+		$usuario = get_entity($usuario_guid);
+		$nombre = $usuario->name;
+		echo "<h3  class='separador-punteado'>" . elgg_echo('votaciones:condorcet:opciones:elegidas:usuario') . $nombre . "</h3>";
+		echo "<br>";
+		echo "<ol class='papeleta-ol'>";
+		
+		foreach ($papelota as $opcion) {
+			echo "<li>$opcion</li>";
+			
+		}
+		
+		echo "</ol>";
+		echo "<h4>" . elgg_echo('votaciones:condorcet:opciones:elegidas:papeleta') .  $nombre . "</h4>";
+		echo elgg_view('votaciones/papeleta', array('matriz' => $papeleta_matriz, 'opciones' => $abecedario));
+		$matriz[] = $papeleta_matriz;
+		if ($i === 0) {
+			$matriz_aux = $papeleta_matriz;
+		} else {
+			$matriz_aux = suma_matrices($matriz_aux, $papeleta_matriz);
+		}
+		$i++;
 		
 	}
-	
-	echo "</ol>";
-	echo "<h4>" . elgg_echo('votaciones:condorcet:opciones:elegidas:papeleta') .  $nombre . "</h4>";
-	echo elgg_view('votaciones/papeleta', array('matriz' => $papeleta_matriz, 'opciones' => $abecedario));
-	$matriz[] = $papeleta_matriz;
-	if ($i === 0) {
-		$matriz_aux = $papeleta_matriz;
-	} else {
-		$matriz_aux = suma_matrices($matriz_aux, $papeleta_matriz);
-	}
-	$i++;
-	
+	echo '</div>';
 }
-echo '</div>';
-echo '<div><br>';
+
+$i2 = 0;
+foreach ($condorcet2 as $papeleta2){
+	$papeleta_matriz2 = pasar_cadena_a_matriz($papeleta2->value);
+	$papelota2 = pasar_anotacion_a_lista_ordenada($papeleta2);
+	$matriz2[] = $papeleta_matriz2;
+	if ($i2 === 0) {
+		$matriz_aux2 = $papeleta_matriz;
+	} else {
+		$matriz_aux2 = suma_matrices($matriz_aux2, $papeleta_matriz2);
+	}
+	$i2++;
+}
+
+
+
+echo '<br>';
 echo "<h2>" . elgg_echo('votaciones:condorcet:resultado:final') . "</h2>";
 
-echo elgg_view('votaciones/papeleta', array('matriz' => $matriz_aux, 'opciones' => $abecedario));
+echo elgg_view('votaciones/papeleta', array('matriz' => $matriz_aux2, 'opciones' => $abecedario));
 		
 $abc = 65;
 echo "<br><h3>" . elgg_echo('votaciones:condorcet:leyenda') . "</h3><br>";
@@ -95,7 +115,7 @@ echo '<ul><br>';
 		$abc++;
 	}
 	
-echo '</ul></div>';
+echo '</ul>';
 		
 
 

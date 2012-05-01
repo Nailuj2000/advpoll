@@ -124,6 +124,7 @@
 	border-style: solid;
 	border-width: 1px;
 	border-color: gray;
+	border-radius: 10px
 }
 
 .parrafo-extendible {
@@ -159,6 +160,36 @@
 }
 .fecha-continua {
 	width: 200px;
+}
+.auditoria-normal-th {
+	text-align: center;
+	padding: 5px;
+	background-color: white;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    vertical-align: middle;
+}
+.auditoria-normal-tr {
+	background-color: white;
+}
+
+.auditoria-normal-tr:hover {
+	background-color: #8CBAE5;
+}
+
+.auditoria-normal-thead {
+}
+
+.auditoria-normal-table {
+	 width: 100%;
+	 border-style: solid;
+	 border-width: 1px;
+}
+
+.auditoria-normal-td {
+	text-align: center;
+	padding: 5px;
+	vertical-align: middle;
 }
 
 	

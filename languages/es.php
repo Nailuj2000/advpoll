@@ -145,6 +145,11 @@ $mapping = array(
 	'votaciones:mostrar:no' => ' No',
 	'votaciones:delete:success' => 'Votación borrada correctamente',
 	'votaciones:opcion:delete:success' => 'Opción de la votación borrada correctamente',
+	'votaciones:normal:auditoria:nick' => 'Nick',
+	'votaciones:normal:auditoria:nombre' => 'Nombre',
+	'votaciones:normal:auditoria:fecha' => 'Fecha del voto',
+	'votaciones:normal:auditoria:opcion' => 'Sentido del voto',
+	'votaciones:normal:auditoria:usuaria' => 'Habitante'
 	
 	
 		

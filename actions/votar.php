@@ -50,7 +50,7 @@ if (!votacion_en_fecha($votacion)) {
 				system_message(elgg_echo('votaciones:anteriores:borradas:ok'));
 			}
 		}
-		
+	
 		
 		if ($respuesta->annotate('vote', 1, $access_id, $owner_guid, 'int')){
 			system_message(elgg_echo('votaciones:accion:voto:ok'));
