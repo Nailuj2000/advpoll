@@ -145,7 +145,8 @@
 .pulsa-que-se-expande:hover {
 	color: #4690D6;
 }
-.tarta {
+#tarta-resultados {
+	
 }
 .ayuda-cuatro-columnas {
 	padding: 10px;

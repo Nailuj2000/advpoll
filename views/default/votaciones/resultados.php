@@ -31,6 +31,8 @@ $votacion = elgg_extract('votacion', $vars, array());
 $guid = $votacion->guid;
 $opciones = polls_get_choice_array($votacion);
 $num_votos = 0;
+$num_opciones = count($opciones);
+$altura = 500 + 36 * $num_opciones;
 $auditoria = $votacion->auditoria;
 $mostrar_resultados =$votacion->mostrar_resultados;
 
@@ -108,6 +110,7 @@ $(function () {
 	var titulo = "<?php echo $titulo_tarta; ?>";
 	var subtitulo = "<?php echo $subtitulo_tarta; ?>";
 	var valores = "<?php echo $valores; ?>";
+	var altura = "<?php echo $altura; ?>";
     $(document).ready(function() {
         chart = new Highcharts.Chart({
             chart: {
@@ -115,7 +118,7 @@ $(function () {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
-                height: 700,                
+                height: altura,                
             },
             title: {
                 text: titulo,
@@ -146,6 +149,7 @@ $(function () {
                         }
                     },
                     showInLegend: true,
+                    size: 300,
                     
                 }
             },
@@ -171,10 +175,12 @@ $(function () {
 				itemStyle: {
 					cursor: 'pointer',
 					color: '#3E576F',
+					
 				},
 				itemWidth: 710,
 				verticalAlign: 'top',
 				y: 50,
+				
 			},
             credits: {
 				enabled: false
