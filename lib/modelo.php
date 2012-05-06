@@ -438,6 +438,17 @@ function elgg_get_votaciones_por_estado($votaciones, $estado) {
 		}
 	return $resultado;
 }
+
+function resultados_condorcet_suma_puntos ($matriz) {
+	foreach ($matriz as $fila) {
+		$puntuacion = 0;
+		foreach ($fila as $puntos) {
+			$puntuacion = $puntuacion + $puntos;
+		}
+		$resultado[] = $puntuacion;
+	}
+	return $resultado;
+}
 	
 		
 

@@ -65,7 +65,9 @@ function votaciones_init() {
 	elgg_extend_view('groups/tool_latest', 'votaciones/group_module');
 	//libreria para las tartas
 	$url = elgg_get_site_url() . "mod/votaciones/lib/js/highcharts.js";
+	$url2 = elgg_get_site_url() . "mod/votaciones/lib/js/kinetic-v3.9.4.min.js";
 	elgg_register_js('highcharts', $url, 'footer', 20000);
+	elgg_register_js('kinetic', $url2, 'head', 30000);
 	elgg_register_plugin_hook_handler('register', 'menu:owner_block', 'votaciones_trujaman_menu_block');
 	
 }

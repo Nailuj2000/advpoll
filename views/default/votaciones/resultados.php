@@ -169,7 +169,7 @@ $(function () {
             }],
             legend: {
 				labelFormatter: function() {
-					return '<p>' + this.name + '<br>Votos: '+ this.y +' / '+'<?php echo $num_votos; ?> </p>';
+					return '<p>' + this.name + '</p><br>Votos: '+ this.y +' / '+'<?php echo $num_votos; ?> ';
 					},
 				width: 720,
 				itemStyle: {
