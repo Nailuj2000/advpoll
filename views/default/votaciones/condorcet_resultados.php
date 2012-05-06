@@ -217,6 +217,7 @@ echo '</ul>';
 					radius: radionodo,
 					stroke: "grey",
 					strokeWidth: 4,
+					name: etiqueta,
 				});
 				
 				var etiq = new Kinetic.Text({
@@ -227,20 +228,36 @@ echo '</ul>';
 					fontFamily: "Arial",
 					textFill: "grey",
 					align: "center",
-					verticalAlign: "middle"
+					verticalAlign: "middle",
+					
 				});
 				
 				
 				
 				nodo.on('mouseover', function(){
-					
+					var trazas = stage.get("." + etiqueta);
+
+					for(var n = 0; n < trazas.length; n++) {
+						var traza = trazas[n];
+						traza.setStrokeWidth(6);
+						traza.setStroke("#4690D6");
+						layer.draw();
+					};
 					this.setStrokeWidth(6);
-					this.setStroke("black");
-					etiq.setTextFill("black");
+					this.setStroke("#4690D6");
+					etiq.setTextFill("#4690D6");
 					layer.draw();
 				});
 				
 				nodo.on("mouseout", function(){
+					var trazas = stage.get("." + etiqueta);
+
+					for(var n = 0; n < trazas.length; n++) {
+						var traza = trazas[n];
+						traza.setStrokeWidth(2);
+						traza.setStroke("grey");
+						layer.draw();
+					};
 					this.setStrokeWidth(4);
 					nodo.setStroke("grey");
 					etiq.setTextFill("grey");
@@ -254,7 +271,7 @@ echo '</ul>';
 			}
 		
 		
-			var dibuja_flecha = function (origen, destino, etiqueta) {
+			var dibuja_flecha = function (origen, destino, etiqueta, nodo) {
 		
 				var angulo = Math.atan2(destino.y-origen.y,destino.x-origen.x),
 				tam_cabeza = 15,
@@ -275,7 +292,8 @@ echo '</ul>';
 					stroke: "grey",
 					strokeWidth: 2,
 					lineCap: 'round',
-					lineJoin: 'round'
+					lineJoin: 'round',
+					name: nodo
 				});
 				
 				var cabeza = new Kinetic.Polygon({
@@ -296,8 +314,10 @@ echo '</ul>';
 					fill: "grey",
 					strokeWidth: 2,
 					lineCap: 'round',
-					lineJoin: 'round'
+					lineJoin: 'round',
+					name: nodo,
 				});
+				
 				
 				layer.add(flecha);
 				layer.add(cabeza);
@@ -313,7 +333,7 @@ echo '</ul>';
 				for (var j=1; j<=num_nodos; j++) {
 					var valor = votaciones[i][j];
 					if ((valor != 0) && (valor > votaciones[j-1][i+1])) {
-						dibuja_flecha(vertices[i], vertices[j-1], valor);
+						dibuja_flecha(vertices[i], vertices[j-1], valor, votaciones[i][0] );
 					}
 				}
 			}
