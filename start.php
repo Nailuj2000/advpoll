@@ -29,14 +29,17 @@
 
 elgg_register_event_handler('init', 'system', 'votaciones_init');
 
+/*
+ * Init polls plugin
+ */
 function votaciones_init() {
-
+	// Register actions
 	$base_dir = elgg_get_plugins_path() . 'votaciones/actions';
 	elgg_register_action('guardar_votacion', "$base_dir/guardar_votacion.php");
 	elgg_register_action('votar', "$base_dir/votar.php");
 	elgg_register_action('condorcet_votar', "$base_dir/condorcet_votar.php");
 	elgg_register_action('editar', "$base_dir/editar.php");
-	elgg_register_action('votaciones/delete', "$base_dir/delete.php");
+	elgg_register_action('delete', "$base_dir/delete.php");
 	
 	// Es recomendable usar como nombre el mismo que el de la vista de la accion
 	// como primer termino, antes registrándola de este modo
@@ -52,28 +55,38 @@ function votaciones_init() {
 
 	// Add a menu item to the main site menu
 	$item = new ElggMenuItem('votaciones', elgg_echo('votaciones:menu'), 'votaciones/totus');
-	#menu
+	// Register menu
 	elgg_register_menu_item('site', $item);
-	#manejador de páginas
+	// Register page handlers
 	elgg_register_page_handler('votaciones', 'maneja_paginas_votaciones');
-	#manejador de direccion url
+	// Register URL addresses handler
 	elgg_register_entity_url_handler('object', 'poll', 'votaciones_url');
-	//registra librerias externas
+	// Register external libraries
 	elgg_register_library('votaciones:model', elgg_get_plugins_path() . 'votaciones/lib/modelo.php');
-	// Módulo para grupos
+	// Groups module
 	add_group_tool_option('votaciones', elgg_echo('votaciones:grupos:habilitarvotaciones'), true);
 	elgg_extend_view('groups/tool_latest', 'votaciones/group_module');
-	//libreria para las tartas
+	// Javascript libraries for graphics
 	$url = elgg_get_site_url() . "mod/votaciones/lib/js/highcharts.js";
 	$url2 = elgg_get_site_url() . "mod/votaciones/lib/js/kinetic-v3.9.4.min.js";
 	
 	elgg_register_js('highcharts', $url, 'footer', 20000);
 	elgg_register_js('kinetic', $url2, 'head', 30000);
 	elgg_register_js('grafo-schulze', elgg_get_site_url() . "mod/votaciones/lib/js/grafo-schulze.js", 'head', 40000);
+	
+	// Register plugin hooks handlers
 	elgg_register_plugin_hook_handler('register', 'menu:owner_block', 'votaciones_trujaman_menu_block');
 	
 }
 
+/**
+ * Dispatches polls pages.
+ * URLs take the form of
+ *  TODO: add this when names are fixed
+ *
+ * @param array $page
+ * @return bool
+ */
 function maneja_paginas_votaciones($page)
 {
 	$base_dir = elgg_get_plugins_path() . 'votaciones/pages/';
@@ -138,13 +151,20 @@ function maneja_paginas_votaciones($page)
 	return true;
 }
 
+/**
+ * Format and return the URL for polls.
+ *
+ * @param ElggObject $entity poll object
+ * @return string URL of blog.
+ */
 function votaciones_url($entity) {
 	$title = elgg_get_friendly_title($entity->title);
 	return "votaciones/vistazo/$entity->guid/$title";
 }
 
-
-
+/**
+ * Add a menu item to an ownerblock
+ */
 function votaciones_trujaman_menu_block($hook, $type, $return, $params) {
 	if (elgg_instanceof($params['entity'], 'user')) {
 		$url = "votaciones/trujaman/{$params['entity']->username}";
