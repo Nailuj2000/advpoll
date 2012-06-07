@@ -162,24 +162,24 @@ function votaciones_preparar_vars($votaciones) {
 		}
 		
 	}
-	if (elgg_is_sticky_form('votaciones')) {
-		$sticky_values = elgg_get_sticky_values('votaciones');
+	if (elgg_is_sticky_form('polls')) {
+		$sticky_values = elgg_get_sticky_values('polls');
 		foreach ($sticky_values as $key => $value) {
 			$values[$key] = $value;
 		}
 	}
 
-	elgg_clear_sticky_form('votaciones');
+	elgg_clear_sticky_form('polls');
 
 /**
-	if (elgg_is_sticky_form('votaciones')) {
-		$sticky_values = elgg_get_sticky_values('votaciones');
+	if (elgg_is_sticky_form('polls')) {
+		$sticky_values = elgg_get_sticky_values('polls');
 		foreach ($sticky_values as $key => $value) {
 			$values[$key] = $value;
 		}
 	}
 
-	elgg_clear_sticky_form('votaciones');
+	elgg_clear_sticky_form('polls');
 */
 	return $values;
 }
