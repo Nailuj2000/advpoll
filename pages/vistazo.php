@@ -62,7 +62,7 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 	elgg_push_breadcrumb($poll->title);
 	
 	elgg_set_page_owner_guid($container->getGUID());
-	elgg_register_title_button('votaciones', 'nueva');
+	elgg_register_title_button('advpoll', 'nueva');
 	$title = $poll->title;
 	
 	$content = elgg_view_entity($poll, array('full_view' => true));

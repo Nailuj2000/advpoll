@@ -23,7 +23,7 @@ $content = elgg_view_entity_list(
 	$pagination = true
 	); 	
 
-elgg_register_title_button('votaciones', 'nueva');
+elgg_register_title_button('advpoll', 'nueva');
 
 $filtros = elgg_view('advpoll/filtros', array(
 	'filter_context' => $contexto,

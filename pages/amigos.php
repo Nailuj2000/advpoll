@@ -8,7 +8,7 @@ elgg_push_breadcrumb(elgg_echo('friends'));
 //get all polls order by date
 $content = list_user_friends_objects($page_owner->guid, 'poll', 5, false);
 
-elgg_register_title_button('votaciones', 'nueva');
+elgg_register_title_button('advpoll', 'nueva');
 $filtros = elgg_view('advpoll/filtros', array(
 	'filter_context' => 'amigos',
 	'context' => 'votaciones'

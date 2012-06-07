@@ -38,7 +38,7 @@ $content = elgg_list_entities(array(
 
 // Registra un botón "añadir nueva" si no se especifican parámetros añade
 // ese por defecto
-elgg_register_title_button('votaciones', 'nueva');
+elgg_register_title_button('advpoll', 'nueva');
 $filtros = elgg_view('advpoll/filtros', array(
 	'filter_context' => 'totus',
 	'context' => 'votaciones'

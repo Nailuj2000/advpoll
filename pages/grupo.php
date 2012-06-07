@@ -30,7 +30,7 @@ $container_guid = get_input('guid');
 $container = get_entity($container_guid);
 $group_context = get_input('group_context');
 
-elgg_register_title_button('votaciones', 'nueva');
+elgg_register_title_button('advpoll', 'nueva');
 elgg_push_breadcrumb($container->name, "votaciones/group/" . $container->guid);
 elgg_push_breadcrumb(elgg_echo('votaciones:' . $group_context));
 
