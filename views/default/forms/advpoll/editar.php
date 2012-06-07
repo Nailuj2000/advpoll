@@ -180,7 +180,12 @@ if ($categories) {
 	<?php echo elgg_echo('advpoll:advertencia:editar:mostrar:resultados'); ?><br />
 	
 </div>
-
+<div>
+	<label><?php echo elgg_echo('advpoll:can:change:vote'); ?></label><br />
+	<label><?php echo elgg_echo("option:$can_change_vote"); ?></label><br />
+	<?php echo elgg_echo('advpoll:advertencia:editar:mostrar:resultados'); ?><br />
+	
+</div>
 
 <div class="elgg-foot">
 <?php

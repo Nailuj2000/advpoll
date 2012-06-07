@@ -19,6 +19,7 @@ $fecha_inicio = $votacion->fecha_inicio;
 $fecha_fin = $votacion->fecha_fin;
 $time = time();
 $mostrar_resultados = $votacion->mostrar_resultados;
+$can_change_vote = $votacion->can_change_vote;
 if ($time < $fecha_fin ) {
 	$poll_comparada_fin = 'menorfin';
 } else {
@@ -79,6 +80,7 @@ $metadata = elgg_view_menu('entity', array(
 	$subtitle .= elgg_echo('advpoll:vistazo:auditoria') . elgg_echo('option:' . $auditoria) . ',';
 	$subtitle .= elgg_echo('advpoll:vistazo:tipo') . elgg_echo('advpoll:tipo:' . $tipo) . ',';
 	$subtitle .= elgg_echo('advpoll:vistazo:mostrar:resultados') . elgg_echo('advpoll:mostrar:' . $mostrar_resultados) . '.';
+	$subtitle .= elgg_echo('advpoll:vistazo:can:change:vote') . elgg_echo('advpoll:mostrar:' . $can_change_vote) . '.';
 
 	
 	$content .= elgg_view('votaciones/choices', array('choices' => $choices));

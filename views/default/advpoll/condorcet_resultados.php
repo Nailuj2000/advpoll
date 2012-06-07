@@ -35,6 +35,7 @@ $num_votos = 0;
 $abcd = 65;
 $auditoria = $votacion->auditoria;
 $mostrar_resultados = $votacion->mostrar_resultados;
+$can_change_vote = $votacion->can_change_vote;
 foreach ($opciones as $opcion) {
 	$abecedario[] = chr($abcd);
 	$abcd++;

@@ -43,6 +43,7 @@ $fecha_inicio = get_input('fecha_inicio');
 $fecha_fin = get_input('fecha_fin');
 $access_votar_id = get_input('access_votar_id');
 $mostrar_resultados = get_input('mostrar_resultados');
+$can_change_vote = get_input('can_change_vote');
 
 
 if (!$fecha_fin) {
@@ -93,6 +94,7 @@ if (!$title) {
 				$votacion->fecha_fin = $fecha_fin;
 				$votacion->access_votar_id = $access_votar_id;
 				$votacion->mostrar_resultados = $mostrar_resultados;
+				$votacion->can_change_vote = $can_change_vote;
 				$guid = $votacion->save();
 				
 				polls_delete_choices($votacion); 

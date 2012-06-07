@@ -47,6 +47,7 @@ $fecha_inicio = elgg_extract('fecha_inicio', $vars);
 $fecha_fin = elgg_extract('fecha_fin', $vars);
 $access_votar_id = elgg_extract('access_votar_id', $vars, ACCESS_DEFAULT);
 $mostrar_resultados = elgg_extract('mostrar_resultados', $vars, 'no');
+$can_change_vote = elgg_extract('can_change_vote', $vars, 'yes');
 
 ?>
 
@@ -159,6 +160,20 @@ if ($categories) {
 			elgg_echo('option:yes') => 'yes',
 			),
 		'value' => $mostrar_resultados,
+	));
+
+	?>
+</div>
+
+<div>
+	<label><?php echo elgg_echo('advpoll:can:change:vote'); ?></label><br />
+	<?php echo elgg_view('input/radio', array(
+		'name' => 'can_change_vote',
+		 'options' => array(
+			elgg_echo('option:no') => 'no' ,
+			elgg_echo('option:yes') => 'yes',
+			),
+		'value' => $can_change_vote,
 	));
 
 	?>

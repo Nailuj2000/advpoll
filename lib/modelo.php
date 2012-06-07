@@ -152,6 +152,7 @@ function votaciones_preparar_vars($votaciones) {
 		'poll_tipo' => 'normal',
 		'access_votar_id' => ACCESS_DEFAULT,
 		'mostrar_resultados' => 'no',
+		'can_change_vote' => 'yes',
 	);
 
 	if ($votaciones) {

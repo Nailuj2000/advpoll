@@ -33,6 +33,7 @@ $auditoria = $poll->auditoria;
 $fecha_fin = $poll->fecha_fin;
 $fecha_inicio = $poll->fecha_inicio;
 $mostrar_resultados = $poll->mostrar_resultados;
+$can_change_vote = $poll->can_change_vote;
 
 $acceso_lectura = $poll->access_id;
 $acceso_votar = $poll->access_votar_id;

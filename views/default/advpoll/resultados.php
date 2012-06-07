@@ -35,6 +35,7 @@ $num_opciones = count($opciones);
 $altura = 500 + 36 * $num_opciones;
 $auditoria = $votacion->auditoria;
 $mostrar_resultados =$votacion->mostrar_resultados;
+$can_change_vote = $votacion->can_change_vote;
 
 $titulo_tarta = elgg_echo('advpoll:resultados:tarta:titulo');
 $subtitulo_tarta = $votacion->title;
