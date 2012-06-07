@@ -25,7 +25,7 @@
  */
 
 // once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
-elgg_load_library('votaciones:model');
+elgg_load_library('advpoll:model');
 elgg_load_js('kinetic');
 elgg_load_js('grafo-schulze');
 $guid = elgg_extract('guid', $vars, '');
@@ -65,7 +65,7 @@ if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !votacion_en_fecha($
 		$usuario_guid = $papeleta->owner_guid;
 		$usuario = get_entity($usuario_guid);
 		$nombre = $usuario->name;
-		echo "<h3  class='separador-punteado'>" . elgg_echo('votaciones:condorcet:opciones:elegidas:usuario') . $nombre . "</h3>";
+		echo "<h3  class='separador-punteado'>" . elgg_echo('advpoll:condorcet:opciones:elegidas:usuario') . $nombre . "</h3>";
 		echo "<br>";
 		echo "<ol class='papeleta-ol'>";
 		
@@ -75,7 +75,7 @@ if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !votacion_en_fecha($
 		}
 		
 		echo "</ol>";
-		echo "<h4>" . elgg_echo('votaciones:condorcet:opciones:elegidas:papeleta') .  $nombre . "</h4>";
+		echo "<h4>" . elgg_echo('advpoll:condorcet:opciones:elegidas:papeleta') .  $nombre . "</h4>";
 		echo elgg_view('advpoll/papeleta', array('matriz' => $papeleta_matriz, 'opciones' => $abecedario));
 		$matriz[] = $papeleta_matriz;
 		if ($i === 0) {
@@ -105,15 +105,15 @@ foreach ($condorcet as $papeleta2){
 
 
 echo '<br>';
-echo "<h2>" . elgg_echo('votaciones:condorcet:resultado:final') . "</h2>";
+echo "<h2>" . elgg_echo('advpoll:condorcet:resultado:final') . "</h2>";
 
 echo elgg_view('advpoll/papeleta', array('matriz' => $matriz_aux2, 'opciones' => $abecedario));
 print_r(resultados_condorcet_suma_puntos($matriz_aux2));
 $abc = 65;
-echo "<br><h3>" . elgg_echo('votaciones:condorcet:leyenda') . "</h3><br>";
+echo "<br><h3>" . elgg_echo('advpoll:condorcet:leyenda') . "</h3><br>";
 echo '<ul><br>';
 	foreach ($opciones_condorcet as $opcion){	
-		echo "<li><b>" . elgg_echo('votaciones:condorcet:leyenda:opcion') . chr($abc) . ': </b>' . "$opcion</li><br>";
+		echo "<li><b>" . elgg_echo('advpoll:condorcet:leyenda:opcion') . chr($abc) . ': </b>' . "$opcion</li><br>";
 		$abc++;
 	}
 	

@@ -27,7 +27,7 @@
  */
 
 // once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
-elgg_load_library('votaciones:model');
+elgg_load_library('advpoll:model');
 
 
 
@@ -51,12 +51,12 @@ $mostrar_resultados = elgg_extract('mostrar_resultados', $vars, 'no');
 ?>
 
 <div>
-	<label><?php echo elgg_echo('votaciones:pregunta'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:pregunta'); ?></label><br />
 	<?php echo elgg_view('input/text', array('name' => 'title', 'value' => $title)); ?>
 </div>
 
 <div>
-	<label><?php echo elgg_echo('votaciones:discusion:previa'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:discusion:previa'); ?></label><br />
 	<?php echo elgg_view('input/text', array('name' => 'path', 'value' => $path)); 
 	//TODO Modificarlo para enviar una lista de las páginas de discusión de
 	// la votacion en el grupo?>
@@ -78,30 +78,30 @@ if ($categories) {
 
 ?>
 <div>
-	<label><?php echo elgg_echo('votaciones:acceso:ver'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:acceso:ver'); ?></label><br />
 	<?php echo elgg_view('input/access', array('name' => 'access_id', 'value' => $access_id)); ?>
 </div>
 
 <div>
-	<label><?php echo elgg_echo('votaciones:acceso:votar'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:acceso:votar'); ?></label><br />
 	<?php echo elgg_view('input/access', array('name' => 'access_votar_id', 'value' => $access_votar_id)); ?>
 </div>
 
 
-<div id="opciones"><?php echo elgg_view('input/button', array('id' => 'nueva_opcion', 'value' => elgg_echo('votaciones:nueva:opcion')));?>
-<label><?php echo elgg_echo('votaciones:opciones'); ?></label><br />
+<div id="opciones"><?php echo elgg_view('input/button', array('id' => 'nueva_opcion', 'value' => elgg_echo('advpoll:nueva:opcion')));?>
+<label><?php echo elgg_echo('advpoll:opciones'); ?></label><br />
 
 </div>
 
 <div>
-	<label><?php echo elgg_echo('votaciones:fecha:inicio'); ?>
+	<label><?php echo elgg_echo('advpoll:fecha:inicio'); ?>
 	<?php echo elgg_view('input/date', array(
 		'name' => 'fecha_inicio',
 		'value' => $fecha_inicio,
 		'timestamp' => true,
 		'class' => 'fecha-continua',
 		)); ?>
-	<?php echo elgg_echo('votaciones:fecha:fin'); ?>
+	<?php echo elgg_echo('advpoll:fecha:fin'); ?>
 	<?php echo elgg_view('input/date', array(
 		'name' => 'fecha_fin',
 		'value' => $fecha_inicio,
@@ -109,11 +109,11 @@ if ($categories) {
 		'class' => 'fecha-continua',
 		)); ?>
 		</label>
-	<?php echo elgg_echo('votaciones:fecha:ayuda'); ?>
+	<?php echo elgg_echo('advpoll:fecha:ayuda'); ?>
 </div>
 <?php /**
 <div>
-	<label><?php echo elgg_echo('votaciones:cerrada'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:cerrada'); ?></label><br />
 	<?php echo elgg_view('input/radio', array(
 		'name' => 'poll_cerrada',
 		 'options' => array(
@@ -125,7 +125,7 @@ if ($categories) {
 </div>
 */ ?>
 <div>
-	<label><?php echo elgg_echo('votaciones:auditoria'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:auditoria'); ?></label><br />
 	<?php echo elgg_view('input/radio', array(
 		'name' => 'auditoria',
 		 'options' => array(
@@ -139,7 +139,7 @@ if ($categories) {
 </div>
 
 <div>
-	<label><?php echo elgg_echo('votaciones:tipo'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:tipo'); ?></label><br />
 	<?php echo elgg_view('input/radio', array(
 		'name' => 'poll_tipo',
 		 'options' => array(
@@ -151,7 +151,7 @@ if ($categories) {
 </div>
 
 <div>
-	<label><?php echo elgg_echo('votaciones:mostrar:resultados:durante'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:mostrar:resultados:durante'); ?></label><br />
 	<?php echo elgg_view('input/radio', array(
 		'name' => 'mostrar_resultados',
 		 'options' => array(
@@ -188,7 +188,7 @@ echo elgg_view('input/submit', array('value' => elgg_echo("save")));
 		var num_opciones = $('.opcion').length;
 		
 		// Añadimos al selector <div id=opciones... un input text
-		$('#opciones').append ('<div id="'+num_opciones+'"><br /><input type="text" name="opcion'+num_opciones+'" id="opcion'+num_opciones+'" class="elgg-input-text opcion" /><span class="eliminarcontomate" rel="'+num_opciones+'" ><?php echo elgg_echo('votaciones:opcion:borrame'); ?></span></div>');
+		$('#opciones').append ('<div id="'+num_opciones+'"><br /><input type="text" name="opcion'+num_opciones+'" id="opcion'+num_opciones+'" class="elgg-input-text opcion" /><span class="eliminarcontomate" rel="'+num_opciones+'" ><?php echo elgg_echo('advpoll:opcion:borrame'); ?></span></div>');
 		
 		// cosa rara para que funcione el live, quizás.
 		return false; 

@@ -25,7 +25,7 @@
  */
 
 // once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
-elgg_load_library('votaciones:model');
+elgg_load_library('advpoll:model');
 elgg_load_js('highcharts');
 $votacion = elgg_extract('votacion', $vars, array());
 $guid = $votacion->guid;
@@ -36,7 +36,7 @@ $altura = 500 + 36 * $num_opciones;
 $auditoria = $votacion->auditoria;
 $mostrar_resultados =$votacion->mostrar_resultados;
 
-$titulo_tarta = elgg_echo('votaciones:resultados:tarta:titulo');
+$titulo_tarta = elgg_echo('advpoll:resultados:tarta:titulo');
 $subtitulo_tarta = $votacion->title;
 if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !votacion_en_fecha($votacion))) {
 	?>
@@ -46,11 +46,11 @@ if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !votacion_en_fecha($
 		<table class='auditoria-normal-table'>
 			<thead class='auditoria-normal-thead'>
 				<tr class='auditoria-normal-tr'>
-					<th class='auditoria-normal-th'> <?php echo elgg_echo('votaciones:normal:auditoria:usuaria'); ?> </th>
-					<th class='auditoria-normal-th'> <?php echo elgg_echo('votaciones:normal:auditoria:nick'); ?> </th>
-					<th class='auditoria-normal-th'> <?php echo elgg_echo('votaciones:normal:auditoria:nombre'); ?> </th>
-					<th class='auditoria-normal-th'> <?php echo elgg_echo('votaciones:normal:auditoria:fecha'); ?> </th>
-					<th class='auditoria-normal-th'> <?php echo elgg_echo('votaciones:normal:auditoria:opcion'); ?> </th>
+					<th class='auditoria-normal-th'> <?php echo elgg_echo('advpoll:normal:auditoria:usuaria'); ?> </th>
+					<th class='auditoria-normal-th'> <?php echo elgg_echo('advpoll:normal:auditoria:nick'); ?> </th>
+					<th class='auditoria-normal-th'> <?php echo elgg_echo('advpoll:normal:auditoria:nombre'); ?> </th>
+					<th class='auditoria-normal-th'> <?php echo elgg_echo('advpoll:normal:auditoria:fecha'); ?> </th>
+					<th class='auditoria-normal-th'> <?php echo elgg_echo('advpoll:normal:auditoria:opcion'); ?> </th>
 					
 				</tr>
 			</thead>

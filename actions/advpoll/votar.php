@@ -25,7 +25,7 @@
  */
 
 // once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
-elgg_load_library('votaciones:model');
+elgg_load_library('advpoll:model');
 $choice = get_input('response');
 $guid = get_input('guid');
 $votacion = get_entity($guid);
@@ -39,21 +39,21 @@ $access_col = get_access_array($usuaria);
 $access_votar_id = $votacion->access_votar_id;
 
 if (!votacion_en_fecha($votacion)) {
-	register_error(elgg_echo('votaciones:accion:votacion:cerrada'));
+	register_error(elgg_echo('advpoll:accion:votacion:cerrada'));
 } else {
 	if (!in_array($access_votar_id, $access_col)) {
-		register_error(elgg_echo('votaciones:accion:error:permisos'));
+		register_error(elgg_echo('advpoll:accion:error:permisos'));
 	} else {
 
 		foreach ($choices as $vote_guid){
 			if (remove_anotation_by_entity_guid_user_guid('vote', $vote_guid, $owner_guid)){
-				system_message(elgg_echo('votaciones:anteriores:borradas:ok'));
+				system_message(elgg_echo('advpoll:anteriores:borradas:ok'));
 			}
 		}
 	
 		
 		if ($respuesta->annotate('vote', 1, $access_id, $owner_guid, 'int')){
-			system_message(elgg_echo('votaciones:accion:voto:ok'));
+			system_message(elgg_echo('advpoll:accion:voto:ok'));
 		}
 	}
 }

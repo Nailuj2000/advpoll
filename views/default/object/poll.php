@@ -1,6 +1,6 @@
 <?php
 
-elgg_load_library('votaciones:model');
+elgg_load_library('advpoll:model');
 $votacion = $vars['entity'];
 
 $auditoria = $votacion->auditoria;
@@ -56,7 +56,7 @@ $metadata = elgg_view_menu('entity', array(
 
 	
 	$link = elgg_get_site_url() . "profile/" . $owner->name ;
-	$subtitle = elgg_echo('votaciones:trujaman');
+	$subtitle = elgg_echo('advpoll:trujaman');
 	$subtitle .= elgg_view('output/url', array(
 		'href' => $link,
 		'text' => $owner->name,
@@ -66,19 +66,19 @@ $metadata = elgg_view_menu('entity', array(
 	
 	$subtitle .= '<br>' . elgg_view('output/url', array(
 		'href' => $votacion->path,
-		'text' => elgg_echo('votaciones:debate:previo:link'),
+		'text' => elgg_echo('advpoll:debate:previo:link'),
 	));
 
 	$subtitle .= "<br>" . elgg_echo('votacion:vistazo:finalizada:' . $poll_comparada_fin . ':' . $poll_comparada_ini ) . ',';
 	if ($poll_comparada_ini == 'menorini') {
-	$subtitle .= elgg_echo('votaciones:vistazo:tiempo:desde') . date('d - M - Y', $fecha_inicio) . ', ';
+	$subtitle .= elgg_echo('advpoll:vistazo:tiempo:desde') . date('d - M - Y', $fecha_inicio) . ', ';
 } 
 	if ($poll_comparada_fin == 'menorfin') {
-	$subtitle .= elgg_echo('votaciones:vistazo:tiempo:hasta') .date('d - M - Y', $fecha_fin);
+	$subtitle .= elgg_echo('advpoll:vistazo:tiempo:hasta') .date('d - M - Y', $fecha_fin);
 } 
-	$subtitle .= elgg_echo('votaciones:vistazo:auditoria') . elgg_echo('option:' . $auditoria) . ',';
-	$subtitle .= elgg_echo('votaciones:vistazo:tipo') . elgg_echo('votaciones:tipo:' . $tipo) . ',';
-	$subtitle .= elgg_echo('votaciones:vistazo:mostrar:resultados') . elgg_echo('votaciones:mostrar:' . $mostrar_resultados) . '.';
+	$subtitle .= elgg_echo('advpoll:vistazo:auditoria') . elgg_echo('option:' . $auditoria) . ',';
+	$subtitle .= elgg_echo('advpoll:vistazo:tipo') . elgg_echo('advpoll:tipo:' . $tipo) . ',';
+	$subtitle .= elgg_echo('advpoll:vistazo:mostrar:resultados') . elgg_echo('advpoll:mostrar:' . $mostrar_resultados) . '.';
 
 	
 	$content .= elgg_view('votaciones/choices', array('choices' => $choices));

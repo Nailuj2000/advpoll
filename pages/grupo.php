@@ -24,15 +24,15 @@
  * MA 02110-1301, USA.
  */
 
-elgg_load_library('votaciones:model');
-$title = elgg_echo('votaciones:grupo:titulo');
+elgg_load_library('advpoll:model');
+$title = elgg_echo('advpoll:grupo:titulo');
 $container_guid = get_input('guid');
 $container = get_entity($container_guid);
 $group_context = get_input('group_context');
 
 elgg_register_title_button('advpoll', 'nueva');
 elgg_push_breadcrumb($container->name, "votaciones/group/" . $container->guid);
-elgg_push_breadcrumb(elgg_echo('votaciones:' . $group_context));
+elgg_push_breadcrumb(elgg_echo('advpoll:' . $group_context));
 
 $votaciones = elgg_get_entities(array(
 	'type' => 'object',

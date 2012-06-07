@@ -54,7 +54,7 @@ function advpoll_init() {
 	elgg_register_entity_type('object', 'poll');
 
 	// Add a menu item to the main site menu
-	$item = new ElggMenuItem('votaciones', elgg_echo('votaciones:menu'), 'advpoll/totus');
+	$item = new ElggMenuItem('votaciones', elgg_echo('advpoll:menu'), 'advpoll/totus');
 	// Register menu
 	elgg_register_menu_item('site', $item);
 	// Register page handlers
@@ -62,9 +62,9 @@ function advpoll_init() {
 	// Register URL addresses handler
 	elgg_register_entity_url_handler('object', 'poll', 'advpoll_url_handler');
 	// Register external libraries
-	elgg_register_library('votaciones:model', elgg_get_plugins_path() . 'advpoll/lib/modelo.php');
+	elgg_register_library('advpoll:model', elgg_get_plugins_path() . 'advpoll/lib/modelo.php');
 	// Groups module
-	add_group_tool_option('votaciones', elgg_echo('votaciones:grupos:habilitarvotaciones'), true);
+	add_group_tool_option('votaciones', elgg_echo('advpoll:grupos:habilitarvotaciones'), true);
 	elgg_extend_view('groups/tool_latest', 'advpoll/group_module');
 	// Javascript libraries for graphics
 	$url = elgg_get_site_url() . "mod/advpoll/lib/js/highcharts.js";
@@ -173,7 +173,7 @@ function advpoll_owner_block_menu($hook, $type, $return, $params) {
 	} else {
 		if ($params['entity']->bookmarks_enable != 'no') {
 			$url = "advpoll/group/{$params['entity']->guid}/totus";
-			$item = new ElggMenuItem('votaciones', elgg_echo('votaciones:grupo'), $url);
+			$item = new ElggMenuItem('votaciones', elgg_echo('advpoll:grupo'), $url);
 			$return[] = $item;
 		}
 	}

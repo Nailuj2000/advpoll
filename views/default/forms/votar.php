@@ -43,7 +43,7 @@ $owner_guid = elgg_get_logged_in_user_guid();
 		<div class='parrafo-extendible'>
 	<?php } ?>
 	<br>
-	<h3><?php echo elgg_echo('votaciones:votar:opcion'); ?></h3><br />
+	<h3><?php echo elgg_echo('advpoll:votar:opcion'); ?></h3><br />
 	<?php echo elgg_view('input/radio', array(
 		'name' => 'response', 
 		'options' => $opciones,

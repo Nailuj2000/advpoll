@@ -23,9 +23,9 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  */
-$title = elgg_echo('votaciones:titulo');
+$title = elgg_echo('advpoll:titulo');
 
-elgg_push_breadcrumb(elgg_echo('votaciones:totus'));
+elgg_push_breadcrumb(elgg_echo('advpoll:totus'));
 
 // Obtiene una lista de polls ordenada por fecha
 $content = elgg_list_entities(array(

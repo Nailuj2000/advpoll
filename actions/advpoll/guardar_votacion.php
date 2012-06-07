@@ -22,7 +22,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  */
-elgg_load_library('votaciones:model');
+elgg_load_library('advpoll:model');
 $title = get_input('title');
 $desc = get_input('description');
 $path = get_input('path');

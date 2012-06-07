@@ -29,17 +29,17 @@ $content = elgg_list_entities($options);
 elgg_pop_context();
 
 if (!$content) {
-	$content = '<p>' . elgg_echo('votaciones:ninguna') . '</p>';
+	$content = '<p>' . elgg_echo('advpoll:ninguna') . '</p>';
 }
 
 $nueva_link = elgg_view('output/url', array(
 	'href' => "advpoll/nueva/$grupo->guid",
-	'text' => elgg_echo('votaciones:nueva'),
+	'text' => elgg_echo('advpoll:nueva'),
 	'is_trusted' => true,
 ));
 
 echo elgg_view('groups/profile/module', array(
-	'title' => elgg_echo('votaciones:grupo'),
+	'title' => elgg_echo('advpoll:grupo'),
 	'content' => $content,
 	'all_link' => $totus_link,
 	'add_link' => $nueva_link,

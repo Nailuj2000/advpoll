@@ -27,7 +27,7 @@
  */
 
 // once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
-elgg_load_library('votaciones:model');
+elgg_load_library('advpoll:model');
 $guid = get_input('guid');
 $votacion = elgg_extract('entity', $vars, null);
 
@@ -68,13 +68,13 @@ $num_opciones = count($opciones);
 ?>
 
 <div>
-	<label><?php echo elgg_echo('votaciones:pregunta'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:pregunta'); ?></label><br />
 	<label><?php echo elgg_view('output/text', array('value' => $title)); ?></label><br />
-	<?php echo elgg_echo('votaciones:advertencia:editar:titulo'); ?>
+	<?php echo elgg_echo('advpoll:advertencia:editar:titulo'); ?>
 </div>
 
 <div>
-	<label><?php echo elgg_echo('votaciones:discusion:previa'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:discusion:previa'); ?></label><br />
 	<?php echo elgg_view('input/text', array('name' => 'path', 'value' => $path)); 
 	//TODO Modificarlo para enviar una lista de las páginas de discusión de
 	// la votacion en el grupo?>
@@ -99,13 +99,13 @@ if ($categories) {
 
 <?php 
 /**
- * <div id="opciones"><?php echo elgg_view('input/button', array('id' => 'nueva_opcion', 'value' => elgg_echo('votaciones:nueva:opcion')));?>
- * <label><?php echo elgg_echo('votaciones:opciones'); ?></label><br />
+ * <div id="opciones"><?php echo elgg_view('input/button', array('id' => 'nueva_opcion', 'value' => elgg_echo('advpoll:nueva:opcion')));?>
+ * <label><?php echo elgg_echo('advpoll:opciones'); ?></label><br />
  * <?php 
  */
  ?>
 <div>
-	<label><?php echo elgg_echo('votaciones:opciones'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:opciones'); ?></label><br />
 </div>
 
 <div><ul class='choices_ul'>
@@ -123,7 +123,7 @@ if ($categories) {
 
 </div>
 <div> 
-	<?php echo elgg_echo('votaciones:advertencia:editar'); ?>
+	<?php echo elgg_echo('advpoll:advertencia:editar'); ?>
 </div>
 <div>
 	<label><?php echo elgg_echo('access'); ?></label><br />
@@ -131,19 +131,19 @@ if ($categories) {
 </div>
 
 <div>
-	<label><?php echo elgg_echo('votaciones:acceso:votar'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:acceso:votar'); ?></label><br />
 	<?php echo elgg_view('input/access', array('name' => 'access_votar_id', 'value' => $access_id)); ?>
 </div>
 
 <div>
-	<label><?php echo elgg_echo('votaciones:fecha:inicio'); ?>
+	<label><?php echo elgg_echo('advpoll:fecha:inicio'); ?>
 	<?php echo elgg_view('input/date', array(
 		'name' => 'fecha_inicio',
 		'value' => $fecha_inicio,
 		'timestamp' => true,
 		'class' => 'fecha-continua',
 		)); ?>
-	<?php echo elgg_echo('votaciones:fecha:fin'); ?>
+	<?php echo elgg_echo('advpoll:fecha:fin'); ?>
 	<?php echo elgg_view('input/date', array(
 		'name' => 'fecha_fin',
 		'value' => $fecha_fin,
@@ -151,12 +151,12 @@ if ($categories) {
 		'class' => 'fecha-continua',
 		)); ?>
 		</label><br>
-	<?php echo elgg_echo('votaciones:fecha:ayuda'); ?>
+	<?php echo elgg_echo('advpoll:fecha:ayuda'); ?>
 </div>
 
 <?php /**
 <div>
-	<label><?php echo elgg_echo('votaciones:cerrada'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:cerrada'); ?></label><br />
 	<?php echo elgg_view('input/radio', array(
 		'name' => 'poll_cerrada',
 		 'options' => array(
@@ -169,15 +169,15 @@ if ($categories) {
 */?>
 
 <div>
-	<label><?php echo elgg_echo('votaciones:auditoria'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:auditoria'); ?></label><br />
 	<label><?php echo elgg_echo("option:$auditoria"); ?></label><br />
-	<?php echo elgg_echo('votaciones:advertencia:editar:auditoria'); ?><br />
+	<?php echo elgg_echo('advpoll:advertencia:editar:auditoria'); ?><br />
 	
 </div>
 <div>
-	<label><?php echo elgg_echo('votaciones:mostrar:resultados:durante'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:mostrar:resultados:durante'); ?></label><br />
 	<label><?php echo elgg_echo("option:$mostrar_resultados"); ?></label><br />
-	<?php echo elgg_echo('votaciones:advertencia:editar:mostrar:resultados'); ?><br />
+	<?php echo elgg_echo('advpoll:advertencia:editar:mostrar:resultados'); ?><br />
 	
 </div>
 

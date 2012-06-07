@@ -26,7 +26,7 @@
 
 // once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
 
-elgg_load_library('votaciones:model');
+elgg_load_library('advpoll:model');
 $guid = elgg_extract('guid', $vars, '');
 $votacion = get_entity($guid);
 $opciones = polls_get_choice_array($votacion);
@@ -65,7 +65,7 @@ if (usuario_ha_votado_condorcet($owner_guid, $condorcet)) {
 		<?php 
 	} ?>
 		<br>
-		<h3><?php echo elgg_echo('votaciones:condorcet:votar:opcion'); ?></h3>
+		<h3><?php echo elgg_echo('advpoll:condorcet:votar:opcion'); ?></h3>
 		<br>
 		<div class="opciones-condorcet"><ol id="ordenable">
 			<?php

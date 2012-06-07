@@ -23,7 +23,7 @@
  * MA 02110-1301, USA.
  */
 
-elgg_load_library('votaciones:model');
+elgg_load_library('advpoll:model');
 $guid = get_input('guid');
 $poll = get_entity($guid);
 $poll_cerrada = $poll->poll_cerrada;
@@ -71,13 +71,13 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 		votacion_en_fecha($poll) && in_array($acceso_votar, $acceso_col)) {
 		$content .= elgg_view('input/button', array(
 			'class' => 'pulsa-que-se-expande',
-			'value' => elgg_echo('votaciones:condorcet:pulsar:cambio'),
+			'value' => elgg_echo('advpoll:condorcet:pulsar:cambio'),
 		));
 		
 	}
 	
 	if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !votacion_en_fecha($poll))) {
-		$content .= elgg_view('input/button', array('class' => 'resultados-expandibles', 'value' => elgg_echo('votaciones:condorcet:auditoria:mostrar'))); 
+		$content .= elgg_view('input/button', array('class' => 'resultados-expandibles', 'value' => elgg_echo('advpoll:condorcet:auditoria:mostrar'))); 
 	}
 	
 	if ($poll_tipo == 'condorcet') {

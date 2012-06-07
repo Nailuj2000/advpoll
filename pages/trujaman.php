@@ -1,6 +1,6 @@
 <?php
 
-$title = elgg_echo('votaciones:titulo');
+$title = elgg_echo('advpoll:titulo');
 $page_owner = elgg_get_logged_in_user_entity();
 elgg_push_breadcrumb($page_owner->name, "votaciones/amigos/" . $page_owner->name);
 //get all polls order by date

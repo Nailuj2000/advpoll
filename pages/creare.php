@@ -25,11 +25,11 @@
  
 gatekeeper();
  
-elgg_load_library('votaciones:model');
+elgg_load_library('advpoll:model');
 
 $vars = votaciones_preparar_vars($votacion);
-$title = elgg_echo('votaciones:editare');
-elgg_push_breadcrumb(elgg_echo('votaciones:creare'));
+$title = elgg_echo('advpoll:editare');
+elgg_push_breadcrumb(elgg_echo('advpoll:creare'));
 
 // Esto de abajo sirve para que aparezca en el menu lateral las opciones
 // de grupo y de usuario al que pertenece la votación

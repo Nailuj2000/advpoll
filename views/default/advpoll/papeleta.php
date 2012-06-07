@@ -9,7 +9,7 @@ echo '<br>';
 echo "<table class='condorcet-papeleta-table'>";
 echo "<thead class='condorcet-thead'><tr class='condorcet-tr'>";
 echo "<th class='condorcet-th'>";
-$texto .= elgg_echo('votaciones:condorcet:info');
+$texto .= elgg_echo('advpoll:condorcet:info');
 $texto .= elgg_view_icon('info');
 
 $direccion = elgg_get_site_url() . "advpoll/ayuda/condorcet";
@@ -18,14 +18,14 @@ echo elgg_view('output/url',array(
 	'href' => $direccion,
 	)) . "</th>";
 foreach ($opciones as $opcion) {
-	echo "<th class='condorcet-th'>" . elgg_echo('votaciones:condorcet:leyenda:opcion') . "$opcion</th>";
+	echo "<th class='condorcet-th'>" . elgg_echo('advpoll:condorcet:leyenda:opcion') . "$opcion</th>";
 }
 echo "</tr></thead><tbody>";
 $i = 0;
 $j = 0;
 foreach ($matriz as $fila) {
 	echo "<tr class='condorcet-tr'>";
-	echo "<th class='condorcet-th'>" . elgg_echo('votaciones:condorcet:leyenda:opcion') . "$opciones[$i]</th>";
+	echo "<th class='condorcet-th'>" . elgg_echo('advpoll:condorcet:leyenda:opcion') . "$opciones[$i]</th>";
 	
 	foreach($fila as $elemento){
 		if ($matriz[$i][$j] === $matriz[$j][$i]) {

@@ -1,10 +1,10 @@
 <?php
 
-elgg_load_library('votaciones:model');
-elgg_push_breadcrumb(elgg_echo('votaciones:activas'));
+elgg_load_library('advpoll:model');
+elgg_push_breadcrumb(elgg_echo('advpoll:activas'));
 
 $contexto = get_input('contexto');
-$title = elgg_echo('votaciones:titulo');
+$title = elgg_echo('advpoll:titulo');
 
 $votaciones = elgg_get_entities(array(
 	'type' => 'object',

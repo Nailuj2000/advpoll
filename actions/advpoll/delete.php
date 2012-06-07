@@ -1,6 +1,6 @@
 <?php
 
-elgg_load_library('votaciones:model');
+elgg_load_library('advpoll:model');
 $guid = get_input('guid');
 $votacion = get_entity($guid);
 $votacion_tipo = $votacion->poll_tipo;
@@ -9,7 +9,7 @@ $container = get_entity($votacion->container_guid);
 if ($votacion->canEdit()) {
 	if ($votacion_tipo == 'condorcet') {
 		if ($votacion->delete()) {
-			system_message(elgg_echo('votaciones:delete:success'));	
+			system_message(elgg_echo('advpoll:delete:success'));	
 		}
 		forward(REFERER);
 	} else {
@@ -17,18 +17,18 @@ if ($votacion->canEdit()) {
 		foreach ($choices as $vote_guid) {
 			$vote = get_entity($vote_guid);
 			if ($vote->delete()) {
-				system_message(elgg_echo('votaciones:opcion:delete:success'));	
+				system_message(elgg_echo('advpoll:opcion:delete:success'));	
 			} else {
-				register_error(elgg_echo('votaciones:opcion:delete:notsuccess'));
+				register_error(elgg_echo('advpoll:opcion:delete:notsuccess'));
 			}
 		}
 		if ($votacion->delete())  {
-			system_message(elgg_echo('votaciones:delete:success'));	
+			system_message(elgg_echo('advpoll:delete:success'));	
 		}
 		forward(REFERER);
 	}
 } else {
-	register_error(elgg_echo('votaciones:delete:notsuccess'));
+	register_error(elgg_echo('advpoll:delete:notsuccess'));
 	forward(REFERER);
 }
 
