@@ -82,7 +82,7 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 	
 	if ($poll_tipo == 'condorcet') {
 		if (votacion_en_fecha($poll) && in_array($acceso_votar, $acceso_col)) {
-			$content .= elgg_view_form('condorcet_votar' , array() , array(
+			$content .= elgg_view_form('advpoll/condorcet_votar' , array() , array(
 				'guid' => $guid,
 				));
 		}	
@@ -93,7 +93,7 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 		}
 	} else {
 		if (votacion_en_fecha($poll) && in_array($acceso_votar, $acceso_col)) {
-			$content .= elgg_view_form('votar' , array() , array(
+			$content .= elgg_view_form('advpoll/votar' , array() , array(
 				'guid' => $guid,
 				));
 		
