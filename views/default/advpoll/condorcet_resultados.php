@@ -76,7 +76,7 @@ if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !votacion_en_fecha($
 		
 		echo "</ol>";
 		echo "<h4>" . elgg_echo('votaciones:condorcet:opciones:elegidas:papeleta') .  $nombre . "</h4>";
-		echo elgg_view('votaciones/papeleta', array('matriz' => $papeleta_matriz, 'opciones' => $abecedario));
+		echo elgg_view('advpoll/papeleta', array('matriz' => $papeleta_matriz, 'opciones' => $abecedario));
 		$matriz[] = $papeleta_matriz;
 		if ($i === 0) {
 			$matriz_aux = $papeleta_matriz;
@@ -107,7 +107,7 @@ foreach ($condorcet as $papeleta2){
 echo '<br>';
 echo "<h2>" . elgg_echo('votaciones:condorcet:resultado:final') . "</h2>";
 
-echo elgg_view('votaciones/papeleta', array('matriz' => $matriz_aux2, 'opciones' => $abecedario));
+echo elgg_view('advpoll/papeleta', array('matriz' => $matriz_aux2, 'opciones' => $abecedario));
 print_r(resultados_condorcet_suma_puntos($matriz_aux2));
 $abc = 65;
 echo "<br><h3>" . elgg_echo('votaciones:condorcet:leyenda') . "</h3><br>";

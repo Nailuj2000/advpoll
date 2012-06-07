@@ -34,7 +34,7 @@ $title = elgg_echo('votaciones:condorcet:ayuda:titulo');
 
 $content = elgg_echo('votaciones:condorcet:ayuda:papeletas:seguramente');
 
-$content .= elgg_view('votaciones/papeleta', array(
+$content .= elgg_view('advpoll/papeleta', array(
 	'matriz' => array(
 		array(0, 0, 1, 1),
 		array(1, 0, 1, 1),
@@ -377,7 +377,7 @@ $content .=
 
 $content .= elgg_echo('votaciones:condorcet:ayuda:papeletas:paso4') . '<br>';
 
-$content .= elgg_view('votaciones/papeleta', array(
+$content .= elgg_view('advpoll/papeleta', array(
 	'matriz' => array(
 		array(0, 0, 1, 1),
 		array(1, 0, 1, 1),

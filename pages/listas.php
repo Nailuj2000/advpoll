@@ -25,7 +25,7 @@ $content = elgg_view_entity_list(
 
 elgg_register_title_button('votaciones', 'nueva');
 
-$filtros = elgg_view('votaciones/filtros', array(
+$filtros = elgg_view('advpoll/filtros', array(
 	'filter_context' => $contexto,
 	'context' => 'votaciones'
 	));

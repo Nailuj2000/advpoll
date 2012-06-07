@@ -9,7 +9,7 @@ elgg_push_breadcrumb(elgg_echo('friends'));
 $content = list_user_friends_objects($page_owner->guid, 'poll', 5, false);
 
 elgg_register_title_button('votaciones', 'nueva');
-$filtros = elgg_view('votaciones/filtros', array(
+$filtros = elgg_view('advpoll/filtros', array(
 	'filter_context' => 'amigos',
 	'context' => 'votaciones'
 	));

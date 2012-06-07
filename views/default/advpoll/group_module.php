@@ -7,7 +7,7 @@ if ($grupo->votaciones_enable == "no") {
 }
 
 $totus_link = elgg_view('output/url', array(
-	'href' => "votaciones/group/$grupo->guid/totus",
+	'href' => "advpoll/group/$grupo->guid/totus",
 	'text' => elgg_echo('link:view:all'),
 	'is_trusted' => true,
 ));
@@ -33,7 +33,7 @@ if (!$content) {
 }
 
 $nueva_link = elgg_view('output/url', array(
-	'href' => "votaciones/nueva/$grupo->guid",
+	'href' => "advpoll/nueva/$grupo->guid",
 	'text' => elgg_echo('votaciones:nueva'),
 	'is_trusted' => true,
 ));

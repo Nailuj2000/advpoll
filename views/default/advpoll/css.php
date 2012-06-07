@@ -54,7 +54,7 @@
 }
 
 .ui-objeto-ordenable:hover {
-	background-image: url(<?php echo elgg_get_site_url() . "mod/votaciones/_graphics/mover2.png" ; ?>);
+	background-image: url(<?php echo elgg_get_site_url() . "mod/advpoll/_graphics/mover2.png" ; ?>);
 	color: #4690D6;	
 }
 

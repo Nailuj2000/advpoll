@@ -87,7 +87,7 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 				));
 		}	
 		if ($mostrar_resultados == 'yes' or !votacion_en_fecha($poll)) {
-			$content .= elgg_view('votaciones/condorcet_resultados', array(
+			$content .= elgg_view('advpoll/condorcet_resultados', array(
 				'guid' => $guid
 			));
 		}
@@ -99,7 +99,7 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 		
 		}
 		if ($mostrar_resultados == 'yes' or !votacion_en_fecha($poll)) {
-			$content .= elgg_view('votaciones/resultados', array(
+			$content .= elgg_view('advpoll/resultados', array(
 			'votacion' => $poll
 			));
 		}
