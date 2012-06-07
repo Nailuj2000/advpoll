@@ -40,7 +40,7 @@ $entity_icon = elgg_view_entity_icon($votacion, 'small');
 
 $metadata = elgg_view_menu('entity', array(
 	'entity' => $votacion,
-	'handler' => 'votaciones',
+	'handler' => 'advpoll',
 	'sort_by' => 'priority',
 	'class' => 'elgg-menu-hz',
 ));
