@@ -55,7 +55,7 @@ if (!$fecha_inicio) {
 
 
 
-elgg_make_sticky_form('votaciones');
+elgg_make_sticky_form('polls');
 
 $opciones = array();
 for ($i=0; $i<$num_opciones; $i++) {
@@ -64,17 +64,17 @@ for ($i=0; $i<$num_opciones; $i++) {
 }
 
 if (!$title) {
-	register_error(elgg_echo('votacion:error:pregunta'));
+	register_error(elgg_echo('advpoll:error:pregunta'));
 
 } else {
 	if ($num_opciones < 2) {
-		register_error(elgg_echo('votacion:error:num:opciones'));
+		register_error(elgg_echo('advpoll:error:num:opciones'));
 	} else { 
 		if (algo_repe_en_array($opciones)) {
-			register_error(elgg_echo('votacion:error:opciones:repes'));
+			register_error(elgg_echo('advpoll:error:opciones:repes'));
 		} else {
 			if ($fecha_inicio > $fecha_fin) {
-				register_error(elgg_echo('votacion:error:fechas:mal'));
+				register_error(elgg_echo('advpoll:error:fechas:mal'));
 			} else {
 				
 				$votacion = new ElggObject();
@@ -98,14 +98,14 @@ if (!$title) {
 				polls_delete_choices($votacion); 
 				polls_add_choices($votacion,$opciones);
 				
-				elgg_clear_sticky_form('votaciones');
+				elgg_clear_sticky_form('polls');
 				
 				if ($guid) { //esta parte creo que esta un poco mal
-					system_message(elgg_echo('votacion:guardada'));
+					system_message(elgg_echo('advpoll:guardada'));
 					forward($votacion->getURL());
 				}
 				else {
-					register_error(elgg_echo('votacion:error:guardar'));
+					register_error(elgg_echo('advpoll:error:guardar'));
 					forward(REFERER); // REFERER is a global variable that defines the previous page
 				}
 			}

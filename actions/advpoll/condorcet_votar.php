@@ -42,7 +42,7 @@ $access_votar_id = $votacion->access_votar_id;
 
 
 if (!votacion_en_fecha($votacion)) {
-	register_error(elgg_echo('advpoll:accion:votacion:cerrada'));
+	register_error(elgg_echo('advpoll:accion:advpoll:cerrada'));
 } else {
 	if (!in_array($access_votar_id, $access_col)) {
 		register_error(elgg_echo('advpoll:accion:error:permisos'));

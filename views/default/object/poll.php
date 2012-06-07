@@ -69,7 +69,7 @@ $metadata = elgg_view_menu('entity', array(
 		'text' => elgg_echo('advpoll:debate:previo:link'),
 	));
 
-	$subtitle .= "<br>" . elgg_echo('votacion:vistazo:finalizada:' . $poll_comparada_fin . ':' . $poll_comparada_ini ) . ',';
+	$subtitle .= "<br>" . elgg_echo('advpoll:vistazo:finalizada:' . $poll_comparada_fin . ':' . $poll_comparada_ini ) . ',';
 	if ($poll_comparada_ini == 'menorini') {
 	$subtitle .= elgg_echo('advpoll:vistazo:tiempo:desde') . date('d - M - Y', $fecha_inicio) . ', ';
 } 

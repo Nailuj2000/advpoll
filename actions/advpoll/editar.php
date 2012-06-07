@@ -49,7 +49,7 @@ if (!$fecha_inicio) {
 }
 
 if ($fecha_inicio > $fecha_fin) {
-	register_error(elgg_echo('votacion:error:fechas:mal'));
+	register_error(elgg_echo('advpoll:error:fechas:mal'));
 } else {
 	
 	//escribimos en base de datos	
@@ -65,11 +65,11 @@ if ($fecha_inicio > $fecha_fin) {
 	$guid2 = $votacion->save();
 	
 	if ($guid2){
-		system_message(elgg_echo('votacion:guardada'));
+		system_message(elgg_echo('advpoll:guardada'));
 		forward($votacion->getURL());
 	}
 	else {
-		register_error(elgg_echo('votacion:error:guardar'));
+		register_error(elgg_echo('advpoll:error:guardar'));
 		forward(REFERER); // REFERER is a global variable that defines the previous page
 	}
 }

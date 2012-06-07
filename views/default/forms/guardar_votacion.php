@@ -143,8 +143,8 @@ if ($categories) {
 	<?php echo elgg_view('input/radio', array(
 		'name' => 'poll_tipo',
 		 'options' => array(
-			elgg_echo('option:normal') => 'normal' ,
-			elgg_echo('option:condorcet') => 'condorcet',
+			elgg_echo('advpoll:option:normal') => 'normal' ,
+			elgg_echo('advpoll:option:condorcet') => 'condorcet',
 			),
 		'value' => $poll_tipo,
 		)); ?>
