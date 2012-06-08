@@ -26,14 +26,11 @@
 
 // once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
 elgg_load_library('advpoll:model');
-$choice = get_input('response');
 $guid = get_input('guid');
 $votacion = get_entity($guid);
-$respuesta = get_entity($choice);
 $owner_guid = get_input('owner_guid');
 $access_id = $respuesta->access_id;
 $choices = polls_get_choice_array($votacion);
-$poll_cerrada = $votacion->poll_cerrada;
 $usuaria = elgg_get_logged_in_user_guid();
 $access_col = get_access_array($usuaria);
 $access_votar_id = $votacion->access_votar_id;
@@ -47,14 +44,27 @@ if (!votacion_en_fecha($votacion)) {
 		if (user_has_voted($usuaria, $guid) && !$votacion->can_change_vote) {
 			register_error(elgg_echo('advpoll:accion:error:cant_change_vote'));
 		} else {
-			foreach ($choices as $vote_guid){
-				if (remove_anotation_by_entity_guid_user_guid('vote', $vote_guid, $owner_guid)){
-					system_message(elgg_echo('advpoll:anteriores:borradas:ok'));
+			if ($votacion->poll_tipo == 'normal') {
+				$choice = get_input('response');
+				$respuesta = get_entity($choice);
+				foreach ($choices as $vote_guid){
+					if (remove_anotation_by_entity_guid_user_guid('vote', $vote_guid, $owner_guid)){
+						system_message(elgg_echo('advpoll:anteriores:borradas:ok'));
+					}
 				}
-			}
-			
-			if ($respuesta->annotate('vote', 1, $access_id, $owner_guid, 'int')){
-				system_message(elgg_echo('advpoll:accion:voto:ok'));
+				
+				if ($respuesta->annotate('vote', 1, $access_id, $owner_guid, 'int')){
+					system_message(elgg_echo('advpoll:accion:voto:ok'));
+				}
+			} else { // condorcet
+				$opciones = get_input('opciones');
+				$opciones_iniciales = pasar_opciones_a_condorcet($choices);
+				$papeleta = matriz_papeleta($opciones_iniciales, $opciones);
+				$papeleta_cadena = pasar_matriz_a_cadena($papeleta);
+				
+				if ($votacion->annotate('vote_condorcet', "$papeleta_cadena", $access_id, $owner_guid)){
+					system_message(elgg_echo('advpoll:accion:voto:ok'));
+				}
 			}
 		}
 	}
