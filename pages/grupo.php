@@ -55,7 +55,7 @@ $content = elgg_view_entity_list(
 
 $filtros = elgg_view('votaciones/filtros_grupos', array(
 	'filter_context' => "$group_context",
-	'context' => 'votaciones'
+	'context' => 'advpoll'
 	));
 
 $body = elgg_view_layout('content', array(

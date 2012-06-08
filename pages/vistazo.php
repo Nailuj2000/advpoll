@@ -67,9 +67,9 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 	$title = $poll->title;
 	
 	$content = elgg_view_entity($poll, array('full_view' => true));
-	if ((($poll_tipo == 'normal' && usuario_ha_votado($usuaria_guid, $guid)) or 
+	if ((($poll_tipo == 'normal' && usuario_ha_votado($usuaria_guid, $guid)) || 
 		($poll_tipo == 'condorcet' && usuario_ha_votado_condorcet($usuaria_guid, $anotaciones))) &&
-		votacion_en_fecha($poll) && in_array($acceso_votar, $acceso_col)) {
+		votacion_en_fecha($poll) && in_array($acceso_votar, $acceso_col) && $can_change_vote == 'yes') {
 		$content .= elgg_view('input/button', array(
 			'class' => 'pulsa-que-se-expande',
 			'value' => elgg_echo('advpoll:condorcet:pulsar:cambio'),

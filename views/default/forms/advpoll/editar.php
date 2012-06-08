@@ -43,6 +43,8 @@ $auditoria = $votacion->auditoria;
 $group = get_entity($container_guid);
 $fecha_inicio = $votacion->fecha_inicio;
 $fecha_fin = $votacion->fecha_fin;
+$mostrar_resultados = $votacion->mostrar_resultados;
+$can_change_vote = $votacion->can_change_vote;
 
 /**
 $group = get_entity($container_guid);
@@ -121,7 +123,6 @@ if ($categories) {
 	?>
 </ul></div>
 
-</div>
 <div> 
 	<?php echo elgg_echo('advpoll:advertencia:editar'); ?>
 </div>
@@ -182,9 +183,16 @@ if ($categories) {
 </div>
 <div>
 	<label><?php echo elgg_echo('advpoll:can:change:vote'); ?></label><br />
-	<label><?php echo elgg_echo("option:$can_change_vote"); ?></label><br />
-	<?php echo elgg_echo('advpoll:advertencia:editar:mostrar:resultados'); ?><br />
-	
+	<?php echo elgg_view('input/radio', array(
+		'name' => 'can_change_vote',
+		 'options' => array(
+			elgg_echo('option:no') => 'no' ,
+			elgg_echo('option:yes') => 'yes',
+			),
+		'value' => $can_change_vote,
+	));
+
+	?>
 </div>
 
 <div class="elgg-foot">

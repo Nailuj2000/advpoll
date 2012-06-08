@@ -27,7 +27,7 @@ elgg_register_title_button('advpoll', 'nueva');
 
 $filtros = elgg_view('advpoll/filtros', array(
 	'filter_context' => $contexto,
-	'context' => 'votaciones'
+	'context' => 'advpoll'
 	));
 
 // llama a la vista 'content' del core registrada en el archivo
