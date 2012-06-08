@@ -24,47 +24,31 @@
  * MA 02110-1301, USA.
  */
 
-// once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
-
-
 $guid = elgg_extract('guid', $vars, '');
 $votacion = get_entity($guid);
 $opciones = polls_get_choice_array($votacion);
 $owner_guid = elgg_get_logged_in_user_guid();
 
-//print_r($opciones);
-
-
+echo '<div>';
+if (user_has_voted($owner_guid, $guid)) {
+	echo '<div class=\'parrafo-extendible\'>';
+}
 ?>
-
-<div>
+<br>
+<h3><?php echo elgg_echo('advpoll:votar:opcion'); ?></h3><br />
 <?php
-	if (user_has_voted($owner_guid, $guid)) {
-		echo '<div class=\'parrafo-extendible\'>';
-	}
-?>
-	<br>
-	<h3><?php echo elgg_echo('advpoll:votar:opcion'); ?></h3><br />
-	<?php echo elgg_view('input/radio', array(
-		'name' => 'response', 
-		'options' => $opciones,
-	));
-
-?>
-
-
-<?php
-
+echo elgg_view('input/radio', array(
+	'name' => 'response', 
+	'options' => $opciones,
+));
 echo elgg_view('input/hidden', array(
 	'name' => 'guid',
 	'value' => $guid
-	));
-
+));
 echo elgg_view('input/hidden', array(
 	'name' => 'owner_guid',
 	'value' => $owner_guid,
-	));
-
+));
 echo '<br>';	
 echo elgg_view('input/submit', array('value' => elgg_echo("votar")));
 if (user_has_voted($owner_guid, $guid)) {

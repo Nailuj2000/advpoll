@@ -151,8 +151,9 @@ $mapping = array(
 	'advpoll:normal:auditoria:nombre' => 'Nombre',
 	'advpoll:normal:auditoria:fecha' => 'Fecha del voto',
 	'advpoll:normal:auditoria:opcion' => 'Sentido del voto',
-	'advpoll:normal:auditoria:usuaria' => 'Habitante'
-	
+	'advpoll:normal:auditoria:usuaria' => 'Habitante',
+	'advpoll:accion:error:cant_change_vote' => 'Esta votación no permite cambiar el voto',
+	'advpoll:accion:error:permisos' => 'No tienes permiso para votar'
 	
 		
 

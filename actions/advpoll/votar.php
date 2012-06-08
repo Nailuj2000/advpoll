@@ -44,16 +44,18 @@ if (!votacion_en_fecha($votacion)) {
 	if (!in_array($access_votar_id, $access_col)) {
 		register_error(elgg_echo('advpoll:accion:error:permisos'));
 	} else {
-
-		foreach ($choices as $vote_guid){
-			if (remove_anotation_by_entity_guid_user_guid('vote', $vote_guid, $owner_guid)){
-				system_message(elgg_echo('advpoll:anteriores:borradas:ok'));
+		if (user_has_voted($usuaria, $guid) && !$votacion->can_change_vote) {
+			register_error(elgg_echo('advpoll:accion:error:cant_change_vote'));
+		} else {
+			foreach ($choices as $vote_guid){
+				if (remove_anotation_by_entity_guid_user_guid('vote', $vote_guid, $owner_guid)){
+					system_message(elgg_echo('advpoll:anteriores:borradas:ok'));
+				}
 			}
-		}
-	
-		
-		if ($respuesta->annotate('vote', 1, $access_id, $owner_guid, 'int')){
-			system_message(elgg_echo('advpoll:accion:voto:ok'));
+			
+			if ($respuesta->annotate('vote', 1, $access_id, $owner_guid, 'int')){
+				system_message(elgg_echo('advpoll:accion:voto:ok'));
+			}
 		}
 	}
 }
