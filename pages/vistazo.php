@@ -41,15 +41,7 @@ $acceso_col = get_access_array($usuaria_guid);
 
 if (!in_array($acceso_lectura, $acceso_col)) {
 	forward(REFERER);
-} else {
-	$anotaciones = elgg_get_annotations(array(
-		'type' => 'object',
-		'subtype' => 'poll',
-		'guid' => $guid,
-		'anotation_name' => 'vote_condorcet',
-		'limit' => 0,
-		));
-	
+} else {	
 	// Esto de abajo sirve para que aparezca en el menu lateral las opciones
 	// de grupo y de usuario al que pertenece la votación
 	$container_guid = $poll->container_guid;
@@ -67,8 +59,7 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 	$title = $poll->title;
 	
 	$content = elgg_view_entity($poll, array('full_view' => true));
-	if ((($poll_tipo == 'normal' && usuario_ha_votado($usuaria_guid, $guid)) || 
-		($poll_tipo == 'condorcet' && usuario_ha_votado_condorcet($usuaria_guid, $anotaciones))) &&
+	if (user_has_voted($usuaria_guid, $guid) &&
 		votacion_en_fecha($poll) && in_array($acceso_votar, $acceso_col) && $can_change_vote == 'yes') {
 		$content .= elgg_view('input/button', array(
 			'class' => 'pulsa-que-se-expande',

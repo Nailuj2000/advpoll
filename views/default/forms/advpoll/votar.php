@@ -38,10 +38,11 @@ $owner_guid = elgg_get_logged_in_user_guid();
 ?>
 
 <div>
-	<?php if (usuario_ha_votado($owner_guid, $guid)) { ?>
-		
-		<div class='parrafo-extendible'>
-	<?php } ?>
+<?php
+	if (user_has_voted($owner_guid, $guid)) {
+		echo '<div class=\'parrafo-extendible\'>';
+	}
+?>
 	<br>
 	<h3><?php echo elgg_echo('advpoll:votar:opcion'); ?></h3><br />
 	<?php echo elgg_view('input/radio', array(
@@ -66,7 +67,8 @@ echo elgg_view('input/hidden', array(
 
 echo '<br>';	
 echo elgg_view('input/submit', array('value' => elgg_echo("votar")));
-
-
-
-
+if (user_has_voted($owner_guid, $guid)) {
+	echo '</div>';
+}
+?>
+</div>

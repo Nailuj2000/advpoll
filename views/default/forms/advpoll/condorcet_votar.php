@@ -47,23 +47,10 @@ $options = array(
 	
 $choices = elgg_get_entities_from_relationship($options);
 
-
-
-
-$condorcet = elgg_get_annotations(array(
-	'type' => 'object',
-	'subtype' => 'poll',
-	'guid' => $guid,
-	'anotation_name' => 'vote_condorcet',
-	'limit' => 0,
-	));
-	
-
-if (usuario_ha_votado_condorcet($owner_guid, $condorcet)) {
-	?>
-	<div class='parrafo-extendible'>
-		<?php 
-	} ?>
+if (user_has_voted($owner_guid, $guid)) {
+	echo '<div class=\'parrafo-extendible\'>'; 
+}
+?>
 		<br>
 		<h3><?php echo elgg_echo('advpoll:condorcet:votar:opcion'); ?></h3>
 		<br>
@@ -96,13 +83,8 @@ if (usuario_ha_votado_condorcet($owner_guid, $condorcet)) {
 	
 	echo '<br>';	
 	echo elgg_view('input/submit', array('value' => elgg_echo("votar")));
-	if (usuario_ha_votado_condorcet($owner_guid, $condorcet)) {
+	if (user_has_voted($owner_guid, $guid)) {
 		echo '</div>';
 	}
 
-
-
-	
-	
-
-
+?>
