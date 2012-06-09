@@ -22,7 +22,13 @@
  * MA 02110-1301, USA.
  */
 
-
+/**
+ * Returns all possible candidates for a poll in an array. Each candidate is an Elgg
+ * entity.
+ * 
+ * @param ElggEntity $poll  A poll entity.
+ * @return array  An array of candidates.
+ */
 function polls_get_choices($poll) {
 	$options = array(
 		'relationship' => 'poll_choice',
@@ -478,16 +484,23 @@ function algo_repe_en_array ($array) {
 	return $return;
 }
 
-
-function resultados_condorcet_suma_puntos ($matriz) {
-	foreach ($matriz as $fila) {
-		$puntuacion = 0;
-		foreach ($fila as $puntos) {
-			$puntuacion = $puntuacion + $puntos;
+/**
+ * Given the matrix of Condorcet results, sums the points obtained for
+ * each candidate.
+ * 
+ * @param array $matrix  The matrix containing the results of a poll using Condorcet.
+ * @return array  Returns an array of int. Each number is the punctuation obtained by
+ * a candidate.
+ */
+function condorcet_results_sum_points($matrix) {
+	foreach ($matrix as $row) {
+		$punctuation = 0;
+		foreach ($row as $points) {
+			$punctuation = $punctuation + $points;
 		}
-		$resultado[] = $puntuacion;
+		$result[] = $punctuation;
 	}
-	return $resultado;
+	return $result;
 }
 
 ?>

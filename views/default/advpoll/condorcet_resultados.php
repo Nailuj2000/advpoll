@@ -109,7 +109,7 @@ echo '<br>';
 echo "<h2>" . elgg_echo('advpoll:condorcet:resultado:final') . "</h2>";
 
 echo elgg_view('advpoll/condorcet_matrix', array('matriz' => $matriz_aux2, 'opciones' => $abecedario));
-print_r(resultados_condorcet_suma_puntos($matriz_aux2));
+print_r(condorcet_results_sum_points($matriz_aux2));
 $abc = 65;
 echo "<br><h3>" . elgg_echo('advpoll:condorcet:leyenda') . "</h3><br>";
 echo '<ul><br>';

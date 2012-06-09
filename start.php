@@ -62,7 +62,7 @@ function advpoll_init() {
 	// Register URL addresses handler
 	elgg_register_entity_url_handler('object', 'poll', 'advpoll_url_handler');
 	// Register external libraries
-	elgg_register_library('advpoll:model', elgg_get_plugins_path() . 'advpoll/lib/modelo.php');
+	elgg_register_library('advpoll:model', elgg_get_plugins_path() . 'advpoll/lib/model.php');
 	// Groups module
 	add_group_tool_option('votaciones', elgg_echo('advpoll:grupos:habilitarvotaciones'), true);
 	elgg_extend_view('groups/tool_latest', 'advpoll/group_module');
