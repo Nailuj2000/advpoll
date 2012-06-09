@@ -61,7 +61,9 @@ if (!votacion_en_fecha($votacion)) {
 				$opciones_iniciales = pasar_opciones_a_condorcet($choices);
 				$papeleta = matriz_papeleta($opciones_iniciales, $opciones);
 				$papeleta_cadena = pasar_matriz_a_cadena($papeleta);
-				
+				if (remove_anotation_by_entity_guid_user_guid('vote_condorcet', $guid, $owner_guid)) {
+					system_message(elgg_echo('advpoll:anteriores:borradas:ok'));
+				}
 				if ($votacion->annotate('vote_condorcet', "$papeleta_cadena", $access_id, $owner_guid)){
 					system_message(elgg_echo('advpoll:accion:voto:ok'));
 				}
