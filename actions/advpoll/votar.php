@@ -48,7 +48,7 @@ if (!votacion_en_fecha($votacion)) {
 				$choice = get_input('response');
 				$respuesta = get_entity($choice);
 				foreach ($choices as $vote_guid){
-					if (remove_anotation_by_entity_guid_user_guid('vote', $vote_guid, $owner_guid)){
+					if (remove_annotation_by_entity_guid_user_guid('vote', $vote_guid, $owner_guid)){
 						system_message(elgg_echo('advpoll:anteriores:borradas:ok'));
 					}
 				}
@@ -58,10 +58,10 @@ if (!votacion_en_fecha($votacion)) {
 				}
 			} else { // condorcet
 				$opciones = get_input('opciones');
-				$opciones_iniciales = pasar_opciones_a_condorcet($choices);
+				$opciones_iniciales = array_keys($choices);
 				$papeleta = matriz_papeleta($opciones_iniciales, $opciones);
 				$papeleta_cadena = pasar_matriz_a_cadena($papeleta);
-				if (remove_anotation_by_entity_guid_user_guid('vote_condorcet', $guid, $owner_guid)) {
+				if (remove_annotation_by_entity_guid_user_guid('vote_condorcet', $guid, $owner_guid)) {
 					system_message(elgg_echo('advpoll:anteriores:borradas:ok'));
 				}
 				if ($votacion->annotate('vote_condorcet', "$papeleta_cadena", $access_id, $owner_guid)){

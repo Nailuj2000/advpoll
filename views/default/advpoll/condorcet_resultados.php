@@ -42,7 +42,7 @@ foreach ($opciones as $opcion) {
 }
 	
 
-$opciones_condorcet = pasar_opciones_a_condorcet($opciones);
+$opciones_condorcet = array_keys($opciones);
 
 $condorcet = elgg_get_annotations(array(
 	'type' => 'object',

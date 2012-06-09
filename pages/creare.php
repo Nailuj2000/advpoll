@@ -27,7 +27,7 @@ gatekeeper();
  
 elgg_load_library('advpoll:model');
 
-$vars = votaciones_preparar_vars($votacion);
+$vars = advpoll_init_vars($votacion);
 $title = elgg_echo('advpoll:editare');
 elgg_push_breadcrumb(elgg_echo('advpoll:creare'));
 

@@ -21,22 +21,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  */
- 
-/*
-checks for votes on the poll
-@param ElggEntity $poll
-@param guid
-@return true/false
-*/
-function polls_check_for_previous_vote($poll, $user_guid)
-{	
-	$votes = get_annotations($poll->guid,"object","poll","vote","",$user_guid,1);
-	if ($votes) {
-		return true;
-	} else {
-		return false;
-	}
-}
+
 
 function polls_get_choices($poll) {
 	$options = array(
@@ -49,22 +34,33 @@ function polls_get_choices($poll) {
 	return elgg_get_entities_from_relationship($options);
 }
 
+/**
+ *  Get an array of all poll choices guids.
+ *  
+ *  @param $poll  The poll the choices of which we want.
+ *  @return an array containing a relation between the choice text and
+ *  the choice guid. 
+ */
 function polls_get_choice_array($poll) {
 	$choices = polls_get_choices($poll);
 	$responses = array();
 	if ($choices) {
-		$i = 1;
 		foreach($choices as $choice) {
-			
 			$label = $choice->text;
-			//pequeño truco para que los números los pase a cadena si o si
+			// force numbers to be strings
 			$responses["$label" . ' '] = $choice->guid;
-			$i = $i+1;
 		}
 	}	
 	return $responses;
 }
 
+/**
+ * Save a list of choices in a poll. For each choice, an ElggObject is created,
+ * and related to the poll as an Elgg relationship.
+ * 
+ * @param $poll  A poll entity.
+ * @param $choices  A collections of strings.
+ */
 function polls_add_choices($poll,$choices) {
 	$i = 0;
 	if ($choices) {
@@ -81,6 +77,11 @@ function polls_add_choices($poll,$choices) {
 	}
 }
 
+/**
+ * Removes all choices associated with a poll.
+ * 
+ * @param $poll  A poll entity.
+ */
 function polls_delete_choices($poll) {
 	$choices = polls_get_choices($poll);
 	if ($choices) {
@@ -90,53 +91,48 @@ function polls_delete_choices($poll) {
 	}
 }
 
+/**
+ * Replaces the current set of polls choices for a new one.
+ * 
+ * @param $poll  A poll entity.
+ * @param $new_choices  A collection of strings.
+ */
 function polls_replace_choices($poll,$new_choices) {
 	polls_delete_choices($poll);
 	polls_add_choices($poll, $new_choices);
 }
 
-function polls_activated_for_group($group) {
-	$group_polls = get_plugin_setting('group_polls', 'polls');
-	if ($group && ($group_polls != 'no')) {
-		if ( ($group->polls_enable == 'yes') 
-			|| ((!$group->polls_enable && ((!$group_polls) || ($group_polls == 'yes_default'))))) {
-			return true;
-		}
-	}
-	return false;		
-}
-
-function polls_can_add_to_group($group,$user=null) {
-	$polls_group_access = get_plugin_setting('group_access', 'polls');
-	if (!$polls_group_access || $polls_group_access == 'admins') {
-		return $group->canEdit();
-	} else {
-		if (!$user) {
-			$user = get_loggedin_user();
-		}
-		return $group->canEdit() || $group->isMember($user);
-	}
-}
-
-function remove_anotation_by_entity_guid_user_guid($annotation, $entity_guid, $user_guid){
+/**
+ * Removes all annotation of a certain type from an entity that belong to a given user.
+ * 
+ * @param $annotation_name  A string with the name of the annotation's type to remove.
+ * @param $entity_guid  The guid of the entity from which remove annotations.
+ * @param $user_guid  The guid of the user the annotation from whom we want to remove.
+ */
+function remove_annotation_by_entity_guid_user_guid($annotation_name, $entity_guid, $user_guid){
 	$entity = get_entity($entity_guid);
-	$all_annotations = $entity->getAnnotations($annotation);
+	$all_annotations = $entity->getAnnotations($annotation_name);
 	foreach ($all_annotations as $annotation_entity){
-		if ($annotation_entity->owner_guid == $user_guid 
-			&&
-			$annotation_entity->entity_guid == $entity_guid){
-				$annotation_id = $annotation_entity->id;
-				elgg_delete_annotation_by_id($annotation_id);
-				$return = TRUE;
-				
-			} 
-		}
-		return $return;
+		if ($annotation_entity->owner_guid == $user_guid &&
+				$annotation_entity->entity_guid == $entity_guid){
+			$annotation_id = $annotation_entity->id;
+			elgg_delete_annotation_by_id($annotation_id);
+			$return = TRUE;	
+		} 
 	}
+	return $return;
+}
 
-function votaciones_preparar_vars($votaciones) {
-
-	// input names => default
+/**
+ * Initialize a vars array suitable for viewing a poll associated form
+ * using elgg_view_form. If $poll is null the variable take default values,
+ * if $poll is a poll entity, the resulting array is initialized using this
+ * poll values. Also, this function use a sticky form called 'polls' to
+ * update the vars array values.
+ * 
+ * @param $poll  A poll entity or null.
+ */
+function advpoll_init_vars($poll) {
 	$container_guid = get_input('container_guid');
 	$values = array(
 		'title' => '',
@@ -145,7 +141,7 @@ function votaciones_preparar_vars($votaciones) {
 		'tags' => '',
 		'container_guid' => $container_guid,
 		'guid' => '',
-		'entity' => $votaciones,
+		'entity' => $poll,
 		'path' => 'http://',
 		'poll_cerrada' => 'no',
 		'auditoria' => 'no',
@@ -155,10 +151,10 @@ function votaciones_preparar_vars($votaciones) {
 		'can_change_vote' => 'yes',
 	);
 
-	if ($votaciones) {
-		foreach (array_keys($values) as $field) {
-			if (isset($votaciones->$field)) {
-				$values[$field] = $votaciones->$field;
+	if ($poll) {
+		foreach (array_keys($values) as $key) {
+			if (isset($poll->$key)) {
+				$values[$key] = $poll->$key;
 			}
 		}
 		
@@ -172,19 +168,16 @@ function votaciones_preparar_vars($votaciones) {
 
 	elgg_clear_sticky_form('polls');
 
-/**
-	if (elgg_is_sticky_form('polls')) {
-		$sticky_values = elgg_get_sticky_values('polls');
-		foreach ($sticky_values as $key => $value) {
-			$values[$key] = $value;
-		}
-	}
-
-	elgg_clear_sticky_form('polls');
-*/
 	return $values;
 }
 
+/**
+ * Return if a user has already cast a vote on a poll or not.
+ * 
+ * @param $user_guid  The user guid for whom we want to check if she has already voted.
+ * @param $poll_guid  The poll guid that we want to check.
+ * @return true if the user has voted on this poll, or false otherwise.
+ */
 function user_has_voted($user_guid, $poll_guid) {
 	$poll = get_entity($poll_guid);
 	$return = false;
@@ -217,13 +210,9 @@ function user_has_voted($user_guid, $poll_guid) {
 	return $return;
 }
 
-// Funciones especificas para método de Condorcet
-function pasar_opciones_a_condorcet ($opciones) {
-	foreach ($opciones as $key => $id) {
-		$opciones_matriz[] = $key;
-	}
-	return $opciones_matriz;
-}
+/*
+ *  Specific functions concerning preferencial voting and Condorcet.
+ */
 
 function opcion_gana_a_opcion($opcion1, $opcion2, $matriz_ordenada) {
 	foreach ($matriz_ordenada as $posicion => $elemento) {
@@ -343,7 +332,7 @@ function pasar_anotacion_a_lista_ordenada ($anotacion){
 	$votacion = get_entity($anotacion->entity_guid);
 	$papeleta = pasar_cadena_a_matriz($anotacion->value);
 	$opciones = polls_get_choice_array($votacion);
-	$opciones_condorcet = pasar_opciones_a_condorcet($opciones);
+	$opciones_condorcet = array_keys($opciones);
 	$i = 0;
 	foreach ($papeleta as $fila) {
 		$puntuacion = suma_puntos_de_fila($fila);

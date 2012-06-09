@@ -39,7 +39,7 @@ $votacion = get_entity($guid);
 $container_guid = $votacion->container_guid;
 $container = get_entity($container_guid);
 elgg_set_page_owner_guid($container->getGUID());
-$vars = votaciones_preparar_vars($votacion);
+$vars = advpoll_init_vars($votacion);
 $content = elgg_view_form('advpoll/editar', array(), $vars);
 //$content = elgg_view('votaciones/vistazo', array());
 $body = elgg_view_layout('content', array(
