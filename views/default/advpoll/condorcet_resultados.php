@@ -56,12 +56,12 @@ $condorcet = elgg_get_annotations(array(
 	$i = 0;
 echo "<br>";
 
-if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !votacion_en_fecha($votacion))) {
+if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !is_poll_on_date($votacion))) {
 		
 	echo "<div class='auditoria-extendible'>";	
 	
 	foreach ($condorcet as $papeleta){
-		$papeleta_matriz = pasar_cadena_a_matriz($papeleta->value);
+		$papeleta_matriz = string_to_ballot_matrix($papeleta->value);
 		$papelota = pasar_anotacion_a_lista_ordenada($papeleta);
 		$usuario_guid = $papeleta->owner_guid;
 		$usuario = get_entity($usuario_guid);
@@ -92,7 +92,7 @@ if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !votacion_en_fecha($
 
 $i2 = 0;
 foreach ($condorcet as $papeleta2){
-	$papeleta_matriz2 = pasar_cadena_a_matriz($papeleta2->value);
+	$papeleta_matriz2 = string_to_ballot_matrix($papeleta2->value);
 	$papelota2 = pasar_anotacion_a_lista_ordenada($papeleta2);
 	$matriz2[] = $papeleta_matriz2;
 	if ($i2 === 0) {

@@ -6,8 +6,8 @@ if ($grupo->votaciones_enable == "no") {
 	return true;
 }
 
-$totus_link = elgg_view('output/url', array(
-	'href' => "advpoll/group/$grupo->guid/totus",
+$all_link = elgg_view('output/url', array(
+	'href' => "advpoll/group/$grupo->guid/all",
 	'text' => elgg_echo('link:view:all'),
 	'is_trusted' => true,
 ));
@@ -41,6 +41,6 @@ $nueva_link = elgg_view('output/url', array(
 echo elgg_view('groups/profile/module', array(
 	'title' => elgg_echo('advpoll:grupo'),
 	'content' => $content,
-	'all_link' => $totus_link,
+	'all_link' => $all_link,
 	'add_link' => $nueva_link,
 ));

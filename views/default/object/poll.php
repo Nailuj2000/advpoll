@@ -15,8 +15,8 @@ $tags = $votacion->tags;
 $choices = polls_get_choice_array($votacion);
 $full = elgg_extract('full_view', $vars, FALSE);
 $owner =  $votacion->getOwnerEntity();
-$fecha_inicio = $votacion->fecha_inicio;
-$fecha_fin = $votacion->fecha_fin;
+$fecha_inicio = $votacion->start_date;
+$fecha_fin = $votacion->end_date;
 $time = time();
 $mostrar_resultados = $votacion->mostrar_resultados;
 $can_change_vote = $votacion->can_change_vote;
@@ -70,7 +70,7 @@ $metadata = elgg_view_menu('entity', array(
 		'text' => elgg_echo('advpoll:debate:previo:link'),
 	));
 
-	$subtitle .= "<br>" . elgg_echo('advpoll:vistazo:finalizada:' . $poll_comparada_fin . ':' . $poll_comparada_ini ) . ',';
+	$subtitle .= "<br>" . elgg_echo('advpoll:vistazo:ended:' . $poll_comparada_fin . ':' . $poll_comparada_ini ) . ',';
 	if ($poll_comparada_ini == 'menorini') {
 	$subtitle .= elgg_echo('advpoll:vistazo:tiempo:desde') . date('d - M - Y', $fecha_inicio) . ', ';
 } 

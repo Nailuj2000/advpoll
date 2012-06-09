@@ -39,7 +39,7 @@ $can_change_vote = $votacion->can_change_vote;
 
 $titulo_tarta = elgg_echo('advpoll:resultados:tarta:titulo');
 $subtitulo_tarta = $votacion->title;
-if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !votacion_en_fecha($votacion))) {
+if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !is_poll_on_date($votacion))) {
 	?>
 	<br>
 	<br>

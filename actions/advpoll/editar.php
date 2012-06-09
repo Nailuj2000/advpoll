@@ -59,8 +59,8 @@ if ($fecha_inicio > $fecha_fin) {
 	$votacion->access_id = $access_id;
 	$votacion->tags = $tags;
 	$votacion->guid = $guid;
-	$votacion->fecha_fin = $fecha_fin;
-	$votacion->fecha_inicio = $fecha_inicio;
+	$votacion->end_date = $fecha_fin;
+	$votacion->start_date = $fecha_inicio;
 	$votacion->access_votar_id = $access_votar_id;
 	$votacion->can_change_vote = $can_change_vote;
 	

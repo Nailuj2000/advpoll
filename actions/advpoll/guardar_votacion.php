@@ -90,8 +90,8 @@ if (!$title) {
 				$votacion->poll_cerrada = $poll_cerrada;
 				$votacion->auditoria = $auditoria;
 				$votacion->poll_tipo = $poll_tipo;
-				$votacion->fecha_inicio = $fecha_inicio;
-				$votacion->fecha_fin = $fecha_fin;
+				$votacion->start_date = $fecha_inicio;
+				$votacion->end_date = $fecha_fin;
 				$votacion->access_votar_id = $access_votar_id;
 				$votacion->mostrar_resultados = $mostrar_resultados;
 				$votacion->can_change_vote = $can_change_vote;

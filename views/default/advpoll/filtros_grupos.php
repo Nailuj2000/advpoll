@@ -23,28 +23,28 @@ if (elgg_is_logged_in() && $context) {
 
 	// generate a list of default tabs
 	$tabs = array(
-		'en_curso' => array(
-			'text' => elgg_echo('advpoll:filtros:encurso'),
-			'href' => (isset($vars['en_curso_link'])) ? $vars['en_curso_link'] : "$context/group/$grupo/en_curso",
+		'current' => array(
+			'text' => elgg_echo('advpoll:filtros:current'),
+			'href' => (isset($vars['current_link'])) ? $vars['current_link'] : "$context/group/$grupo/current",
 			'selected' => ($filter_context == 'activas'),
 			'priority' => 100,
 		),
-		'totus' => array(
-			'text' => elgg_echo('advpoll:filtros:totus'),
-			'href' => (isset($vars['totus_link'])) ? $vars['totus_link'] : "$context/group/$grupo/totus",
-			'selected' => ($filter_context == 'totus'),
+		'all' => array(
+			'text' => elgg_echo('advpoll:filtros:all'),
+			'href' => (isset($vars['all_link'])) ? $vars['all_link'] : "$context/group/$grupo/all",
+			'selected' => ($filter_context == 'all'),
 			'priority' => 200,
 		),
 		
-		'finalizadas' => array(
-			'text' => elgg_echo('advpoll:filtros:finalizadas'),
-			'href' => (isset($vars['finalizadas_link'])) ? $vars['finalizadas_link'] : "$context/group/$grupo/finalizadas",
+		'ended' => array(
+			'text' => elgg_echo('advpoll:filtros:ended'),
+			'href' => (isset($vars['ended_link'])) ? $vars['ended_link'] : "$context/group/$grupo/ended",
 			'selected' => ($filter_context == 'cerradas'),
 			'priority' => 500,
 		),
-		'no_iniciadas' => array(
-			'text' => elgg_echo('advpoll:filtros:noiniciadas'),
-			'href' => (isset($vars['no_iniciadas_link'])) ? $vars['no_iniciadas_link'] : "$context/group/$grupo/no_iniciadas",
+		'not_initiated' => array(
+			'text' => elgg_echo('advpoll:filtros:not_initiated'),
+			'href' => (isset($vars['not_initiated_link'])) ? $vars['not_initiated_link'] : "$context/group/$grupo/not_initiaded",
 			'selected' => ($filter_context == 'cerradas'),
 			'priority' => 500,
 		),

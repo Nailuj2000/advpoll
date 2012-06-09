@@ -54,7 +54,7 @@ function advpoll_init() {
 	elgg_register_entity_type('object', 'poll');
 
 	// Add a menu item to the main site menu
-	$item = new ElggMenuItem('votaciones', elgg_echo('advpoll:menu'), 'advpoll/totus');
+	$item = new ElggMenuItem('votaciones', elgg_echo('advpoll:menu'), 'advpoll/all');
 	// Register menu
 	elgg_register_menu_item('site', $item);
 	// Register page handlers
@@ -91,10 +91,10 @@ function advpoll_page_handler($page)
 {
 	$base_dir = elgg_get_plugins_path() . 'advpoll/pages/';
 	
-	elgg_push_breadcrumb(elgg_echo('votaciones'), 'addpoll/totus');
+	elgg_push_breadcrumb(elgg_echo('votaciones'), 'addpoll/all');
 	switch ($page[0]){
-		case "totus":
-			include $base_dir . 'totus.php';
+		case "all":
+			include $base_dir . 'all.php';
 			break;
 		case "edit":
 			set_input('guid', $page[1]);
@@ -114,15 +114,15 @@ function advpoll_page_handler($page)
 		case "trujaman":
 			include $base_dir . 'trujaman.php';
 			break;
-		case "en_curso":
+		case "current":
 			set_input('contexto', $page[0]);
 			include $base_dir . 'listas.php';
 			break;
-		case "finalizadas":
+		case "ended":
 			set_input('contexto', $page[0]);
 			include $base_dir . 'listas.php';
 			break;
-		case "no_iniciadas":
+		case "not_initiated":
 			set_input('contexto', $page[0]);
 			include $base_dir . 'listas.php';
 			break;
@@ -136,7 +136,7 @@ function advpoll_page_handler($page)
 		case "group":
 			set_input('guid', $page[1]);
 			set_input('group_context', $page[2]);
-			//if ($page[2] == 'totus') {
+			//if ($page[2] == 'all') {
 				include $base_dir . 'grupo.php';
 			//}
 			//if ($page[2] == 'cerradas'){
@@ -172,7 +172,7 @@ function advpoll_owner_block_menu($hook, $type, $return, $params) {
 		$return[] = $item;
 	} else {
 		if ($params['entity']->bookmarks_enable != 'no') {
-			$url = "advpoll/group/{$params['entity']->guid}/totus";
+			$url = "advpoll/group/{$params['entity']->guid}/all";
 			$item = new ElggMenuItem('votaciones', elgg_echo('advpoll:grupo'), $url);
 			$return[] = $item;
 		}

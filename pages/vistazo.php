@@ -30,8 +30,8 @@ $poll_cerrada = $poll->poll_cerrada;
 $poll_tipo = $poll->poll_tipo;
 $usuaria_guid = elgg_get_logged_in_user_guid();
 $auditoria = $poll->auditoria;
-$fecha_fin = $poll->fecha_fin;
-$fecha_inicio = $poll->fecha_inicio;
+$fecha_fin = $poll->end_date;
+$fecha_inicio = $poll->start_date;
 $mostrar_resultados = $poll->mostrar_resultados;
 $can_change_vote = $poll->can_change_vote;
 
@@ -60,7 +60,7 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 	
 	$content = elgg_view_entity($poll, array('full_view' => true));
 	if (user_has_voted($usuaria_guid, $guid) &&
-			votacion_en_fecha($poll) && in_array($acceso_votar, $acceso_col) &&
+			is_poll_on_date($poll) && in_array($acceso_votar, $acceso_col) &&
 			$can_change_vote == 'yes') {
 		$content .= elgg_view('input/button', array(
 			'class' => 'pulsa-que-se-expande',
@@ -69,29 +69,29 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 		
 	}
 	
-	if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !votacion_en_fecha($poll))) {
+	if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !is_poll_on_date($poll))) {
 		$content .= elgg_view('input/button', array('class' => 'resultados-expandibles', 'value' => elgg_echo('advpoll:condorcet:auditoria:mostrar'))); 
 	}
 	
 	if ($poll_tipo == 'condorcet') {
-		if (votacion_en_fecha($poll) && in_array($acceso_votar, $acceso_col)) {
+		if (is_poll_on_date($poll) && in_array($acceso_votar, $acceso_col)) {
 			$content .= elgg_view_form('advpoll/condorcet_votar' , array() , array(
 				'guid' => $guid,
 				));
 		}	
-		if ($mostrar_resultados == 'yes' or !votacion_en_fecha($poll)) {
+		if ($mostrar_resultados == 'yes' or !is_poll_on_date($poll)) {
 			$content .= elgg_view('advpoll/condorcet_resultados', array(
 				'guid' => $guid
 			));
 		}
 	} else { // normal
-		if (votacion_en_fecha($poll) && in_array($acceso_votar, $acceso_col)) {
+		if (is_poll_on_date($poll) && in_array($acceso_votar, $acceso_col)) {
 			$content .= elgg_view_form('advpoll/votar' , array() , array(
 				'guid' => $guid,
 				));
 		
 		}
-		if ($mostrar_resultados == 'yes' or !votacion_en_fecha($poll)) {
+		if ($mostrar_resultados == 'yes' or !is_poll_on_date($poll)) {
 			$content .= elgg_view('advpoll/resultados', array(
 			'votacion' => $poll
 			));

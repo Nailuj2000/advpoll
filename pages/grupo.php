@@ -41,7 +41,7 @@ $votaciones = elgg_get_entities(array(
 	'container_guid' => $container_guid,
 	));
 
-$filtradas = $filtradas = elgg_get_votaciones_por_estado($votaciones, $group_context);
+$filtradas = advpoll_get_polls_from_state($votaciones, $group_context);
 
 $content = elgg_view_entity_list(
 	$filtradas,

@@ -41,8 +41,8 @@ $path = $votacion->path;
 
 $auditoria = $votacion->auditoria;
 $group = get_entity($container_guid);
-$fecha_inicio = $votacion->fecha_inicio;
-$fecha_fin = $votacion->fecha_fin;
+$fecha_inicio = $votacion->start_date;
+$fecha_fin = $votacion->end_date;
 $mostrar_resultados = $votacion->mostrar_resultados;
 $can_change_vote = $votacion->can_change_vote;
 

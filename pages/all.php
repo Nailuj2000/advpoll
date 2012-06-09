@@ -25,7 +25,7 @@
  */
 $title = elgg_echo('advpoll:titulo');
 
-elgg_push_breadcrumb(elgg_echo('advpoll:totus'));
+elgg_push_breadcrumb(elgg_echo('advpoll:all'));
 
 // Obtiene una lista de polls ordenada por fecha
 $content = elgg_list_entities(array(
@@ -40,7 +40,7 @@ $content = elgg_list_entities(array(
 // ese por defecto
 elgg_register_title_button('advpoll', 'nueva');
 $filtros = elgg_view('advpoll/filtros', array(
-	'filter_context' => 'totus',
+	'filter_context' => 'all',
 	'context' => 'advpoll'
 	));
 
@@ -50,7 +50,7 @@ $body = elgg_view_layout('content', array(
 	'content' => $content,
 	'title' => $title,
 	'filter' => $filtros,
-	'filter_context' => 'totus',
+	'filter_context' => 'all',
 	'sidebar' => ''
 ));
 // Renderiza la página con el título y el cuerpo

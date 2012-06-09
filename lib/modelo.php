@@ -210,62 +210,171 @@ function user_has_voted($user_guid, $poll_guid) {
 	return $return;
 }
 
+/**
+ * Tells if a poll is open, that is that the actual time is between the poll's
+ * starting time and ending time.
+ *
+ * @param ElggEntity $poll  A poll entity.
+ * @return boolean  Returns true if the poll if open, or false otherwise.
+ */
+function is_poll_on_date($poll) {
+	$on_date = false;
+	$start = $poll->start_date;
+	$end = $poll->end_date;
+	$date = time();
+
+	if ($end == 'no') {
+		if ($start < $date) {
+			$on_date = true;
+		}
+	} else {
+		if ($start<$date && $date<$end) {
+			$on_date = true;
+		}
+	}
+	return $on_date;
+}
+
+/**
+ * Returns all the polls in a collection that are in the specified state.
+ * State can be one of:
+ * - current: polls that are open to receive votes.
+ * - not_initiated: polls that will be opened in the future.
+ * - ended: polls that are already closed to receive new votes.
+ * - all: all polls in the collection.
+ *
+ * @param array $polls  An array of poll entities.
+ * @param string $state  A string indicated the wanted state.
+ * @return array  Returns an array of all polls in $polls that are in $state state.
+ */
+function advpoll_get_polls_from_state($polls, $state) {
+	$time = time();
+	switch ($state) {
+		case 'current':
+			foreach ($polls as $poll) {
+				if ($time < $poll->end_date && $time > $poll->start_date) {
+					$result[] = $poll;
+				}
+			}
+			break;
+		case 'not_initiated':
+			foreach ($polls as $poll) {
+				if ($time < $poll->end_date && $time < $poll->start_date) {
+					$result[] = $poll;
+				}
+			}
+			break;
+		case 'ended':
+			foreach ($polls as $poll) {
+				if ($time > $poll->end_date && $time > $poll->start_date) {
+					$result[] = $poll;
+				}
+			}
+			break;
+		case 'all':
+			$result = $polls;
+			break;
+	}
+	return $result;
+}
+
+
 /*
  *  Specific functions concerning preferencial voting and Condorcet.
  */
 
-function opcion_gana_a_opcion($opcion1, $opcion2, $matriz_ordenada) {
-	foreach ($matriz_ordenada as $posicion => $elemento) {
-		if ($elemento == $opcion1) {
-			$posicion1 = $posicion;
-		}
-		if ($elemento == $opcion2) {
-			$posicion2 = $posicion;
-		}
-	}
-	if ($posicion1 < $posicion2) {
-		return true;
-	} else {
-		return false;
-	}
-			
+/**
+ * Tells if a candidate is preferred over another candidate in a concrete
+ * preferential ballot.
+ * 
+ * @param string $candidate1  The first candidate.   
+ * @param string $candidate2  The second candidate.
+ * @param array $preferential_ballot  An array containing as values all candidates,
+ * ordered by preference.
+ * @return boolean  Returns true if candidate1 is preferred over candidate2 in this ballot,
+ * false otherwise.
+ */
+function is_preferred_candidate($candidate1, $candidate2, $preferential_ballot) {
+	$pos1 = array_search($candidate1, $preferential_ballot);
+	$pos2 = array_search($candidate2, $preferential_ballot);
+
+	return $pos1 < $pos2;
 }
 
-function linea_de_candidato($candidato, $candidatos_ordenados, $opciones_condorcet) {
+/**
+ * For a candidate in a preferential system, returns an array indicating which others
+ * candidates this candidate is preferred in a given ballot.
+ * 
+ * @param string $candidate  The candidate for whom we want to get the array.
+ * @param array $preferential_ballot  The ballot we want to check.
+ * @param array $candidates  An array containing all candidates in the poll's
+ * original order.
+ * @return array  An integer array of 1 and 0. In a given position there is a 1 if
+ * the candidate is preferred over the candidate in this position (in the original
+ * poll's order).
+ */
+function candidate_line($candidate, $preferential_ballot, $candidates) {
 	$i = 0;
-	foreach ($opciones_condorcet as $op) {
-		if (opcion_gana_a_opcion($candidato, $op, $candidatos_ordenados)) {
-			$linea[$i] = 1;
+	foreach ($candidates as $c) {
+		if (is_preferred_candidate($candidate, $c, $preferential_ballot)) {
+			$line[$i] = 1;
 		} else {
-			$linea[$i] = 0;
+			$line[$i] = 0;
 		}
 		$i++;
 	}
-	return $linea;
+	return $line;
 }
 
-function matriz_papeleta($opciones_iniciales, $opciones_ordenadas) {
-	foreach ($opciones_iniciales as $opcion) {
-		$matriz_papeleta[] = linea_de_candidato($opcion, $opciones_ordenadas, $opciones_iniciales);
+/**
+ * Given a list of candidates and a ballot in a preferential poll,
+ * this function calculates a matrix that indicates, for each candidate,
+ * which other candidates it is preferred to.
+ * 
+ * @param array $candidates  An array containing all candidates in the poll's
+ * original order.  
+ * @param array $preferential_ballot  The ballot we want to check.
+ * @return array ballot_matrix  A matrix that for each candidate, it contains a 1
+ * if the candidate on the row is preferred over the candidate on the column, or 0
+ * otherwise. See help/condorcet.
+ */
+function ballot_matrix($candidates, $preferential_ballot) {
+	foreach ($candidates as $candidate) {
+		$ballot_matrix[] = candidate_line($candidate, $preferential_ballot, $candidates);
 	}
-	return $matriz_papeleta;
+	return $ballot_matrix;
 }
 
-function pasar_matriz_a_cadena($matriz) {
-	foreach ($matriz as $fila) {
-		$cadena_fila[] = implode(" ", $fila);
+/**
+ * Translates from a ballot matrix containing a preferential ballot information
+ * to a string, in order to save it as an Elgg annotation.
+ * 
+ * @param array $ballot_matrix  A ballot matrix as obtaned from ballot_matrix()
+ * @return string $string  A string with the same information.
+ */
+function ballot_matrix_to_string($ballot_matrix) {
+	foreach ($ballot_matrix as $row) {
+		$string_row[] = implode(" ", $row);
 	}
-	$cadena = implode(",", $cadena_fila);
-	return $cadena;
+	$string = implode(",", $string_row);
+	return $string;
 }
 
-function pasar_cadena_a_matriz($cadena) {
-	$matriz_filas = explode(",", $cadena);
-	foreach ($matriz_filas as $fila_cadena) {
-		$fila_matriz = explode(" ", $fila_cadena);
-		$matriz_final[] = $fila_matriz;
+/**
+ * Translates from a string containing information about a preferrential ballot
+ * to its corresponding ballot matrix.
+ * 
+ * @param string $string  The string to translate, obtained from an Elgg annotation in the
+ * preferential poll.
+ * @return array  The original ballot matrix as returned by ballot_matrix()
+ */
+function string_to_ballot_matrix($string) {
+	$matrix_rows = explode(",", $string);
+	foreach ($matrix_rows as $string_row) {
+		$matrix_row = explode(" ", $string_row);
+		$ballot_matrix[] = $matrix_row;
 	}
-	return $matriz_final;
+	return $ballot_matrix;
 }
 
 function todas_las_filas_dimension_n($n, $matrix) {
@@ -330,7 +439,7 @@ function suma_puntos_de_fila($fila) {
 
 function pasar_anotacion_a_lista_ordenada ($anotacion){
 	$votacion = get_entity($anotacion->entity_guid);
-	$papeleta = pasar_cadena_a_matriz($anotacion->value);
+	$papeleta = string_to_ballot_matrix($anotacion->value);
 	$opciones = polls_get_choice_array($votacion);
 	$opciones_condorcet = array_keys($opciones);
 	$i = 0;
@@ -369,57 +478,6 @@ function algo_repe_en_array ($array) {
 	return $return;
 }
 
-function votacion_en_fecha($votacion) {
-	$inicio = $votacion->fecha_inicio;
-	$fin = $votacion->fecha_fin;
-	$date = time();
-	
-	if ($fin == 'no') {
-		if ($inicio < $date) {
-			return true ;
-		} else {
-			return false ;
-		}
-	} else {
-		if (($inicio < $date) && ($date < $fin)) {
-			return true ;
-		} else {
-			return false ;
-		}
-	}
-}
-
-function elgg_get_votaciones_por_estado($votaciones, $estado) {
-	$time = time();
-	switch ($estado) {
-		case 'en_curso':
-			foreach ($votaciones as $votacion) {
-				if ($time < $votacion->fecha_fin && $time > $votacion->fecha_inicio) {
-					$resultado[] = $votacion;
-				}
-			}
-			break;
-		case 'no_iniciadas':
-			foreach ($votaciones as $votacion) {
-				if ($time < $votacion->fecha_fin && $time < $votacion->fecha_inicio) {
-					$resultado[] = $votacion;
-				}
-			}
-			break;
-		case 'finalizadas':
-			foreach ($votaciones as $votacion) {
-				if ($time > $votacion->fecha_fin && $time > $votacion->fecha_inicio) {
-					$resultado[] = $votacion;
-				}
-			}
-			break;
-		
-		case 'totus':
-			$resultado = $votaciones;
-			break;
-		}
-	return $resultado;
-}
 
 function resultados_condorcet_suma_puntos ($matriz) {
 	foreach ($matriz as $fila) {
@@ -431,16 +489,5 @@ function resultados_condorcet_suma_puntos ($matriz) {
 	}
 	return $resultado;
 }
-	
-		
-
-
-
-
-
-
-
-
-
 
 ?>
