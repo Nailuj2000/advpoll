@@ -195,7 +195,7 @@ function user_has_voted($user_guid, $poll_guid) {
 			$votes = $choice->getAnnotations('vote');
 			
 			foreach ($votes as $vote) {
-				if ($vote->owner_guid == $user_guid && $vote->entity_guid == $vote_guid) {
+				if ($vote->owner_guid == $user_guid) {
 					$return = true;
 				}
 			}

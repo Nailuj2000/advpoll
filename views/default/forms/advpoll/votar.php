@@ -24,12 +24,12 @@
  * MA 02110-1301, USA.
  */
 
+elgg_load_library('advpoll:model');
 $guid = elgg_extract('guid', $vars, '');
 $votacion = get_entity($guid);
 $opciones = polls_get_choice_array($votacion);
 $owner_guid = elgg_get_logged_in_user_guid();
 
-echo '<div>';
 if (user_has_voted($owner_guid, $guid)) {
 	echo '<div class=\'parrafo-extendible\'>';
 }
@@ -55,4 +55,3 @@ if (user_has_voted($owner_guid, $guid)) {
 	echo '</div>';
 }
 ?>
-</div>
