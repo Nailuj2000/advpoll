@@ -24,28 +24,11 @@
  * MA 02110-1301, USA.
  */
 
-// once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
-
 elgg_load_library('advpoll:model');
 $guid = elgg_extract('guid', $vars, '');
 $votacion = get_entity($guid);
 $opciones = polls_get_choice_array($votacion);
 $owner_guid = elgg_get_logged_in_user_guid();
-
-//print_r($votacion);
-//print_r($opciones);
-
-$papelota = matriz_papeleta($opciones, $opciones);
-$papelota_cad = pasar_matriz_a_cadena($papelota);
-$papelota_mat = pasar_cadena_a_matriz($papelota_cad);
-
-$options = array(
-		'relationship' => 'poll_choice',
-		'relationship_guid' => $votacion->guid,
-		'inverse_relationship' => TRUE,
-		'order_by_metadata' => array('name'=>'display_order','direction'=>'ASC'));
-	
-$choices = elgg_get_entities_from_relationship($options);
 
 if (user_has_voted($owner_guid, $guid)) {
 	echo '<div class=\'parrafo-extendible\'>'; 
@@ -58,7 +41,6 @@ if (user_has_voted($owner_guid, $guid)) {
 			<?php
 		
 			foreach ($opciones as $opcion => $opcion_guid){
-			
 				echo '<li class="ui-objeto-ordenable"><p class="parrafo-opciones">'. $opcion . '</p>';
 				echo elgg_view('input/hidden', array ('name' => "opciones[]", 'value' => $opcion));
 				echo '</li>';
