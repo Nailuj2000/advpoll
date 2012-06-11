@@ -71,7 +71,7 @@ if (!$title) {
 	if ($num_opciones < 2) {
 		register_error(elgg_echo('advpoll:error:num:opciones'));
 	} else { 
-		if (algo_repe_en_array($opciones)) {
+		if (array_has_repeated_value($opciones)) {
 			register_error(elgg_echo('advpoll:error:opciones:repes'));
 		} else {
 			if ($fecha_inicio > $fecha_fin) {

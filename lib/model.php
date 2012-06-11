@@ -383,30 +383,49 @@ function string_to_ballot_matrix($string) {
 	return $ballot_matrix;
 }
 
-function todas_las_filas_dimension_n($n, $matrix) {
-	foreach ($matrix as $fila) {
-		$columnas = count($fila);
-		if ($columnas !== $n) {
+/**
+ * Check that all rows of a matrix have the same length.
+ * 
+ * @param int $n  The supposed common length.
+ * @param array $matrix  A matrix (array of arrays).
+ * @return boolean  True if all rows of $matrix have $n length, false otherwise.
+ */
+function all_rows_n_length($n, $matrix) {
+	foreach ($matrix as $row) {
+		$cols = count($row);
+		if ($col !== $n) {
 			return false;
-			break;
-		} else {
-			return true;
 		}
 	}
+	return true;
 }
-	 
-function suma_filas($fila1, $fila2) {
+
+/**
+ * Sum two vectors component by component.
+ * 
+ * @param array $v1  First vector
+ * @param array $v2  Second vector
+ * @return array  The sum of v1 and v2
+ */
+function sum_vectors($v1, $v2) {
 	$i = 0;
-	foreach ($fila1 as $elemento) {
-		$fila_sumada[] = $elemento + $fila2[$i];
+	foreach ($v1 as $num) {
+		$v_sum[] = $num + $v[$i];
 		$i++;
 	}
-	return $fila_sumada;
+	return $v_sum;
 }	
 
-function suma_matrices($a, $b) {
-	
-	/** Las matrices tienen que estar expresadas de la forma
+/**
+ * Sum two matrices component by component.
+ * 
+ * @param array $a  First matrix (array of arrays)
+ * @param array $b  Second matrix
+ * @return array  The sum of $a and $b, or null if they haven't the same dimension.
+ */
+function sum_matrices($a, $b) {
+	/**
+	 * Matrices should be in the form:
 	 * $a = array(
 	 * 			array(a11, a12, a13),
 	 * 			array(a21, a22, a23),
@@ -414,72 +433,61 @@ function suma_matrices($a, $b) {
 	 * );
 	 */
 	
-	$a_filas = count($a);
-	$b_filas = count($b);
-	$a_columnas = count($a[0]);
-	$b_columnas = count($b[0]);
-	if (todas_las_filas_dimension_n($a_columnas, $a) &&
-		todas_las_filas_dimension_n($b_columnas, $b) &&
-		$a_filas === $b_filas &&
-		$a_columnas === $b_columnas) {
-			$i= 0;
-			foreach ($a as $filas){
-				$matriz_sumada[] = suma_filas($a[$i], $b[$i]);
-			$i++;
-			}
-			
-			
-		} else {
-			$matriz_sumada = "No se pueden sumar las matrices";
-		}
-	return $matriz_sumada;
+	$a_rows = count($a);
+	$b_rows = count($b);
+	$a_cols = count($a[0]);
+	$b_cols = count($b[0]);
+	if (all_rows_n_length($a_cols, $a) &&
+			all_rows_n_length($b_cols, $b) &&
+			$a_rows === $b_rows && $a_cols === $b_cols) {
+		for ($i=0; $i<$a_rows; $i++)
+			$sum[] = sum_vectors($a[$i], $b[$i]);	
+	} else {
+		$sum = null;
+	}
+	return $sum;
 } 
 
-function suma_puntos_de_fila($fila) {
-	$suma = 0;
-	foreach ($fila as $puntos) {
-		$suma = $suma + $puntos;
-	}
-	return $suma;
-}
-
-function pasar_anotacion_a_lista_ordenada ($anotacion){
-	$votacion = get_entity($anotacion->entity_guid);
-	$papeleta = string_to_ballot_matrix($anotacion->value);
-	$opciones = polls_get_choice_array($votacion);
-	$opciones_condorcet = array_keys($opciones);
+/**
+ * Obtain an ordered list of candidates from an annotation
+ * containing a ballot for a Condorcet method.
+ * 
+ * @param ElggAnnotation $annotation  An annotation containing a ballot.
+ * @return array  A list of all candidates, ordered by preference.
+ */
+function get_ordered_candidates_from_annotation($annotation){
+	// Extract the ballot and the list of candidates
+	$poll = get_entity($annotation->entity_guid);
+	$ballot = string_to_ballot_matrix($annotation->value);
+	$candidates_array = polls_get_choice_array($poll);
+	$candidates = array_keys($candidates_array);
+	// Get a list of all candidates, ordered by given points	
 	$i = 0;
-	foreach ($papeleta as $fila) {
-		$puntuacion = suma_puntos_de_fila($fila);
-		$lista[$puntuacion] = $opciones_condorcet[$i];
+	foreach ($ballot as $row) {
+		$points = array_sum($row);
+		$points_candidates_array[$points] = $candidates[$i];
 		$i++;
 	}
-	krsort($lista);
-	foreach ($lista as $opcion) {
-		$lista2[] = $opcion;
+	krsort($points_candidates_array);
+	foreach ($points_candidates_array as $candidate) {
+		$ordered_candidates_array[] = $candidate;
 	}
-	return $lista2;
+	return $ordered_candidates_array;
 }
 
-function se_repite_nombre_array ($nombre, $array) {
+/**
+ * Check if an array has at least two times the same value at some index.
+ * 
+ * @param array $array  An array of strings or integers.
+ * @return boolean  Returns true if exists a value that appears two or more times
+ * in the array, or false otherwise.
+ */
+function array_has_repeated_value($array) {
 	$return = false;
-	foreach ($array as $element) {
-		if ($nombre == $element) {
+	$freq = array_count_values($array);
+	foreach ($freq as $num) {
+		if ($num != 1)
 			$return = true;
-		} 
-	}
-	return $return;
-}
-
-function algo_repe_en_array ($array) {
-	$return = false;
-	$copia = $array;
-	foreach ($array as $key => $opc) {
-		unset($array[$key]);
-		if ( se_repite_nombre_array($opc, $array)){
-			$return = true;
-		}
-		$array = $copia;
 	}
 	return $return;
 }

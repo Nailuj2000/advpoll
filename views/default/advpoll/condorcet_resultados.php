@@ -62,7 +62,7 @@ if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !is_poll_on_date($vo
 	
 	foreach ($condorcet as $papeleta){
 		$papeleta_matriz = string_to_ballot_matrix($papeleta->value);
-		$papelota = pasar_anotacion_a_lista_ordenada($papeleta);
+		$papelota = get_ordered_candidates_from_annotation($papeleta);
 		$usuario_guid = $papeleta->owner_guid;
 		$usuario = get_entity($usuario_guid);
 		$nombre = $usuario->name;
@@ -93,7 +93,7 @@ if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !is_poll_on_date($vo
 $i2 = 0;
 foreach ($condorcet as $papeleta2){
 	$papeleta_matriz2 = string_to_ballot_matrix($papeleta2->value);
-	$papelota2 = pasar_anotacion_a_lista_ordenada($papeleta2);
+	$papelota2 = get_ordered_candidates_from_annotation($papeleta2);
 	$matriz2[] = $papeleta_matriz2;
 	if ($i2 === 0) {
 		$matriz_aux2 = $papeleta_matriz2;
