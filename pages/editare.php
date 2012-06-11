@@ -35,13 +35,12 @@ elgg_push_breadcrumb(elgg_echo('advpoll:editare'));
 // de grupo y de usuario al que pertenece la votación
 
 $guid = (int) get_input('guid');
-$votacion = get_entity($guid);
-$container_guid = $votacion->container_guid;
+$poll = get_entity($guid);
+$container_guid = $poll->container_guid;
 $container = get_entity($container_guid);
 elgg_set_page_owner_guid($container->getGUID());
-$vars = advpoll_init_vars($votacion);
+$vars = advpoll_init_vars($poll);
 $content = elgg_view_form('advpoll/editar', array(), $vars);
-//$content = elgg_view('votaciones/vistazo', array());
 $body = elgg_view_layout('content', array(
 	'filter' => '',
 	'content' => $content,

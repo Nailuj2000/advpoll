@@ -29,22 +29,22 @@
 // once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
 elgg_load_library('advpoll:model');
 $guid = get_input('guid');
-$votacion = elgg_extract('entity', $vars, null);
+$poll = elgg_extract('entity', $vars, null);
 
-$title = $votacion->title;
-$desc = $votacion->description;
-$access_id = $votacion->access_id;
-$tags = $votacion->tags;
-$container_guid = $votacion->container_guid;
+$title = $poll->title;
+$desc = $poll->description;
+$access_id = $poll->access_id;
+$tags = $poll->tags;
+$container_guid = $poll->container_guid;
 
-$path = $votacion->path;
+$path = $poll->path;
 
-$auditoria = $votacion->auditoria;
+$auditoria = $poll->auditoria;
 $group = get_entity($container_guid);
-$fecha_inicio = $votacion->start_date;
-$fecha_fin = $votacion->end_date;
-$mostrar_resultados = $votacion->mostrar_resultados;
-$can_change_vote = $votacion->can_change_vote;
+$fecha_inicio = $poll->start_date;
+$fecha_fin = $poll->end_date;
+$mostrar_resultados = $poll->mostrar_resultados;
+$can_change_vote = $poll->can_change_vote;
 
 /**
 $group = get_entity($container_guid);
@@ -54,13 +54,13 @@ $access_id = elgg_extract('access_id', $vars, ACCESS_DEFAULT);
 $tags = elgg_extract('tags', $vars, '');
 $container_guid = elgg_extract('container_guid', $vars, elgg_get_page_owner_guid());
 $guid = elgg_extract('guid', $vars, null);
-$votacion = elgg_extract('entity', $vars, null);
+$poll = elgg_extract('entity', $vars, null);
 $path = elgg_extract('path', $vars, '');
-$poll_cerrada = elgg_extract('poll_cerrada', $vars, 'no');
+$poll_closed = elgg_extract('poll_closed', $vars, 'no');
 $auditoria = elgg_extract('auditoria', $vars, 'no');
 */
-if ($votacion){
-	$opciones = polls_get_choice_array($votacion);
+if ($poll){
+	$opciones = polls_get_choice_array($poll);
 } else {
 	$opciones = array();
 }
@@ -159,12 +159,12 @@ if ($categories) {
 <div>
 	<label><?php echo elgg_echo('advpoll:cerrada'); ?></label><br />
 	<?php echo elgg_view('input/radio', array(
-		'name' => 'poll_cerrada',
+		'name' => 'poll_closed',
 		 'options' => array(
 			elgg_echo('option:no') => 'no' ,
 			elgg_echo('option:yes') => 'yes',
 			),
-		'value' => $poll_cerrada,
+		'value' => $poll_closed,
 		)); ?>
 </div>
 */?>

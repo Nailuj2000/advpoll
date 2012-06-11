@@ -27,7 +27,7 @@ gatekeeper();
  
 elgg_load_library('advpoll:model');
 
-$vars = advpoll_init_vars($votacion);
+$vars = advpoll_init_vars($poll);
 $title = elgg_echo('advpoll:editare');
 elgg_push_breadcrumb(elgg_echo('advpoll:creare'));
 
@@ -39,7 +39,7 @@ $container = get_entity($container_guid);
 elgg_set_page_owner_guid($container->getGUID());
 
 
-$content = elgg_view_form('advpoll/guardar_votacion', array(), $vars);
+$content = elgg_view_form('advpoll/save', array(), $vars);
 //$content = elgg_view('advpoll/vistazo', array());
 $body = elgg_view_layout('content', array(
 	'filter' => '',

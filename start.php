@@ -35,7 +35,7 @@ elgg_register_event_handler('init', 'system', 'advpoll_init');
 function advpoll_init() {
 	// Register actions
 	$action_path = elgg_get_plugins_path() . 'advpoll/actions/advpoll';
-	elgg_register_action('advpoll/guardar_votacion', "$action_path/guardar_votacion.php");
+	elgg_register_action('advpoll/save', "$action_path/save.php");
 	elgg_register_action('advpoll/vote', "$action_path/vote.php");
 	elgg_register_action('advpoll/condorcet_vote', "$action_path/vote.php");
 	elgg_register_action('advpoll/editar', "$action_path/editar.php");
@@ -43,7 +43,7 @@ function advpoll_init() {
 	
 	// Es recomendable usar como nombre el mismo que el de la vista de la accion
 	// como primer termino, antes registrándola de este modo
-	// elgg_register_action('advpoll/guardar', "$base_dir/guardar_votacion.php");
+	// elgg_register_action('advpoll/save', "$base_dir/save.php");
 	// no tiraba
 
 	// Extend the main CSS file
@@ -54,7 +54,7 @@ function advpoll_init() {
 	elgg_register_entity_type('object', 'poll');
 
 	// Add a menu item to the main site menu
-	$item = new ElggMenuItem('votaciones', elgg_echo('advpoll:menu'), 'advpoll/all');
+	$item = new ElggMenuItem('polls', elgg_echo('advpoll:menu'), 'advpoll/all');
 	// Register menu
 	elgg_register_menu_item('site', $item);
 	// Register page handlers
@@ -64,7 +64,7 @@ function advpoll_init() {
 	// Register external libraries
 	elgg_register_library('advpoll:model', elgg_get_plugins_path() . 'advpoll/lib/model.php');
 	// Groups module
-	add_group_tool_option('votaciones', elgg_echo('advpoll:grupos:habilitarvotaciones'), true);
+	add_group_tool_option('polls', elgg_echo('advpoll:grupos:enablepolls'), true);
 	elgg_extend_view('groups/tool_latest', 'advpoll/group_module');
 	// Javascript libraries for graphics
 	$url = elgg_get_site_url() . "mod/advpoll/lib/js/highcharts.js";
@@ -91,7 +91,7 @@ function advpoll_page_handler($page)
 {
 	$base_dir = elgg_get_plugins_path() . 'advpoll/pages/';
 	
-	elgg_push_breadcrumb(elgg_echo('votaciones'), 'addpoll/all');
+	elgg_push_breadcrumb(elgg_echo('polls'), 'addpoll/all');
 	switch ($page[0]){
 		case "all":
 			include $base_dir . 'all.php';
@@ -168,12 +168,12 @@ function advpoll_url_handler($entity) {
 function advpoll_owner_block_menu($hook, $type, $return, $params) {
 	if (elgg_instanceof($params['entity'], 'user')) {
 		$url = "advpoll/trujaman/{$params['entity']->username}";
-		$item = new ElggMenuItem('votaciones', elgg_echo('votaciones'), $url);
+		$item = new ElggMenuItem('polls', elgg_echo('polls'), $url);
 		$return[] = $item;
 	} else {
 		if ($params['entity']->bookmarks_enable != 'no') {
 			$url = "advpoll/group/{$params['entity']->guid}/all";
-			$item = new ElggMenuItem('votaciones', elgg_echo('advpoll:grupo'), $url);
+			$item = new ElggMenuItem('polls', elgg_echo('advpoll:grupo'), $url);
 			$return[] = $item;
 		}
 	}

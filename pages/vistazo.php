@@ -26,7 +26,7 @@
 elgg_load_library('advpoll:model');
 $guid = get_input('guid');
 $poll = get_entity($guid);
-$poll_cerrada = $poll->poll_cerrada;
+$poll_closed = $poll->poll_closed;
 $poll_tipo = $poll->poll_tipo;
 $usuaria_guid = elgg_get_logged_in_user_guid();
 $auditoria = $poll->auditoria;
@@ -48,9 +48,9 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 	$container = get_entity($container_guid);
 	
 	if (elgg_instanceof($container, 'group')) {
-		elgg_push_breadcrumb($container->name, "votaciones/group/$container->guid/");
+		elgg_push_breadcrumb($container->name, "advpoll/group/$container->guid/");
 	} else {
-		elgg_push_breadcrumb($container->name, "votaciones/trujaman/$container->username");
+		elgg_push_breadcrumb($container->name, "advpoll/trujaman/$container->username");
 	}
 	elgg_push_breadcrumb($poll->title);
 	
@@ -93,7 +93,7 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 		}
 		if ($mostrar_resultados == 'yes' or !is_poll_on_date($poll)) {
 			$content .= elgg_view('advpoll/resultados', array(
-			'votacion' => $poll
+			'poll' => $poll
 			));
 		}
 	}

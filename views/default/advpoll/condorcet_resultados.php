@@ -1,6 +1,6 @@
 <?php
 /**
- * mod/votaciones/views/default/votaciones/resultados.php
+ * mod/advpoll/views/default/advpoll/resultados.php
  * 
  * Copyright 2012 DRY Team
  *              - aruberuto
@@ -29,13 +29,13 @@ elgg_load_library('advpoll:model');
 elgg_load_js('kinetic');
 elgg_load_js('grafo-schulze');
 $guid = elgg_extract('guid', $vars, '');
-$votacion = get_entity($guid);
-$opciones = polls_get_choice_array($votacion);
+$poll = get_entity($guid);
+$opciones = polls_get_choice_array($poll);
 $num_votos = 0;
 $abcd = 65;
-$auditoria = $votacion->auditoria;
-$mostrar_resultados = $votacion->mostrar_resultados;
-$can_change_vote = $votacion->can_change_vote;
+$auditoria = $poll->auditoria;
+$mostrar_resultados = $poll->mostrar_resultados;
+$can_change_vote = $poll->can_change_vote;
 foreach ($opciones as $opcion) {
 	$abecedario[] = chr($abcd);
 	$abcd++;
@@ -56,7 +56,7 @@ $condorcet = elgg_get_annotations(array(
 	$i = 0;
 echo "<br>";
 
-if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !is_poll_on_date($votacion))) {
+if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !is_poll_on_date($poll))) {
 		
 	echo "<div class='auditoria-extendible'>";	
 	
@@ -125,7 +125,7 @@ $abc = 65;
 ?>	Prueba grafo condorcet
 		
 	<script type="text/javascript">
-		var votaciones = [ <?php foreach ($matriz_aux2 as $linea){
+		var polls = [ <?php foreach ($matriz_aux2 as $linea){
 			echo "[" . '"' . chr($abc) . '", ';
 			foreach ($linea as $punt) {
 				echo $punt . ', ';
@@ -143,7 +143,7 @@ $abc = 65;
 <div id="container"></div>
 <script>
 	
-	var canvas = grafo_condorcet ('grafo', votaciones);
+	var canvas = grafo_condorcet ('grafo', polls);
 
 </script>
 

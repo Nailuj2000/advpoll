@@ -31,17 +31,17 @@ $container = get_entity($container_guid);
 $group_context = get_input('group_context');
 
 elgg_register_title_button('advpoll', 'nueva');
-elgg_push_breadcrumb($container->name, "votaciones/group/" . $container->guid);
+elgg_push_breadcrumb($container->name, "advpoll/group/" . $container->guid);
 elgg_push_breadcrumb(elgg_echo('advpoll:' . $group_context));
 
-$votaciones = elgg_get_entities(array(
+$polls = elgg_get_entities(array(
 	'type' => 'object',
 	'subtype' => 'poll',
 	'limit' => 0,
 	'container_guid' => $container_guid,
 	));
 
-$filtradas = advpoll_get_polls_from_state($votaciones, $group_context);
+$filtradas = advpoll_get_polls_from_state($polls, $group_context);
 
 $content = elgg_view_entity_list(
 	$filtradas,
@@ -53,7 +53,7 @@ $content = elgg_view_entity_list(
 	$pagination = true
 	); 	
 
-$filtros = elgg_view('votaciones/filtros_grupos', array(
+$filtros = elgg_view('advpoll/filtros_grupos', array(
 	'filter_context' => "$group_context",
 	'context' => 'advpoll'
 	));

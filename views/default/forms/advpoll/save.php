@@ -37,9 +37,9 @@ $access_id = elgg_extract('access_id', $vars, ACCESS_DEFAULT);
 $tags = elgg_extract('tags', $vars, '');
 $container_guid = elgg_extract('container_guid', $vars, '');
 $guid = elgg_extract('guid', $vars, null);
-$votacion = elgg_extract('entity', $vars, null);
+$poll = elgg_extract('entity', $vars, null);
 $path = elgg_extract('path', $vars, '');
-$poll_cerrada = elgg_extract('poll_cerrada', $vars, 'no');
+$poll_closed = elgg_extract('poll_closed', $vars, 'no');
 $auditoria = elgg_extract('auditoria', $vars, 'no');
 $group = get_entity($container_guid);
 $poll_tipo = elgg_extract('poll_tipo', $vars, 'normal');
@@ -116,12 +116,12 @@ if ($categories) {
 <div>
 	<label><?php echo elgg_echo('advpoll:cerrada'); ?></label><br />
 	<?php echo elgg_view('input/radio', array(
-		'name' => 'poll_cerrada',
+		'name' => 'poll_closed',
 		 'options' => array(
 			elgg_echo('option:no') => 'no' ,
 			elgg_echo('option:yes') => 'yes',
 			),
-		'value' => $poll_cerrada,
+		'value' => $poll_closed,
 		)); ?>
 </div>
 */ ?>
@@ -232,7 +232,7 @@ echo elgg_view('input/submit', array('value' => elgg_echo("save")));
 		//alert(x);
 		//$(x).fadeOut();
 	//});
-	$('.elgg-form-advpoll-guardar-votacion').submit(function() {
+	$('.elgg-form-advpoll-save').submit(function() {
 		$('#num_opciones').val($('.opcion').length);
 	});
 </script>

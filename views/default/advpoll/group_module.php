@@ -2,7 +2,7 @@
 
 $grupo = elgg_get_page_owner_entity();
 
-if ($grupo->votaciones_enable == "no") {
+if ($grupo->polls_enable == "no") {
 	return true;
 }
 

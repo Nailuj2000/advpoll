@@ -6,13 +6,13 @@ elgg_push_breadcrumb(elgg_echo('advpoll:activas'));
 $contexto = get_input('contexto');
 $title = elgg_echo('advpoll:titulo');
 
-$votaciones = elgg_get_entities(array(
+$polls = elgg_get_entities(array(
 	'type' => 'object',
 	'subtype' => 'poll',
 	'limit' => 0,
 	));
 
-$filtradas = advpoll_get_polls_from_state($votaciones, $contexto);
+$filtradas = advpoll_get_polls_from_state($polls, $contexto);
 $content = elgg_view_entity_list(
 	$filtradas,
 	$vars = array(), 

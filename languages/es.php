@@ -111,7 +111,7 @@ $mapping = array(
 	'advpoll:accion:voto:ok' => 'Tu voto se ha guardado correctamente',
 	'advpoll:amigos' => 'Amigos',
 	'advpoll:activas' => 'Activas',
-	'votaciones' => 'Votaciones',
+	'polls' => 'Votaciones',
 	
 	'advpoll:vistazo:cerrada' => 'Finalizada: ',
 	'advpoll:vistazo:auditoria' => ' Auditoría pública: ',
@@ -136,7 +136,7 @@ $mapping = array(
 	'advpoll:vistazo:ended:menorfin:mayorini' => 'Activa',
 	'advpoll:vistazo:ended:mayorfin:menorini' => 'Imposible',
 	'advpoll:vistazo:ended:mayorfin:mayorini' => 'Finalizada',
-	'advpoll:grupos:habilitarvotaciones' => 'Activar las votaciones de grupo',
+	'advpoll:grupos:enablepolls' => 'Activar las votaciones de grupo',
 	'advpoll:accion:error:permisos' => 'Lo sentimos, no tienes permisos para votar',
 	'advpoll:mostrar:resultados:durante' => '¿Mostrar resultados durante la votación (y auditoría si está activada)?',
 	'advpoll:can:change:vote' => '¿Se permite que los usuarios cambien su voto una vez emitido?',

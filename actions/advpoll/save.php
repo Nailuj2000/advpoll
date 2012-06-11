@@ -35,7 +35,7 @@ $num_opciones = intval(get_input('num_opciones'));
 $trujaman = intval(get_input('container_guid'));
 //$guid = intval(get_input('guid'));
 
-$poll_cerrada = get_input('poll_cerrada');
+$poll_closed = get_input('poll_closed');
 $auditoria = get_input('auditoria');
 $owner_guid = elgg_get_logged_in_user_guid();
 $poll_tipo = get_input('poll_tipo');
@@ -78,33 +78,33 @@ if (!$title) {
 				register_error(elgg_echo('advpoll:error:fechas:mal'));
 			} else {
 				
-				$votacion = new ElggObject();
-				$votacion->subtype = "poll";
-				$votacion->title = $title;
-				$votacion->description = $desc;
-				$votacion->path = $path;
-				$votacion->access_id = $access_id;
-				$votacion->owner_guid = $owner_guid;
-				$votacion->container_guid = $trujaman;
-				$votacion->tags = $tags;
-				$votacion->poll_cerrada = $poll_cerrada;
-				$votacion->auditoria = $auditoria;
-				$votacion->poll_tipo = $poll_tipo;
-				$votacion->start_date = $fecha_inicio;
-				$votacion->end_date = $fecha_fin;
-				$votacion->access_vote_id = $access_vote_id;
-				$votacion->mostrar_resultados = $mostrar_resultados;
-				$votacion->can_change_vote = $can_change_vote;
-				$guid = $votacion->save();
+				$poll = new ElggObject();
+				$poll->subtype = "poll";
+				$poll->title = $title;
+				$poll->description = $desc;
+				$poll->path = $path;
+				$poll->access_id = $access_id;
+				$poll->owner_guid = $owner_guid;
+				$poll->container_guid = $trujaman;
+				$poll->tags = $tags;
+				$poll->poll_closed = $poll_closed;
+				$poll->auditoria = $auditoria;
+				$poll->poll_tipo = $poll_tipo;
+				$poll->start_date = $fecha_inicio;
+				$poll->end_date = $fecha_fin;
+				$poll->access_vote_id = $access_vote_id;
+				$poll->mostrar_resultados = $mostrar_resultados;
+				$poll->can_change_vote = $can_change_vote;
+				$guid = $poll->save();
 				
-				polls_delete_choices($votacion); 
-				polls_add_choices($votacion,$opciones);
+				polls_delete_choices($poll); 
+				polls_add_choices($poll,$opciones);
 				
 				elgg_clear_sticky_form('polls');
 				
 				if ($guid) { //esta parte creo que esta un poco mal
 					system_message(elgg_echo('advpoll:guardada'));
-					forward($votacion->getURL());
+					forward($poll->getURL());
 				}
 				else {
 					register_error(elgg_echo('advpoll:error:guardar'));

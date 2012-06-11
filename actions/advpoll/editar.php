@@ -30,11 +30,8 @@ $access_id = get_input('access_id');
 $guid = intval(get_input('guid'));
 $access_vote_id = get_input('access_vote_id');
 $can_change_vote = get_input('can_change_vote');
-
-$poll_cerrada = get_input('poll_cerrada');
-
-
-$votacion = get_entity($guid);
+$poll_closed = get_input('poll_closed');
+$poll = get_entity($guid);
 $fecha_inicio = get_input('fecha_inicio');
 $fecha_fin = get_input('fecha_fin');
 
@@ -54,21 +51,21 @@ if ($fecha_inicio > $fecha_fin) {
 } else {
 	
 	//escribimos en base de datos	
-	$votacion->description = $desc;
-	$votacion->path = $path;
-	$votacion->access_id = $access_id;
-	$votacion->tags = $tags;
-	$votacion->guid = $guid;
-	$votacion->end_date = $fecha_fin;
-	$votacion->start_date = $fecha_inicio;
-	$votacion->access_vote_id = $access_vote_id;
-	$votacion->can_change_vote = $can_change_vote;
+	$poll->description = $desc;
+	$poll->path = $path;
+	$poll->access_id = $access_id;
+	$poll->tags = $tags;
+	$poll->guid = $guid;
+	$poll->end_date = $fecha_fin;
+	$poll->start_date = $fecha_inicio;
+	$poll->access_vote_id = $access_vote_id;
+	$poll->can_change_vote = $can_change_vote;
 	
-	$guid2 = $votacion->save();
+	$guid2 = $poll->save();
 	
 	if ($guid2){
 		system_message(elgg_echo('advpoll:guardada'));
-		forward($votacion->getURL());
+		forward($poll->getURL());
 	}
 	else {
 		register_error(elgg_echo('advpoll:error:guardar'));

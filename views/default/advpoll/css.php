@@ -40,7 +40,7 @@
 }
 .ui-objeto-ordenable {
 	background: white;
-	background-image: url(<?php echo elgg_get_site_url() . "mod/votaciones/_graphics/mover.png" ; ?>);
+	background-image: url(<?php echo elgg_get_site_url() . "mod/advpoll/_graphics/mover.png" ; ?>);
 	background-position: 10px;
 	background-repeat: no-repeat;
 	margin: 10px;

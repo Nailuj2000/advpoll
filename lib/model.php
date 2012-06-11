@@ -149,7 +149,7 @@ function advpoll_init_vars($poll) {
 		'guid' => '',
 		'entity' => $poll,
 		'path' => 'http://',
-		'poll_cerrada' => 'no',
+		'poll_closed' => 'no',
 		'auditoria' => 'no',
 		'poll_tipo' => 'normal',
 		'access_vote_id' => ACCESS_DEFAULT,

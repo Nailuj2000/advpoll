@@ -1,6 +1,6 @@
 <?php
 /**
- * mod/votaciones/views/default/votaciones/resultados.php
+ * mod/advpoll/views/default/advpoll/resultados.php
  * 
  * Copyright 2012 DRY Team
  *              - aruberuto
@@ -27,19 +27,19 @@
 // once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
 elgg_load_library('advpoll:model');
 elgg_load_js('highcharts');
-$votacion = elgg_extract('votacion', $vars, array());
-$guid = $votacion->guid;
-$opciones = polls_get_choice_array($votacion);
+$poll = elgg_extract('poll', $vars, array());
+$guid = $poll->guid;
+$opciones = polls_get_choice_array($poll);
 $num_votos = 0;
 $num_opciones = count($opciones);
 $altura = 500 + 36 * $num_opciones;
-$auditoria = $votacion->auditoria;
-$mostrar_resultados =$votacion->mostrar_resultados;
-$can_change_vote = $votacion->can_change_vote;
+$auditoria = $poll->auditoria;
+$mostrar_resultados =$poll->mostrar_resultados;
+$can_change_vote = $poll->can_change_vote;
 
 $titulo_tarta = elgg_echo('advpoll:resultados:tarta:titulo');
-$subtitulo_tarta = $votacion->title;
-if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !is_poll_on_date($votacion))) {
+$subtitulo_tarta = $poll->title;
+if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !is_poll_on_date($poll))) {
 	?>
 	<br>
 	<br>
