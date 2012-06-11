@@ -103,11 +103,11 @@ if (!$title) {
 				elgg_clear_sticky_form('polls');
 				
 				if ($guid) { //esta parte creo que esta un poco mal
-					system_message(elgg_echo('advpoll:guardada'));
+					system_message(elgg_echo('advpoll:saved'));
 					forward($poll->getURL());
 				}
 				else {
-					register_error(elgg_echo('advpoll:error:guardar'));
+					register_error(elgg_echo('advpoll:error:save'));
 					forward(REFERER); // REFERER is a global variable that defines the previous page
 				}
 			}

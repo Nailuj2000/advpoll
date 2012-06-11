@@ -21,7 +21,7 @@ $mapping = array(
 	'advpoll:titulo' => 'Polls',
 	'advpoll:menu' => 'Polls',
 	'advpoll:nueva' => 'New Poll',
-	'advpoll:editare' => 'Editing a Poll',
+	'advpoll:editing' => 'Editing a Poll',
 	'advpoll:enviada:nueva' => 'New Poll created.',
 );
 

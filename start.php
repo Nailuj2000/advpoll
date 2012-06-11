@@ -38,7 +38,7 @@ function advpoll_init() {
 	elgg_register_action('advpoll/save', "$action_path/save.php");
 	elgg_register_action('advpoll/vote', "$action_path/vote.php");
 	elgg_register_action('advpoll/condorcet_vote', "$action_path/vote.php");
-	elgg_register_action('advpoll/editar', "$action_path/editar.php");
+	elgg_register_action('advpoll/edit', "$action_path/edit.php");
 	elgg_register_action('advpoll/delete', "$action_path/delete.php");
 	
 	// Es recomendable usar como nombre el mismo que el de la vista de la accion
@@ -98,7 +98,7 @@ function advpoll_page_handler($page)
 			break;
 		case "edit":
 			set_input('guid', $page[1]);
-			include $base_dir . 'editare.php';
+			include $base_dir . 'edit.php';
 			break;
 		case "nueva":
 			set_input('container_guid', $page[1]);

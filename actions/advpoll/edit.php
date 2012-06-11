@@ -35,22 +35,18 @@ $poll = get_entity($guid);
 $start_date = get_input('start_date');
 $end_date = get_input('end_date');
 
-
 if (!$end_date) {
-	$end_date = time() + 31536000 ;
-	
-	}
+	$end_date = time() + 31536000 ;	
+}
 
 if (!$start_date) {
-	$start_date = time();
-	
+	$start_date = time();	
 }
 
 if ($start_date > $end_date) {
 	register_error(elgg_echo('advpoll:error:wrong_dates'));
 } else {
-	
-	//escribimos en base de datos	
+	// write to database	
 	$poll->description = $desc;
 	$poll->path = $path;
 	$poll->access_id = $access_id;
@@ -64,16 +60,11 @@ if ($start_date > $end_date) {
 	$guid2 = $poll->save();
 	
 	if ($guid2){
-		system_message(elgg_echo('advpoll:guardada'));
+		system_message(elgg_echo('advpoll:saved'));
 		forward($poll->getURL());
 	}
 	else {
-		register_error(elgg_echo('advpoll:error:guardar'));
+		register_error(elgg_echo('advpoll:error:save'));
 		forward(REFERER); // REFERER is a global variable that defines the previous page
 	}
 }
-
-
-
-
-

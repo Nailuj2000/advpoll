@@ -72,7 +72,7 @@ $num_opciones = count($opciones);
 <div>
 	<label><?php echo elgg_echo('advpoll:pregunta'); ?></label><br />
 	<label><?php echo elgg_view('output/text', array('value' => $title)); ?></label><br />
-	<?php echo elgg_echo('advpoll:advertencia:editar:titulo'); ?>
+	<?php echo elgg_echo('advpoll:warning:edit:titulo'); ?>
 </div>
 
 <div>
@@ -124,7 +124,7 @@ if ($categories) {
 </ul></div>
 
 <div> 
-	<?php echo elgg_echo('advpoll:advertencia:editar'); ?>
+	<?php echo elgg_echo('advpoll:warning:edit'); ?>
 </div>
 <div>
 	<label><?php echo elgg_echo('access'); ?></label><br />
@@ -172,13 +172,13 @@ if ($categories) {
 <div>
 	<label><?php echo elgg_echo('advpoll:auditoria'); ?></label><br />
 	<label><?php echo elgg_echo("option:$auditoria"); ?></label><br />
-	<?php echo elgg_echo('advpoll:advertencia:editar:auditoria'); ?><br />
+	<?php echo elgg_echo('advpoll:warning:edit:auditoria'); ?><br />
 	
 </div>
 <div>
 	<label><?php echo elgg_echo('advpoll:mostrar:resultados:durante'); ?></label><br />
 	<label><?php echo elgg_echo("option:$mostrar_resultados"); ?></label><br />
-	<?php echo elgg_echo('advpoll:advertencia:editar:mostrar:resultados'); ?><br />
+	<?php echo elgg_echo('advpoll:warning:edit:mostrar:resultados'); ?><br />
 	
 </div>
 <div>

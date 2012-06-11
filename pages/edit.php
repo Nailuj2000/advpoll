@@ -28,8 +28,8 @@ gatekeeper();
 elgg_load_library('advpoll:model');
 
 
-$title = elgg_echo('advpoll:editare');
-elgg_push_breadcrumb(elgg_echo('advpoll:editare'));
+$title = elgg_echo('advpoll:editing');
+elgg_push_breadcrumb(elgg_echo('advpoll:editing'));
 
 // Esto de abajo sirve para que aparezca en el menu lateral las opciones
 // de grupo y de usuario al que pertenece la votación
@@ -40,7 +40,7 @@ $container_guid = $poll->container_guid;
 $container = get_entity($container_guid);
 elgg_set_page_owner_guid($container->getGUID());
 $vars = advpoll_init_vars($poll);
-$content = elgg_view_form('advpoll/editar', array(), $vars);
+$content = elgg_view_form('advpoll/edit', array(), $vars);
 $body = elgg_view_layout('content', array(
 	'filter' => '',
 	'content' => $content,
