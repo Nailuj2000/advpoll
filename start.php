@@ -36,8 +36,8 @@ function advpoll_init() {
 	// Register actions
 	$action_path = elgg_get_plugins_path() . 'advpoll/actions/advpoll';
 	elgg_register_action('advpoll/guardar_votacion', "$action_path/guardar_votacion.php");
-	elgg_register_action('advpoll/votar', "$action_path/votar.php");
-	elgg_register_action('advpoll/condorcet_votar', "$action_path/votar.php");
+	elgg_register_action('advpoll/vote', "$action_path/vote.php");
+	elgg_register_action('advpoll/condorcet_vote', "$action_path/vote.php");
 	elgg_register_action('advpoll/editar', "$action_path/editar.php");
 	elgg_register_action('advpoll/delete', "$action_path/delete.php");
 	

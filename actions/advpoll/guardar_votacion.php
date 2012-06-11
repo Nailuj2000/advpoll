@@ -41,7 +41,7 @@ $owner_guid = elgg_get_logged_in_user_guid();
 $poll_tipo = get_input('poll_tipo');
 $fecha_inicio = get_input('fecha_inicio');
 $fecha_fin = get_input('fecha_fin');
-$access_votar_id = get_input('access_votar_id');
+$access_vote_id = get_input('access_vote_id');
 $mostrar_resultados = get_input('mostrar_resultados');
 $can_change_vote = get_input('can_change_vote');
 
@@ -92,7 +92,7 @@ if (!$title) {
 				$votacion->poll_tipo = $poll_tipo;
 				$votacion->start_date = $fecha_inicio;
 				$votacion->end_date = $fecha_fin;
-				$votacion->access_votar_id = $access_votar_id;
+				$votacion->access_vote_id = $access_vote_id;
 				$votacion->mostrar_resultados = $mostrar_resultados;
 				$votacion->can_change_vote = $can_change_vote;
 				$guid = $votacion->save();

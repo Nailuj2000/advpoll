@@ -28,7 +28,7 @@ $path = get_input('path');
 $tags = string_to_tag_array(get_input('tags'));
 $access_id = get_input('access_id');
 $guid = intval(get_input('guid'));
-$access_votar_id = get_input('access_votar_id');
+$access_vote_id = get_input('access_vote_id');
 $can_change_vote = get_input('can_change_vote');
 
 $poll_cerrada = get_input('poll_cerrada');
@@ -61,7 +61,7 @@ if ($fecha_inicio > $fecha_fin) {
 	$votacion->guid = $guid;
 	$votacion->end_date = $fecha_fin;
 	$votacion->start_date = $fecha_inicio;
-	$votacion->access_votar_id = $access_votar_id;
+	$votacion->access_vote_id = $access_vote_id;
 	$votacion->can_change_vote = $can_change_vote;
 	
 	$guid2 = $votacion->save();

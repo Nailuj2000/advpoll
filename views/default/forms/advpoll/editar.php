@@ -132,8 +132,8 @@ if ($categories) {
 </div>
 
 <div>
-	<label><?php echo elgg_echo('advpoll:acceso:votar'); ?></label><br />
-	<?php echo elgg_view('input/access', array('name' => 'access_votar_id', 'value' => $access_id)); ?>
+	<label><?php echo elgg_echo('advpoll:acceso:vote'); ?></label><br />
+	<?php echo elgg_view('input/access', array('name' => 'access_vote_id', 'value' => $access_id)); ?>
 </div>
 
 <div>

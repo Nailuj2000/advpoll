@@ -1,6 +1,6 @@
 <?php
 /**
- * mod/votaciones/views/default/forms/votar.php
+ * mod/advpoll/views/default/forms/condorcet_vote.php
  * 
  * Copyright 2012 DRY Team
  *              - aruberuto
@@ -35,7 +35,7 @@ if (user_has_voted($owner_guid, $guid)) {
 }
 ?>
 		<br>
-		<h3><?php echo elgg_echo('advpoll:condorcet:votar:opcion'); ?></h3>
+		<h3><?php echo elgg_echo('advpoll:condorcet:vote:opcion'); ?></h3>
 		<br>
 		<div class="opciones-condorcet"><ol id="ordenable">
 			<?php
@@ -64,7 +64,7 @@ if (user_has_voted($owner_guid, $guid)) {
 		));
 	
 	echo '<br>';	
-	echo elgg_view('input/submit', array('value' => elgg_echo("votar")));
+	echo elgg_view('input/submit', array('value' => elgg_echo("vote")));
 	if (user_has_voted($owner_guid, $guid)) {
 		echo '</div>';
 	}

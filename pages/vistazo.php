@@ -36,7 +36,7 @@ $mostrar_resultados = $poll->mostrar_resultados;
 $can_change_vote = $poll->can_change_vote;
 
 $acceso_lectura = $poll->access_id;
-$acceso_votar = $poll->access_votar_id;
+$access_vote = $poll->access_vote_id;
 $acceso_col = get_access_array($usuaria_guid);
 
 if (!in_array($acceso_lectura, $acceso_col)) {
@@ -60,7 +60,7 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 	
 	$content = elgg_view_entity($poll, array('full_view' => true));
 	if (user_has_voted($usuaria_guid, $guid) &&
-			is_poll_on_date($poll) && in_array($acceso_votar, $acceso_col) &&
+			is_poll_on_date($poll) && in_array($access_vote, $acceso_col) &&
 			$can_change_vote == 'yes') {
 		$content .= elgg_view('input/button', array(
 			'class' => 'pulsa-que-se-expande',
@@ -74,8 +74,8 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 	}
 	
 	if ($poll_tipo == 'condorcet') {
-		if (is_poll_on_date($poll) && in_array($acceso_votar, $acceso_col)) {
-			$content .= elgg_view_form('advpoll/condorcet_votar' , array() , array(
+		if (is_poll_on_date($poll) && in_array($access_vote, $acceso_col)) {
+			$content .= elgg_view_form('advpoll/condorcet_vote' , array() , array(
 				'guid' => $guid,
 				));
 		}	
@@ -85,8 +85,8 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 			));
 		}
 	} else { // normal
-		if (is_poll_on_date($poll) && in_array($acceso_votar, $acceso_col)) {
-			$content .= elgg_view_form('advpoll/votar' , array() , array(
+		if (is_poll_on_date($poll) && in_array($access_vote, $acceso_col)) {
+			$content .= elgg_view_form('advpoll/vote' , array() , array(
 				'guid' => $guid,
 				));
 		

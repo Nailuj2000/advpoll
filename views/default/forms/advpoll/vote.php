@@ -1,6 +1,6 @@
 <?php
 /**
- * mod/votaciones/views/default/forms/votar.php
+ * mod/advpoll/views/default/forms/vote.php
  * 
  * Copyright 2012 DRY Team
  *              - aruberuto
@@ -35,7 +35,7 @@ if (user_has_voted($owner_guid, $guid)) {
 }
 ?>
 <br>
-<h3><?php echo elgg_echo('advpoll:votar:opcion'); ?></h3><br />
+<h3><?php echo elgg_echo('advpoll:vote:opcion'); ?></h3><br />
 <?php
 echo elgg_view('input/radio', array(
 	'name' => 'response', 
@@ -50,7 +50,7 @@ echo elgg_view('input/hidden', array(
 	'value' => $owner_guid,
 ));
 echo '<br>';	
-echo elgg_view('input/submit', array('value' => elgg_echo("votar")));
+echo elgg_view('input/submit', array('value' => elgg_echo("vote")));
 if (user_has_voted($owner_guid, $guid)) {
 	echo '</div>';
 }

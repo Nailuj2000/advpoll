@@ -152,7 +152,7 @@ function advpoll_init_vars($poll) {
 		'poll_cerrada' => 'no',
 		'auditoria' => 'no',
 		'poll_tipo' => 'normal',
-		'access_votar_id' => ACCESS_DEFAULT,
+		'access_vote_id' => ACCESS_DEFAULT,
 		'mostrar_resultados' => 'no',
 		'can_change_vote' => 'yes',
 	);
@@ -337,14 +337,15 @@ function candidate_line($candidate, $preferential_ballot, $candidates) {
  * this function calculates a matrix that indicates, for each candidate,
  * which other candidates it is preferred to.
  * 
- * @param array $candidates  An array containing all candidates in the poll's
- * original order.  
+ * @param array $candidate_array  An array containing all candidates in the poll's
+ * original order as keys.
  * @param array $preferential_ballot  The ballot we want to check.
  * @return array ballot_matrix  A matrix that for each candidate, it contains a 1
  * if the candidate on the row is preferred over the candidate on the column, or 0
  * otherwise. See help/condorcet.
  */
-function ballot_matrix($candidates, $preferential_ballot) {
+function ballot_matrix($candidate_array, $preferential_ballot) {
+	$candidates = array_keys($candidate_array);
 	foreach ($candidates as $candidate) {
 		$ballot_matrix[] = candidate_line($candidate, $preferential_ballot, $candidates);
 	}
