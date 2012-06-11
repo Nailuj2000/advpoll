@@ -43,8 +43,8 @@ $poll_closed = elgg_extract('poll_closed', $vars, 'no');
 $auditoria = elgg_extract('auditoria', $vars, 'no');
 $group = get_entity($container_guid);
 $poll_tipo = elgg_extract('poll_tipo', $vars, 'normal');
-$fecha_inicio = elgg_extract('fecha_inicio', $vars);
-$fecha_fin = elgg_extract('fecha_fin', $vars);
+$start_date = elgg_extract('start_date', $vars);
+$end_date = elgg_extract('end_date', $vars);
 $access_vote_id = elgg_extract('access_vote_id', $vars, ACCESS_DEFAULT);
 $mostrar_resultados = elgg_extract('mostrar_resultados', $vars, 'no');
 $can_change_vote = elgg_extract('can_change_vote', $vars, 'yes');
@@ -95,22 +95,22 @@ if ($categories) {
 </div>
 
 <div>
-	<label><?php echo elgg_echo('advpoll:fecha:inicio'); ?>
+	<label><?php echo elgg_echo('advpoll:start_date'); ?>
 	<?php echo elgg_view('input/date', array(
-		'name' => 'fecha_inicio',
-		'value' => $fecha_inicio,
+		'name' => 'start_date',
+		'value' => $start_date,
 		'timestamp' => true,
-		'class' => 'fecha-continua',
+		'class' => 'continuos-date',
 		)); ?>
-	<?php echo elgg_echo('advpoll:fecha:fin'); ?>
+	<?php echo elgg_echo('advpoll:end_date'); ?>
 	<?php echo elgg_view('input/date', array(
-		'name' => 'fecha_fin',
-		'value' => $fecha_inicio,
+		'name' => 'end_date',
+		'value' => $end_date,
 		'timestamp' => true,
-		'class' => 'fecha-continua',
+		'class' => 'continuos-date',
 		)); ?>
 		</label>
-	<?php echo elgg_echo('advpoll:fecha:ayuda'); ?>
+	<?php echo elgg_echo('advpoll:help:date'); ?>
 </div>
 <?php /**
 <div>

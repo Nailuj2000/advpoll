@@ -159,7 +159,7 @@
     margin-top: 20px;
     padding-top: 10px;
 }
-.fecha-continua {
+.continuos-date {
 	width: 200px;
 }
 .auditoria-normal-th {

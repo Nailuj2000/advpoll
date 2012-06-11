@@ -50,7 +50,7 @@ if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !is_poll_on_date($po
 					<th class='auditoria-normal-th'> <?php echo elgg_echo('advpoll:normal:auditoria:usuaria'); ?> </th>
 					<th class='auditoria-normal-th'> <?php echo elgg_echo('advpoll:normal:auditoria:nick'); ?> </th>
 					<th class='auditoria-normal-th'> <?php echo elgg_echo('advpoll:normal:auditoria:nombre'); ?> </th>
-					<th class='auditoria-normal-th'> <?php echo elgg_echo('advpoll:normal:auditoria:fecha'); ?> </th>
+					<th class='auditoria-normal-th'> <?php echo elgg_echo('advpoll:normal:audit:date'); ?> </th>
 					<th class='auditoria-normal-th'> <?php echo elgg_echo('advpoll:normal:auditoria:opcion'); ?> </th>
 					
 				</tr>
@@ -67,7 +67,7 @@ if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !is_poll_on_date($po
 			foreach ($anotaciones as $anotacion){
 				$nombre = $anotacion->name;
 				$time = $anotacion->time_created;
-				$fecha = date('d-m-Y, h:i:s', $time);
+				$date = date('d-m-Y, h:i:s', $time);
 				$usuario_guid = $anotacion->owner_guid;
 				$usuario = get_entity($usuario_guid);
 				$usuario_nombre = $usuario->name;
@@ -79,7 +79,7 @@ if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !is_poll_on_date($po
 					<td class='auditoria-normal-td'><?php echo $usuario_icono; ?></td>
 					<td class='auditoria-normal-td'><?php echo $usuario_nick; ?></td>
 					<td class='auditoria-normal-td'><?php echo $usuario_nombre; ?></td>
-					<td class='auditoria-normal-td'><?php echo $fecha; ?></td>
+					<td class='auditoria-normal-td'><?php echo $date; ?></td>
 					<td class='auditoria-normal-td'><?php echo $nombre_op; ?></td>
 				</tr>
 				<?php

@@ -15,23 +15,23 @@ $tags = $poll->tags;
 $choices = polls_get_choice_array($poll);
 $full = elgg_extract('full_view', $vars, FALSE);
 $owner =  $poll->getOwnerEntity();
-$fecha_inicio = $poll->start_date;
-$fecha_fin = $poll->end_date;
+$start_date = $poll->start_date;
+$end_date = $poll->end_date;
 $time = time();
 $mostrar_resultados = $poll->mostrar_resultados;
 $can_change_vote = $poll->can_change_vote;
-if ($time < $fecha_fin ) {
+if ($time < $end_date ) {
 	$poll_comparada_fin = 'menorfin';
 } else {
-	if ($time >= $fecha_fin ){
+	if ($time >= $end_date ){
 		$poll_comparada_fin = 'mayorfin';
 	}
 }
 
-if ($time < $fecha_inicio) {
+if ($time < $start_date) {
 	$poll_comparada_ini = 'menorini';
 }else {
-	if ($time >= $fecha_inicio ){
+	if ($time >= $start_date ){
 		$poll_comparada_ini = 'mayorini';
 	}
 }
@@ -72,10 +72,10 @@ $metadata = elgg_view_menu('entity', array(
 
 	$subtitle .= "<br>" . elgg_echo('advpoll:vistazo:ended:' . $poll_comparada_fin . ':' . $poll_comparada_ini ) . ',';
 	if ($poll_comparada_ini == 'menorini') {
-	$subtitle .= elgg_echo('advpoll:vistazo:tiempo:desde') . date('d - M - Y', $fecha_inicio) . ', ';
+	$subtitle .= elgg_echo('advpoll:vistazo:tiempo:desde') . date('d - M - Y', $start_date) . ', ';
 } 
 	if ($poll_comparada_fin == 'menorfin') {
-	$subtitle .= elgg_echo('advpoll:vistazo:tiempo:hasta') .date('d - M - Y', $fecha_fin);
+	$subtitle .= elgg_echo('advpoll:vistazo:tiempo:hasta') .date('d - M - Y', $end_date);
 } 
 	$subtitle .= elgg_echo('advpoll:vistazo:auditoria') . elgg_echo('option:' . $auditoria) . ',';
 	$subtitle .= elgg_echo('advpoll:vistazo:tipo') . elgg_echo('advpoll:tipo:' . $tipo) . ',';

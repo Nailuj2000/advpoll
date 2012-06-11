@@ -39,19 +39,19 @@ $poll_closed = get_input('poll_closed');
 $auditoria = get_input('auditoria');
 $owner_guid = elgg_get_logged_in_user_guid();
 $poll_tipo = get_input('poll_tipo');
-$fecha_inicio = get_input('fecha_inicio');
-$fecha_fin = get_input('fecha_fin');
+$start_date = get_input('start_date');
+$end_date = get_input('end_date');
 $access_vote_id = get_input('access_vote_id');
 $mostrar_resultados = get_input('mostrar_resultados');
 $can_change_vote = get_input('can_change_vote');
 
 
-if (!$fecha_fin) {
-	$fecha_fin = time() + 31536000 ;
+if (!$end_date) {
+	$end_date = time() + 31536000 ;
 }
 
-if (!$fecha_inicio) {
-	$fecha_inicio = time();
+if (!$start_date) {
+	$start_date = time();
 }
 
 
@@ -74,8 +74,8 @@ if (!$title) {
 		if (array_has_repeated_value($opciones)) {
 			register_error(elgg_echo('advpoll:error:opciones:repes'));
 		} else {
-			if ($fecha_inicio > $fecha_fin) {
-				register_error(elgg_echo('advpoll:error:fechas:mal'));
+			if ($start_date > $end_date) {
+				register_error(elgg_echo('advpoll:error:wrong_dates'));
 			} else {
 				
 				$poll = new ElggObject();
@@ -90,8 +90,8 @@ if (!$title) {
 				$poll->poll_closed = $poll_closed;
 				$poll->auditoria = $auditoria;
 				$poll->poll_tipo = $poll_tipo;
-				$poll->start_date = $fecha_inicio;
-				$poll->end_date = $fecha_fin;
+				$poll->start_date = $start_date;
+				$poll->end_date = $end_date;
 				$poll->access_vote_id = $access_vote_id;
 				$poll->mostrar_resultados = $mostrar_resultados;
 				$poll->can_change_vote = $can_change_vote;

@@ -27,7 +27,7 @@ $title = elgg_echo('advpoll:titulo');
 
 elgg_push_breadcrumb(elgg_echo('advpoll:all'));
 
-// Obtiene una lista de polls ordenada por fecha
+// Get a list of polls ordered by date
 $content = elgg_list_entities(array(
 	'type' => 'object',
 	'subtype' => 'poll',

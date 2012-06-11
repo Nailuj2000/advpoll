@@ -30,8 +30,8 @@ $poll_closed = $poll->poll_closed;
 $poll_tipo = $poll->poll_tipo;
 $usuaria_guid = elgg_get_logged_in_user_guid();
 $auditoria = $poll->auditoria;
-$fecha_fin = $poll->end_date;
-$fecha_inicio = $poll->start_date;
+$end_date = $poll->end_date;
+$start_date = $poll->start_date;
 $mostrar_resultados = $poll->mostrar_resultados;
 $can_change_vote = $poll->can_change_vote;
 

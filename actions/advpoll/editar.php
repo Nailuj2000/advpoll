@@ -32,22 +32,22 @@ $access_vote_id = get_input('access_vote_id');
 $can_change_vote = get_input('can_change_vote');
 $poll_closed = get_input('poll_closed');
 $poll = get_entity($guid);
-$fecha_inicio = get_input('fecha_inicio');
-$fecha_fin = get_input('fecha_fin');
+$start_date = get_input('start_date');
+$end_date = get_input('end_date');
 
 
-if (!$fecha_fin) {
-	$fecha_fin = time() + 31536000 ;
+if (!$end_date) {
+	$end_date = time() + 31536000 ;
 	
 	}
 
-if (!$fecha_inicio) {
-	$fecha_inicio = time();
+if (!$start_date) {
+	$start_date = time();
 	
 }
 
-if ($fecha_inicio > $fecha_fin) {
-	register_error(elgg_echo('advpoll:error:fechas:mal'));
+if ($start_date > $end_date) {
+	register_error(elgg_echo('advpoll:error:wrong_dates'));
 } else {
 	
 	//escribimos en base de datos	
@@ -56,8 +56,8 @@ if ($fecha_inicio > $fecha_fin) {
 	$poll->access_id = $access_id;
 	$poll->tags = $tags;
 	$poll->guid = $guid;
-	$poll->end_date = $fecha_fin;
-	$poll->start_date = $fecha_inicio;
+	$poll->end_date = $end_date;
+	$poll->start_date = $start_date;
 	$poll->access_vote_id = $access_vote_id;
 	$poll->can_change_vote = $can_change_vote;
 	
