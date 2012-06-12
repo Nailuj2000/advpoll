@@ -18,11 +18,11 @@
  */
 
 $mapping = array(
-	'advpoll:titulo' => 'Polls',
+	'advpoll:title' => 'Polls',
 	'advpoll:menu' => 'Polls',
-	'advpoll:nueva' => 'New Poll',
+	'advpoll:new' => 'New Poll',
 	'advpoll:editing' => 'Editing a Poll',
-	'advpoll:enviada:nueva' => 'New Poll created.',
+	'advpoll:new:poll' => 'New Poll created.',
 );
 
 add_translation('en', $mapping);

@@ -36,13 +36,13 @@ $owner = intval(get_input('container_guid'));
 //$guid = intval(get_input('guid'));
 
 $poll_closed = get_input('poll_closed');
-$auditoria = get_input('auditoria');
+$audit = get_input('audit');
 $owner_guid = elgg_get_logged_in_user_guid();
-$poll_tipo = get_input('poll_tipo');
+$poll_type = get_input('poll_type');
 $start_date = get_input('start_date');
 $end_date = get_input('end_date');
 $access_vote_id = get_input('access_vote_id');
-$mostrar_resultados = get_input('mostrar_resultados');
+$show_results = get_input('show_results');
 $can_change_vote = get_input('can_change_vote');
 
 
@@ -88,12 +88,12 @@ if (!$title) {
 				$poll->container_guid = $owner;
 				$poll->tags = $tags;
 				$poll->poll_closed = $poll_closed;
-				$poll->auditoria = $auditoria;
-				$poll->poll_tipo = $poll_tipo;
+				$poll->audit = $audit;
+				$poll->poll_type = $poll_type;
 				$poll->start_date = $start_date;
 				$poll->end_date = $end_date;
 				$poll->access_vote_id = $access_vote_id;
-				$poll->mostrar_resultados = $mostrar_resultados;
+				$poll->show_results = $show_results;
 				$poll->can_change_vote = $can_change_vote;
 				$guid = $poll->save();
 				

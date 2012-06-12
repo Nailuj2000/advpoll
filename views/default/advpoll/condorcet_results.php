@@ -1,6 +1,6 @@
 <?php
 /**
- * mod/advpoll/views/default/advpoll/resultados.php
+ * mod/advpoll/views/default/advpoll/condorcet_results.php
  * 
  * Copyright 2012 DRY Team
  *              - aruberuto
@@ -33,8 +33,8 @@ $poll = get_entity($guid);
 $opciones = polls_get_choice_array($poll);
 $num_votos = 0;
 $abcd = 65;
-$auditoria = $poll->auditoria;
-$mostrar_resultados = $poll->mostrar_resultados;
+$audit = $poll->audit;
+$show_results = $poll->show_results;
 $can_change_vote = $poll->can_change_vote;
 foreach ($opciones as $opcion) {
 	$abecedario[] = chr($abcd);
@@ -56,9 +56,9 @@ $condorcet = elgg_get_annotations(array(
 	$i = 0;
 echo "<br>";
 
-if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !is_poll_on_date($poll))) {
+if ($audit == 'yes' && ($show_results == 'yes' or !is_poll_on_date($poll))) {
 		
-	echo "<div class='auditoria-extendible'>";	
+	echo "<div class='audit-extendible'>";	
 	
 	foreach ($condorcet as $papeleta){
 		$papeleta_matriz = string_to_ballot_matrix($papeleta->value);
@@ -106,7 +106,7 @@ foreach ($condorcet as $papeleta2){
 
 
 echo '<br>';
-echo "<h2>" . elgg_echo('advpoll:condorcet:resultado:final') . "</h2>";
+echo "<h2>" . elgg_echo('advpoll:condorcet:results:final') . "</h2>";
 
 echo elgg_view('advpoll/condorcet_matrix', array('matriz' => $matriz_aux2, 'opciones' => $abecedario));
 print_r(condorcet_results_sum_points($matriz_aux2));

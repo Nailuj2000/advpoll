@@ -18,22 +18,22 @@
  */
 
 $mapping = array(
-	'advpoll:titulo' => 'Votaciones',
+	'advpoll:title' => 'Votaciones',
 	'advpoll:menu' => 'Votaciones',
-	'advpoll:nueva' => 'Nueva Votación',
+	'advpoll:new' => 'Nueva Votación',
 	'advpoll:editing' => 'Editor de votaciones',
-	'advpoll:enviada:nueva' => 'Votación creada satisfactoriamente',
+	'advpoll:new:poll' => 'Votación creada satisfactoriamente',
 	'advpoll:discusion:previa' => 'Dirección de enlace a la discusión previa a la votación',
 	'advpoll:opciones' => 'Opciones de la votación: ',
-	'advpoll:nueva:opcion' => '+',
-	'advpoll:resultados' => 'Resultados de la votación',
+	'advpoll:new:opcion' => '+',
+	'advpoll:results' => 'Resultados de la votación',
 	'advpoll:vote:opcion' => 'Elige la opción que prefieras',
 	'advpoll:respuesta' => 'Opción',
-	'advpoll:debate:previo:link' => 'Enlace al debate previo',
+	'advpoll:previous:discussion:link' => 'Enlace al debate previo',
 	'advpoll:warning:edit' => 'Por motivos de seguridad no se pueden modificar las opciones de una votación una vez creada',
 	'advpoll:pregunta' => 'Título de la pregunta',
-	'advpoll:warning:edit:titulo' => 'Por motivos de seguridad no se puede modificar la pregunta de la votación una vez creada',
-	'advpoll:warning:edit:auditoria' => 'Por motivos de privacidad no se puede modificar esta opción una vez creada la votación',
+	'advpoll:warning:edit:title' => 'Por motivos de seguridad no se puede modificar la pregunta de la votación una vez creada',
+	'advpoll:warning:edit:audit' => 'Por motivos de privacidad no se puede modificar esta opción una vez creada la votación',
 	'advpoll:filters:current' => 'En Curso',
 	'advpoll:filters:ended' => 'Finalizadas',
 	'advpoll:filters:all' => 'Todas',
@@ -44,25 +44,25 @@ $mapping = array(
 	'advpoll:condorcet:leyenda:opcion' => 'Opción ',
 	'advpoll:condorcet:leyenda' => 'Leyenda',
 	'advpoll:condorcet:opciones:elegidas:usuario' => 'Estas son las opciones que eligió ',
-	'advpoll:condorcet:resultado:final' => 'Resultados',
+	'advpoll:condorcet:results:final' => 'Resultados',
 	'advpoll:condorcet:opciones:elegidas:papeleta' => 'Papeleta de voto en forma de matriz de ',
 	'advpoll:condorcet:vote:opcion' => 'Ordena las opciones según tus preferencias y pulsa el botón "votar"',
-	'advpoll:condorcet:auditoria:mostrar' => 'Mostrar auditoría',
+	'advpoll:condorcet:audit:mostrar' => 'Mostrar auditoría',
 	'advpoll:condorcet:pulsar:cambio' => 'Cambiar votación',
 	'advpoll:anteriores:borradas:ok' => 'Se ha borrado tu elección anterior',
 	'advpoll:pulsar:cambio' => 'Pulsa aquí para cambiar tu voto anterior',
-	'advpoll:resultados:tarta:titulo' => 'Resultados de la votación',
+	'advpoll:results:tarta:title' => 'Resultados de la votación',
 	'advpoll:group' => 'Votaciones del grupo',	
 	'advpoll:condorcet:info' => 'info',
-	'advpoll:condorcet:ayuda:titulo' => '¿Cómo funciona una votación preferencial?',
-	'advpoll:condorcet:ayuda:papeletas:seguramente' => 'Seguramente te estarás preguntando qué significa una tabla como ésta:',
-	'advpoll:condorcet:ayuda:papeletas:notemas' => 
+	'advpoll:condorcet:help:title' => '¿Cómo funciona una votación preferencial?',
+	'advpoll:condorcet:help:ballots:seguramente' => 'Seguramente te estarás preguntando qué significa una tabla como ésta:',
+	'advpoll:condorcet:help:ballots:notemas' => 
 		'No temas, es bastante sencillo, básicamente esta tabla representa una papeleta de voto preferencial. El método inicial 
 		que utilizaremos para representar los votos	es conocido como el método de <a href="http://es.wikipedia.org/wiki/M%C3%A9todo_de_Condorcet"> condorcet</a>
 		 y es el método que explicaremos aquí.<br>',
-	'advpoll:condorcet:ayuda:papeletas:explicacion:titulo' => 'Cómo se crea una papeleta de condorcet',
+	'advpoll:condorcet:help:ballots:explicacion:title' => 'Cómo se crea una papeleta de condorcet',
 		
-	'advpoll:condorcet:ayuda:papeletas:supongamos' => 'Supongamos que tenemos una lista de 4 opciones: <br/> A, B, C y D <br/>
+	'advpoll:condorcet:help:ballots:supongamos' => 'Supongamos que tenemos una lista de 4 opciones: <br/> A, B, C y D <br/>
 		De las cuales queremos sacar a votación para ver qué preferencias tiene una comunidad con respecto a ellas. <br/>
 		En una votación preferencial lo que importa es el orden en que coloques las opciones, ya que no estás votando
 		por una sóla, sino por una lista ordenada según tus preferencias. <br/>
@@ -74,28 +74,28 @@ $mapping = array(
 		En este caso la manera de hallar la matriz o tabla que representa su papeleta puede realizarse del siguiente modo: <br><br>
 		1. Hacemos una tabla colocando las opciones A, B, C, y D tanto en las filas como en las columnas en el mismo orden en ambas.<br/>
 		Nos quedará algo como lo siguiente:',
-	'advpoll:condorcet:ayuda:papeletas:paso2' => '2. El siguiente paso consiste en ir comparando la opción de la fila con la opción de la columna,
+	'advpoll:condorcet:help:ballots:paso2' => '2. El siguiente paso consiste en ir comparando la opción de la fila con la opción de la columna,
 		escribiendo un 1 en el caso en el que la fila gane a la columna en la elección de <em>Face-Lance</em> y escribiendo un 0 en el caso contrario.<br>
 		Por ejemplo, en la votación que hizo <em>Face-Lance</em> la opción B gana a la opción A, por lo que escribiremos un 1 en la casilla correspondiente,
 		con lo que nos quedará algo así:',
-	'advpoll:condorcet:ayuda:papeletas:paso3' => '3. Lo que nos queda ahora es ir rellenando todas las casillas con el método anterior,
+	'advpoll:condorcet:help:ballots:paso3' => '3. Lo que nos queda ahora es ir rellenando todas las casillas con el método anterior,
 		con una anotación más:<br> En las casillas donde se enfrentan opciones iguales siempre se escribe un 0, por lo que es una condición indispensable
 		que la diagonal principal sea una diagonal compuesta de ceros.<br>
 		Por ejemplo en la casilla de la fila A columna A tendremos que escribir un 0. <br>
 		Completando poco a poco la tabla nos irá quedando lo siguiente: <br>',
-	'advpoll:condorcet:ayuda:papeletas:opciona' => ' La opción A pierde con B, y gana a C, y D. Su fila se completa así:',
-	'advpoll:condorcet:ayuda:papeletas:opcionb' => ' La opción B gana a todas las demás. Su fila se completa así:',
-	'advpoll:condorcet:ayuda:papeletas:opcionc' => ' La opción C pierde con A y con B, pero gana a D. Su fila se completará así:',
-	'advpoll:condorcet:ayuda:papeletas:opciond' => ' La opción D pierde con todas las demás, por lo que su fila sólo contiene ceros:',
-	'advpoll:condorcet:ayuda:papeletas:paso4' =>	'<br> 4. El siguiente paso es una cuestión de visibilización que nos servirá posteriormente para sacar conclusiones
+	'advpoll:condorcet:help:ballots:opciona' => ' La opción A pierde con B, y gana a C, y D. Su fila se completa así:',
+	'advpoll:condorcet:help:ballots:opcionb' => ' La opción B gana a todas las demás. Su fila se completa así:',
+	'advpoll:condorcet:help:ballots:opcionc' => ' La opción C pierde con A y con B, pero gana a D. Su fila se completará así:',
+	'advpoll:condorcet:help:ballots:opciond' => ' La opción D pierde con todas las demás, por lo que su fila sólo contiene ceros:',
+	'advpoll:condorcet:help:ballots:paso4' =>	'<br> 4. El siguiente paso es una cuestión de visibilización que nos servirá posteriormente para sacar conclusiones
 		del método de condorcet. Consiste en colorear de verde aquellas casillas cuya puntuación sea mayor que la casilla simétrica con respecto a la diagonal.<br>
 		<em>¿y eso qué significa?</em> En este paso inicial, simplemente significa que coloreemos de verde los 1 
 		y de rojo los 0, salvo aquellos ceros que están en la diagonal. <br>
 		Si nos fijamos, por ejemplo la casilla "Fila A, Columna B" tiene distinto color que la casilla simétrica "Fila B, Columna A".<br>
 		Esto va a ser una regla de este tipo de tablas, y nos va a servir posteriormente para detectar si ha habido algún error en el proceso, pero
 		también nos servirá para calcular el resultado final.',
-	'advpoll:condorcet:ayuda:suma:explicacion:titulo' => 'Cómo se suman los votos en una votación de condorcet',
-	'advpoll:condorcet:ayuda:suma:explicacion:maspapeletas' => 'Ahora que sabemos como se crean las papeletas, vamos a ver cómo operar con ellas,
+	'advpoll:condorcet:help:suma:explicacion:title' => 'Cómo se suman los votos en una votación de condorcet',
+	'advpoll:condorcet:help:suma:explicacion:maspapeletas' => 'Ahora que sabemos como se crean las papeletas, vamos a ver cómo operar con ellas,
 		es decir, cómo podemos sumar los votos y sacar conclusiones. <br><br>
 		Supongamos para ello que el héroe de nuestra fábula, encuentra un <em>bug</em> en el sistema que le permite crear tantas
 		papeletas de votos como quisiera y que en lugar de reportar el error al lugar donde podrían solucionarlo, 
@@ -114,13 +114,13 @@ $mapping = array(
 	'polls' => 'Votaciones',
 	
 	'advpoll:view:cerrada' => 'Finalizada: ',
-	'advpoll:view:auditoria' => ' Auditoría pública: ',
+	'advpoll:view:audit' => ' Auditoría pública: ',
 	'advpoll:view:tipo' => ' Tipo: ',
-	'advpoll:tipo:normal' => ' Normal',
-	'advpoll:tipo:condorcet' => ' Preferencial',
+	'advpoll:type:normal' => ' Normal',
+	'advpoll:type:condorcet' => ' Preferencial',
 	'advpoll:cerrada' => '¿Votación cerrada? (nadie podrá votar hasta que se active)',
-	'advpoll:auditoria' => '¿Realizar auditoría pública? (los votos serán publicados detalladamente)',
-	'advpoll:tipo' => 'Tipo de votación',
+	'advpoll:audit' => '¿Realizar auditoría pública? (los votos serán publicados detalladamente)',
+	'advpoll:type' => 'Tipo de votación',
 	'advpoll:option:normal' => 'Normal: se vota una opción entre varias',
 	'advpoll:option:condorcet' => 'Preferencial: se vota el orden de todas las opciones',
 	'advpoll:start_date' => 'La votación comienza el día ',
@@ -128,30 +128,30 @@ $mapping = array(
 	'advpoll:help:date' => 'Dejar en blanco para controlar la votación de manera manual',
 	'advpoll:acceso:ver' => '¿Quién puede ver los resultados de la votación?',
 	'advpoll:acceso:vote' => '¿Quién puede votar?',
-	'advpoll:view:tiempo:desde' => ' Periodo de votación desde el ',
-	'advpoll:view:tiempo:hasta' => ' hasta el ',
+	'advpoll:view:time:from' => ' Periodo de votación desde el ',
+	'advpoll:view:time:to' => ' hasta el ',
 	'advpoll:view:ended:si' => 'Finalizada',
 	'advpoll:view:ended:no' => 'Activa',
-	'advpoll:view:ended:menorfin:menorini' => 'No iniciada',
-	'advpoll:view:ended:menorfin:mayorini' => 'Activa',
-	'advpoll:view:ended:mayorfin:menorini' => 'Imposible',
-	'advpoll:view:ended:mayorfin:mayorini' => 'Finalizada',
+	'advpoll:view:ended:lessthanend:lessthanstart' => 'No iniciada',
+	'advpoll:view:ended:lessthanend:morethanstart' => 'Activa',
+	'advpoll:view:ended:morethanend:lessthanstart' => 'Imposible',
+	'advpoll:view:ended:morethanend:morethanstart' => 'Finalizada',
 	'advpoll:groups:enablepolls' => 'Activar las votaciones de grupo',
 	'advpoll:accion:error:permisos' => 'Lo sentimos, no tienes permisos para votar',
-	'advpoll:mostrar:resultados:durante' => '¿Mostrar resultados durante la votación (y auditoría si está activada)?',
+	'advpoll:show:results:ongoing' => '¿Mostrar resultados durante la votación (y auditoría si está activada)?',
 	'advpoll:can:change:vote' => '¿Se permite que los usuarios cambien su voto una vez emitido?',
-	'advpoll:warning:edit:mostrar:resultados' => 'Por cuestiones de privacidad no se permite modificar este parámetro una vez creada la votación',
-	'advpoll:view:mostrar:resultados' => ' Resultados antes de finalizar:',
+	'advpoll:warning:edit:show:results' => 'Por cuestiones de privacidad no se permite modificar este parámetro una vez creada la votación',
+	'advpoll:view:show:results' => ' Resultados antes de finalizar:',
 	'advpoll:view:can:change:vote' => ' Cambiar voto:',
-	'advpoll:mostrar:yes' => ' Sí',
-	'advpoll:mostrar:no' => ' No',
+	'advpoll:show:yes' => ' Sí',
+	'advpoll:show:no' => ' No',
 	'advpoll:delete:success' => 'Votación borrada correctamente',
 	'advpoll:opcion:delete:success' => 'Opción de la votación borrada correctamente',
-	'advpoll:normal:auditoria:nick' => 'Nick',
-	'advpoll:normal:auditoria:nombre' => 'Nombre',
+	'advpoll:normal:audit:nick' => 'Nick',
+	'advpoll:normal:audit:nombre' => 'Nombre',
 	'advpoll:normal:audit:date' => 'Fecha del voto',
-	'advpoll:normal:auditoria:opcion' => 'Sentido del voto',
-	'advpoll:normal:auditoria:usuaria' => 'Habitante',
+	'advpoll:normal:audit:opcion' => 'Sentido del voto',
+	'advpoll:normal:audit:usuaria' => 'Habitante',
 	'advpoll:accion:error:cant_change_vote' => 'Esta votación no permite cambiar el voto',
 	'advpoll:accion:error:permisos' => 'No tienes permiso para votar'
 	

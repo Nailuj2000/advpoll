@@ -24,358 +24,15 @@
  */
 
 elgg_load_library('advpoll:model');
-elgg_push_breadcrumb(elgg_echo('advpoll:ayuda'));
+elgg_push_breadcrumb(elgg_echo('advpoll:help'));
 
 // Esto de abajo sirve para que aparezca en el menu lateral las opciones
 // de grupo y de usuario al que pertenece la votación
 
 
-$title = elgg_echo('advpoll:condorcet:ayuda:titulo');
+$title = elgg_echo('advpoll:condorcet:help:title');
 
-$content = elgg_echo('advpoll:condorcet:ayuda:papeletas:seguramente');
-
-$content .= elgg_view('advpoll/condorcet_matrix', array(
-	'matriz' => array(
-		array(0, 0, 1, 1),
-		array(1, 0, 1, 1),
-		array(0, 0, 0, 1),
-		array(0, 0, 0, 0),
-	),
-	'opciones' => array(
-		'A',
-		'B', 
-		'C', 
-		'D',
-	)));
-$content .= '<br>';	
-$content .= elgg_echo('advpoll:condorcet:ayuda:papeletas:notemas') . '<br>';
-
-$content .= '<h3>' . elgg_echo('advpoll:condorcet:ayuda:papeletas:explicacion:titulo') . '</h3><br>';
-
-$content .= elgg_echo('advpoll:condorcet:ayuda:papeletas:supongamos') . '<br>';
-
-$content .= 
-	"<br><table class='condorcet-papeleta-table'>
-		<thead class='condorcet-thead'>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'></th>
-				<th class='condorcet-th'>Opción A</th>
-				<th class='condorcet-th'>Opción B</th>
-				<th class='condorcet-th'>Opción C</th>
-				<th class='condorcet-th'>Opción D</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción A</th>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-			</tr>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción B</th>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-			</tr>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción C</th>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-			</tr>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción D</th>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-			</tr>
-		</tbody>
-	</table>
-<br>";
-
-$content .= elgg_echo('advpoll:condorcet:ayuda:papeletas:paso2') . '<br>';
-
-$content .= 
-	"<br><table class='condorcet-papeleta-table'>
-		<thead class='condorcet-thead'>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'></th>
-				<th class='condorcet-th'>Opción A</th>
-				<th class='condorcet-th'>Opción B</th>
-				<th class='condorcet-th'>Opción C</th>
-				<th class='condorcet-th'>Opción D</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción A</th>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-			</tr>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción B</th>
-					<td class='condorcet-td'>1</td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-			</tr>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción C</th>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-			</tr>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción D</th>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-			</tr>
-		</tbody>
-	</table>
-<br>";
-
-$content .= elgg_echo('advpoll:condorcet:ayuda:papeletas:paso3') . '<br>';
-
-$content .= 
-	"<br><table class='condorcet-papeleta-table'>
-		<thead class='condorcet-thead'>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'></th>
-				<th class='condorcet-th'>Opción A</th>
-				<th class='condorcet-th'>Opción B</th>
-				<th class='condorcet-th'>Opción C</th>
-				<th class='condorcet-th'>Opción D</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción A</th>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-			</tr>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción B</th>
-					<td class='condorcet-td'>1</td>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-			</tr>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción C</th>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'></td>
-			</tr>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción D</th>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'>0</td>
-			</tr>
-		</tbody>
-	</table>
-<br>";
-
-$content .= elgg_echo('advpoll:condorcet:ayuda:papeletas:opciona') . '<br>';
-
-$content .= 
-	"<br><table class='condorcet-papeleta-table'>
-		<thead class='condorcet-thead'>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'></th>
-				<th class='condorcet-th'>Opción A</th>
-				<th class='condorcet-th'>Opción B</th>
-				<th class='condorcet-th'>Opción C</th>
-				<th class='condorcet-th'>Opción D</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción A</th>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'>1</td>
-					<td class='condorcet-td'>1</td>
-			</tr>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción B</th>
-					<td class='condorcet-td'>1</td>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-			</tr>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción C</th>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'></td>
-			</tr>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción D</th>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'>0</td>
-			</tr>
-		</tbody>
-	</table>
-<br>";
-
-$content .= elgg_echo('advpoll:condorcet:ayuda:papeletas:opcionb') . '<br>';
-
-$content .= 
-	"<br><table class='condorcet-papeleta-table'>
-		<thead class='condorcet-thead'>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'></th>
-				<th class='condorcet-th'>Opción A</th>
-				<th class='condorcet-th'>Opción B</th>
-				<th class='condorcet-th'>Opción C</th>
-				<th class='condorcet-th'>Opción D</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción A</th>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'>1</td>
-					<td class='condorcet-td'>1</td>
-			</tr>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción B</th>
-					<td class='condorcet-td'>1</td>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'>1</td>
-					<td class='condorcet-td'>1</td>
-			</tr>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción C</th>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'></td>
-			</tr>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción D</th>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'>0</td>
-			</tr>
-		</tbody>
-	</table>
-<br>";
-
-$content .= elgg_echo('advpoll:condorcet:ayuda:papeletas:opcionc') . '<br>';
-
-$content .= 
-	"<br><table class='condorcet-papeleta-table'>
-		<thead class='condorcet-thead'>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'></th>
-				<th class='condorcet-th'>Opción A</th>
-				<th class='condorcet-th'>Opción B</th>
-				<th class='condorcet-th'>Opción C</th>
-				<th class='condorcet-th'>Opción D</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción A</th>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'>1</td>
-					<td class='condorcet-td'>1</td>
-			</tr>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción B</th>
-					<td class='condorcet-td'>1</td>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'>1</td>
-					<td class='condorcet-td'>1</td>
-			</tr>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción C</th>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'>1</td>
-			</tr>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción D</th>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'></td>
-					<td class='condorcet-td'>0</td>
-			</tr>
-		</tbody>
-	</table>
-<br>";
-
-
-$content .= elgg_echo('advpoll:condorcet:ayuda:papeletas:opciond') . '<br>';
-
-$content .= 
-	"<br><table class='condorcet-papeleta-table'>
-		<thead class='condorcet-thead'>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'></th>
-				<th class='condorcet-th'>Opción A</th>
-				<th class='condorcet-th'>Opción B</th>
-				<th class='condorcet-th'>Opción C</th>
-				<th class='condorcet-th'>Opción D</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción A</th>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'>1</td>
-					<td class='condorcet-td'>1</td>
-			</tr>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción B</th>
-					<td class='condorcet-td'>1</td>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'>1</td>
-					<td class='condorcet-td'>1</td>
-			</tr>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción C</th>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'>1</td>
-			</tr>
-			<tr class='condorcet-tr'>
-				<th class='condorcet-th'>Opción D</th>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'>0</td>
-					<td class='condorcet-td'>0</td>
-			</tr>
-		</tbody>
-	</table>
-<br>";
-
-$content .= elgg_echo('advpoll:condorcet:ayuda:papeletas:paso4') . '<br>';
+$content = elgg_echo('advpoll:condorcet:help:ballots:seguramente');
 
 $content .= elgg_view('advpoll/condorcet_matrix', array(
 	'matriz' => array(
@@ -391,21 +48,364 @@ $content .= elgg_view('advpoll/condorcet_matrix', array(
 		'D',
 	)));
 $content .= '<br>';	
+$content .= elgg_echo('advpoll:condorcet:help:ballots:notemas') . '<br>';
 
-$content .= '<h3>' . elgg_echo('advpoll:condorcet:ayuda:suma:explicacion:titulo') . '</h3><br>';
+$content .= '<h3>' . elgg_echo('advpoll:condorcet:help:ballots:explicacion:title') . '</h3><br>';
 
-$content .= elgg_echo('advpoll:condorcet:ayuda:suma:explicacion:maspapeletas');
+$content .= elgg_echo('advpoll:condorcet:help:ballots:supongamos') . '<br>';
+
+$content .= 
+	"<br><table class='condorcet-papeleta-table'>
+		<thead class='condorcet-thead'>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'></th>
+				<th class='condorcet-th'>Opción A</th>
+				<th class='condorcet-th'>Opción B</th>
+				<th class='condorcet-th'>Opción C</th>
+				<th class='condorcet-th'>Opción D</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción A</th>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+			</tr>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción B</th>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+			</tr>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción C</th>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+			</tr>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción D</th>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+			</tr>
+		</tbody>
+	</table>
+<br>";
+
+$content .= elgg_echo('advpoll:condorcet:help:ballots:paso2') . '<br>';
+
+$content .= 
+	"<br><table class='condorcet-papeleta-table'>
+		<thead class='condorcet-thead'>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'></th>
+				<th class='condorcet-th'>Opción A</th>
+				<th class='condorcet-th'>Opción B</th>
+				<th class='condorcet-th'>Opción C</th>
+				<th class='condorcet-th'>Opción D</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción A</th>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+			</tr>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción B</th>
+					<td class='condorcet-td'>1</td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+			</tr>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción C</th>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+			</tr>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción D</th>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+			</tr>
+		</tbody>
+	</table>
+<br>";
+
+$content .= elgg_echo('advpoll:condorcet:help:ballots:paso3') . '<br>';
+
+$content .= 
+	"<br><table class='condorcet-papeleta-table'>
+		<thead class='condorcet-thead'>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'></th>
+				<th class='condorcet-th'>Opción A</th>
+				<th class='condorcet-th'>Opción B</th>
+				<th class='condorcet-th'>Opción C</th>
+				<th class='condorcet-th'>Opción D</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción A</th>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+			</tr>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción B</th>
+					<td class='condorcet-td'>1</td>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+			</tr>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción C</th>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'></td>
+			</tr>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción D</th>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'>0</td>
+			</tr>
+		</tbody>
+	</table>
+<br>";
+
+$content .= elgg_echo('advpoll:condorcet:help:ballots:opciona') . '<br>';
+
+$content .= 
+	"<br><table class='condorcet-papeleta-table'>
+		<thead class='condorcet-thead'>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'></th>
+				<th class='condorcet-th'>Opción A</th>
+				<th class='condorcet-th'>Opción B</th>
+				<th class='condorcet-th'>Opción C</th>
+				<th class='condorcet-th'>Opción D</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción A</th>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'>1</td>
+					<td class='condorcet-td'>1</td>
+			</tr>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción B</th>
+					<td class='condorcet-td'>1</td>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+			</tr>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción C</th>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'></td>
+			</tr>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción D</th>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'>0</td>
+			</tr>
+		</tbody>
+	</table>
+<br>";
+
+$content .= elgg_echo('advpoll:condorcet:help:ballots:opcionb') . '<br>';
+
+$content .= 
+	"<br><table class='condorcet-papeleta-table'>
+		<thead class='condorcet-thead'>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'></th>
+				<th class='condorcet-th'>Opción A</th>
+				<th class='condorcet-th'>Opción B</th>
+				<th class='condorcet-th'>Opción C</th>
+				<th class='condorcet-th'>Opción D</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción A</th>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'>1</td>
+					<td class='condorcet-td'>1</td>
+			</tr>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción B</th>
+					<td class='condorcet-td'>1</td>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'>1</td>
+					<td class='condorcet-td'>1</td>
+			</tr>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción C</th>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'></td>
+			</tr>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción D</th>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'>0</td>
+			</tr>
+		</tbody>
+	</table>
+<br>";
+
+$content .= elgg_echo('advpoll:condorcet:help:ballots:opcionc') . '<br>';
+
+$content .= 
+	"<br><table class='condorcet-papeleta-table'>
+		<thead class='condorcet-thead'>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'></th>
+				<th class='condorcet-th'>Opción A</th>
+				<th class='condorcet-th'>Opción B</th>
+				<th class='condorcet-th'>Opción C</th>
+				<th class='condorcet-th'>Opción D</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción A</th>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'>1</td>
+					<td class='condorcet-td'>1</td>
+			</tr>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción B</th>
+					<td class='condorcet-td'>1</td>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'>1</td>
+					<td class='condorcet-td'>1</td>
+			</tr>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción C</th>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'>1</td>
+			</tr>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción D</th>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'></td>
+					<td class='condorcet-td'>0</td>
+			</tr>
+		</tbody>
+	</table>
+<br>";
+
+
+$content .= elgg_echo('advpoll:condorcet:help:ballots:opciond') . '<br>';
+
+$content .= 
+	"<br><table class='condorcet-papeleta-table'>
+		<thead class='condorcet-thead'>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'></th>
+				<th class='condorcet-th'>Opción A</th>
+				<th class='condorcet-th'>Opción B</th>
+				<th class='condorcet-th'>Opción C</th>
+				<th class='condorcet-th'>Opción D</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción A</th>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'>1</td>
+					<td class='condorcet-td'>1</td>
+			</tr>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción B</th>
+					<td class='condorcet-td'>1</td>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'>1</td>
+					<td class='condorcet-td'>1</td>
+			</tr>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción C</th>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'>1</td>
+			</tr>
+			<tr class='condorcet-tr'>
+				<th class='condorcet-th'>Opción D</th>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'>0</td>
+					<td class='condorcet-td'>0</td>
+			</tr>
+		</tbody>
+	</table>
+<br>";
+
+$content .= elgg_echo('advpoll:condorcet:help:ballots:paso4') . '<br>';
+
+$content .= elgg_view('advpoll/condorcet_matrix', array(
+	'matriz' => array(
+		array(0, 0, 1, 1),
+		array(1, 0, 1, 1),
+		array(0, 0, 0, 1),
+		array(0, 0, 0, 0),
+	),
+	'opciones' => array(
+		'A',
+		'B', 
+		'C', 
+		'D',
+	)));
+$content .= '<br>';	
+
+$content .= '<h3>' . elgg_echo('advpoll:condorcet:help:suma:explicacion:title') . '</h3><br>';
+
+$content .= elgg_echo('advpoll:condorcet:help:suma:explicacion:maspapeletas');
 
 $content .= "
-		<table class='ayuda-cuatro-columnas'>
-		<tr class='ayuda-cuatro-columnas'>
-		<td class='ayuda-cuatro-columnas'>A B C D</td>
-		<td class='ayuda-cuatro-columnas'>C D A B</td>
-		<td class='ayuda-cuatro-columnas'>C A B D</td>
-		<td class='ayuda-cuatro-columnas'>A B D C</td>
+		<table class='help-four-cols'>
+		<tr class='help-four-cols'>
+		<td class='help-four-cols'>A B C D</td>
+		<td class='help-four-cols'>C D A B</td>
+		<td class='help-four-cols'>C A B D</td>
+		<td class='help-four-cols'>A B D C</td>
 		</tr>
-		<tr class='ayuda-cuatro-columnas'>
-		<td class='ayuda-cuatro-columnas'><table>
+		<tr class='help-four-cols'>
+		<td class='help-four-cols'><table>
 		<thead class='condorcet-thead'>
 			<tr class='condorcet-tr'>
 				<th class='condorcet-th'></th>
@@ -449,7 +449,7 @@ $content .= "
 	
 	
 	
-		<td class='ayuda-cuatro-columnas'><table>
+		<td class='help-four-cols'><table>
 		<thead class='condorcet-thead'>
 			<tr class='condorcet-tr'>
 				<th class='condorcet-th'></th>
@@ -493,7 +493,7 @@ $content .= "
 	
 	
 	
-		<td class='ayuda-cuatro-columnas'><table>
+		<td class='help-four-cols'><table>
 		<thead class='condorcet-thead'>
 			<tr class='condorcet-tr'>
 				<th class='condorcet-th'></th>
@@ -537,7 +537,7 @@ $content .= "
 	
 	
 	
-		<td class='ayuda-cuatro-columnas'><table>
+		<td class='help-four-cols'><table>
 		<thead class='condorcet-thead'>
 			<tr class='condorcet-tr'>
 				<th class='condorcet-th'></th>

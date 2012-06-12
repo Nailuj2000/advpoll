@@ -25,12 +25,12 @@
  */
 
 elgg_load_library('advpoll:model');
-$title = elgg_echo('advpoll:group:titulo');
+$title = elgg_echo('advpoll:group:title');
 $container_guid = get_input('guid');
 $container = get_entity($container_guid);
 $group_context = get_input('group_context');
 
-elgg_register_title_button('advpoll', 'nueva');
+elgg_register_title_button('advpoll', 'new');
 elgg_push_breadcrumb($container->name, "advpoll/group/" . $container->guid);
 elgg_push_breadcrumb(elgg_echo('advpoll:' . $group_context));
 
@@ -53,7 +53,7 @@ $content = elgg_view_entity_list(
 	$pagination = true
 	); 	
 
-$filtros = elgg_view('advpoll/group_filters', array(
+$filters = elgg_view('advpoll/group_filters', array(
 	'filter_context' => "$group_context",
 	'context' => 'advpoll'
 	));
@@ -61,7 +61,7 @@ $filtros = elgg_view('advpoll/group_filters', array(
 $body = elgg_view_layout('content', array(
 	'content' => $content,
 	'title' => $title,
-	'filter' => $filtros,
+	'filter' => $filters,
 	'filter_context' => "$group_context",
 	'sidebar' => ''
 ));

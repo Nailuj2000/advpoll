@@ -12,7 +12,7 @@ echo "<th class='condorcet-th'>";
 $texto .= elgg_echo('advpoll:condorcet:info');
 $texto .= elgg_view_icon('info');
 
-$direccion = elgg_get_site_url() . "advpoll/ayuda/condorcet";
+$direccion = elgg_get_site_url() . "advpoll/help/condorcet";
 echo elgg_view('output/url',array(
 	'text' => $texto ,
 	'href' => $direccion,

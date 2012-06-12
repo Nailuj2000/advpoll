@@ -40,13 +40,13 @@ $guid = elgg_extract('guid', $vars, null);
 $poll = elgg_extract('entity', $vars, null);
 $path = elgg_extract('path', $vars, '');
 $poll_closed = elgg_extract('poll_closed', $vars, 'no');
-$auditoria = elgg_extract('auditoria', $vars, 'no');
+$audit = elgg_extract('audit', $vars, 'no');
 $group = get_entity($container_guid);
-$poll_tipo = elgg_extract('poll_tipo', $vars, 'normal');
+$poll_type = elgg_extract('poll_type', $vars, 'normal');
 $start_date = elgg_extract('start_date', $vars);
 $end_date = elgg_extract('end_date', $vars);
 $access_vote_id = elgg_extract('access_vote_id', $vars, ACCESS_DEFAULT);
-$mostrar_resultados = elgg_extract('mostrar_resultados', $vars, 'no');
+$show_results = elgg_extract('show_results', $vars, 'no');
 $can_change_vote = elgg_extract('can_change_vote', $vars, 'yes');
 
 ?>
@@ -89,7 +89,7 @@ if ($categories) {
 </div>
 
 
-<div id="opciones"><?php echo elgg_view('input/button', array('id' => 'nueva_opcion', 'value' => elgg_echo('advpoll:nueva:opcion')));?>
+<div id="opciones"><?php echo elgg_view('input/button', array('id' => 'new_candidate', 'value' => elgg_echo('advpoll:new:opcion')));?>
 <label><?php echo elgg_echo('advpoll:opciones'); ?></label><br />
 
 </div>
@@ -126,40 +126,40 @@ if ($categories) {
 </div>
 */ ?>
 <div>
-	<label><?php echo elgg_echo('advpoll:auditoria'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:audit'); ?></label><br />
 	<?php echo elgg_view('input/radio', array(
-		'name' => 'auditoria',
+		'name' => 'audit',
 		 'options' => array(
 			elgg_echo('option:no') => 'no' ,
 			elgg_echo('option:yes') => 'yes',
 			),
-		'value' => $auditoria,
+		'value' => $audit,
 	));
 
 	?>
 </div>
 
 <div>
-	<label><?php echo elgg_echo('advpoll:tipo'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:type'); ?></label><br />
 	<?php echo elgg_view('input/radio', array(
-		'name' => 'poll_tipo',
+		'name' => 'poll_type',
 		 'options' => array(
 			elgg_echo('advpoll:option:normal') => 'normal' ,
 			elgg_echo('advpoll:option:condorcet') => 'condorcet',
 			),
-		'value' => $poll_tipo,
+		'value' => $poll_type,
 		)); ?>
 </div>
 
 <div>
-	<label><?php echo elgg_echo('advpoll:mostrar:resultados:durante'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:show:results:ongoing'); ?></label><br />
 	<?php echo elgg_view('input/radio', array(
-		'name' => 'mostrar_resultados',
+		'name' => 'show_results',
 		 'options' => array(
 			elgg_echo('option:no') => 'no' ,
 			elgg_echo('option:yes') => 'yes',
 			),
-		'value' => $mostrar_resultados,
+		'value' => $show_results,
 	));
 
 	?>
@@ -196,8 +196,8 @@ echo elgg_view('input/submit', array('value' => elgg_echo("save")));
 </div>
 
 <script type="text/javascript">
-	$('#nueva_opcion').click(function() {
-		// si estás aquí dentro es porque has pulsado el botón nueva_opcion
+	$('#new_candidate').click(function() {
+		// si estás aquí dentro es porque has pulsado el botón new_candidate
 		// metemos en la variable número de opciones,
 		// la longitud de opciones que haya o no haya... 0,1,2,3,4
 		var num_opciones = $('.opcion').length;

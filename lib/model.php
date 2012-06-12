@@ -150,10 +150,10 @@ function advpoll_init_vars($poll) {
 		'entity' => $poll,
 		'path' => 'http://',
 		'poll_closed' => 'no',
-		'auditoria' => 'no',
-		'poll_tipo' => 'normal',
+		'audit' => 'no',
+		'poll_type' => 'normal',
 		'access_vote_id' => ACCESS_DEFAULT,
-		'mostrar_resultados' => 'no',
+		'show_results' => 'no',
 		'can_change_vote' => 'yes',
 	);
 
@@ -187,7 +187,7 @@ function advpoll_init_vars($poll) {
 function user_has_voted($user_guid, $poll_guid) {
 	$poll = get_entity($poll_guid);
 	$return = false;
-	if ($poll->poll_tipo == 'normal') {
+	if ($poll->poll_type == 'normal') {
 		$choices = polls_get_choice_array($poll);
 		foreach ($choices as $choice_guid){
 			$choice = get_entity($choice_guid);

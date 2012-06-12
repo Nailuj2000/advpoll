@@ -23,7 +23,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  */
-$title = elgg_echo('advpoll:titulo');
+$title = elgg_echo('advpoll:title');
 
 elgg_push_breadcrumb(elgg_echo('advpoll:all'));
 
@@ -38,8 +38,8 @@ $content = elgg_list_entities(array(
 
 // Registra un botón "añadir nueva" si no se especifican parámetros añade
 // ese por defecto
-elgg_register_title_button('advpoll', 'nueva');
-$filtros = elgg_view('advpoll/filtros', array(
+elgg_register_title_button('advpoll', 'new');
+$filters = elgg_view('advpoll/filters', array(
 	'filter_context' => 'all',
 	'context' => 'advpoll'
 	));
@@ -49,7 +49,7 @@ $filtros = elgg_view('advpoll/filtros', array(
 $body = elgg_view_layout('content', array(
 	'content' => $content,
 	'title' => $title,
-	'filter' => $filtros,
+	'filter' => $filters,
 	'filter_context' => 'all',
 	'sidebar' => ''
 ));

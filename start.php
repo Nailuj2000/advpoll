@@ -100,9 +100,9 @@ function advpoll_page_handler($page)
 			set_input('guid', $page[1]);
 			include $base_dir . 'edit.php';
 			break;
-		case "nueva":
+		case "new":
 			set_input('container_guid', $page[1]);
-			include $base_dir . 'creare.php';
+			include $base_dir . 'new.php';
 			break;
 		case "view":
 			set_input('guid', $page[1]);
@@ -115,21 +115,21 @@ function advpoll_page_handler($page)
 			include $base_dir . 'owner.php';
 			break;
 		case "current":
-			set_input('contexto', $page[0]);
-			include $base_dir . 'listas.php';
+			set_input('context', $page[0]);
+			include $base_dir . 'list.php';
 			break;
 		case "ended":
-			set_input('contexto', $page[0]);
-			include $base_dir . 'listas.php';
+			set_input('context', $page[0]);
+			include $base_dir . 'list.php';
 			break;
 		case "not_initiated":
-			set_input('contexto', $page[0]);
-			include $base_dir . 'listas.php';
+			set_input('context', $page[0]);
+			include $base_dir . 'list.php';
 			break;
-		case "ayuda":
+		case "help":
 			switch ($page[1]) {
 				case "condorcet":
-					include $base_dir . 'condorcet_ayuda.php';
+					include $base_dir . 'condorcet_help.php';
 					break;
 			}
 			break;			

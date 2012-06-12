@@ -29,7 +29,7 @@ elgg_load_library('advpoll:model');
 
 $vars = advpoll_init_vars($poll);
 $title = elgg_echo('advpoll:editing');
-elgg_push_breadcrumb(elgg_echo('advpoll:creare'));
+elgg_push_breadcrumb(elgg_echo('advpoll:editing'));
 
 // Esto de abajo sirve para que aparezca en el menu lateral las opciones
 // de grupo y de usuario al que pertenece la votación

@@ -1,6 +1,6 @@
 <?php
 /**
- * mod/advpoll/views/default/advpoll/resultados.php
+ * mod/advpoll/views/default/advpoll/results.php
  * 
  * Copyright 2012 DRY Team
  *              - aruberuto
@@ -33,25 +33,25 @@ $opciones = polls_get_choice_array($poll);
 $num_votos = 0;
 $num_opciones = count($opciones);
 $altura = 500 + 36 * $num_opciones;
-$auditoria = $poll->auditoria;
-$mostrar_resultados =$poll->mostrar_resultados;
+$audit = $poll->audit;
+$show_results =$poll->show_results;
 $can_change_vote = $poll->can_change_vote;
 
-$titulo_tarta = elgg_echo('advpoll:resultados:tarta:titulo');
-$subtitulo_tarta = $poll->title;
-if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !is_poll_on_date($poll))) {
+$title_tarta = elgg_echo('advpoll:results:tarta:title');
+$subtitle_tarta = $poll->title;
+if ($audit == 'yes' && ($show_results == 'yes' or !is_poll_on_date($poll))) {
 	?>
 	<br>
 	<br>
-	<div class='auditoria-extendible'>
-		<table class='auditoria-normal-table'>
-			<thead class='auditoria-normal-thead'>
-				<tr class='auditoria-normal-tr'>
-					<th class='auditoria-normal-th'> <?php echo elgg_echo('advpoll:normal:auditoria:usuaria'); ?> </th>
-					<th class='auditoria-normal-th'> <?php echo elgg_echo('advpoll:normal:auditoria:nick'); ?> </th>
-					<th class='auditoria-normal-th'> <?php echo elgg_echo('advpoll:normal:auditoria:nombre'); ?> </th>
-					<th class='auditoria-normal-th'> <?php echo elgg_echo('advpoll:normal:audit:date'); ?> </th>
-					<th class='auditoria-normal-th'> <?php echo elgg_echo('advpoll:normal:auditoria:opcion'); ?> </th>
+	<div class='audit-extendible'>
+		<table class='audit-normal-table'>
+			<thead class='audit-normal-thead'>
+				<tr class='audit-normal-tr'>
+					<th class='audit-normal-th'> <?php echo elgg_echo('advpoll:normal:audit:usuaria'); ?> </th>
+					<th class='audit-normal-th'> <?php echo elgg_echo('advpoll:normal:audit:nick'); ?> </th>
+					<th class='audit-normal-th'> <?php echo elgg_echo('advpoll:normal:audit:nombre'); ?> </th>
+					<th class='audit-normal-th'> <?php echo elgg_echo('advpoll:normal:audit:date'); ?> </th>
+					<th class='audit-normal-th'> <?php echo elgg_echo('advpoll:normal:audit:opcion'); ?> </th>
 					
 				</tr>
 			</thead>
@@ -75,12 +75,12 @@ if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !is_poll_on_date($po
 				$usuario_icono = elgg_view_entity_icon($usuario, 'tiny');
 				
 				?>
-				<tr class='auditoria-normal-tr'>
-					<td class='auditoria-normal-td'><?php echo $usuario_icono; ?></td>
-					<td class='auditoria-normal-td'><?php echo $usuario_nick; ?></td>
-					<td class='auditoria-normal-td'><?php echo $usuario_nombre; ?></td>
-					<td class='auditoria-normal-td'><?php echo $date; ?></td>
-					<td class='auditoria-normal-td'><?php echo $nombre_op; ?></td>
+				<tr class='audit-normal-tr'>
+					<td class='audit-normal-td'><?php echo $usuario_icono; ?></td>
+					<td class='audit-normal-td'><?php echo $usuario_nick; ?></td>
+					<td class='audit-normal-td'><?php echo $usuario_nombre; ?></td>
+					<td class='audit-normal-td'><?php echo $date; ?></td>
+					<td class='audit-normal-td'><?php echo $nombre_op; ?></td>
 				</tr>
 				<?php
 			}
@@ -97,7 +97,7 @@ if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !is_poll_on_date($po
 ?>		
 	
 	
-<div id='tarta-resultados'></div>
+<div id='results-sectors'></div>
 
 <script type="text/javascript">
 
@@ -108,21 +108,21 @@ function roundNumber(num, dec) {
 
 $(function () {
     var chart;
-	var titulo = "<?php echo $titulo_tarta; ?>";
-	var subtitulo = "<?php echo $subtitulo_tarta; ?>";
+	var title = "<?php echo $title_tarta; ?>";
+	var subtitle = "<?php echo $subtitle_tarta; ?>";
 	var valores = "<?php echo $valores; ?>";
 	var altura = "<?php echo $altura; ?>";
     $(document).ready(function() {
         chart = new Highcharts.Chart({
             chart: {
-                renderTo: 'tarta-resultados',
+                renderTo: 'results-sectors',
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
                 height: altura,                
             },
             title: {
-                text: titulo,
+                text: title,
                 align: "left",
                 style: {
 					color: '#0054A7',

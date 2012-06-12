@@ -3,9 +3,9 @@
 elgg_load_library('advpoll:model');
 $poll = $vars['entity'];
 
-$auditoria = $poll->auditoria;
-$tipo = $poll->poll_tipo;
-$titulo = $poll->title;
+$audit = $poll->audit;
+$type = $poll->poll_type;
+$title = $poll->title;
 $desc = $poll->description;
 $path = $poll->path;
 $acces_id = $poll->access_id;
@@ -18,21 +18,21 @@ $owner =  $poll->getOwnerEntity();
 $start_date = $poll->start_date;
 $end_date = $poll->end_date;
 $time = time();
-$mostrar_resultados = $poll->mostrar_resultados;
+$show_results = $poll->show_results;
 $can_change_vote = $poll->can_change_vote;
 if ($time < $end_date ) {
-	$poll_comparada_fin = 'menorfin';
+	$poll_comparison_end = 'lessthanend';
 } else {
 	if ($time >= $end_date ){
-		$poll_comparada_fin = 'mayorfin';
+		$poll_comparison_end = 'morethanend';
 	}
 }
 
 if ($time < $start_date) {
-	$poll_comparada_ini = 'menorini';
+	$poll_comparison_start = 'lessthanstart';
 }else {
 	if ($time >= $start_date ){
-		$poll_comparada_ini = 'mayorini';
+		$poll_comparison_start = 'morethanstart';
 	}
 }
 
@@ -67,20 +67,20 @@ $metadata = elgg_view_menu('entity', array(
 	
 	$subtitle .= '<br>' . elgg_view('output/url', array(
 		'href' => $poll->path,
-		'text' => elgg_echo('advpoll:debate:previo:link'),
+		'text' => elgg_echo('advpoll:previous:discussion:link'),
 	));
 
-	$subtitle .= "<br>" . elgg_echo('advpoll:view:ended:' . $poll_comparada_fin . ':' . $poll_comparada_ini ) . ',';
-	if ($poll_comparada_ini == 'menorini') {
-	$subtitle .= elgg_echo('advpoll:view:tiempo:desde') . date('d - M - Y', $start_date) . ', ';
+	$subtitle .= "<br>" . elgg_echo('advpoll:view:ended:' . $poll_comparison_end . ':' . $poll_comparison_start ) . ',';
+	if ($poll_comparison_start == 'lessthanstart') {
+	$subtitle .= elgg_echo('advpoll:view:time:from') . date('d - M - Y', $start_date) . ', ';
 } 
-	if ($poll_comparada_fin == 'menorfin') {
-	$subtitle .= elgg_echo('advpoll:view:tiempo:hasta') .date('d - M - Y', $end_date);
+	if ($poll_comparison_end == 'lessthanend') {
+	$subtitle .= elgg_echo('advpoll:view:time:to') .date('d - M - Y', $end_date);
 } 
-	$subtitle .= elgg_echo('advpoll:view:auditoria') . elgg_echo('option:' . $auditoria) . ',';
-	$subtitle .= elgg_echo('advpoll:view:tipo') . elgg_echo('advpoll:tipo:' . $tipo) . ',';
-	$subtitle .= elgg_echo('advpoll:view:mostrar:resultados') . elgg_echo('advpoll:mostrar:' . $mostrar_resultados) . '.';
-	$subtitle .= elgg_echo('advpoll:view:can:change:vote') . elgg_echo('advpoll:mostrar:' . $can_change_vote) . '.';
+	$subtitle .= elgg_echo('advpoll:view:audit') . elgg_echo('option:' . $audit) . ',';
+	$subtitle .= elgg_echo('advpoll:view:type') . elgg_echo('advpoll:type:' . $type) . ',';
+	$subtitle .= elgg_echo('advpoll:view:show:results') . elgg_echo('advpoll:show:' . $show_results) . '.';
+	$subtitle .= elgg_echo('advpoll:view:can:change:vote') . elgg_echo('advpoll:show:' . $can_change_vote) . '.';
 
 	
 	$content .= elgg_view('advpoll/choices', array('choices' => $choices));

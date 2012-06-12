@@ -39,11 +39,11 @@ $container_guid = $poll->container_guid;
 
 $path = $poll->path;
 
-$auditoria = $poll->auditoria;
+$audit = $poll->audit;
 $group = get_entity($container_guid);
 $start_date = $poll->start_date;
 $end_date = $poll->end_date;
-$mostrar_resultados = $poll->mostrar_resultados;
+$show_results = $poll->show_results;
 $can_change_vote = $poll->can_change_vote;
 
 /**
@@ -57,7 +57,7 @@ $guid = elgg_extract('guid', $vars, null);
 $poll = elgg_extract('entity', $vars, null);
 $path = elgg_extract('path', $vars, '');
 $poll_closed = elgg_extract('poll_closed', $vars, 'no');
-$auditoria = elgg_extract('auditoria', $vars, 'no');
+$audit = elgg_extract('audit', $vars, 'no');
 */
 if ($poll){
 	$opciones = polls_get_choice_array($poll);
@@ -72,7 +72,7 @@ $num_opciones = count($opciones);
 <div>
 	<label><?php echo elgg_echo('advpoll:pregunta'); ?></label><br />
 	<label><?php echo elgg_view('output/text', array('value' => $title)); ?></label><br />
-	<?php echo elgg_echo('advpoll:warning:edit:titulo'); ?>
+	<?php echo elgg_echo('advpoll:warning:edit:title'); ?>
 </div>
 
 <div>
@@ -101,7 +101,7 @@ if ($categories) {
 
 <?php 
 /**
- * <div id="opciones"><?php echo elgg_view('input/button', array('id' => 'nueva_opcion', 'value' => elgg_echo('advpoll:nueva:opcion')));?>
+ * <div id="opciones"><?php echo elgg_view('input/button', array('id' => 'new_candidate', 'value' => elgg_echo('advpoll:new:opcion')));?>
  * <label><?php echo elgg_echo('advpoll:opciones'); ?></label><br />
  * <?php 
  */
@@ -170,15 +170,15 @@ if ($categories) {
 */?>
 
 <div>
-	<label><?php echo elgg_echo('advpoll:auditoria'); ?></label><br />
-	<label><?php echo elgg_echo("option:$auditoria"); ?></label><br />
-	<?php echo elgg_echo('advpoll:warning:edit:auditoria'); ?><br />
+	<label><?php echo elgg_echo('advpoll:audit'); ?></label><br />
+	<label><?php echo elgg_echo("option:$audit"); ?></label><br />
+	<?php echo elgg_echo('advpoll:warning:edit:audit'); ?><br />
 	
 </div>
 <div>
-	<label><?php echo elgg_echo('advpoll:mostrar:resultados:durante'); ?></label><br />
-	<label><?php echo elgg_echo("option:$mostrar_resultados"); ?></label><br />
-	<?php echo elgg_echo('advpoll:warning:edit:mostrar:resultados'); ?><br />
+	<label><?php echo elgg_echo('advpoll:show:results:ongoing'); ?></label><br />
+	<label><?php echo elgg_echo("option:$show_results"); ?></label><br />
+	<?php echo elgg_echo('advpoll:warning:edit:show:results'); ?><br />
 	
 </div>
 <div>

@@ -27,12 +27,12 @@ elgg_load_library('advpoll:model');
 $guid = get_input('guid');
 $poll = get_entity($guid);
 $poll_closed = $poll->poll_closed;
-$poll_tipo = $poll->poll_tipo;
+$poll_type = $poll->poll_type;
 $usuaria_guid = elgg_get_logged_in_user_guid();
-$auditoria = $poll->auditoria;
+$audit = $poll->audit;
 $end_date = $poll->end_date;
 $start_date = $poll->start_date;
-$mostrar_resultados = $poll->mostrar_resultados;
+$show_results = $poll->show_results;
 $can_change_vote = $poll->can_change_vote;
 
 $acceso_lectura = $poll->access_id;
@@ -55,7 +55,7 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 	elgg_push_breadcrumb($poll->title);
 	
 	elgg_set_page_owner_guid($container->getGUID());
-	elgg_register_title_button('advpoll', 'nueva');
+	elgg_register_title_button('advpoll', 'new');
 	$title = $poll->title;
 	
 	$content = elgg_view_entity($poll, array('full_view' => true));
@@ -69,18 +69,18 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 		
 	}
 	
-	if ($auditoria == 'yes' && ($mostrar_resultados == 'yes' or !is_poll_on_date($poll))) {
-		$content .= elgg_view('input/button', array('class' => 'resultados-expandibles', 'value' => elgg_echo('advpoll:condorcet:auditoria:mostrar'))); 
+	if ($audit == 'yes' && ($show_results == 'yes' or !is_poll_on_date($poll))) {
+		$content .= elgg_view('input/button', array('class' => 'expandable-results', 'value' => elgg_echo('advpoll:condorcet:audit:mostrar'))); 
 	}
 	
-	if ($poll_tipo == 'condorcet') {
+	if ($poll_type == 'condorcet') {
 		if (is_poll_on_date($poll) && in_array($access_vote, $acceso_col)) {
 			$content .= elgg_view_form('advpoll/condorcet_vote' , array() , array(
 				'guid' => $guid,
 				));
 		}	
-		if ($mostrar_resultados == 'yes' or !is_poll_on_date($poll)) {
-			$content .= elgg_view('advpoll/condorcet_resultados', array(
+		if ($show_results == 'yes' or !is_poll_on_date($poll)) {
+			$content .= elgg_view('advpoll/condorcet_results', array(
 				'guid' => $guid
 			));
 		}
@@ -91,8 +91,8 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 				));
 		
 		}
-		if ($mostrar_resultados == 'yes' or !is_poll_on_date($poll)) {
-			$content .= elgg_view('advpoll/resultados', array(
+		if ($show_results == 'yes' or !is_poll_on_date($poll)) {
+			$content .= elgg_view('advpoll/results', array(
 			'poll' => $poll
 			));
 		}
@@ -110,11 +110,11 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 	
 ?>
 <script>
-$(".resultados-expandibles").click(function () {
-if ($(".auditoria-extendible").is(":hidden")) {
-$(".auditoria-extendible").slideDown("slow");
+$(".expandable-results").click(function () {
+if ($(".audit-extendible").is(":hidden")) {
+$(".audit-extendible").slideDown("slow");
 } else {
-$(".auditoria-extendible").hide();
+$(".audit-extendible").hide();
 }
 });
 

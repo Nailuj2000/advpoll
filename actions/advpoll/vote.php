@@ -44,7 +44,7 @@ if (!is_poll_on_date($poll)) {
 		if (user_has_voted($user, $guid) && !$poll->can_change_vote) {
 			register_error(elgg_echo('advpoll:accion:error:cant_change_vote'));
 		} else {
-			if ($poll->poll_tipo == 'normal') {
+			if ($poll->poll_type == 'normal') {
 				$choice = get_input('response');
 				$candidate_entity = get_entity($choice);
 				foreach ($choices as $vote_guid){

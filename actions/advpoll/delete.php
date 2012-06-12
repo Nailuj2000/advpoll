@@ -3,11 +3,11 @@
 elgg_load_library('advpoll:model');
 $guid = get_input('guid');
 $poll = get_entity($guid);
-$poll_tipo = $poll->poll_tipo;
+$poll_type = $poll->poll_type;
 $container = get_entity($poll->container_guid);
 
 if ($poll->canEdit()) {
-	if ($poll_tipo == 'condorcet') {
+	if ($poll_type == 'condorcet') {
 		if ($poll->delete()) {
 			system_message(elgg_echo('advpoll:delete:success'));	
 		}

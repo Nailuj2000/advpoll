@@ -117,7 +117,7 @@
     padding-bottom: 10px;
 }
 
-.auditoria-extendible {
+.audit-extendible {
 	display: none;
 	background-color: Ivory;
 	padding: 10px;
@@ -131,11 +131,11 @@
 	display: none;
 }
 
-.resultados-expandibles {
+.expandable-results {
 	cursor: pointer;
 }
 
-.resultados-expandibles:hover {
+.expandable-results:hover {
 	color: #4690D6;
 }
 
@@ -145,10 +145,10 @@
 .pulsa-que-se-expande:hover {
 	color: #4690D6;
 }
-#tarta-resultados {
+#results-sectors {
 	
 }
-.ayuda-cuatro-columnas {
+.help-four-cols {
 	padding: 10px;
 }
 
@@ -162,7 +162,7 @@
 .continuos-date {
 	width: 200px;
 }
-.auditoria-normal-th {
+.audit-normal-th {
 	text-align: center;
 	padding: 5px;
 	background-color: white;
@@ -170,24 +170,24 @@
     border-bottom-width: 2px;
     vertical-align: middle;
 }
-.auditoria-normal-tr {
+.audit-normal-tr {
 	background-color: white;
 }
 
-.auditoria-normal-tr:hover {
+.audit-normal-tr:hover {
 	background-color: #8CBAE5;
 }
 
-.auditoria-normal-thead {
+.audit-normal-thead {
 }
 
-.auditoria-normal-table {
+.audit-normal-table {
 	 width: 100%;
 	 border-style: solid;
 	 border-width: 1px;
 }
 
-.auditoria-normal-td {
+.audit-normal-td {
 	text-align: center;
 	padding: 5px;
 	vertical-align: middle;
