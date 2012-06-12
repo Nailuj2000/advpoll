@@ -57,7 +57,7 @@ $metadata = elgg_view_menu('entity', array(
 
 	
 	$link = elgg_get_site_url() . "profile/" . $owner->name ;
-	$subtitle = elgg_echo('advpoll:trujaman');
+	$subtitle = elgg_echo('advpoll:owner');
 	$subtitle .= elgg_view('output/url', array(
 		'href' => $link,
 		'text' => $owner->name,
@@ -70,17 +70,17 @@ $metadata = elgg_view_menu('entity', array(
 		'text' => elgg_echo('advpoll:debate:previo:link'),
 	));
 
-	$subtitle .= "<br>" . elgg_echo('advpoll:vistazo:ended:' . $poll_comparada_fin . ':' . $poll_comparada_ini ) . ',';
+	$subtitle .= "<br>" . elgg_echo('advpoll:view:ended:' . $poll_comparada_fin . ':' . $poll_comparada_ini ) . ',';
 	if ($poll_comparada_ini == 'menorini') {
-	$subtitle .= elgg_echo('advpoll:vistazo:tiempo:desde') . date('d - M - Y', $start_date) . ', ';
+	$subtitle .= elgg_echo('advpoll:view:tiempo:desde') . date('d - M - Y', $start_date) . ', ';
 } 
 	if ($poll_comparada_fin == 'menorfin') {
-	$subtitle .= elgg_echo('advpoll:vistazo:tiempo:hasta') .date('d - M - Y', $end_date);
+	$subtitle .= elgg_echo('advpoll:view:tiempo:hasta') .date('d - M - Y', $end_date);
 } 
-	$subtitle .= elgg_echo('advpoll:vistazo:auditoria') . elgg_echo('option:' . $auditoria) . ',';
-	$subtitle .= elgg_echo('advpoll:vistazo:tipo') . elgg_echo('advpoll:tipo:' . $tipo) . ',';
-	$subtitle .= elgg_echo('advpoll:vistazo:mostrar:resultados') . elgg_echo('advpoll:mostrar:' . $mostrar_resultados) . '.';
-	$subtitle .= elgg_echo('advpoll:vistazo:can:change:vote') . elgg_echo('advpoll:mostrar:' . $can_change_vote) . '.';
+	$subtitle .= elgg_echo('advpoll:view:auditoria') . elgg_echo('option:' . $auditoria) . ',';
+	$subtitle .= elgg_echo('advpoll:view:tipo') . elgg_echo('advpoll:tipo:' . $tipo) . ',';
+	$subtitle .= elgg_echo('advpoll:view:mostrar:resultados') . elgg_echo('advpoll:mostrar:' . $mostrar_resultados) . '.';
+	$subtitle .= elgg_echo('advpoll:view:can:change:vote') . elgg_echo('advpoll:mostrar:' . $can_change_vote) . '.';
 
 	
 	$content .= elgg_view('advpoll/choices', array('choices' => $choices));

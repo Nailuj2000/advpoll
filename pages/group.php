@@ -25,7 +25,7 @@
  */
 
 elgg_load_library('advpoll:model');
-$title = elgg_echo('advpoll:grupo:titulo');
+$title = elgg_echo('advpoll:group:titulo');
 $container_guid = get_input('guid');
 $container = get_entity($container_guid);
 $group_context = get_input('group_context');
@@ -53,7 +53,7 @@ $content = elgg_view_entity_list(
 	$pagination = true
 	); 	
 
-$filtros = elgg_view('advpoll/filtros_grupos', array(
+$filtros = elgg_view('advpoll/group_filters', array(
 	'filter_context' => "$group_context",
 	'context' => 'advpoll'
 	));

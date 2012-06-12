@@ -40,7 +40,7 @@ elgg_set_page_owner_guid($container->getGUID());
 
 
 $content = elgg_view_form('advpoll/save', array(), $vars);
-//$content = elgg_view('advpoll/vistazo', array());
+//$content = elgg_view('advpoll/view', array());
 $body = elgg_view_layout('content', array(
 	'filter' => '',
 	'content' => $content,

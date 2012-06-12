@@ -1,13 +1,13 @@
 <?php
 
-$grupo = elgg_get_page_owner_entity();
+$group = elgg_get_page_owner_entity();
 
-if ($grupo->polls_enable == "no") {
+if ($group->polls_enable == "no") {
 	return true;
 }
 
 $all_link = elgg_view('output/url', array(
-	'href' => "advpoll/group/$grupo->guid/all",
+	'href' => "advpoll/group/$group->guid/all",
 	'text' => elgg_echo('link:view:all'),
 	'is_trusted' => true,
 ));
@@ -16,7 +16,7 @@ elgg_push_context('widgets');
 $options = array(
 	'type' => 'object',
 	'subtype' => 'poll',
-	'container_guid' => $grupo->guid,
+	'container_guid' => $group->guid,
 	'limit' => 6,
 	'full_view' => false,
 	'pagination' => false,
@@ -33,13 +33,13 @@ if (!$content) {
 }
 
 $nueva_link = elgg_view('output/url', array(
-	'href' => "advpoll/nueva/$grupo->guid",
+	'href' => "advpoll/nueva/$group->guid",
 	'text' => elgg_echo('advpoll:nueva'),
 	'is_trusted' => true,
 ));
 
 echo elgg_view('groups/profile/module', array(
-	'title' => elgg_echo('advpoll:grupo'),
+	'title' => elgg_echo('advpoll:group'),
 	'content' => $content,
 	'all_link' => $all_link,
 	'add_link' => $nueva_link,

@@ -32,7 +32,7 @@ $container_guid = get_input('container_guid');
 //$guid = get_input('guid');
 $choices = get_input('choices');
 $num_opciones = intval(get_input('num_opciones'));
-$trujaman = intval(get_input('container_guid'));
+$owner = intval(get_input('container_guid'));
 //$guid = intval(get_input('guid'));
 
 $poll_closed = get_input('poll_closed');
@@ -85,7 +85,7 @@ if (!$title) {
 				$poll->path = $path;
 				$poll->access_id = $access_id;
 				$poll->owner_guid = $owner_guid;
-				$poll->container_guid = $trujaman;
+				$poll->container_guid = $owner;
 				$poll->tags = $tags;
 				$poll->poll_closed = $poll_closed;
 				$poll->auditoria = $auditoria;

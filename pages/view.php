@@ -50,7 +50,7 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 	if (elgg_instanceof($container, 'group')) {
 		elgg_push_breadcrumb($container->name, "advpoll/group/$container->guid/");
 	} else {
-		elgg_push_breadcrumb($container->name, "advpoll/trujaman/$container->username");
+		elgg_push_breadcrumb($container->name, "advpoll/owner/$container->username");
 	}
 	elgg_push_breadcrumb($poll->title);
 	

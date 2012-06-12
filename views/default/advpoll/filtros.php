@@ -23,37 +23,37 @@ if (elgg_is_logged_in() && $context) {
 	// generate a list of default tabs
 	$tabs = array(
 		'current' => array(
-			'text' => elgg_echo('advpoll:filtros:current'),
+			'text' => elgg_echo('advpoll:filters:current'),
 			'href' => (isset($vars['current_link'])) ? $vars['current_link'] : "$context/current",
 			'selected' => ($filter_context == 'activas'),
 			'priority' => 100,
 		),
 		'all' => array(
-			'text' => elgg_echo('advpoll:filtros:all'),
+			'text' => elgg_echo('advpoll:filters:all'),
 			'href' => (isset($vars['all_link'])) ? $vars['all_link'] : "$context/all",
 			'selected' => ($filter_context == 'all'),
 			'priority' => 200,
 		),
-		'trujaman' => array(
-			'text' => elgg_echo('advpoll:filtros:trujaman'),
-			'href' => (isset($vars['mtrujaman_link'])) ? $vars['trujaman_link'] : "$context/trujaman/$username",
-			'selected' => ($filter_context == 'trujaman'),
+		'owner' => array(
+			'text' => elgg_echo('advpoll:filters:owner'),
+			'href' => (isset($vars['owner_link'])) ? $vars['owner_link'] : "$context/owner/$username",
+			'selected' => ($filter_context == 'owner'),
 			'priority' => 300,
 		),
-		'amigos' => array(
-			'text' => elgg_echo('advpoll:filtros:amigos'),
-			'href' => (isset($vars['amigos_link'])) ? $vars['amigos_link'] : "$context/amigos/$username",
+		'friends' => array(
+			'text' => elgg_echo('advpoll:filters:friends'),
+			'href' => (isset($vars['friends_link'])) ? $vars['friends_link'] : "$context/friends/$username",
 			'selected' => ($filter_context == 'burning'),
 			'priority' => 400,
 		),
 		'ended' => array(
-			'text' => elgg_echo('advpoll:filtros:ended'),
+			'text' => elgg_echo('advpoll:filters:ended'),
 			'href' => (isset($vars['ended_link'])) ? $vars['ended_link'] : "$context/ended",
 			'selected' => ($filter_context == 'ended'),
 			'priority' => 500,
 		),
 		'not_initiated' => array(
-			'text' => elgg_echo('advpoll:filtros:not_initiated'),
+			'text' => elgg_echo('advpoll:filters:not_initiated'),
 			'href' => (isset($vars['not_initiated_link'])) ? $vars['not_initiated_link'] : "$context/not_initiated",
 			'selected' => ($filter_context == 'not_initiated'),
 			'priority' => 600,

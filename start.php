@@ -64,7 +64,7 @@ function advpoll_init() {
 	// Register external libraries
 	elgg_register_library('advpoll:model', elgg_get_plugins_path() . 'advpoll/lib/model.php');
 	// Groups module
-	add_group_tool_option('polls', elgg_echo('advpoll:grupos:enablepolls'), true);
+	add_group_tool_option('polls', elgg_echo('advpoll:groups:enablepolls'), true);
 	elgg_extend_view('groups/tool_latest', 'advpoll/group_module');
 	// Javascript libraries for graphics
 	$url = elgg_get_site_url() . "mod/advpoll/lib/js/highcharts.js";
@@ -104,15 +104,15 @@ function advpoll_page_handler($page)
 			set_input('container_guid', $page[1]);
 			include $base_dir . 'creare.php';
 			break;
-		case "vistazo":
+		case "view":
 			set_input('guid', $page[1]);
-			include $base_dir . 'vistazo.php';
+			include $base_dir . 'view.php';
 			break;
-		case "amigos":
-			include $base_dir . 'amigos.php';
+		case "friends":
+			include $base_dir . 'friends.php';
 			break;
-		case "trujaman":
-			include $base_dir . 'trujaman.php';
+		case "owner":
+			include $base_dir . 'owner.php';
 			break;
 		case "current":
 			set_input('contexto', $page[0]);
@@ -137,12 +137,12 @@ function advpoll_page_handler($page)
 			set_input('guid', $page[1]);
 			set_input('group_context', $page[2]);
 			//if ($page[2] == 'all') {
-				include $base_dir . 'grupo.php';
+				include $base_dir . 'group.php';
 			//}
 			//if ($page[2] == 'cerradas'){
-			//	include $base_dir . 'grupo_cerradas.php';
+			//	include $base_dir . 'group_cerradas.php';
 			//} else {
-			//	include $base_dir . 'grupo_activas.php';
+			//	include $base_dir . 'group_activas.php';
 			//}
 			break;
 				
@@ -159,7 +159,7 @@ function advpoll_page_handler($page)
  */
 function advpoll_url_handler($entity) {
 	$title = elgg_get_friendly_title($entity->title);
-	return "advpoll/vistazo/$entity->guid/$title";
+	return "advpoll/view/$entity->guid/$title";
 }
 
 /**
@@ -167,13 +167,13 @@ function advpoll_url_handler($entity) {
  */
 function advpoll_owner_block_menu($hook, $type, $return, $params) {
 	if (elgg_instanceof($params['entity'], 'user')) {
-		$url = "advpoll/trujaman/{$params['entity']->username}";
+		$url = "advpoll/owner/{$params['entity']->username}";
 		$item = new ElggMenuItem('polls', elgg_echo('polls'), $url);
 		$return[] = $item;
 	} else {
 		if ($params['entity']->bookmarks_enable != 'no') {
 			$url = "advpoll/group/{$params['entity']->guid}/all";
-			$item = new ElggMenuItem('polls', elgg_echo('advpoll:grupo'), $url);
+			$item = new ElggMenuItem('polls', elgg_echo('advpoll:group'), $url);
 			$return[] = $item;
 		}
 	}
