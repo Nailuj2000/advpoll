@@ -29,16 +29,16 @@ elgg_load_library('advpoll:model');
 elgg_load_js('highcharts');
 $poll = elgg_extract('poll', $vars, array());
 $guid = $poll->guid;
-$opciones = polls_get_choice_array($poll);
-$num_votos = 0;
-$num_opciones = count($opciones);
-$altura = 500 + 36 * $num_opciones;
+$candidates = polls_get_choice_array($poll);
+$n_votes = 0;
+$n_candidates = count($candidates);
+$height = 500 + 36 * $n_candidates;
 $audit = $poll->audit;
 $show_results =$poll->show_results;
 $can_change_vote = $poll->can_change_vote;
 
-$title_tarta = elgg_echo('advpoll:results:tarta:title');
-$subtitle_tarta = $poll->title;
+$graphic_title = elgg_echo('advpoll:results:graphic:title');
+$graphic_subtitle = $poll->title;
 if ($audit == 'yes' && ($show_results == 'yes' or !is_poll_on_date($poll))) {
 	?>
 	<br>
@@ -47,11 +47,11 @@ if ($audit == 'yes' && ($show_results == 'yes' or !is_poll_on_date($poll))) {
 		<table class='audit-normal-table'>
 			<thead class='audit-normal-thead'>
 				<tr class='audit-normal-tr'>
-					<th class='audit-normal-th'> <?php echo elgg_echo('advpoll:normal:audit:usuaria'); ?> </th>
+					<th class='audit-normal-th'> <?php echo elgg_echo('advpoll:normal:audit:user'); ?> </th>
 					<th class='audit-normal-th'> <?php echo elgg_echo('advpoll:normal:audit:nick'); ?> </th>
-					<th class='audit-normal-th'> <?php echo elgg_echo('advpoll:normal:audit:nombre'); ?> </th>
+					<th class='audit-normal-th'> <?php echo elgg_echo('advpoll:normal:audit:name'); ?> </th>
 					<th class='audit-normal-th'> <?php echo elgg_echo('advpoll:normal:audit:date'); ?> </th>
-					<th class='audit-normal-th'> <?php echo elgg_echo('advpoll:normal:audit:opcion'); ?> </th>
+					<th class='audit-normal-th'> <?php echo elgg_echo('advpoll:normal:audit:candidate'); ?> </th>
 					
 				</tr>
 			</thead>
@@ -59,32 +59,32 @@ if ($audit == 'yes' && ($show_results == 'yes' or !is_poll_on_date($poll))) {
 				
 		<?php
 		
-		foreach ($opciones as $op) {
-			$entidad = get_entity($op);
-			$anotaciones = $entidad->getAnnotations('vote');
-			$nombre_op = $entidad->text;
+		foreach ($candidates as $candidate) {
+			$entity = get_entity($candidate);
+			$annotations = $entity->getAnnotations('vote');
+			$candidate_name = $entity->text;
 			//print_r($nombre_op);
-			foreach ($anotaciones as $anotacion){
-				$nombre = $anotacion->name;
-				$time = $anotacion->time_created;
+			foreach ($annotations as $annotation){
+				$name = $annotation->name;
+				$time = $annotation->time_created;
 				$date = date('d-m-Y, h:i:s', $time);
-				$usuario_guid = $anotacion->owner_guid;
-				$usuario = get_entity($usuario_guid);
-				$usuario_nombre = $usuario->name;
-				$usuario_nick = $usuario->username;
-				$usuario_icono = elgg_view_entity_icon($usuario, 'tiny');
+				$user_guid = $annotation->owner_guid;
+				$user = get_entity($user_guid);
+				$user_name = $user->name;
+				$user_nick = $user->username;
+				$user_icon = elgg_view_entity_icon($user, 'tiny');
 				
 				?>
 				<tr class='audit-normal-tr'>
-					<td class='audit-normal-td'><?php echo $usuario_icono; ?></td>
-					<td class='audit-normal-td'><?php echo $usuario_nick; ?></td>
-					<td class='audit-normal-td'><?php echo $usuario_nombre; ?></td>
+					<td class='audit-normal-td'><?php echo $user_icon; ?></td>
+					<td class='audit-normal-td'><?php echo $user_nick; ?></td>
+					<td class='audit-normal-td'><?php echo $user_name; ?></td>
 					<td class='audit-normal-td'><?php echo $date; ?></td>
-					<td class='audit-normal-td'><?php echo $nombre_op; ?></td>
+					<td class='audit-normal-td'><?php echo $candidate_name; ?></td>
 				</tr>
 				<?php
 			}
-			//print_r($anotaciones);
+			//print_r($annotations);
 		}
 		?>
 		
@@ -107,11 +107,8 @@ function roundNumber(num, dec) {
 }
 
 $(function () {
-    var chart;
-	var title = "<?php echo $title_tarta; ?>";
-	var subtitle = "<?php echo $subtitle_tarta; ?>";
-	var valores = "<?php echo $valores; ?>";
-	var altura = "<?php echo $altura; ?>";
+	var title = "<?php echo $graphic_title; ?>";
+	var h = "<?php echo $height; ?>";
     $(document).ready(function() {
         chart = new Highcharts.Chart({
             chart: {
@@ -119,7 +116,7 @@ $(function () {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
-                height: altura,                
+                height: h,                
             },
             title: {
                 text: title,
@@ -159,18 +156,18 @@ $(function () {
                 type: 'pie',
                 name: 'Browser share',
                 data: [
-                   <?php foreach ($opciones as $opcion){
-								$respuesta = get_entity($opcion);
-								$nombre_opcion = $respuesta->text;
-								$opcion_num_votos = $respuesta->countAnnotations('vote');
-								$num_votos = $num_votos + $opcion_num_votos;
-								?> [' <?php echo $nombre_opcion; ?> ', <?php echo $opcion_num_votos; ?> ],
+                   <?php foreach ($candidates as $candidate){
+								$answer = get_entity($candidate);
+								$candidate_name = $answer->text;
+								$candidate_n_votes = $answer->countAnnotations('vote');
+								$n_votes = $n_votes + $candidate_n_votes;
+								?> [' <?php echo $candidate_name; ?> ', <?php echo $candidate_n_votes; ?> ],
 					<?php } ?>
                 ]
             }],
             legend: {
 				labelFormatter: function() {
-					return '<p>' + this.name + '</p><br>Votos: '+ this.y +' / '+'<?php echo $num_votos; ?> ';
+					return '<p>' + this.name + '</p><br>Votos: '+ this.y +' / '+'<?php echo $n_votes; ?> ';
 					},
 				width: 720,
 				itemStyle: {
@@ -191,10 +188,4 @@ $(function () {
 });
 
 </script>
-
-
-
-
-
-
 

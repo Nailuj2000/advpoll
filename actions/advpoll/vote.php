@@ -36,13 +36,13 @@ $access_col = get_access_array($user);
 $access_vote_id = $poll->access_vote_id;
 
 if (!is_poll_on_date($poll)) {
-	register_error(elgg_echo('advpoll:accion:advpoll:cerrada'));
+	register_error(elgg_echo('advpoll:action:advpoll:closed'));
 } else {
 	if (!in_array($access_vote_id, $access_col)) {
-		register_error(elgg_echo('advpoll:accion:error:permisos'));
+		register_error(elgg_echo('advpoll:action:error:permisos'));
 	} else {
 		if (user_has_voted($user, $guid) && !$poll->can_change_vote) {
-			register_error(elgg_echo('advpoll:accion:error:cant_change_vote'));
+			register_error(elgg_echo('advpoll:action:error:cant_change_vote'));
 		} else {
 			if ($poll->poll_type == 'normal') {
 				$choice = get_input('response');
@@ -54,17 +54,17 @@ if (!is_poll_on_date($poll)) {
 				}
 				
 				if ($candidate_entity->annotate('vote', 1, $access_id, $owner_guid, 'int')){
-					system_message(elgg_echo('advpoll:accion:voto:ok'));
+					system_message(elgg_echo('advpoll:action:voto:ok'));
 				}
 			} else { // condorcet
-				$ballot = ballot_matrix($choices, get_input('opciones'));
+				$ballot = ballot_matrix($choices, get_input('candidates'));
 				$str_ballot = ballot_matrix_to_string($ballot);
 				
 				if (remove_annotation_by_entity_guid_user_guid('vote_condorcet', $guid, $owner_guid)) {
 					system_message(elgg_echo('advpoll:anteriores:borradas:ok'));
 				}
 				if ($poll->annotate('vote_condorcet', "$str_ballot", $access_id, $owner_guid)){
-					system_message(elgg_echo('advpoll:accion:voto:ok'));
+					system_message(elgg_echo('advpoll:action:voto:ok'));
 				}
 			}
 		}

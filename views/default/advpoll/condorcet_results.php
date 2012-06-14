@@ -30,19 +30,19 @@ elgg_load_js('kinetic');
 elgg_load_js('grafo-schulze');
 $guid = elgg_extract('guid', $vars, '');
 $poll = get_entity($guid);
-$opciones = polls_get_choice_array($poll);
+$candidates = polls_get_choice_array($poll);
 $num_votos = 0;
 $abcd = 65;
 $audit = $poll->audit;
 $show_results = $poll->show_results;
 $can_change_vote = $poll->can_change_vote;
-foreach ($opciones as $opcion) {
+foreach ($candidates as $candidate) {
 	$abecedario[] = chr($abcd);
 	$abcd++;
 }
 	
 
-$opciones_condorcet = array_keys($opciones);
+$candidates_condorcet = array_keys($candidates);
 
 $condorcet = elgg_get_annotations(array(
 	'type' => 'object',
@@ -66,18 +66,18 @@ if ($audit == 'yes' && ($show_results == 'yes' or !is_poll_on_date($poll))) {
 		$usuario_guid = $papeleta->owner_guid;
 		$usuario = get_entity($usuario_guid);
 		$nombre = $usuario->name;
-		echo "<h3  class='separador-punteado'>" . elgg_echo('advpoll:condorcet:opciones:elegidas:usuario') . $nombre . "</h3>";
+		echo "<h3  class='separador-punteado'>" . elgg_echo('advpoll:condorcet:candidates:elegidas:usuario') . $nombre . "</h3>";
 		echo "<br>";
 		echo "<ol class='papeleta-ol'>";
 		
-		foreach ($papelota as $opcion) {
-			echo "<li>$opcion</li>";
+		foreach ($papelota as $candidate) {
+			echo "<li>$candidate</li>";
 			
 		}
 		
 		echo "</ol>";
-		echo "<h4>" . elgg_echo('advpoll:condorcet:opciones:elegidas:papeleta') .  $nombre . "</h4>";
-		echo elgg_view('advpoll/condorcet_matrix', array('matriz' => $papeleta_matriz, 'opciones' => $abecedario));
+		echo "<h4>" . elgg_echo('advpoll:condorcet:candidates:elegidas:papeleta') .  $nombre . "</h4>";
+		echo elgg_view('advpoll/condorcet_matrix', array('matriz' => $papeleta_matriz, 'candidates' => $abecedario));
 		$matriz[] = $papeleta_matriz;
 		if ($i === 0) {
 			$matriz_aux = $papeleta_matriz;
@@ -108,13 +108,13 @@ foreach ($condorcet as $papeleta2){
 echo '<br>';
 echo "<h2>" . elgg_echo('advpoll:condorcet:results:final') . "</h2>";
 
-echo elgg_view('advpoll/condorcet_matrix', array('matriz' => $matriz_aux2, 'opciones' => $abecedario));
+echo elgg_view('advpoll/condorcet_matrix', array('matriz' => $matriz_aux2, 'candidates' => $abecedario));
 print_r(condorcet_results_sum_points($matriz_aux2));
 $abc = 65;
 echo "<br><h3>" . elgg_echo('advpoll:condorcet:leyenda') . "</h3><br>";
 echo '<ul><br>';
-	foreach ($opciones_condorcet as $opcion){	
-		echo "<li><b>" . elgg_echo('advpoll:condorcet:leyenda:opcion') . chr($abc) . ': </b>' . "$opcion</li><br>";
+	foreach ($candidates_condorcet as $candidate){	
+		echo "<li><b>" . elgg_echo('advpoll:condorcet:legend:candidate') . chr($abc) . ': </b>' . "$candidate</li><br>";
 		$abc++;
 	}
 	

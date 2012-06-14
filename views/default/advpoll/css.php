@@ -16,7 +16,7 @@
 }
 
 
-.opciones-condorcet {
+.candidates-condorcet {
 	border-style: solid;
 	border-width: 2px;
 	border-color: #4D4D4D;
@@ -58,7 +58,7 @@
 	color: #4690D6;	
 }
 
-.parrafo-opciones {
+.parrafo-candidates {
 	font-weight: normal;
 	margin-left: 30px;
 	margin-bottom: 0;

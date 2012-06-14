@@ -28,7 +28,7 @@ $guid = get_input('guid');
 $poll = get_entity($guid);
 $poll_closed = $poll->poll_closed;
 $poll_type = $poll->poll_type;
-$usuaria_guid = elgg_get_logged_in_user_guid();
+$user_guid = elgg_get_logged_in_user_guid();
 $audit = $poll->audit;
 $end_date = $poll->end_date;
 $start_date = $poll->start_date;
@@ -37,7 +37,7 @@ $can_change_vote = $poll->can_change_vote;
 
 $acceso_lectura = $poll->access_id;
 $access_vote = $poll->access_vote_id;
-$acceso_col = get_access_array($usuaria_guid);
+$acceso_col = get_access_array($user_guid);
 
 if (!in_array($acceso_lectura, $acceso_col)) {
 	forward(REFERER);
@@ -59,7 +59,7 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 	$title = $poll->title;
 	
 	$content = elgg_view_entity($poll, array('full_view' => true));
-	if (user_has_voted($usuaria_guid, $guid) &&
+	if (user_has_voted($user_guid, $guid) &&
 			is_poll_on_date($poll) && in_array($access_vote, $acceso_col) &&
 			$can_change_vote == 'yes') {
 		$content .= elgg_view('input/button', array(

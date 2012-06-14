@@ -31,7 +31,7 @@ $access_id = get_input('access_id');
 $container_guid = get_input('container_guid');
 //$guid = get_input('guid');
 $choices = get_input('choices');
-$num_opciones = intval(get_input('num_opciones'));
+$n_candidates = intval(get_input('n_candidates'));
 $owner = intval(get_input('container_guid'));
 //$guid = intval(get_input('guid'));
 
@@ -58,9 +58,9 @@ if (!$start_date) {
 
 elgg_make_sticky_form('polls');
 
-$opciones = array();
-for ($i=0; $i<$num_opciones; $i++) {
-	$opciones[$i] = get_input('opcion'.$i);
+$candidates = array();
+for ($i=0; $i<$n_candidates; $i++) {
+	$candidates[$i] = get_input('candidate'.$i);
 	
 }
 
@@ -68,11 +68,11 @@ if (!$title) {
 	register_error(elgg_echo('advpoll:error:pregunta'));
 
 } else {
-	if ($num_opciones < 2) {
-		register_error(elgg_echo('advpoll:error:num:opciones'));
+	if ($n_candidates < 2) {
+		register_error(elgg_echo('advpoll:error:number_of_candidates'));
 	} else { 
-		if (array_has_repeated_value($opciones)) {
-			register_error(elgg_echo('advpoll:error:opciones:repes'));
+		if (array_has_repeated_value($candidate)) {
+			register_error(elgg_echo('advpoll:error:duplicated_candidates'));
 		} else {
 			if ($start_date > $end_date) {
 				register_error(elgg_echo('advpoll:error:wrong_dates'));
@@ -98,7 +98,7 @@ if (!$title) {
 				$guid = $poll->save();
 				
 				polls_delete_choices($poll); 
-				polls_add_choices($poll,$opciones);
+				polls_add_choices($poll,$candidates);
 				
 				elgg_clear_sticky_form('polls');
 				

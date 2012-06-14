@@ -17,9 +17,9 @@ if ($poll->canEdit()) {
 		foreach ($choices as $vote_guid) {
 			$vote = get_entity($vote_guid);
 			if ($vote->delete()) {
-				system_message(elgg_echo('advpoll:opcion:delete:success'));	
+				system_message(elgg_echo('advpoll:candidate:delete:success'));	
 			} else {
-				register_error(elgg_echo('advpoll:opcion:delete:notsuccess'));
+				register_error(elgg_echo('advpoll:candidate:delete:fail'));
 			}
 		}
 		if ($poll->delete())  {

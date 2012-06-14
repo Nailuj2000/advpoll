@@ -1,7 +1,7 @@
 <?php
 
 $matriz = elgg_extract('matriz', $vars, array());
-$opciones = elgg_extract('opciones', $vars, array());
+$candidates = elgg_extract('candidates', $vars, array());
 
 
 echo '<div>';
@@ -17,15 +17,15 @@ echo elgg_view('output/url',array(
 	'text' => $texto ,
 	'href' => $direccion,
 	)) . "</th>";
-foreach ($opciones as $opcion) {
-	echo "<th class='condorcet-th'>" . elgg_echo('advpoll:condorcet:leyenda:opcion') . "$opcion</th>";
+foreach ($candidates as $candidate) {
+	echo "<th class='condorcet-th'>" . elgg_echo('advpoll:condorcet:legend:candidate') . "$candidate</th>";
 }
 echo "</tr></thead><tbody>";
 $i = 0;
 $j = 0;
 foreach ($matriz as $fila) {
 	echo "<tr class='condorcet-tr'>";
-	echo "<th class='condorcet-th'>" . elgg_echo('advpoll:condorcet:leyenda:opcion') . "$opciones[$i]</th>";
+	echo "<th class='condorcet-th'>" . elgg_echo('advpoll:condorcet:legend:candidate') . "$candidates[$i]</th>";
 	
 	foreach($fila as $elemento){
 		if ($matriz[$i][$j] === $matriz[$j][$i]) {

@@ -27,7 +27,7 @@
 elgg_load_library('advpoll:model');
 $guid = elgg_extract('guid', $vars, '');
 $poll = get_entity($guid);
-$opciones = polls_get_choice_array($poll);
+$candidates = polls_get_choice_array($poll);
 $owner_guid = elgg_get_logged_in_user_guid();
 
 if (user_has_voted($owner_guid, $guid)) {
@@ -35,11 +35,11 @@ if (user_has_voted($owner_guid, $guid)) {
 }
 ?>
 <br>
-<h3><?php echo elgg_echo('advpoll:vote:opcion'); ?></h3><br />
+<h3><?php echo elgg_echo('advpoll:candidate:vote'); ?></h3><br />
 <?php
 echo elgg_view('input/radio', array(
 	'name' => 'response', 
-	'options' => $opciones,
+	'candidates' => $candidates,
 ));
 echo elgg_view('input/hidden', array(
 	'name' => 'guid',

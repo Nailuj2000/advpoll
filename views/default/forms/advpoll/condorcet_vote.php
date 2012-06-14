@@ -27,7 +27,7 @@
 elgg_load_library('advpoll:model');
 $guid = elgg_extract('guid', $vars, '');
 $poll = get_entity($guid);
-$opciones = polls_get_choice_array($poll);
+$candidates = polls_get_choice_array($poll);
 $owner_guid = elgg_get_logged_in_user_guid();
 
 if (user_has_voted($owner_guid, $guid)) {
@@ -35,14 +35,14 @@ if (user_has_voted($owner_guid, $guid)) {
 }
 ?>
 		<br>
-		<h3><?php echo elgg_echo('advpoll:condorcet:vote:opcion'); ?></h3>
+		<h3><?php echo elgg_echo('advpoll:condorcet:candidate:vote'); ?></h3>
 		<br>
-		<div class="opciones-condorcet"><ol id="ordenable">
+		<div class="candidates-condorcet"><ol id="ordenable">
 			<?php
 		
-			foreach ($opciones as $opcion => $opcion_guid){
-				echo '<li class="ui-objeto-ordenable"><p class="parrafo-opciones">'. $opcion . '</p>';
-				echo elgg_view('input/hidden', array ('name' => "opciones[]", 'value' => $opcion));
+			foreach ($candidates as $candidate => $candidate_guid){
+				echo '<li class="ui-objeto-ordenable"><p class="parrafo-candidates">'. $candidate . '</p>';
+				echo elgg_view('input/hidden', array ('name' => "candidates[]", 'value' => $candidate));
 				echo '</li>';
 			}
 

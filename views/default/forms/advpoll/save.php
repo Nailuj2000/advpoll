@@ -79,18 +79,18 @@ if ($categories) {
 
 ?>
 <div>
-	<label><?php echo elgg_echo('advpoll:acceso:ver'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:access:ver'); ?></label><br />
 	<?php echo elgg_view('input/access', array('name' => 'access_id', 'value' => $access_id)); ?>
 </div>
 
 <div>
-	<label><?php echo elgg_echo('advpoll:acceso:vote'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:access:vote'); ?></label><br />
 	<?php echo elgg_view('input/access', array('name' => 'access_vote_id', 'value' => $access_vote_id)); ?>
 </div>
 
 
-<div id="opciones"><?php echo elgg_view('input/button', array('id' => 'new_candidate', 'value' => elgg_echo('advpoll:new:opcion')));?>
-<label><?php echo elgg_echo('advpoll:opciones'); ?></label><br />
+<div id="candidates"><?php echo elgg_view('input/button', array('id' => 'new_candidate', 'value' => elgg_echo('advpoll:candidate:new')));?>
+<label><?php echo elgg_echo('advpoll:candidates'); ?></label><br />
 
 </div>
 
@@ -114,7 +114,7 @@ if ($categories) {
 </div>
 <?php /**
 <div>
-	<label><?php echo elgg_echo('advpoll:cerrada'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:closed'); ?></label><br />
 	<?php echo elgg_view('input/radio', array(
 		'name' => 'poll_closed',
 		 'options' => array(
@@ -184,7 +184,7 @@ if ($categories) {
 <?php
 
 echo elgg_view('input/hidden', array('name' => 'container_guid', 'value' => $container_guid));
-echo elgg_view('input/hidden', array('name' => 'num_opciones', 'id' => 'num_opciones', 'value' => $num_opciones));
+echo elgg_view('input/hidden', array('name' => 'n_candidates', 'id' => 'n_candidates', 'value' => $n_candidates));
 
 if ($guid) {
 	echo elgg_view('input/hidden', array('name' => 'guid', 'value' => $guid));
@@ -200,10 +200,10 @@ echo elgg_view('input/submit', array('value' => elgg_echo("save")));
 		// si estás aquí dentro es porque has pulsado el botón new_candidate
 		// metemos en la variable número de opciones,
 		// la longitud de opciones que haya o no haya... 0,1,2,3,4
-		var num_opciones = $('.opcion').length;
+		var n_candidates = $('.candidate').length;
 
-		// Añadimos al selector <div id=opciones... un input text
-		$('#opciones').append ('<div id="'+num_opciones+'"><br /><input type="text" name="opcion'+num_opciones+'" id="opcion'+num_opciones+'" class="elgg-input-text opcion" /><span class="eliminarcontomate" rel="'+num_opciones+'" ><?php echo elgg_echo('advpoll:opcion:borrame'); ?></span></div>');
+		// Añadimos al selector <div id=candidates... un input text
+		$('#candidates').append ('<div id="'+n_candidates+'"><br /><input type="text" name="candidate'+n_candidates+'" id="opcion'+n_candidates+'" class="elgg-input-text opcion" /><span class="eliminarcontomate" rel="'+n_candidates+'" ><?php echo elgg_echo('advpoll:candidate:deleteme'); ?></span></div>');
 		// cosa rara para que funcione el live, quizás.
 		return false; 
 	});
@@ -213,8 +213,8 @@ echo elgg_view('input/submit', array('value' => elgg_echo("save")));
 	    // si estás aquí dentro es porque has pulsado alguna palabra,
 	    // "borrame" contenida dentro de un class="eliminarcontomate"
 	    // metemos dentro de la variable cual_borro, el contenido de 
-	    // rel="0 o 1 o 2 o 3 o 4".....rel="'+num_opciones+'" para luego
-	    // borrar todo el div de la opcion <div id="'+num_opciones+'">
+	    // rel="0 o 1 o 2 o 3 o 4".....rel="'+n_candidates+'" para luego
+	    // borrar todo el div de la opcion <div id="'+n_candidates+'">
 	    var cual_borro = $(this).attr('rel');
 	    
 	    // metemos en la variable chapucilla, el selector(id) que se va a usar
@@ -233,7 +233,7 @@ echo elgg_view('input/submit', array('value' => elgg_echo("save")));
 		//$(x).fadeOut();
 	//});
 	$('.elgg-form-advpoll-save').submit(function() {
-		$('#num_opciones').val($('.opcion').length);
+		$('#n_candidates').val($('.candidate').length);
 	});
 </script>
 

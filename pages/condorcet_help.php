@@ -41,7 +41,7 @@ $content .= elgg_view('advpoll/condorcet_matrix', array(
 		array(0, 0, 0, 1),
 		array(0, 0, 0, 0),
 	),
-	'opciones' => array(
+	'candidates' => array(
 		'A',
 		'B', 
 		'C', 
@@ -190,7 +190,7 @@ $content .=
 	</table>
 <br>";
 
-$content .= elgg_echo('advpoll:condorcet:help:ballots:opciona') . '<br>';
+$content .= elgg_echo('advpoll:condorcet:help:ballots:candidatea') . '<br>';
 
 $content .= 
 	"<br><table class='condorcet-papeleta-table'>
@@ -236,7 +236,7 @@ $content .=
 	</table>
 <br>";
 
-$content .= elgg_echo('advpoll:condorcet:help:ballots:opcionb') . '<br>';
+$content .= elgg_echo('advpoll:condorcet:help:ballots:candidateb') . '<br>';
 
 $content .= 
 	"<br><table class='condorcet-papeleta-table'>
@@ -282,7 +282,7 @@ $content .=
 	</table>
 <br>";
 
-$content .= elgg_echo('advpoll:condorcet:help:ballots:opcionc') . '<br>';
+$content .= elgg_echo('advpoll:condorcet:help:ballots:candidatec') . '<br>';
 
 $content .= 
 	"<br><table class='condorcet-papeleta-table'>
@@ -329,7 +329,7 @@ $content .=
 <br>";
 
 
-$content .= elgg_echo('advpoll:condorcet:help:ballots:opciond') . '<br>';
+$content .= elgg_echo('advpoll:condorcet:help:ballots:candidated') . '<br>';
 
 $content .= 
 	"<br><table class='condorcet-papeleta-table'>
@@ -384,7 +384,7 @@ $content .= elgg_view('advpoll/condorcet_matrix', array(
 		array(0, 0, 0, 1),
 		array(0, 0, 0, 0),
 	),
-	'opciones' => array(
+	'candidates' => array(
 		'A',
 		'B', 
 		'C', 

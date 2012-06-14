@@ -2,7 +2,7 @@
 $choices = elgg_extract('choices', $vars, array());
 
 
-echo '<h5>' . elgg_echo('advpoll:opciones') . '</h5>';
+echo '<h5>' . elgg_echo('advpoll:candidates') . '</h5>';
 
 echo "<div><ul class='choices_ul'>";
 

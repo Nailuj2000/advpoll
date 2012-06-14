@@ -60,13 +60,13 @@ $poll_closed = elgg_extract('poll_closed', $vars, 'no');
 $audit = elgg_extract('audit', $vars, 'no');
 */
 if ($poll){
-	$opciones = polls_get_choice_array($poll);
+	$candidates = polls_get_choice_array($poll);
 } else {
-	$opciones = array();
+	$candidates = array();
 }
 
 	
-$num_opciones = count($opciones);
+$n_candidates = count($candidates);
 ?>
 
 <div>
@@ -101,21 +101,21 @@ if ($categories) {
 
 <?php 
 /**
- * <div id="opciones"><?php echo elgg_view('input/button', array('id' => 'new_candidate', 'value' => elgg_echo('advpoll:new:opcion')));?>
- * <label><?php echo elgg_echo('advpoll:opciones'); ?></label><br />
+ * <div id="candidates"><?php echo elgg_view('input/button', array('id' => 'new_candidate', 'value' => elgg_echo('advpoll:candidate:new')));?>
+ * <label><?php echo elgg_echo('advpoll:candidates'); ?></label><br />
  * <?php 
  */
  ?>
 <div>
-	<label><?php echo elgg_echo('advpoll:opciones'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:candidates'); ?></label><br />
 </div>
 
 <div><ul class='choices_ul'>
 	<?php
 	$i = 0;
-	foreach ($opciones as $opcion_guid) {
-		$opcion = get_entity($opcion_guid);
-		$value = $opcion->text; ?>
+	foreach ($candidates as $candidate_guid) {
+		$candidate = get_entity($candidate_guid);
+		$value = $candidate->text; ?>
 		<li><?php echo elgg_view('output/text', array('value' => $value)); ?></li>
 		<?php
 		$i = $i+1;
@@ -132,7 +132,7 @@ if ($categories) {
 </div>
 
 <div>
-	<label><?php echo elgg_echo('advpoll:acceso:vote'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:access:vote'); ?></label><br />
 	<?php echo elgg_view('input/access', array('name' => 'access_vote_id', 'value' => $access_id)); ?>
 </div>
 
@@ -157,7 +157,7 @@ if ($categories) {
 
 <?php /**
 <div>
-	<label><?php echo elgg_echo('advpoll:cerrada'); ?></label><br />
+	<label><?php echo elgg_echo('advpoll:closed'); ?></label><br />
 	<?php echo elgg_view('input/radio', array(
 		'name' => 'poll_closed',
 		 'options' => array(
@@ -199,7 +199,7 @@ if ($categories) {
 <?php
 
 //echo elgg_view('input/hidden', array('name' => 'container_guid', 'value' => $container_guid));
-echo elgg_view('input/hidden', array('name' => 'num_opciones', 'id' => 'num_opciones', 'value' => $num_opciones));
+echo elgg_view('input/hidden', array('name' => 'n_candidates', 'id' => 'n_candidates', 'value' => $n_candidates));
 
 if ($guid) {
 	echo elgg_view('input/hidden', array('name' => 'guid', 'value' => $guid));
