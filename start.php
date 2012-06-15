@@ -33,6 +33,10 @@ elgg_register_event_handler('init', 'system', 'advpoll_init');
  * Init polls plugin
  */
 function advpoll_init() {
+	// Register classes
+	elgg_register_entity_type('object', 'advpoll');
+	add_subtype('object', 'advpoll', 'AdvPoll');
+
 	// Register actions
 	$action_path = elgg_get_plugins_path() . 'advpoll/actions/advpoll';
 	elgg_register_action('advpoll/save', "$action_path/save.php");
@@ -48,10 +52,6 @@ function advpoll_init() {
 
 	// Extend the main CSS file
 	elgg_extend_view('css/elgg', 'advpoll/css');
-	
-	// Register entity type for search
-	// Registrar tipo de entidad para las busquedas
-	elgg_register_entity_type('object', 'poll');
 
 	// Add a menu item to the main site menu
 	$item = new ElggMenuItem('polls', elgg_echo('advpoll:menu'), 'advpoll/all');
@@ -60,7 +60,7 @@ function advpoll_init() {
 	// Register page handlers
 	elgg_register_page_handler('advpoll', 'advpoll_page_handler');
 	// Register URL addresses handler
-	elgg_register_entity_url_handler('object', 'poll', 'advpoll_url_handler');
+	elgg_register_entity_url_handler('object', 'advpoll', 'advpoll_url_handler');
 	// Register external libraries
 	elgg_register_library('advpoll:model', elgg_get_plugins_path() . 'advpoll/lib/model.php');
 	// Groups module

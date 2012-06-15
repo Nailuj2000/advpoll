@@ -203,7 +203,7 @@ echo elgg_view('input/submit', array('value' => elgg_echo("save")));
 		var n_candidates = $('.candidate').length;
 
 		// Añadimos al selector <div id=candidates... un input text
-		$('#candidates').append ('<div id="'+n_candidates+'"><br /><input type="text" name="candidate'+n_candidates+'" id="opcion'+n_candidates+'" class="elgg-input-text opcion" /><span class="eliminarcontomate" rel="'+n_candidates+'" ><?php echo elgg_echo('advpoll:candidate:deleteme'); ?></span></div>');
+		$('#candidates').append ('<div id="'+n_candidates+'"><br /><input type="text" name="candidate'+n_candidates+'" id="candidate'+n_candidates+'" class="elgg-input-text candidate" /><span class="eliminarcontomate" rel="'+n_candidates+'" ><?php echo elgg_echo('advpoll:candidate:deleteme'); ?></span></div>');
 		// cosa rara para que funcione el live, quizás.
 		return false; 
 	});

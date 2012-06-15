@@ -8,7 +8,7 @@ $title = elgg_echo('advpoll:title');
 
 $polls = elgg_get_entities(array(
 	'type' => 'object',
-	'subtype' => 'poll',
+	'subtype' => 'advpoll',
 	'limit' => 0,
 	));
 

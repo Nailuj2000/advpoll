@@ -60,7 +60,7 @@ $poll_closed = elgg_extract('poll_closed', $vars, 'no');
 $audit = elgg_extract('audit', $vars, 'no');
 */
 if ($poll){
-	$candidates = polls_get_choice_array($poll);
+	$candidates = $poll->getCandidatesArray();
 } else {
 	$candidates = array();
 }

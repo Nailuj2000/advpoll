@@ -25,12 +25,12 @@
  */
 $title = elgg_echo('advpoll:title');
 
-elgg_push_breadcrumb(elgg_echo('advpoll:all'));
+elgg_push_breadcrumb(elgg_echo('advpoll:filters:all'));
 
 // Get a list of polls ordered by date
 $content = elgg_list_entities(array(
 	'type' => 'object',
-	'subtype' => 'poll',
+	'subtype' => 'advpoll',
 	'limit' => 5,
 	'full_view' => false,
 	));

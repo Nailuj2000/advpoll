@@ -6,7 +6,7 @@ elgg_push_breadcrumb($page_owner->name, "advpoll/friends/" . $page_owner->name);
 //get all polls order by date
 $content = elgg_list_entities(array(
 	'type' => 'object',
-	'subtype' => 'poll',
+	'subtype' => 'advpoll',
 	'limit' => 5,
 	'full_view' => false,
 	'container_guid' => $page_owner->guid,

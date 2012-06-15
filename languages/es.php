@@ -20,6 +20,7 @@
 $mapping = array(
 	'advpoll:title' => 'Votaciones',
 	'advpoll:menu' => 'Votaciones',
+	'item:object:advpoll' => 'Votación',
 	'advpoll:new' => 'Nueva Votación',
 	'advpoll:editing' => 'Editor de votaciones',
 	'advpoll:new:poll' => 'Votación creada satisfactoriamente',
@@ -115,7 +116,7 @@ $mapping = array(
 	
 	'advpoll:view:cerrada' => 'Finalizada: ',
 	'advpoll:view:audit' => ' Auditoría pública: ',
-	'advpoll:view:tipo' => ' Tipo: ',
+	'advpoll:view:type' => ' Tipo: ',
 	'advpoll:type:normal' => ' Normal',
 	'advpoll:type:condorcet' => ' Preferencial',
 	'advpoll:closed' => '¿Votación cerrada? (nadie podrá votar hasta que se active)',
@@ -155,6 +156,7 @@ $mapping = array(
 	'advpoll:normal:audit:user' => 'Habitante',
 	'advpoll:action:error:cant_change_vote' => 'Esta votación no permite cambiar el voto',
 	'advpoll:action:error:permisos' => 'No tienes permiso para votar',
+	'advpoll:action:error:must_select_candidate' => 'Tienes que elegir una opción',
 	'advpoll:error:number_of_candidates' => 'Tienen que haber al menos dos opciones posibles',
 	'advpoll:error:duplicated_candidates' => 'No pueden haber opciones repetidas',
 	'advpoll:error:wrong_dates' => 'La fecha de inicio es posterior a la fecha de finalización'

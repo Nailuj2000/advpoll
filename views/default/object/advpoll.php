@@ -1,8 +1,6 @@
 <?php
-
 elgg_load_library('advpoll:model');
 $poll = $vars['entity'];
-
 $audit = $poll->audit;
 $type = $poll->poll_type;
 $title = $poll->title;
@@ -12,7 +10,7 @@ $acces_id = $poll->access_id;
 $owner_guid = $poll->owner_guid;
 $container_guid = $poll->container_guid;
 $tags = $poll->tags;
-$choices = polls_get_choice_array($poll);
+$choices = $poll->getCandidatesArray();
 $full = elgg_extract('full_view', $vars, FALSE);
 $owner =  $poll->getOwnerEntity();
 $start_date = $poll->start_date;
@@ -72,11 +70,11 @@ $metadata = elgg_view_menu('entity', array(
 
 	$subtitle .= "<br>" . elgg_echo('advpoll:view:ended:' . $poll_comparison_end . ':' . $poll_comparison_start ) . ',';
 	if ($poll_comparison_start == 'lessthanstart') {
-	$subtitle .= elgg_echo('advpoll:view:time:from') . date('d - M - Y', $start_date) . ', ';
-} 
+		$subtitle .= elgg_echo('advpoll:view:time:from') . date('d - M - Y', $start_date) . ', ';
+	} 
 	if ($poll_comparison_end == 'lessthanend') {
-	$subtitle .= elgg_echo('advpoll:view:time:to') .date('d - M - Y', $end_date);
-} 
+		$subtitle .= elgg_echo('advpoll:view:time:to') .date('d - M - Y', $end_date);
+	}
 	$subtitle .= elgg_echo('advpoll:view:audit') . elgg_echo('option:' . $audit) . ',';
 	$subtitle .= elgg_echo('advpoll:view:type') . elgg_echo('advpoll:type:' . $type) . ',';
 	$subtitle .= elgg_echo('advpoll:view:show:results') . elgg_echo('advpoll:show:' . $show_results) . '.';

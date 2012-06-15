@@ -30,7 +30,7 @@ $guid = get_input('guid');
 $poll = get_entity($guid);
 $owner_guid = get_input('owner_guid');
 $access_id = $poll->access_id;
-$choices = polls_get_choice_array($poll);
+$choices = $poll->getCandidatesArray();
 $user = elgg_get_logged_in_user_guid();
 $access_col = get_access_array($user);
 $access_vote_id = $poll->access_vote_id;
@@ -46,15 +46,19 @@ if (!is_poll_on_date($poll)) {
 		} else {
 			if ($poll->poll_type == 'normal') {
 				$choice = get_input('response');
-				$candidate_entity = get_entity($choice);
-				foreach ($choices as $vote_guid){
-					if (remove_annotation_by_entity_guid_user_guid('vote', $vote_guid, $owner_guid)){
-						system_message(elgg_echo('advpoll:anteriores:borradas:ok'));
+				if ($choice == null) {
+					register_error(elgg_echo('advpoll:action:error:must_select_candidate'));
+				} else {
+					$candidate_entity = get_entity($choice);
+					foreach ($choices as $vote_guid){
+						if (remove_annotation_by_entity_guid_user_guid('vote', $vote_guid, $owner_guid)){
+							system_message(elgg_echo('advpoll:anteriores:borradas:ok'));
+						}
 					}
-				}
-				
-				if ($candidate_entity->annotate('vote', 1, $access_id, $owner_guid, 'int')){
-					system_message(elgg_echo('advpoll:action:voto:ok'));
+					
+					if ($candidate_entity->annotate('vote', 1, $access_id, $owner_guid, 'int')){
+						system_message(elgg_echo('advpoll:action:voto:ok'));
+					}
 				}
 			} else { // condorcet
 				$ballot = ballot_matrix($choices, get_input('candidates'));

@@ -23,92 +23,6 @@
  */
 
 /**
- * Returns all possible candidates for a poll in an array. Each candidate is an Elgg
- * entity.
- * 
- * @param ElggEntity $poll  A poll entity.
- * @return array  An array of candidates.
- */
-function polls_get_choices($poll) {
-	$options = array(
-		'relationship' => 'poll_choice',
-		'relationship_guid' => $poll->guid,
-		'inverse_relationship' => TRUE,
-		'order_by_metadata' => array('name'=>'display_order','direction'=>'ASC'),
-		'limit' => 0,
-	);
-	return elgg_get_entities_from_relationship($options);
-}
-
-/**
- *  Get an array of all poll choices guids.
- *  
- *  @param $poll  The poll the choices of which we want.
- *  @return an array containing a relation between the choice text and
- *  the choice guid. 
- */
-function polls_get_choice_array($poll) {
-	$choices = polls_get_choices($poll);
-	$responses = array();
-	if ($choices) {
-		foreach($choices as $choice) {
-			$label = $choice->text;
-			// force numbers to be strings
-			$responses["$label" . ' '] = $choice->guid;
-		}
-	}	
-	return $responses;
-}
-
-/**
- * Save a list of choices in a poll. For each choice, an ElggObject is created,
- * and related to the poll as an Elgg relationship.
- * 
- * @param $poll  A poll entity.
- * @param $choices  A collections of strings.
- */
-function polls_add_choices($poll,$choices) {
-	$i = 0;
-	if ($choices) {
-		foreach($choices as $choice) {
-			$poll_choice = new ElggObject();
-			$poll_choice->subtype = "poll_choice";
-			$poll_choice->text = $choice;
-			$poll_choice->display_order = $i*10;
-			$poll_choice->access_id = $poll->access_id;
-			$poll_choice->save();
-			add_entity_relationship($poll_choice->guid, 'poll_choice', $poll->guid);
-			$i += 1;
-		}
-	}
-}
-
-/**
- * Removes all choices associated with a poll.
- * 
- * @param $poll  A poll entity.
- */
-function polls_delete_choices($poll) {
-	$choices = polls_get_choices($poll);
-	if ($choices) {
-		foreach($choices as $choice) {
-			$choice->delete();
-		}
-	}
-}
-
-/**
- * Replaces the current set of polls choices for a new one.
- * 
- * @param $poll  A poll entity.
- * @param $new_choices  A collection of strings.
- */
-function polls_replace_choices($poll,$new_choices) {
-	polls_delete_choices($poll);
-	polls_add_choices($poll, $new_choices);
-}
-
-/**
  * Removes all annotation of a certain type from an entity that belong to a given user.
  * 
  * @param $annotation_name  A string with the name of the annotation's type to remove.
@@ -188,7 +102,7 @@ function user_has_voted($user_guid, $poll_guid) {
 	$poll = get_entity($poll_guid);
 	$return = false;
 	if ($poll->poll_type == 'normal') {
-		$choices = polls_get_choice_array($poll);
+		$choices = $poll->getCandidatesArray();
 		foreach ($choices as $choice_guid){
 			$choice = get_entity($choice_guid);
 			$votes = $choice->getAnnotations('vote');
@@ -202,7 +116,7 @@ function user_has_voted($user_guid, $poll_guid) {
 	} else { // condorcet
 		$votes = elgg_get_annotations(array(
 				'type' => 'object',
-				'subtype' => 'poll',
+				'subtype' => 'advpoll',
 				'guid' => $poll_guid,
 				'anotation_name' => 'vote_condorcet',
 				'limit' => 0,
@@ -460,7 +374,7 @@ function get_ordered_candidates_from_annotation($annotation){
 	// Extract the ballot and the list of candidates
 	$poll = get_entity($annotation->entity_guid);
 	$ballot = string_to_ballot_matrix($annotation->value);
-	$candidates_array = polls_get_choice_array($poll);
+	$candidates_array = $poll->getCandidatesArray();
 	$candidates = array_keys($candidates_array);
 	// Get a list of all candidates, ordered by given points	
 	$i = 0;

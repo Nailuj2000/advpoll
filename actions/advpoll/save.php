@@ -23,6 +23,7 @@
  * MA 02110-1301, USA.
  */
 elgg_load_library('advpoll:model');
+
 $title = get_input('title');
 $desc = get_input('description');
 $path = get_input('path');
@@ -71,15 +72,14 @@ if (!$title) {
 	if ($n_candidates < 2) {
 		register_error(elgg_echo('advpoll:error:number_of_candidates'));
 	} else { 
-		if (array_has_repeated_value($candidate)) {
+		if (array_has_repeated_value($candidates)) {
 			register_error(elgg_echo('advpoll:error:duplicated_candidates'));
 		} else {
 			if ($start_date > $end_date) {
 				register_error(elgg_echo('advpoll:error:wrong_dates'));
 			} else {
 				
-				$poll = new ElggObject();
-				$poll->subtype = "poll";
+				$poll = new AdvPoll();
 				$poll->title = $title;
 				$poll->description = $desc;
 				$poll->path = $path;
@@ -95,15 +95,14 @@ if (!$title) {
 				$poll->access_vote_id = $access_vote_id;
 				$poll->show_results = $show_results;
 				$poll->can_change_vote = $can_change_vote;
-				$guid = $poll->save();
+				$saved = $poll->save();
 				
-				polls_delete_choices($poll); 
-				polls_add_choices($poll,$candidates);
+				$poll->replaceCandidates($candidates);
 				
 				elgg_clear_sticky_form('polls');
 				
-				if ($guid) { //esta parte creo que esta un poco mal
-					system_message(elgg_echo('advpoll:saved'));
+				if ($saved) {
+					system_message(elgg_echo('advpoll:new:poll'));
 					forward($poll->getURL());
 				}
 				else {

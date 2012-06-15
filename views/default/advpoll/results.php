@@ -27,9 +27,9 @@
 // once elgg_view stops throwing all sorts of junk into $vars, we can use extract()
 elgg_load_library('advpoll:model');
 elgg_load_js('highcharts');
-$poll = elgg_extract('poll', $vars, array());
+$poll = elgg_extract('advpoll', $vars, array());
 $guid = $poll->guid;
-$candidates = polls_get_choice_array($poll);
+$candidates = $poll->getCandidatesArray();
 $n_votes = 0;
 $n_candidates = count($candidates);
 $height = 500 + 36 * $n_candidates;

@@ -15,7 +15,7 @@ $all_link = elgg_view('output/url', array(
 elgg_push_context('widgets');
 $options = array(
 	'type' => 'object',
-	'subtype' => 'poll',
+	'subtype' => 'advpoll',
 	'container_guid' => $group->guid,
 	'limit' => 6,
 	'full_view' => false,

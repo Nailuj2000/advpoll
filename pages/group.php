@@ -36,7 +36,7 @@ elgg_push_breadcrumb(elgg_echo('advpoll:' . $group_context));
 
 $polls = elgg_get_entities(array(
 	'type' => 'object',
-	'subtype' => 'poll',
+	'subtype' => 'advpoll',
 	'limit' => 0,
 	'container_guid' => $container_guid,
 	));

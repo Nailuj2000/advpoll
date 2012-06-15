@@ -30,7 +30,7 @@ elgg_load_js('kinetic');
 elgg_load_js('grafo-schulze');
 $guid = elgg_extract('guid', $vars, '');
 $poll = get_entity($guid);
-$candidates = polls_get_choice_array($poll);
+$candidates = $poll->getCandidatesArray();
 $num_votos = 0;
 $abcd = 65;
 $audit = $poll->audit;
@@ -46,7 +46,7 @@ $candidates_condorcet = array_keys($candidates);
 
 $condorcet = elgg_get_annotations(array(
 	'type' => 'object',
-	'subtype' => 'poll',
+	'subtype' => 'advpoll',
 	'guid' => $guid,
 	'annotation_name' => 'vote_condorcet',
 	'limit' => 0,

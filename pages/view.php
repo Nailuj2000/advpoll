@@ -93,7 +93,7 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 		}
 		if ($show_results == 'yes' or !is_poll_on_date($poll)) {
 			$content .= elgg_view('advpoll/results', array(
-			'poll' => $poll
+			'advpoll' => $poll
 			));
 		}
 	}

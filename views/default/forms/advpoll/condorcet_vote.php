@@ -27,7 +27,7 @@
 elgg_load_library('advpoll:model');
 $guid = elgg_extract('guid', $vars, '');
 $poll = get_entity($guid);
-$candidates = polls_get_choice_array($poll);
+$candidates = $poll->getCandidatesArray();
 $owner_guid = elgg_get_logged_in_user_guid();
 
 if (user_has_voted($owner_guid, $guid)) {
