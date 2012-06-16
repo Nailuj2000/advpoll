@@ -339,26 +339,14 @@ function sum_vectors($v1, $v2) {
  * @return array  The sum of $a and $b, or null if they haven't the same dimension.
  */
 function sum_matrices($a, $b) {
-	/**
-	 * Matrices should be in the form:
-	 * $a = array(
-	 * 			array(a11, a12, a13),
-	 * 			array(a21, a22, a23),
-	 * 			array(a31, a32, a33)
-	 * );
-	 */
+	$rows = count($a);
+	$cols = count($a[0]);
+	$sum = array_fill(0, $rows, array_fill(0, $cols, 0));
 	
-	$a_rows = count($a);
-	$b_rows = count($b);
-	$a_cols = count($a[0]);
-	$b_cols = count($b[0]);
-	if (all_rows_n_length($a_cols, $a) &&
-			all_rows_n_length($b_cols, $b) &&
-			$a_rows === $b_rows && $a_cols === $b_cols) {
-		for ($i=0; $i<$a_rows; $i++)
-			$sum[] = sum_vectors($a[$i], $b[$i]);	
-	} else {
-		$sum = null;
+	for ($row=0; $row<$rows; $row++) {
+		for ($col=0; $col<$cols; $col++) {
+			$sum[$row][$col] = $a[$row][$col]+$b[$row][$col];
+		}
 	}
 	return $sum;
 } 
@@ -408,22 +396,96 @@ function array_has_repeated_value($array) {
 }
 
 /**
- * Given the matrix of Condorcet results, sums the points obtained for
- * each candidate.
+ * Calculates matrix of pairwise preferences for Schultze method.
  * 
- * @param array $matrix  The matrix containing the results of a poll using Condorcet.
- * @return array  Returns an array of int. Each number is the punctuation obtained by
- * a candidate.
+ * @param array $ballots An array of strings. Each string is a ballot, in the
+ * format that they are stored as ElggAnnotation.
+ * @return array  The matrix of pairwise prefences. d[a][b] tells how many
+ * voters prefer 'a' over 'b'.
  */
-function condorcet_results_sum_points($matrix) {
-	foreach ($matrix as $row) {
-		$punctuation = 0;
-		foreach ($row as $points) {
-			$punctuation = $punctuation + $points;
+function schultze_pairwise_preferences($ballots) {
+	$i = 0;
+	foreach ($ballots as $ballot_string){
+		$ballot_matrix = string_to_ballot_matrix($ballot_string->value);
+		if ($i == 0) {
+			$n_candidates = count($ballot_matrix);
+			$d = array_fill(0, $n_candidates, array_fill(0, $n_candidates, 0));
 		}
-		$result[] = $punctuation;
+		$ordered_ballot = get_ordered_candidates_from_annotation($ballot_string);
+		$d = sum_matrices($d, $ballot_matrix);
+		$i++;
 	}
-	return $result;
+	return $d;
+}
+
+/**
+ * Computes the strongest path strengths matrix (p) from
+ * the pairwise preferences matrix (d).
+ * See http://en.wikipedia.org/wiki/Condorcet-Schulze_method
+ * 
+ * @param array $d  The pairwise preferences matrix: d[a][b] if the number of
+ * voters that prefer 'a' over 'b'.
+ * @return array  Returns the strongest path strengths matrix. 
+ */
+function schultze_strongest_path_strengths($d) {
+	$C = count($d); // number of candidates
+	// Initialize a CxC matrix.
+	$p = array_fill(0, $C, array_fill(0, $C, 0));
+	
+	for ($i=0; $i<$C; $i++) {
+		for ($j=0; $j<$C; $j++) {
+			if ($i != $j) {
+				if ($d[$i][$j] > $d[$j][$i])
+					$p[$i][$j] = $d[$i][$j];
+				else
+					$p[$i][$j] = 0;
+			}
+		}
+	}
+	for ($i=0; $i<$C; $i++) {
+		for ($j=0; $j<$C; $j++) {
+			if ($i != $j) {
+				for ($k=0; $k<$C; $k++) {
+					if ($i != $k && $j != $k)
+						$p[$j][$k] = max($p[$j][$k], min($p[$j][$i], $p[$i][$k]));
+				}
+			}
+		}
+	}
+	return $p;
+}
+
+/**
+ * Compute the winner or winners of the Schultze method,
+ * given the strongest path strengths matrix. 
+ * 
+ * @param array $p  The strongest path strengths matrix obtained from
+ * schultze_strongest_path_strengths().
+ * @return array  Returns an array of all winners. If there is only one
+ * winner, the array will have a length of 1. The array contains the
+ * position that the winning candidate occupy in the $p matrix.
+ */
+function schultze_winner($p) {
+	$C = count($p);
+	$max_points=0;
+	$row_points = array();
+	$winners = array();
+
+	for ($row=0; $row<$C; $row++) {
+		$points = 0;
+		for ($col=0; $col<$C; $col++) {
+			if ($p[$row][$col]>=$p[$col][$row])
+				$points++;
+		}
+		if ($points > $max_points)
+			$max_points = $points;
+		$row_points[] = $points;
+	}
+	for ($row=0; $row<$C; $row++) {
+		if ($row_points[$row] == $max_points)
+			$winners[] = $row;
+	}
+	return $winners;
 }
 
 ?>
