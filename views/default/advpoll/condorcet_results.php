@@ -89,7 +89,7 @@ if ($audit == 'yes' && ($show_results == 'yes' or !is_poll_on_date($poll))) {
 	echo '</div>';
 }
 
-$d = schultze_pairwise_preferences($candidates_condorcet);
+$d = schultze_pairwise_preferences($condorcet);
 // Uncomment to test Schultze method using wikipedia's example
 /*
 $d = array(
