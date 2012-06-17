@@ -144,11 +144,11 @@ function is_poll_on_date($poll) {
 	$date = time();
 
 	if ($end == 'no') {
-		if ($start < $date) {
+		if ($start <= $date) {
 			$on_date = true;
 		}
 	} else {
-		if ($start<$date && $date<$end) {
+		if ($start<=$date && $date<$end) {
 			$on_date = true;
 		}
 	}
