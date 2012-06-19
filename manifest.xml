@@ -5,8 +5,8 @@
 	<version>1.0</version>
 	<description>Advanced polls plugin</description>
 	<website>http://www.elgg.org/</website>
-	<copyright>(C) EquipoTe DRY, (C) Lorea</copyright>
-	<license>GNU General Public License version 2</license>
+	<copyright>(C) Lorea, (C) DRY team</copyright>
+	<license>GNU Affero General Public License version 3 or later</license>
 
 	<requires>
 		<type>elgg_release</type>
