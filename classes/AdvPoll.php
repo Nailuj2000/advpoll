@@ -91,5 +91,49 @@ class AdvPoll extends ElggObject {
     	$this->deleteCandidates();
     	$this->addCandidates($new_choices);
     }
+    
+    /**
+     * Returns the electoral roll of the election, that is, how many users
+     * can vote in it at the present moment.
+     * 
+     * @return int.  Returns the maximum number of potential voters
+     * for this poll, or -1 if the poll is public and an electoral roll
+     * doesn't make sense.
+     */
+    public function getElectoralRollCount() {
+    	$previous_ignore_access = elgg_set_ignore_access(true);
+    	$access_vote_id = $this->access_vote_id;
+    	$electoral_roll = 0;
+    	switch ($access_vote_id) {
+    		case ACCESS_FRIENDS:
+    			$owner_guid = $this->owner_guid;
+    			$options =array (
+    					'type' => 'user',
+    					'relationship' => 'friend',
+    					'relationship_guid' => $owner_guid,
+    					'count' => true
+    			);
+    			// Curiously, the user has no access, but her friends have.
+    			$electoral_roll = elgg_get_entities_from_relationship($options);
+    			break;
+    		case ACCESS_PRIVATE:
+    			$electoral_roll = 1;
+    			break;
+    		case ACCESS_LOGGED_IN:
+    			$electoral_roll = elgg_get_entities(array(
+    			'type' => 'user',
+    			'count' => true
+    			));
+    			break;
+    		case ACCESS_PUBLIC:
+    			$electoral_roll = -1;
+    			break;
+    		default: // group
+    			$electoral_roll = get_group_members($this->container_guid, 0, 0, 0, true);
+    		break;
+    	}
+    	elgg_set_ignore_access($previous_ignore_access);
+    	return $electoral_roll;
+    }
 }
 ?>

@@ -161,8 +161,10 @@ $mapping = array(
 	'advpoll:action:error:must_select_candidate' => 'Tienes que elegir una opción',
 	'advpoll:error:number_of_candidates' => 'Tienen que haber al menos dos opciones posibles',
 	'advpoll:error:duplicated_candidates' => 'No pueden haber opciones repetidas',
-	'advpoll:error:wrong_dates' => 'La fecha de inicio es posterior a la fecha de finalización'
-	
+	'advpoll:error:wrong_dates' => 'La fecha de inicio es posterior a la fecha de finalización',
+	'advpoll:quorum_count' => 'Han votado %d habitantes de un censo de %d, cosa
+	que representa un quórum del %.1f%%.',
+	'advpoll:vote_count' => 'Se han registrado %d votos.'
 
 );
 

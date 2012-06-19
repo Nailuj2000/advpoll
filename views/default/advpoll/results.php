@@ -93,10 +93,28 @@ if ($audit == 'yes' && ($show_results == 'yes' or !is_poll_on_date($poll))) {
 	</div>
 	
 <?php
+}		
+
+// Calculate number of votes for each candidate, and total.
+$names_votes = array();
+foreach ($candidates as $candidate){
+	$answer = get_entity($candidate);
+	$candidate_name = $answer->text;
+	$candidate_n_votes = $answer->countAnnotations('vote');
+	$names_votes[$candidate_name] = $candidate_n_votes;
+	$n_votes = $n_votes + $candidate_n_votes;
 }
-?>		
-	
-	
+
+// Show number of votes and quorum
+$electoral_roll = $poll->getElectoralRollCount();
+if ($electoral_roll >= 0) {
+	echo "<p>".elgg_echo('advpoll:quorum_count', array($n_votes, $electoral_roll, 
+			round($n_votes/$electoral_roll*100, 1)))."</p>";
+} else {
+	echo "<p>".elgg_echo('advpoll:vote_count', array($n_votes))."</p>";
+}
+
+?>
 <div id='results-sectors'></div>
 
 <script type="text/javascript">
@@ -156,12 +174,8 @@ $(function () {
                 type: 'pie',
                 name: 'Browser share',
                 data: [
-                   <?php foreach ($candidates as $candidate){
-								$answer = get_entity($candidate);
-								$candidate_name = $answer->text;
-								$candidate_n_votes = $answer->countAnnotations('vote');
-								$n_votes = $n_votes + $candidate_n_votes;
-								?> [' <?php echo $candidate_name; ?> ', <?php echo $candidate_n_votes; ?> ],
+                   <?php foreach ($names_votes as $name => $votes) {
+								?> [' <?php echo $name; ?> ', <?php echo $votes; ?> ],
 					<?php } ?>
                 ]
             }],
