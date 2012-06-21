@@ -90,6 +90,7 @@ if ($audit == 'yes' && ($show_results == 'yes' or !is_poll_on_date($poll))) {
 <?php
 }		
 
+echo "<br>";
 // Calculate number of votes for each candidate, and total.
 $names_votes = array();
 foreach ($candidates as $candidate){

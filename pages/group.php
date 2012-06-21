@@ -27,7 +27,7 @@ $group_context = get_input('group_context');
 
 elgg_register_title_button('advpoll', 'new');
 elgg_push_breadcrumb($container->name, "advpoll/group/" . $container->guid);
-elgg_push_breadcrumb(elgg_echo('advpoll:' . $group_context));
+elgg_push_breadcrumb(elgg_echo('advpoll:filters:' . $group_context));
 
 $polls = elgg_get_entities(array(
 	'type' => 'object',
