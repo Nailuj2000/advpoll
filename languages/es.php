@@ -41,6 +41,7 @@ $mapping = array(
 	'advpoll:menu' => 'Votaciones',
 	'item:object:advpoll' => 'Votación',
 	'advpoll:new' => 'Nueva Votación',
+	'advpoll:none' => 'No hay ninguna votación',
 	'advpoll:one_winner' => 'Hay un único ganador: ',
 	'advpoll:many_winners' => 'Las siguientes opciones han empatado como ganadoras: ',
 	'advpoll:editing' => 'Editor de votaciones',

@@ -48,7 +48,7 @@ $content = elgg_list_entities($options);
 elgg_pop_context();
 
 if (!$content) {
-	$content = '<p>' . elgg_echo('advpoll:ninguna') . '</p>';
+	$content = '<p>' . elgg_echo('advpoll:none') . '</p>';
 }
 
 $new_link = elgg_view('output/url', array(

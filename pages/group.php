@@ -20,7 +20,7 @@
  */
 
 elgg_load_library('advpoll:model');
-$title = elgg_echo('advpoll:group:title');
+$title = elgg_echo('advpoll:group');
 $container_guid = get_input('guid');
 $container = get_entity($container_guid);
 $group_context = get_input('group_context');
