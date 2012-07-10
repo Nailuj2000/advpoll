@@ -1,16 +1,11 @@
 <?php
 /**
-* /var/www/elgg/mod/polls/pages/all.php
- *
- * Copyright 2012 DRY Team
- *              - aruberuto
- *              - joker
- *              - ******
- *              y otros
+ * Polls plugin for elgg-1.8
+ * Copyright 2012 Lorea, DRY Team
  *
  * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
@@ -25,14 +20,14 @@
  */
 
 elgg_load_library('advpoll:model');
-$title = elgg_echo('advpoll:group:title');
+$title = elgg_echo('advpoll:group');
 $container_guid = get_input('guid');
 $container = get_entity($container_guid);
 $group_context = get_input('group_context');
 
 elgg_register_title_button('advpoll', 'new');
 elgg_push_breadcrumb($container->name, "advpoll/group/" . $container->guid);
-elgg_push_breadcrumb(elgg_echo('advpoll:' . $group_context));
+elgg_push_breadcrumb(elgg_echo('advpoll:filters:' . $group_context));
 
 $polls = elgg_get_entities(array(
 	'type' => 'object',

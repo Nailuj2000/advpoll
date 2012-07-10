@@ -1,16 +1,11 @@
 <?php
 /**
- * mod/advpoll/views/default/advpoll/condorcet_results.php
- * 
- * Copyright 2012 DRY Team
- *              - aruberuto
- *              - joker
- *              - *****
- *              y otros
+ * Polls plugin for elgg-1.8
+ * Copyright 2012 Lorea, DRY Team
  *
  * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
@@ -31,7 +26,6 @@ elgg_load_js('grafo-schulze');
 $guid = elgg_extract('guid', $vars, '');
 $poll = get_entity($guid);
 $candidates = $poll->getCandidatesArray();
-$n_votes = 0;
 $abcd = 65;
 $audit = $poll->audit;
 $show_results = $poll->show_results;
@@ -52,6 +46,7 @@ $condorcet = elgg_get_annotations(array(
 	'annotation_name' => 'vote_condorcet',
 	'limit' => 0,
 ));
+$n_votes = count($condorcet);
 
 $i = 0;
 echo "<br>";
@@ -103,6 +98,15 @@ $d = array(
 
 echo '<br>';
 echo "<h2>" . elgg_echo('advpoll:condorcet:results:final') . "</h2>";
+
+// Show number of votes and quorum
+$electoral_roll = $poll->getElectoralRollCount();
+if ($electoral_roll >= 0) {
+	echo "<p>".elgg_echo('advpoll:quorum_count', array($n_votes, $electoral_roll,
+			round($n_votes/$electoral_roll*100, 1)))."</p>";
+} else {
+	echo "<p>".elgg_echo('advpoll:vote_count', array($n_votes))."</p>";
+}
 
 echo elgg_view('advpoll/condorcet_matrix', array('matriz' => $d, 'candidates' => $abecedario));
 
