@@ -35,7 +35,7 @@ $content = elgg_list_entities(array(
 
 elgg_register_title_button('advpoll', 'new');
 $filters = elgg_view('advpoll/filters', array(
-	'filter_context' => 'friends',
+	'filter_context' => 'owner',
 	'context' => 'advpoll'
 	));
 
@@ -45,7 +45,7 @@ $body = elgg_view_layout('content', array(
 	'content' => $content,
 	'title' => $title,
 	'filter' => $filters,
-	'filter_context' => 'friends',
+	'filter_context' => 'owner',
 	'sidebar' => ''
 ));
 

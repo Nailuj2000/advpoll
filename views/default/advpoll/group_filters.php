@@ -46,7 +46,7 @@ if (elgg_is_logged_in() && $context) {
 		'current' => array(
 			'text' => elgg_echo('advpoll:filters:current'),
 			'href' => (isset($vars['current_link'])) ? $vars['current_link'] : "$context/group/$group/current",
-			'selected' => ($filter_context == 'activas'),
+			'selected' => ($filter_context == 'current'),
 			'priority' => 100,
 		),
 		'all' => array(
@@ -59,14 +59,14 @@ if (elgg_is_logged_in() && $context) {
 		'ended' => array(
 			'text' => elgg_echo('advpoll:filters:ended'),
 			'href' => (isset($vars['ended_link'])) ? $vars['ended_link'] : "$context/group/$group/ended",
-			'selected' => ($filter_context == 'cerradas'),
-			'priority' => 500,
+			'selected' => ($filter_context == 'ended'),
+			'priority' => 300,
 		),
 		'not_initiated' => array(
 			'text' => elgg_echo('advpoll:filters:not_initiated'),
 			'href' => (isset($vars['not_initiated_link'])) ? $vars['not_initiated_link'] : "$context/group/$group/not_initiaded",
-			'selected' => ($filter_context == 'cerradas'),
-			'priority' => 500,
+			'selected' => ($filter_context == 'not_initiaded'),
+			'priority' => 400,
 		),
 		
 			);

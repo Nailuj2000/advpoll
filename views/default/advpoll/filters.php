@@ -45,7 +45,7 @@ if (elgg_is_logged_in() && $context) {
 		'current' => array(
 			'text' => elgg_echo('advpoll:filters:current'),
 			'href' => (isset($vars['current_link'])) ? $vars['current_link'] : "$context/current",
-			'selected' => ($filter_context == 'activas'),
+			'selected' => ($filter_context == 'current'),
 			'priority' => 100,
 		),
 		'all' => array(
@@ -63,7 +63,7 @@ if (elgg_is_logged_in() && $context) {
 		'friends' => array(
 			'text' => elgg_echo('advpoll:filters:friends'),
 			'href' => (isset($vars['friends_link'])) ? $vars['friends_link'] : "$context/friends/$username",
-			'selected' => ($filter_context == 'burning'),
+			'selected' => ($filter_context == 'friends'),
 			'priority' => 400,
 		),
 		'ended' => array(
