@@ -471,7 +471,7 @@ function schultze_winner($p) {
 	for ($row=0; $row<$C; $row++) {
 		$points = 0;
 		for ($col=0; $col<$C; $col++) {
-			if ($p[$row][$col]>=$p[$col][$row])
+			if ($p[$row][$col]>$p[$col][$row])
 				$points++;
 		}
 		if ($points > $max_points)
