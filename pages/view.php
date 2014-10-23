@@ -93,7 +93,9 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 		}
 	}
 	
-	$content .= elgg_view_comments($poll);
+	if ($poll->end_date < time()) {
+            $content .= elgg_view_comments($poll);
+        }
 	$body = elgg_view_layout('content', array(
 		'title' => $title,
 		'content' => $content,
