@@ -79,7 +79,17 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 				'guid' => $guid
 			));
 		}
-	} else { // normal
+	} else { // normal or candidature
+                if ($poll_type == 'candidature' && $poll->start_date >= time()) {
+                    elgg_register_menu_item('title', array(
+                        'name' => 'postulate',
+                        'href' => "action/advpoll/postulate?guid=$guid",
+                        'text' => $poll->getCandidates(elgg_get_logged_in_user_entity()->username)?
+                            elgg_echo("advpoll:depostulate") : elgg_echo("advpoll:postulate"),
+                        'link_class' => 'elgg-button elgg-button-action',
+                        'is_action' => true,
+                    ));
+                }
 		if (is_poll_on_date($poll) && in_array($access_vote, $acceso_col)) {
 			$content .= elgg_view_form('advpoll/vote' , array() , array(
 				'guid' => $guid,

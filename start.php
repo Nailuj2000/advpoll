@@ -36,6 +36,7 @@ function advpoll_init() {
 	elgg_register_action('advpoll/condorcet_vote', "$action_path/vote.php");
 	elgg_register_action('advpoll/edit', "$action_path/edit.php");
 	elgg_register_action('advpoll/delete', "$action_path/delete.php");
+	elgg_register_action('advpoll/postulate', "$action_path/postulate.php");
 	
 	// Es recomendable usar como nombre el mismo que el de la vista de la accion
 	// como primer termino, antes registrándola de este modo

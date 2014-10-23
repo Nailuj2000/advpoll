@@ -88,11 +88,13 @@ $mapping = array(
 	'advpoll:view:type' => ' Tipo: ',
 	'advpoll:type:normal' => ' Normal',
 	'advpoll:type:condorcet' => ' Preferencial',
+	'advpoll:type:candidature' => ' Candidatura',
 	'advpoll:closed' => '¿Votación cerrada? (nadie podrá votar hasta que se active)',
 	'advpoll:audit' => '¿Realizar auditoría pública? (los votos serán publicados detalladamente)',
 	'advpoll:type' => 'Tipo de votación',
 	'advpoll:option:normal' => 'Normal: se vota una opción entre varias',
 	'advpoll:option:condorcet' => 'Preferencial: se vota el orden de todas las opciones',
+        'advpoll:option:candidature' => 'Candidatura: se vota un candidato entre varios',
 	'advpoll:start_date' => 'La votación comienza el día ',
 	'advpoll:end_date' => ' y termina el día ',
 	'advpoll:help:date' => 'Dejar en blanco para controlar la votación de manera manual',
@@ -132,6 +134,8 @@ $mapping = array(
 	'advpoll:quorum_count' => 'Han votado %d habitantes de un censo de %d, cosa
 	que representa un quórum del %.1f%%.',
 	'advpoll:vote_count' => 'Se han registrado %d votos.',
+        'advpoll:postulate' => 'Postular para candidatura',
+        'advpoll:depostulate' => 'Despostular',
 
 	'friendlytime:future:minutes' => "en %s minutos",
 	'friendlytime:future:minutes:singular' => "en un minuto",
