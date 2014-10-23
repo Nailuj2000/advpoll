@@ -101,7 +101,11 @@ $metadata = elgg_view_menu('entity', array(
 	$subtitle .= elgg_echo('advpoll:view:can:change:vote') . elgg_echo('advpoll:show:' . $can_change_vote) . '.';
 
 	
-        $content .= elgg_view('advpoll/choices', array('choices' => $choices));
+        if ($poll->poll_type == 'candidature') {
+            $content .= elgg_view('advpoll/candidature_choices', array('choices' => $choices));
+        } else {
+            $content .= elgg_view('advpoll/choices', array('choices' => $choices));
+        }
 	$params = array(
 		'entity' => $poll,
 		'metadata' => $metadata,
