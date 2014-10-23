@@ -136,6 +136,11 @@ $mapping = array(
 	'advpoll:vote_count' => 'Se han registrado %d votos.',
         'advpoll:postulate' => 'Postular para candidatura',
         'advpoll:depostulate' => 'Despostular',
+        'advpoll:candidature:votation_begun' => 'Lo siento, la votación ya ha empezado',
+        'advpoll:candidature:empty_fields' => 'Rellena los campos «sobre ti» y «descripción corta» y luego prueba a postular de nuevo.',
+        'advpoll:candidature:success' => 'Ahora eres candidato para esta elección',
+        'advpoll:candidature:depostulate:success' => 'Ya no eres candidato para esta elección',
+        'advpoll:candidature:error' => 'Por alguna razón no se puede postular',
 
 	'friendlytime:future:minutes' => "en %s minutos",
 	'friendlytime:future:minutes:singular' => "en un minuto",

@@ -21,15 +21,24 @@
 
 elgg_load_library('advpoll:model');
 $poll = get_entity((int)get_input('guid'));
+$user = elgg_get_logged_in_user_entity();
 if (elgg_instanceof($poll, 'object', 'advpoll')) {
-    $username = elgg_get_logged_in_user_entity()->username;
-    $candidate = $poll->getCandidates($username);
+    if ($poll->start_time > time()) {
+        register_error(elgg_echo('advpoll:candidature:votation_begun'));
+        forward(REFERER);
+    }
+    if (!$user->briefdescription || !$user->description) {
+        register_error(elgg_echo('advpoll:candidature:empty_fields'));
+        forward("profile/$user->username/edit");
+    }
+    $candidate = $poll->getCandidates($user->username);
     if (count($candidate)) {
         $candidate[0]->delete();
+        system_message(elgg_echo('advpoll:candidature:depostulate:success'));
     } else {
-        $poll->addCandidates(array($username));
+        $poll->addCandidates(array($user->username));
+        system_message(elgg_echo('advpoll:candidature:success'));
     }
-    system_message(elgg_echo('advpoll:candidature:success'));
 } else {
     register_error(elgg_echo('advpoll:candidature:error'));
 }
