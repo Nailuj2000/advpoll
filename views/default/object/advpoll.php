@@ -101,12 +101,12 @@ $metadata = elgg_view_menu('entity', array(
 	$subtitle .= elgg_echo('advpoll:view:can:change:vote') . elgg_echo('advpoll:show:' . $can_change_vote) . '.';
 
 	
-	$content .= elgg_view('advpoll/choices', array('choices' => $choices));
+        $content .= elgg_view('advpoll/choices', array('choices' => $choices));
 	$params = array(
 		'entity' => $poll,
 		'metadata' => $metadata,
 		'subtitle' => $subtitle,
-		'tags' => $tags,
+		'tags' => elgg_view('output/tags', array('value' => $tags)),
 		'content' => $content,
 	);
 	$params = $params + $vars;
