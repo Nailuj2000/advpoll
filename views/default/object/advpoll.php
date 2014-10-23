@@ -90,10 +90,10 @@ $metadata = elgg_view_menu('entity', array(
 
 	$subtitle .= "<br>" . elgg_echo('advpoll:view:ended:' . $poll_comparison_end . ':' . $poll_comparison_start ) . ',';
 	if ($poll_comparison_start == 'lessthanstart') {
-		$subtitle .= elgg_echo('advpoll:view:time:from') . date('d - M - Y', $start_date) . ', ';
+		$subtitle .= elgg_echo('advpoll:view:time:from') . elgg_get_friendly_time_19($start_date) . ', ';
 	} 
 	if ($poll_comparison_end == 'lessthanend') {
-		$subtitle .= elgg_echo('advpoll:view:time:to') .date('d - M - Y', $end_date);
+		$subtitle .= elgg_echo('advpoll:view:time:to') . elgg_get_friendly_time_19($end_date);
 	}
 	$subtitle .= elgg_echo('advpoll:view:audit') . elgg_echo('option:' . $audit) . ',';
 	$subtitle .= elgg_echo('advpoll:view:type') . elgg_echo('advpoll:type:' . $type) . ',';

@@ -151,8 +151,8 @@ $mapping = array(
 	'advpoll:help:date' => 'Dejar en blanco para controlar la votación de manera manual',
 	'advpoll:access:ver' => '¿Quién puede ver los resultados de la votación?',
 	'advpoll:access:vote' => '¿Quién puede votar?',
-	'advpoll:view:time:from' => ' Periodo de votación desde el ',
-	'advpoll:view:time:to' => ' hasta el ',
+	'advpoll:view:time:from' => ' Periodo de votación empieza ',
+	'advpoll:view:time:to' => ' termina ',
 	'advpoll:view:ended:si' => 'Finalizada',
 	'advpoll:view:ended:no' => 'Activa',
 	'advpoll:view:ended:lessthanend:lessthanstart' => 'No iniciada',
@@ -184,8 +184,14 @@ $mapping = array(
 	'advpoll:error:wrong_dates' => 'La fecha de inicio es posterior a la fecha de finalización',
 	'advpoll:quorum_count' => 'Han votado %d habitantes de un censo de %d, cosa
 	que representa un quórum del %.1f%%.',
-	'advpoll:vote_count' => 'Se han registrado %d votos.'
+	'advpoll:vote_count' => 'Se han registrado %d votos.',
 
+	'friendlytime:future:minutes' => "en %s minutos",
+	'friendlytime:future:minutes:singular' => "en un minuto",
+	'friendlytime:future:hours' => "en %s horas",
+	'friendlytime:future:hours:singular' => "en una hora",
+	'friendlytime:future:days' => "en %s días",
+	'friendlytime:future:days:singular' => "mañana",
 );
 
 add_translation('es', $mapping);
