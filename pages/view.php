@@ -51,7 +51,6 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 	elgg_push_breadcrumb($poll->title);
 	
 	elgg_set_page_owner_guid($container->getGUID());
-	elgg_register_title_button('advpoll', 'new');
 	$title = $poll->title;
 	
 	$content = elgg_view_entity($poll, array('full_view' => true));
@@ -75,7 +74,7 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 				'guid' => $guid,
 				));
 		}	
-		if ($show_results == 'yes' or !is_poll_on_date($poll)) {
+		if ($show_results == 'yes' || $poll->end_date < time()) {
 			$content .= elgg_view('advpoll/condorcet_results', array(
 				'guid' => $guid
 			));
@@ -87,7 +86,7 @@ if (!in_array($acceso_lectura, $acceso_col)) {
 				));
 		
 		}
-		if ($show_results == 'yes' or !is_poll_on_date($poll)) {
+		if ($show_results == 'yes' || $poll->end_date < time()) {
 			$content .= elgg_view('advpoll/results', array(
 			'advpoll' => $poll
 			));
