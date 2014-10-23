@@ -83,7 +83,7 @@ function advpoll_page_handler($page)
 {
 	$base_dir = elgg_get_plugins_path() . 'advpoll/pages/';
 	
-	elgg_push_breadcrumb(elgg_echo('polls'), 'addpoll/all');
+	elgg_push_breadcrumb(elgg_echo('polls'), 'advpoll/all');
 	switch ($page[0]){
 		case "all":
 			include $base_dir . 'all.php';
@@ -117,13 +117,6 @@ function advpoll_page_handler($page)
 		case "not_initiated":
 			set_input('context', $page[0]);
 			include $base_dir . 'list.php';
-			break;
-		case "help":
-			switch ($page[1]) {
-				case "condorcet":
-					include $base_dir . 'condorcet_help.php';
-					break;
-			}
 			break;			
 		case "group":
 			set_input('guid', $page[1]);
@@ -137,7 +130,8 @@ function advpoll_page_handler($page)
 			//	include $base_dir . 'group_activas.php';
 			//}
 			break;
-				
+		default:
+			return false;
 	}
 	
 	return true;

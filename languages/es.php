@@ -77,59 +77,6 @@ $mapping = array(
 	'advpoll:results:graphic:title' => 'Resultados de la votación',
 	'advpoll:group' => 'Votaciones del grupo',	
 	'advpoll:condorcet:info' => 'info',
-	'advpoll:condorcet:help:title' => '¿Cómo funciona una votación preferencial?',
-	'advpoll:condorcet:help:ballots:seguramente' => 'Seguramente te estarás preguntando qué significa una tabla como ésta:',
-	'advpoll:condorcet:help:ballots:notemas' => 
-		'No temas, es bastante sencillo, básicamente esta tabla representa una papeleta de voto preferencial. El método inicial 
-		que utilizaremos para representar los votos	es conocido como el método de <a href="http://es.wikipedia.org/wiki/M%C3%A9todo_de_Condorcet"> condorcet</a>
-		 y es el método que explicaremos aquí.<br>',
-	'advpoll:condorcet:help:ballots:explicacion:title' => 'Cómo se crea una papeleta de condorcet',
-		
-	'advpoll:condorcet:help:ballots:supongamos' => 'Supongamos que tenemos una lista de 4 opciones: <br/> A, B, C y D <br/>
-		De las cuales queremos sacar a votación para ver qué preferencias tiene una comunidad con respecto a ellas. <br/>
-		En una votación preferencial lo que importa es el orden en que coloques las opciones, ya que no estás votando
-		por una sóla, sino por una lista ordenada según tus preferencias. <br/>
-		Supongamos que el habitante <em>Face-Lance</em> prefiere los candidatos anteriores en el siguiente orden: <br><br>
-		1. B <br/>
-		2. A <br/>
-		3. C <br/>
-		4. D <br><br>
-		En este caso la manera de hallar la matriz o tabla que representa su papeleta puede realizarse del siguiente modo: <br><br>
-		1. Hacemos una tabla colocando las opciones A, B, C, y D tanto en las filas como en las columnas en el mismo orden en ambas.<br/>
-		Nos quedará algo como lo siguiente:',
-	'advpoll:condorcet:help:ballots:paso2' => '2. El siguiente paso consiste en ir comparando la opción de la fila con la opción de la columna,
-		escribiendo un 1 en el caso en el que la fila gane a la columna en la elección de <em>Face-Lance</em> y escribiendo un 0 en el caso contrario.<br>
-		Por ejemplo, en la votación que hizo <em>Face-Lance</em> la opción B gana a la opción A, por lo que escribiremos un 1 en la casilla correspondiente,
-		con lo que nos quedará algo así:',
-	'advpoll:condorcet:help:ballots:paso3' => '3. Lo que nos queda ahora es ir rellenando todas las casillas con el método anterior,
-		con una anotación más:<br> En las casillas donde se enfrentan opciones iguales siempre se escribe un 0, por lo que es una condición indispensable
-		que la diagonal principal sea una diagonal compuesta de ceros.<br>
-		Por ejemplo en la casilla de la fila A columna A tendremos que escribir un 0. <br>
-		Completando poco a poco la tabla nos irá quedando lo siguiente: <br>',
-	'advpoll:condorcet:help:ballots:candidatea' => ' La opción A pierde con B, y gana a C, y D. Su fila se completa así:',
-	'advpoll:condorcet:help:ballots:candidateb' => ' La opción B gana a todas las demás. Su fila se completa así:',
-	'advpoll:condorcet:help:ballots:candidatec' => ' La opción C pierde con A y con B, pero gana a D. Su fila se completará así:',
-	'advpoll:condorcet:help:ballots:candidated' => ' La opción D pierde con todas las demás, por lo que su fila sólo contiene ceros:',
-	'advpoll:condorcet:help:ballots:paso4' =>	'<br> 4. El siguiente paso es una cuestión de visibilización que nos servirá posteriormente para sacar conclusiones
-		del método de condorcet. Consiste en colorear de verde aquellas casillas cuya puntuación sea mayor que la casilla simétrica con respecto a la diagonal.<br>
-		<em>¿y eso qué significa?</em> En este paso inicial, simplemente significa que coloreemos de verde los 1 
-		y de rojo los 0, salvo aquellos ceros que están en la diagonal. <br>
-		Si nos fijamos, por ejemplo la casilla "Fila A, Columna B" tiene distinto color que la casilla simétrica "Fila B, Columna A".<br>
-		Esto va a ser una regla de este tipo de tablas, y nos va a servir posteriormente para detectar si ha habido algún error en el proceso, pero
-		también nos servirá para calcular el resultado final.',
-	'advpoll:condorcet:help:suma:explicacion:title' => 'Cómo se suman los votos en una votación de condorcet',
-	'advpoll:condorcet:help:suma:explicacion:maspapeletas' => 'Ahora que sabemos como se crean las papeletas, vamos a ver cómo operar con ellas,
-		es decir, cómo podemos sumar los votos y sacar conclusiones. <br><br>
-		Supongamos para ello que el héroe de nuestra fábula, encuentra un <em>bug</em> en el sistema que le permite crear tantas
-		papeletas de votos como quisiera y que en lugar de reportar el error al lugar donde podrían solucionarlo, 
-		su destino de héroe trágico se apodera de él y al igual que Aquiles despedazando troyanos, <em>Face-Lance</em>, rápido con el ratón,
-		comienza a crear papeletas a diestro y siniestro.<br><br>
-		Inicialmente crea sólo 4 papeletas distintas que se corresponden con las siguientes elecciones (se leen de izquierda a derecha):<br>
-		A B C D <br>
-		C D A B <br>
-		C A B D <br>
-		A B D C <br><br>
-		Las tablas correspondientes a cada uno de estas elecciones serán las siguientes:',
 	'advpoll:owner' => 'Votación creada por ',
 	'advpoll:action:voto:ok' => 'Tu voto se ha guardado correctamente',
 	'advpoll:friends' => 'Amigos',
